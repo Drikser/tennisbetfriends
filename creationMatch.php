@@ -47,33 +47,33 @@ session_start(); // On démarre la session AVANT toute chose
 
             if ($donnees['NbPlayersTournament'] == 0) {
 
-            //$adresse = "https://www.atpworldtour.com/en/scores/current/nitto-atp-finals/605/draws";
-            //$adresse = "https://www.atptour.com/en/scores/current/australian-open/580/draws";
-            //$adresse = "https://www.atptour.com/en/scores/current/marseille/496/draws";
-            //$adresse = "https://www.atptour.com/en/scores/current/dubai/495/draws";
-            //$adresse = "https://www.atptour.com/en/scores/archive/miami/403/draws";
-            //$adresse = "https://www.atptour.com/en/scores/current/monte-carlo/410/draws";
-            //$adresse = "https://www.atptour.com/en/scores/current/barcelona/425/draws";
-            //$adresse = "https://www.atptour.com/en/scores/current/madrid/1536/draws";
-            //$adresse = "https://www.atptour.com/en/scores/current/roland-garros/520/draws";
-            $adresse = "https://www.atptour.com/en/scores/current/eastbourne/741/draws";
+              //$adresse = "https://www.atpworldtour.com/en/scores/current/nitto-atp-finals/605/draws";
+              //$adresse = "https://www.atptour.com/en/scores/current/australian-open/580/draws";
+              //$adresse = "https://www.atptour.com/en/scores/current/marseille/496/draws";
+              //$adresse = "https://www.atptour.com/en/scores/current/dubai/495/draws";
+              //$adresse = "https://www.atptour.com/en/scores/archive/miami/403/draws";
+              //$adresse = "https://www.atptour.com/en/scores/current/monte-carlo/410/draws";
+              //$adresse = "https://www.atptour.com/en/scores/current/barcelona/425/draws";
+              //$adresse = "https://www.atptour.com/en/scores/current/madrid/1536/draws";
+              //$adresse = "https://www.atptour.com/en/scores/current/roland-garros/520/draws";
+              $adresse = "https://www.atptour.com/en/scores/current/antalya/7650/draws";
 
+              $page = file_get_contents ($adresse);
 
-            $page = file_get_contents ($adresse);
+            //preg_match_all ('#src="/en/~/media/images/flags/([a-z]{3}).svg"/>
+//([A-Za-z]+(([ -])[A-Za-z]+)+)</a>#', $page, $player);
+            preg_match_all ('#data-ga-label="([A-Za-z]+(([ -])[A-Za-z]+)+)">	<img class="scores-draw-entry-box-players-item-flag " src="/en/~/media/images/flags/([a-z]{3}).svg"/>#', $page, $player);
 
-            preg_match_all ('#src="/en/~/media/images/flags/([a-z]{3}).svg"/>
-([A-Za-z]+(([ -])[A-Za-z]+)+)</a>#', $page, $player);
+              //var_dump($player); // Le var_dump() du tableau $prix nous montre que $prix[0] contient l'ensemble du morceau trouvé et que $prix[1] contient le contenu de la parenthèse capturante
 
-            var_dump($player); // Le var_dump() du tableau $prix nous montre que $prix[0] contient l'ensemble du morceau trouvé et que $prix[1] contient le contenu de la parenthèse capturante
+              for($i = 0; $i < count($player[1]); $i++) // On parcourt le tableau $player[1]
+              {
+                  echo "ligne=" . $player[1][$i] . " (" . $player[2][$i] . ")<br />"; // On affiche le joueur et son pays
 
-            for($i = 0; $i < count($player[1]); $i++) // On parcourt le tableau $prix[1]
-            {
-                echo "ligne=" . $player[2][$i] . " (" . $player[1][$i] . ")<br />"; // On affiche le joueur et son pays
+                  loadTournamentPlayers($player[1][$i], $player[2][$i]);
 
-                loadTournamentPlayers($player[2][$i], $player[1][$i]);
-
-            //    echo "ligne=" . $player[1][$i] . "<br />"; // On affiche le joueur
-            }
+              //    echo "ligne=" . $player[1][$i] . "<br />"; // On affiche le joueur
+              }
 
             }
 
