@@ -1,2 +1,2 @@
-# tennisbetfirends
+# tennisbetfriends
 Pronostiques tennis entre amis
