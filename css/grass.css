@@ -1,0 +1,140 @@
+body
+{
+    background-color: DarkGreen;
+    margin: 10px 10px;
+    padding: 0 ;
+}
+
+
+h1
+{
+    color: DarkGreen;
+/*
+    text-shadow: 1px 0 0 white, 0 1px 0 white, 0 -1px 0 white, -1px 0 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 white;
+*/
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px, rgb(255, 255, 255) 0.540302px 0.841471px 0px, rgb(255, 255, 255) -0.416147px 0.909297px 0px, rgb(255, 255, 255) -0.989992px 0.14112px 0px, rgb(255, 255, 255) -0.653644px -0.756802px 0px, rgb(255, 255, 255) 0.283662px -0.958924px 0px, rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+}
+
+h2
+{
+    color: purple;
+}
+
+
+/*.tournoi*/
+h6
+{
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    border: 5px solid purple;
+    background-image:url(../images/tennis-grass-3.jpg);
+    /*background-position: center;*/
+    background-position: 50% 18%;
+    background-repeat: no-repeat;
+    margin: 0px;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+
+menu
+{
+    background-color: LightBlue;
+}
+
+.warning
+{
+color: red;
+font-size: 20px;
+}
+
+table
+{
+    border-collapse: collapse; /* Les bordures du tableau seront collées (plus joli) */
+}
+
+td, th
+{
+    border: 1px solid black;
+    background-color: ForestGreen;
+}
+
+th
+{
+    background-color: MediumSlateBlue;
+}
+
+.lignecoloree td {
+   background-color: Gold;
+}
+
+.lignenormale td {
+   background-color: ForestGreen;
+}
+
+#conteneur
+{
+    /*display: float;*/
+    display: flex;
+    /*display: inline;*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    background-color: YellowGreen;
+    /*background-image:url(images/terre-battue.jpg);*/
+}
+
+.element
+{
+    /*margin: auto; */
+    background-color: LawnGreen;
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+}
+
+.element_corps
+{
+    /*margin: auto; */
+    background-color: SeaGreen;
+    margin: 10px 10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:2px;
+    padding-bottom:2px;
+    /*background-image:ur
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+}
+
+.element_menu
+{
+    /*margin: auto; */
+    background-color: DarkKhaki;
+    margin: 10px 10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:2px;
+    padding-bottom:2px;
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+}
+
+/* On sélectionne tous les labels */
+label
+{
+    display:block;
+    width:200px; /* Attention : prenez une largeur suffisamment grande */
+    float:left;
+}
+
+/* On sélectionne tout les labels contenu dans le formulaire avec l'id : id_form */
+#registration_form label
+{
+    display:block;
+    width:200px;
+    float:left;
+}
+
+#connection_form label
+{
+    display:block;
+    width:100px;
+    float:left;
+}

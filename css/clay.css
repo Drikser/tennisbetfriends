@@ -1,0 +1,138 @@
+body
+{
+    background-color: Khaki;
+    /*background-color: Chocolate;*/
+    margin: 10px 10px;
+    padding: 0 ;
+}
+
+
+h1
+{
+    color: orange;
+    text-shadow: 1px 0 0 white, 0 1px 0 white, 0 -1px 0 white, -1px 0 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 white;
+}
+
+h2
+{
+    color: green;
+}
+
+
+/*.tournoi*/
+h6
+{
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    border: 3px solid purple;
+    /*background-color: Chocolate;*/
+    background-image:url(images/TERRE_BATTUE2894.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0px;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+
+menu
+{
+    background-color: LightBlue;
+}
+
+.warning
+{
+color: red;
+font-size: 20px;
+}
+
+table
+{
+    border-collapse: collapse; /* Les bordures du tableau seront collées (plus joli) */
+}
+
+td, th
+{
+    border: 1px solid black;
+    background-color: DarkOrange;
+}
+
+th
+{
+    background-color: DodgerBlue;
+}
+
+.lignecoloree td {
+   background-color: Gold;
+}
+
+.lignenormale td {
+   background-color: DarkOrange;
+}
+
+#conteneur
+{
+    /*display: float;*/
+    display: flex;
+    /*display: inline;*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    background-color: Peru;
+    /*background-image:url(images/terre-battue.jpg);*/
+}
+
+.element
+{
+    /*margin: auto; */
+    background-color: LawnGreen;
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+}
+
+.element_corps
+{
+    /*margin: auto; */
+    background-color: SandyBrown;
+    margin: 10px 10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:2px;
+    padding-bottom:2px;
+    /*background-image:ur
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+}
+
+.element_menu
+{
+    /*margin: auto; */
+    background-color: DarkKhaki;
+    margin: 10px 10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:2px;
+    padding-bottom:2px;
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+}
+
+/* On sélectionne tous les labels */
+label
+{
+    display:block;
+    width:200px; /* Attention : prenez une largeur suffisamment grande */
+    float:left;
+}
+
+/* On sélectionne tout les labels contenu dans le formulaire avec l'id : id_form */
+#registration_form label
+{
+    display:block;
+    width:200px;
+    float:left;
+}
+
+#connection_form label
+{
+    display:block;
+    width:100px;
+    float:left;
+}
