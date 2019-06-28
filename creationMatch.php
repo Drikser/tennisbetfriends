@@ -64,13 +64,13 @@ session_start(); // On démarre la session AVANT toute chose
 //([A-Za-z]+(([ -])[A-Za-z]+)+)</a>#', $page, $player);
             preg_match_all ('#data-ga-label="([A-Za-z]+(([ -])[A-Za-z]+)+)">	<img class="scores-draw-entry-box-players-item-flag " src="/en/~/media/images/flags/([a-z]{3}).svg"/>#', $page, $player);
 
-              //var_dump($player); // Le var_dump() du tableau $prix nous montre que $prix[0] contient l'ensemble du morceau trouvé et que $prix[1] contient le contenu de la parenthèse capturante
+              var_dump($player); // Le var_dump() du tableau $prix nous montre que $prix[0] contient l'ensemble du morceau trouvé et que $prix[1] contient le contenu de la parenthèse capturante
 
               for($i = 0; $i < count($player[1]); $i++) // On parcourt le tableau $player[1]
               {
-                  echo "ligne=" . $player[1][$i] . " (" . $player[2][$i] . ")<br />"; // On affiche le joueur et son pays
+                  echo "ligne=" . $player[1][$i] . " (" . $player[4][$i] . ")<br />"; // On affiche le joueur et son pays
 
-                  loadTournamentPlayers($player[1][$i], $player[2][$i]);
+                  loadTournamentPlayers($player[1][$i], $player[4][$i]);
 
               //    echo "ligne=" . $player[1][$i] . "<br />"; // On affiche le joueur
               }
