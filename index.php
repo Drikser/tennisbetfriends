@@ -93,11 +93,16 @@ session_start(); // On démarre la session AVANT toute chose
     				</script>
     				-->
 
-    				<?php
+          <p>
+          Pour saisir vos pronostiques, rendez-vous dans la section <a href="pronostique_matchs.php">Pronostiques matchs</a><br /> <br />
+          </p>
+          <p>
+          Le(s) prochains (s) match(s) est(sont) :<br />
+          </p>
+
+  				<?php
 
 					$dailyMatchs = getDailyMatchs();
-
-					echo "<br />Le(s) prochains (s) match(s) est(sont) :<br />";
 
 					//while ($donnees = $reponse->fetch()) {
 					while ($donnees = $dailyMatchs->fetch()) {
