@@ -62,18 +62,18 @@ while ($titre = $allPrognosis->fetch()) {
 ?>
 <table>
 	<tr>
-    	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
-        <th colspan="4" align="center" valign="middle">RESULTAT OFFICIEL</th>
+  	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
+    <th colspan="4" align="center" valign="middle">RESULTAT OFFICIEL</th>
 		<th colspan="<?php echo $nbplayers ?>" align="center" valign="middle">PRONOSTIQUES JOUEURS</th>
-    </tr>
+  </tr>
 
-    <tr>
-    	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
-        <th width="150" align="center" valign="middle" class="cellule">Niveau</th>
-        <th width="150" align="center" valign="middle" class="cellule">Joueur 1</th>
-        <th width="100" align="center" valign="middle" class="cellule">Resultat</th>
-        <th width="150" align="center" valign="middle" class="cellule">Joueur 2</th>
-        <?php
+  <tr>
+		<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
+    <th width="150" align="center" valign="middle" class="cellule">Niveau</th>
+    <th width="150" align="center" valign="middle" class="cellule">Joueur 1</th>
+    <th width="100" align="center" valign="middle" class="cellule">Resultat</th>
+    <th width="150" align="center" valign="middle" class="cellule">Joueur 2</th>
+      <?php
 		foreach($tabPseudo as $element) {
 		?>
 			<th width="150" align="center" valign="middle" class="cellule"><?php echo $element; ?></th>
@@ -81,7 +81,7 @@ while ($titre = $allPrognosis->fetch()) {
 		}
         ?>
 
-    </tr>
+  </tr>
 
     <?php
 
@@ -95,10 +95,10 @@ while ($titre = $allPrognosis->fetch()) {
        		?>
         	<tr>
         		<td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $donnees['RES_MATCH_ID']; ?> required="required"></td>
-                <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_TOUR']; ?></td>
-                <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU1']; ?></td>
-                <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH'] . " " . $donnees['RES_MATCH_SCR_JOU1'] . "/" . $donnees['RES_MATCH_SCR_JOU2'] . " " . $donnees['RES_MATCH_TYP']; ?></td>
-                <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU2']; ?></td>
+                <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH_TOUR']; ?></b></td>
+                <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH_JOU1']; ?></b></td>
+                <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH'] . " " . $donnees['RES_MATCH_SCR_JOU1'] . "/" . $donnees['RES_MATCH_SCR_JOU2'] . " " . $donnees['RES_MATCH_TYP']; ?></b></td>
+                <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH_JOU2']; ?></b></td>
                 <?php
                 $i = 0;
                 foreach($tabPseudoProno as $prono) {
