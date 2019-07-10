@@ -729,8 +729,10 @@ function dbConnect(){
 	try
 	{
 		// On va se connecter à la base de données
-		//$bdd = new PDO('mysql:host=tennisbefubddtbf.mysql.db;dbname=tennisbefubddtbf;charset=utf8', 'tennisbefubddtbf', 'nediamBDDTBF1975', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-		$bdd = new PDO('mysql:host=localhost;dbname=tennisbefubddtbf;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		$bdd = new PDO('mysql:host=tennisbefubddtbf.mysql.db;dbname=tennisbefubddtbf;charset=utf8', 'tennisbefubddtbf', 'nediamBDDTBF1975', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+		//--> Base de données pour le test
+		//$bdd = new PDO('mysql:host=localhost;dbname=tennisbefubddtbf;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 		return $bdd;
 	}
 		catch(Exception $e)
