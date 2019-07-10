@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 //************************************************************************************************************************************************************
 //****************************************************** Fonctions de séléction ******************************************************************************
@@ -283,11 +283,32 @@ function getAllBonus() {
                           FROM pronostique_bonus b
                     INNER JOIN joueur j
                             ON b.PROB_JOU_ID = j.JOU_ID
-                      ORDER BY b.PROB_JOU_ID ASC');
+												 WHERE b.PROB_JOU_ID <> 1
+                      ORDER BY j.JOU_PSE ASC');
+	return $response;
+}
+
+
+function getSemisAndFinalists() {
+	//Recherche des résultats des demi-finales (poids 2)
+	$bdd = dbConnect();
+	$response = $bdd->query('SELECT *
+                          FROM resultats
+													WHERE (RES_MATCH_POIDS_TOUR = 1 OR RES_MATCH_POIDS_TOUR = 2)');
 
 	return $response;
 }
 
+
+function getFinalists() {
+	//Recherche des résultats de la finale (poids 1)
+	$bdd = dbConnect();
+	$response = $bdd->query('SELECT *
+                          FROM resultats
+													WHERE RES_MATCH_POIDS_TOUR = 1');
+
+	return $responseFinalists;
+}
 
 function getDailyMatchs() {
 	$bdd = dbConnect();
@@ -708,7 +729,8 @@ function dbConnect(){
 	try
 	{
 		// On va se connecter à la base de données
-		$bdd = new PDO('mysql:host=tennisbefubddtbf.mysql.db;dbname=tennisbefubddtbf;charset=utf8', 'tennisbefubddtbf', 'nediamBDDTBF1975', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		//$bdd = new PDO('mysql:host=tennisbefubddtbf.mysql.db;dbname=tennisbefubddtbf;charset=utf8', 'tennisbefubddtbf', 'nediamBDDTBF1975', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		$bdd = new PDO('mysql:host=localhost;dbname=tennisbefubddtbf;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 		return $bdd;
 	}
 		catch(Exception $e)

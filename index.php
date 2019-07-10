@@ -69,12 +69,19 @@ session_start(); // On démarre la session AVANT toute chose
 				 	<p></p>
 
 				 	<?php
-					// Affichage du classement des joueurs pour l'admin
-					// *** Récap pronostiques matchs des joueurs ***
-				 	//include ("affichageResultats.php");
-				 	include ("affichageResultatsPronosMatchs.php");
+					// *** Récap pronostiques bonus des joueurs ***
+				 	include ("affichageResultatsPronosBonus.php");
 
 				 	?>
+
+          <p></p>
+
+			    <?php
+			    // *** Récap pronostiques matchs des joueurs ***
+			    include ("affichageResultatsPronosMatchs.php");
+
+			    ?>
+          
 					<p>
 						Le site de référence est <a href="https://www.atptour.com/" target="_blank">www.atptour.com</a><br />
 					</p>
@@ -148,14 +155,14 @@ session_start(); // On démarre la session AVANT toute chose
     </div>
 
 	<?php
-	$monfichier = fopen('compteurPageIndex.txt', 'r+');
+	//$monfichier = fopen('compteurPageIndex.txt', 'r+');
 
-	$pages_vues = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
-	$pages_vues++; // On augmente de 1 ce nombre de pages vues
-	fseek($monfichier, 0); // On remet le curseur au début du fichier
-	fputs($monfichier, $pages_vues); // On écrit le nouveau nombre de pages vues
+	//$pages_vues = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
+	//$pages_vues++; // On augmente de 1 ce nombre de pages vues
+	//fseek($monfichier, 0); // On remet le curseur au début du fichier
+	//fputs($monfichier, $pages_vues); // On écrit le nouveau nombre de pages vues
 
-	fclose($monfichier);
+	//fclose($monfichier);
 
 	//echo '<p>Cette page a été vue ' . $pages_vues . ' fois !</p>';
 	?>

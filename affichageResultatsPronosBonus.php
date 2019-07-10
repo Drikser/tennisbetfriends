@@ -4,13 +4,19 @@
 
 
 <?php
-echo "Les pronostiques bonus :<br />";
-
 $tabPseudo = array();
 $tabPseudoProno = array();
 $i = 0;
 $idMatchPrecedent = '';
 $nbplayers = 0;
+$Winner = "";
+$Finalist1 = "";
+$Finalist2 = "";
+$Semi1 = "";
+$Semi2 = "";
+$Semi3 = "";
+$Semi4 = "";
+
 
 // Renseigner un tableau contenant tous les pseudo des joueurs
 // ==> Pour affichage dynamique des pseudo dans les titres du tableau
@@ -49,78 +55,202 @@ while ($titre = $allBonus->fetch()) {
 	$tabPseudoProno[$i]['finalist1'] = $titre['PROB_FINAL1'];
 	$tabPseudoProno[$i]['finalist2'] = $titre['PROB_FINAL2'];
 	$tabPseudoProno[$i]['semiFinalist1'] = $titre['PROB_DEMI1'];
-    $tabPseudoProno[$i]['semiFinalist2'] = $titre['PROB_DEMI2'];
-    $tabPseudoProno[$i]['semiFinalist3'] = $titre['PROB_DEMI3'];
+  $tabPseudoProno[$i]['semiFinalist2'] = $titre['PROB_DEMI2'];
+  $tabPseudoProno[$i]['semiFinalist3'] = $titre['PROB_DEMI3'];
 	$tabPseudoProno[$i]['semiFinalist4'] = $titre['PROB_DEMI4'];
 	$i++;
-
 }
 
-echo '<pre>';
-print_r($tabPseudoProno);
-echo '</pre>';
+//echo '<pre>';
+//print_r($tabPseudoProno);
+//echo '</pre>';
 
 ?>
 
-
 <table>
 	<tr>
-    	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
-        <th colspan="2" align="center" valign="middle">RESULTAT OFFICIEL</th>
+  	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
+    <th colspan="2" align="center" valign="middle">RESULTAT OFFICIEL</th>
 		<th colspan="<?php echo $nbplayers ?>" align="center" valign="middle">PRONOSTIQUES JOUEURS</th>
-    </tr>
+  </tr>
 
-    <tr>
-    	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
-        <th width="150" align="center" valign="middle" class="cellule">Niveau</th>
-        <th width="150" align="center" valign="middle" class="cellule">Nom du joueur</th>
-        <?php
+  <tr>
+		<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
+		<th width="150" align="center" valign="middle" class="cellule">NIVEAU</th>
+		<th width="150" align="center" valign="middle" class="cellule">NOM</th>
+    <?php
 		foreach($tabPseudo as $element) {
 		?>
 			<th width="150" align="center" valign="middle" class="cellule"><?php echo $element; ?></th>
 		<?php
 		}
-        ?>
+		?>
+  </tr>
 
-    </tr>
-
-    <?php
-
-    //include("affichageResultatsPronoMatchsRequete.php");
-	$allPrognosis = getAllBonus();
+	<?php
+	//Recherche des matchs finale et demi-finale dans la table des résultats
+	//poids 1 = finale
+	//poids 2 = demi-finales
+	//--> Les demi-finalsites sont player1 et player2 pour les 2 matchs dont le poids est 2
+	//--> Les finalistes sont les joueurs player1 et player2 du match dont le poids est 1
+	//--> Le vainqueur est le vainqueur du match dont le poids est 1
+	$allSemisAndFinalists = getSemisAndFinalists();
+	//$allFinalists = getFinalists();
 
 	//while ($donnees = $response->fetch()) {
-    while ($donnees = $allPrognosis->fetch()) {
+	while ($donnees = $allSemisAndFinalists->fetch()) {
 
-       	if ($donnees['RES_MATCH_ID'] != $idMatchPrecedent) {
-       		?>
-        	<tr>
-        		<td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $donnees['RES_MATCH_ID']; ?> required="required"></td>
-                <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_TOURNOI']; ?></td>
-                <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_TOUR']; ?></td>
-                <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU1']; ?></td>
-                <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH'] . " " . $donnees['RES_MATCH_SCR_JOU1'] . "/" . $donnees['RES_MATCH_SCR_JOU2'] . " " . $donnees['RES_MATCH_TYP']; ?></td>
-                <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU2']; ?></td>
-                <?php
-                $i = 0;
-                foreach($tabPseudoProno as $prono) {
-                	if ($tabPseudoProno[$i]['matchId'] == $donnees['RES_MATCH_ID']) {
-					?>
-						<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['proRes'] . " " . $tabPseudoProno[$i]['proScore1'] . "/" . $tabPseudoProno[$i]['proScore2'] . " " . $tabPseudoProno[$i]['proTypMatch'] . " (" . $tabPseudoProno[$i]['proPoints'] . "pts)"; ?></td>
-					<?php
-					}
-					$i++;
-				}
-        		?>
-            </tr>
+		if ($donnees['RES_MATCH_POIDS_TOUR'] == 1) {
+			$Finalist1 = $donnees['RES_MATCH_JOU1'];
+			$Finalist2 = $donnees['RES_MATCH_JOU2'];
 
-        	<?php
-        	$idMatchPrecedent = $donnees['RES_MATCH_ID'];
-           	}
+			if ($donnees['RES_MATCH'] == 'V') {
+				$Winner = $donnees['RES_MATCH_JOU1'];
+			}
+
+			if ($donnees['RES_MATCH'] == 'D') {
+				$Winner = $donnees['RES_MATCH_JOU2'];
+			}
 		}
-    ?>
 
-   </table>
+		if ($donnees['RES_MATCH_POIDS_TOUR'] == 2) {
+			if ($Semi1 == "" and $Semi2 == "") {
+				$Semi1 = $donnees['RES_MATCH_JOU1'];
+				$Semi2 = $donnees['RES_MATCH_JOU2'];
+			} else {
+				$Semi3 = $donnees['RES_MATCH_JOU1'];
+				$Semi4 = $donnees['RES_MATCH_JOU2'];
+			}
+		}
+	}
+
+	//echo "Après chargement variables<br />";
+	//echo "Vainqueur        = "	. $Winner . "<br />";
+	//echo "Finaliste 1      = "	. $Finalist1 . "<br />";
+	//echo "Finaliste 2      = "	. $Finalist2 . "<br />";
+	//echo "Demi-Finaliste 1 = "	. $Semi1 . "<br />";
+	//echo "Demi-Finaliste 2 = "	. $Semi2 . "<br />";
+	//echo "Demi-Finaliste 3 = "	. $Semi3 . "<br />";
+	//echo "Demi-Finaliste 4 = "	. $Semi4 . "<br />";
+
+	// Affichage des pronostiques bonnus des vainqueurs si vainqueur du tournoi connu
+	//---------------------------------------------------------------------------------
+
+	if ($Winner != "") {
+		?>
+		<tr>
+			<td align="center" valign="middle" class="cellule"><b>VAINQUEUR</b></td>
+			<td align="center" valign="middle" class="cellule"><b><?php echo $Winner; ?><b></td>
+			<?php
+			$i = 0;
+			foreach($tabPseudoProno as $prono) {
+			 ?>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['winner']; ?></td>
+			<?php
+			$i++;
+			}
+		 ?>
+		 </tr>
+		 <?php
+	}
+
+	// Affichage des pronostiques bonnus des vainqueurs si vainqueur du tournoi connu
+	//---------------------------------------------------------------------------------
+
+	if ($Finalist1 != "" AND $Finalist2 != "") {
+		?>
+		<tr>
+			<td rowspan="2" align="center" valign="middle" class="cellule"><b>FINALISTES</b></td>
+			<td align="center" valign="middle" class="cellule"><b><?php echo $Finalist1; ?></b></td>
+			<?php
+			$i = 0;
+			foreach($tabPseudoProno as $prono) {
+			?>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['finalist1']; ?></td>
+			<?php
+			$i++;
+			}
+		 	?>
+		 </tr>
+
+		 <tr>
+ 			<td align="center" valign="middle" class="cellule"><b><?php echo $Finalist2; ?></b></td>
+ 			<?php
+ 			$i = 0;
+ 			foreach($tabPseudoProno as $prono) {
+ 			?>
+ 				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['finalist2']; ?></td>
+ 			<?php
+ 			$i++;
+ 			}
+ 		 	?>
+ 		 </tr>
+
+		 <?php
+	}
+
+	// Affichage des pronostiques bonnus des demi-fnales si demi-finalistes du tournoi connus
+	//----------------------------------------------------------------------------------------
+	if ($Semi1 != "" AND $Semi2 != "" AND $Semi3 != "" AND $Semi4 != "") {
+		?>
+		<tr>
+			<td rowspan="4" align="center" valign="middle" class="cellule"><b>DEMI-FINALISTES</b></td>
+			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi1; ?></b></td>
+			<?php
+			$i = 0;
+			foreach($tabPseudoProno as $prono) {
+			 ?>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist1']; ?></td>
+			<?php
+			$i++;
+			}
+		 ?>
+		</tr>
+
+		<tr>
+			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi2; ?></b></td>
+			<?php
+			$i = 0;
+			foreach($tabPseudoProno as $prono) {
+			?>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist2']; ?></td>
+			<?php
+			$i++;
+			}
+		 	?>
+		</tr>
+
+		<tr>
+			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi3; ?></b></td>
+			<?php
+			$i = 0;
+			foreach($tabPseudoProno as $prono) {
+			?>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist3']; ?></td>
+			<?php
+			$i++;
+			}
+		 	?>
+		</tr>
+
+		<tr>
+			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi4; ?></b></td>
+			<?php
+			$i = 0;
+			foreach($tabPseudoProno as $prono) {
+			?>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist4']; ?></td>
+			<?php
+			$i++;
+			}
+		 ?>
+		 </tr>
+
+	<?php
+	}
+	?>
+
+</table>
 
    <?php
 //$response->closeCursor();
