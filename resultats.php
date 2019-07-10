@@ -31,7 +31,7 @@ session_start(); // On démarre la session AVANT toute chose
             <p>
                 <!-- Affichage des pronostiques bonus des joueurs -->
                 <!-- Cette page contiend tous les résultats des pronostiques bonus de tous les joueurs -->
-                <!-- <?php //include ("affichageResultatsPronosBonus.php"); ?> Ne pas afficher page pour l'instant, pas terminée -->
+                <?php include ("affichageResultatsPronosBonus.php"); ?>
             </p>
 
             <p>
