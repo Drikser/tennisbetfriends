@@ -81,7 +81,7 @@ session_start(); // On démarre la session AVANT toute chose
 			    include ("affichageResultatsPronosMatchs.php");
 
 			    ?>
-          
+
 					<p>
 						Le site de référence est <a href="https://www.atptour.com/" target="_blank">www.atptour.com</a><br />
 					</p>
@@ -93,12 +93,6 @@ session_start(); // On démarre la session AVANT toute chose
 
 
  					?>
-
-   				    <!--
-   				    <script>
-       					alert('Hello toi!');
-    				</script>
-    				-->
 
           <p>
           Pour saisir vos pronostiques, rendez-vous dans la section <a href="pronostique_matchs.php">Pronostiques matchs</a><br /> <br />
@@ -142,6 +136,12 @@ session_start(); // On démarre la session AVANT toute chose
 			}
 			else {
 				?>
+
+
+        <?php
+        //  include ("clock.php");
+        ?>
+
 				<p>
 					Pas encore inscrit ? Faites partie de la communauté en cliquant en allant sur la page : <a href="inscription.php">Inscription</a><br />
 

@@ -44,7 +44,9 @@ session_start(); // On démarre la session AVANT toute chose
 	                echo "<br /><h1>Pronostiques du tournoi</h1>";
 
 	                setlocale(LC_TIME, "fr_FR", "French");
-	                echo "Nous sommes le " . strftime('%A %d %B %Y, il est %H:%M:%S') . "<br />";
+                  //---
+	                //echo "Nous sommes le " . strftime('%A %d %B %Y, il est %H:%M:%S') . "<br />";
+                  //---
 					        //echo "Nous sommes le " . (date('l jS \of F Y\, \i\l \e\s\t H:i:s')) . "<br /><br />";
 
 	                $tournament= getTournament();

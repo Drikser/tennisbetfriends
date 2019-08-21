@@ -11,7 +11,7 @@ function controlPseudo($postPseudo) {
 	//$req->execute(array(
 	//   	'Pseudo' => $_POST['Pseudo']));
 
-	$req = $bdd->prepare('SELECT * FROM joueur WHERE JOU_PSE = ? LIMIT 1'); // Limitation à une réponse (si on trouve le pseudo pas la peine d'aller plus loin, il faut choisir un autre pseudo)
+	$req = $bdd->prepare('SELECT * FROM joueur WHERE JOU_PSE = ? AND JOU_ACTIVE = "1" LIMIT 1'); // Limitation à une réponse (si on trouve le pseudo pas la peine d'aller plus loin, il faut choisir un autre pseudo)
 	$req->execute(array($postPseudo));
 
 	$pseudo = $req->fetch(); // Pas besoin de faire un "while" car une seule ligne de résultat
@@ -283,7 +283,7 @@ function getAllBonus() {
                           FROM pronostique_bonus b
                     INNER JOIN joueur j
                             ON b.PROB_JOU_ID = j.JOU_ID
-												 WHERE b.PROB_JOU_ID <> 1
+												 WHERE j.JOU_PSE <> "Admin"
                       ORDER BY j.JOU_PSE ASC');
 	return $response;
 }
@@ -423,6 +423,20 @@ function getAllPtsPrognosisPlayer($postPlayerId) {
 }
 
 
+function getKey($pseudoValid) {
+	$bdd = dbConnect();
+
+	$req = $bdd->prepare("SELECT JOU_KEY, JOU_ACTIVE
+													FROM joueur
+												 WHERE JOU_PSE = ?
+												 LIMIT 1");
+
+	$req->execute(array($pseudoValid));
+
+return $req;
+}
+
+
 //************************************************************************************************************************************************************
 //****************************************************** Fonctions d'insertion *******************************************************************************
 //************************************************************************************************************************************************************
@@ -431,9 +445,10 @@ function insertPlayer() {
 	$bdd = dbConnect();
 
 	global $MotDePasseHache;
+	global $key;
 
 	//Chargement du nouvel inscrit en table MySQL
-	$req = $bdd->prepare('INSERT INTO joueur (JOU_NOM, JOU_PRE, JOU_PSE, JOU_ADR_MAIL, JOU_MDP, JOU_COUNT, JOU_TOKEN, JOU_DAT_INS, JOU_PTS_PRONO, JOU_NB_RES_OK, JOU_BONUS_DF, JOU_BONUS_VQR, JOU_BONUS_FR_NOM, JOU_BONUS_FR_NIV, JOU_TOT_PTS) VALUES (:Nom, :Prenom, :Pseudo, :Email, :MotDePasse, :Count, :Token, NOW(), :PointsPronos, :NbPronoOK, :BonusDemiFinalistes, :BonusVainqueur, :BonusMeilleurFrancais, :BonusNiveauMeilleurFrancais, :TotalPoints)');
+	$req = $bdd->prepare('INSERT INTO joueur (JOU_NOM, JOU_PRE, JOU_PSE, JOU_ADR_MAIL, JOU_MDP, JOU_COUNT, JOU_TOKEN, JOU_DAT_INS, JOU_PTS_PRONO, JOU_NB_RES_OK, JOU_BONUS_DF, JOU_BONUS_VQR, JOU_BONUS_FR_NOM, JOU_BONUS_FR_NIV, JOU_TOT_PTS, JOU_KEY, JOU_ACTIVE) VALUES (:Nom, :Prenom, :Pseudo, :Email, :MotDePasse, :Count, :Token, NOW(), :PointsPronos, :NbPronoOK, :BonusDemiFinalistes, :BonusVainqueur, :BonusMeilleurFrancais, :BonusNiveauMeilleurFrancais, :TotalPoints, :Key, :Active)');
 	$req->execute(array(
 		'Nom' => $_POST['Nom'],
 		'Prenom' => $_POST['Prenom'],
@@ -448,7 +463,9 @@ function insertPlayer() {
 		'BonusVainqueur' => 0,
 		'BonusMeilleurFrancais' => 0,
 		'BonusNiveauMeilleurFrancais' => 0,
-		'TotalPoints' => 0));
+		'TotalPoints' => 0,
+		'Key' => $key,
+		'Active' => 0));
 
 	return $req;
 }
@@ -720,6 +737,21 @@ function updatePwd($postToken) {
     return $req;
 }
 
+function updateActive($player, $activeValue) {
+	$bdd = dbConnect();
+
+	global $pseudoValid;
+
+	$req = $bdd->prepare('UPDATE joueur
+							 SET JOU_ACTIVE = :Value
+						   WHERE JOU_PSE = "'.$pseudoValid.'"');
+
+	$req->execute(array(
+		'Value' => $activeValue));
+
+    return $req;
+}
+
 //************************************************************************************************************************************************************
 //****************************************************** Connexion à la base dedonnées ***********************************************************************
 //************************************************************************************************************************************************************
@@ -729,10 +761,13 @@ function dbConnect(){
 	try
 	{
 		// On va se connecter à la base de données
+		//------------------------------------------
+
+		//--> Base de donnée de production
 		$bdd = new PDO('mysql:host=tennisbefubddtbf.mysql.db;dbname=tennisbefubddtbf;charset=utf8', 'tennisbefubddtbf', 'nediamBDDTBF1975', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 		//--> Base de données pour le test
-		//$bdd = new PDO('mysql:host=localhost;dbname=tennisbefubddtbf;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		//$bdd = new PDO('mysql:host=localhost;dbname=usopen2019;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 		return $bdd;
 	}
 		catch(Exception $e)

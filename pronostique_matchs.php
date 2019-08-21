@@ -44,7 +44,9 @@ session_start(); // On démarre la session AVANT toute chose
                     echo "<br /><h1>Pronostiques des matchs</h1><br />";
 
                     setlocale(LC_TIME, "fr_FR", "French");
-                    echo "Nous sommes le " . strftime('%A %d %B %Y, il est %H:%M:%S') . "<br />";
+                    //--- 
+                    //echo "Nous sommes le " . strftime('%A %d %B %Y, il est %H:%M:%S') . "<br />";
+                    //---
                     //echo (date('l jS \of F Y\, \i\l \e\s\t H:i:s')) . "<br />";
                     //echo (date('l jS \of F Y\, \i\l \e\s\t H:i:s \à \M\a\d\r\i\d')) . "<br />";
                     //echo (date('Y-m-d \i\l \e\s\t H:i:s \à \M\a\d\r\i\d')) . "<br />";

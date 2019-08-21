@@ -37,7 +37,7 @@ session_start(); // On démarre la session AVANT toute chose
 
         	<h2>Le site de référence</h2>
 
-			<p>Lors de ce concours, le site de référence sera le site <a href="https://www.atptour.com/" target="_blank">www.atptour.com</a>, sur lequel seront pris l'ordre des matchs et les horaires, dans la section "Daily schedule" du site.</p>
+			<p>Lors de ce concours, le site de référence sera le site <a class="a_text" href="https://www.atptour.com/" target="_blank">www.atptour.com</a>, sur lequel seront pris l'ordre des matchs et les horaires, dans la section "Daily schedule" du site.</p>
 
 
 			<h2>Faire les pronostiques</h2>
@@ -61,7 +61,7 @@ session_start(); // On démarre la session AVANT toute chose
 
         	<p>
         	Les matchs sont proposés au format: Joueur1 contre Joueur2, ce qui veut dire que si vous pensez que le Joueur 2 va gagner, vous devrez pronostiquer la défaite du joueur 1.<br />
-        	Le score sera toujours en faveur du vainqueur. Une victoire du joueur 2 sera donc enregistrée comme : D 2/1 ou D 2/0.<br />
+        	Le score sera toujours en faveur du vainqueur. Une victoire du joueur 2 sera donc enregistrée comme : D 3/0, D 3/1 ou D 3/2.<br />
         	Cas particuliers :<br />
         	- Abandon : Un joueur peut abandonner en cours de match, et vous pouvez choisir le format AB, avec le score qu'il y avait au moment de l'abandon.<br />
         	- Forfait : Un joueur peut déclarer forfait avant la rencontre, dans ce cas le résultat sera : 0/0 (WO).<br />
@@ -74,12 +74,12 @@ session_start(); // On démarre la session AVANT toute chose
         			<th>A renseigner sur le site</td>
         		</tr>
         		<tr>
-        			<td>Le joueur1 bat le joueur2 par 2 sets à 0</td>
-        			<td>Joueur1 V Joueur2 2/0</td>
+        			<td>Le joueur1 bat le joueur2 par 3 sets à 0</td>
+        			<td>Joueur1 V Joueur2 3/0</td>
         		</tr>
         		<tr>
-        			<td>Le joueur2 bat le joueur1 par 2 sets à 1</td>
-        			<td>Joueur1 D Joueur2 2/1</td>
+        			<td>Le joueur2 bat le joueur1 par 3 sets à 1</td>
+        			<td>Joueur1 D Joueur2 3/1</td>
         		</tr>
         		<tr>
         			<td>Le joueur1 abandonne sur blessure alors qu'il menait 1 set à 0</td>
@@ -95,7 +95,7 @@ session_start(); // On démarre la session AVANT toute chose
 
         	<h3>Les horaires des matchs</h3>
 
-        	<p>Les horaires des matchs seront ceux affiché sur le site <a href="https://www.atptour.com/" target="_blank">www.atptour.com</a>, dans la programmation du jour (Daily schedule).</p>
+        	<p>Les horaires des matchs seront ceux affiché sur le site <a class="a_text" href="https://www.atptour.com/" target="_blank">www.atptour.com</a>, dans la programmation du jour (Daily schedule).</p>
         	<p>ATTENTION, tous les matchs n'ayant pas un horaire fixe, tous les matchs qui ont la mention "Followed by" (suivi de) auront pour horaire de référence le premier match avec un horaire fixe, ou avec la mention "Not before" (Pas avant).</p>
 
         	<p>Pour la programmation suivante:<br />

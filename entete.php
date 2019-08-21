@@ -12,7 +12,7 @@
 			if ($donnees['SET_TYP_TOURNAMENT'] ==  "GC") {
 				?>
 <!--		<span class='tournoi'><?php echo $donnees['SET_LIB_TOURNAMENT'] . ' (' . $donnees['SET_LIB_TYP'] . ')' ?></span> -->
-					<h6><?php echo 'Pronostiques du tournoi de ' . $donnees['SET_LIB_TOURNAMENT'] ?></h6>
+					<h6><?php echo "Pronostiques de l'" . $donnees['SET_LIB_TOURNAMENT'] ?></h6>
 				<?php
 			}
 			else {
@@ -24,15 +24,37 @@
     ?>
 
 
-
 	<?php
 	if (isset($_SESSION['JOU_ID']) AND isset($_SESSION['JOU_PSE']))
 	{
-    	echo "Bonjour " . $_SESSION['JOU_PSE'];
+    	echo "Bonjour " . $_SESSION['JOU_PSE'] . " <br />";
 	}
 	else
 	{
-		echo "Bonjour visiteur";
+		echo "Bonjour visiteur <br />";
 	}
+
+	include ("clock.php");
+
+	//include ("moment.js");
 	?>
+
+<!--
+	<script>
+		var now = new Date();
+		console.log("date de maintenant = ",now);
+		//alert('Hello toi!');
+		//console.log("getTimezoneOffset", now.getTimezoneOffset());
+
+
+		var maintenant = moment();
+		console.log(maintenant);
+
+	</script>
+-->
+
+
+
+
+
 </header>
