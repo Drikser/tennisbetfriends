@@ -62,11 +62,12 @@ session_start(); // On démarre la session AVANT toute chose
         <img src="captcha.php" alt="captcha" />
         Copier le mot ici: <input type="text" name="captcha" />
       </p>
+      -->
 			<p>
 				<input type="submit" value="Valider" />
 			</p>
 			</form>
-      -->
+
 
 
 			<?php
