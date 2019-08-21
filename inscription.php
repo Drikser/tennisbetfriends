@@ -56,10 +56,17 @@ session_start(); // On démarre la session AVANT toute chose
 				<label>Confirmez le mot de passe : </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
 				<b>Note :</b> Le mot de passe doit faire au moins 8 caratères, avec une majuscule, une minuscule, un chiffre et un caractère spécial
 			</p>
+
+      <!--
+      <p>
+        <img src="captcha.php" alt="captcha" />
+        Copier le mot ici: <input type="text" name="captcha" />
+      </p>
 			<p>
 				<input type="submit" value="Valider" />
 			</p>
 			</form>
+      -->
 
 
 			<?php
@@ -146,10 +153,11 @@ session_start(); // On démarre la session AVANT toute chose
 						//***********************************************************************************
 						//*            Insertion du joueur dans la table des joueurs
 						//***********************************************************************************
-						insertPlayer();
+            // Create a random key for the confirmation Email
+            $key = md5(microtime(TRUE)*100000);
 
-						//$nbRow = $req->rowcount();
-						//if ($nbRow > 0) {
+            // SQL statement
+						insertPlayer();
 
 						//***********************************************************************************
 						//*                   Création des matchs à pronostiquer
@@ -171,17 +179,29 @@ session_start(); // On démarre la session AVANT toute chose
 						//***********************************************************************************
 						insertTournamentToPrognosis($playerId);
 
-						include("inscriptionMail.php");
+            //***********************************************************************************
+						//*            Send an email with link to validate the registration
+						//***********************************************************************************
+            // get variable for confirmation Email
+            $emailValid = $_POST['Email'];
+            $pseudoValid = $_POST['Pseudo'];
 
+						//include("inscriptionMail.php");
+            include("inscriptionMailValidation.php");
+
+            // Message to refer player to their email address
 						$pseudo = htmlspecialchars($_POST['Pseudo']);
-						echo 'Bravo ' . htmlspecialchars($_POST['Prenom']) . ', ton inscrition a bien été prise en compte avec le pseudo suivant : ' . htmlspecialchars($_POST['Pseudo']) . '.<br />';
+            echo "<span class='info'>Merci </span>" . htmlspecialchars($_POST['Prenom']) . "<span class='info'> pour ton inscrition.</span><br />";
+            echo "<span class='info'>Afin de finaliser ton inscription, un email t'as été envoyé. Merci de te rendre sur </span>" . htmlspecialchars($_POST['Email']) . "<span class='info'> et de cliquer sur le lien d'activation reçu.</span><br />";
+
+            //echo 'Bravo ' . htmlspecialchars($_POST['Prenom']) . ', ton inscrition a bien été prise en compte avec le pseudo suivant : ' . htmlspecialchars($_POST['Pseudo']) . '.<br />';
 						//echo 'Bravo ' . htmlspecialchars($_POST['Prenom']) . ', ton inscrition a bien été prise en compte avec le pseudo suivant : ' . htmlspecialchars($_POST['Pseudo']) . ' (et le mot de passe suivant : ' . $_POST['MotDePasse'] . ') ... mais chuuuuuut faut pas le dire ... <br />';
-						echo 'Vérifie ton adresse mail ' . htmlspecialchars($_POST['Email']) . ', tu as dû recevoir un message de confirmation !<br />';
+						//echo 'Vérifie ton adresse mail ' . htmlspecialchars($_POST['Email']) . ', tu as dû recevoir un message de confirmation !<br />';
 
 
 						//include ('creationEntreesTablePronostique2.php');
 
-							echo 'Tu peux maintenant te connecter : <a href="connexion.php">' . 'Connexion' . '</a><br/>';
+						//echo 'Tu peux maintenant te connecter : <a href="connexion.php">' . 'Connexion' . '</a><br/>';
 					}
 						//else
 						//{
