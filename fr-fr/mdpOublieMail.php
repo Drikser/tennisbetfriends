@@ -9,14 +9,29 @@ else
 	$passage_ligne = "\n";
 }
 //=====Déclaration des messages au format texte et au format HTML.
-$message_txt = "Bonjour, voici le lien pour réinitialiser votre mot de passe.";
+
+//----------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------
+//
+// REMARQUE :
+// Pour le test, l'addresse du lien commence par http://localhost/pronos/fr-fr/xxxxxxxxxx.php
+// En production, l'addresse du lien commence par http://www.tennisbetfriends.com/xxxxxxxxxx.php
+//
+//----------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------
+
+
+
+$message_txt = "Bonjour <var>$firstName</var>, ";
 $message_html = "
-<html><head></head><body><b>Bonjour</b>,<br />
+<html><head></head><body>Bonjour <var>$firstName</var>,<br />
 <br />
-Merci d'être inscrit sur <b><i>www.tennisbetfriends.com</i></b>. <br />
-Voici le lien pour pouvoir réinitialiser votre mot de passe : http://www.tennisbetfriends/mdpInit.php?var=$token<br />
-<br />
-Si vous n'êtes pas à l'origine du changement de mot de passe, merci de contacter immédiatement l'administrateur de ce site.
+Nous avons reçu une demande pour réinitialiser votre mot de passe de votre compte Tennisbetfriends. <br />
+Si vous n'êtes pas à l'origine de ce changement, merci de contacter immédiatement l'administrateur de ce site.<br />
+<p>
+Si vous êtes à l'origine de cette demande, voici le lien pour définir un nouveau mot de passe : <a href=http://localhost/pronos/fr-fr/mdpInit.php?var=$token>http://localhost/pronos/fr-fr/mdpInit.php?var=$token</a><br />
+</p>
+Merci d'être inscrit sur <i>www.tennisbetfriends.com</i>. <br />
 <br />
 <br />
 Tennis Bet Friends

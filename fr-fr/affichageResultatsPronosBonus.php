@@ -35,7 +35,7 @@ $Semi4 = "";
 //Sélection des pronostiques effectués par le joueur :
 
 //include("affichageResultatsPronoMatchsRequete.php");
-//include("model.php");
+//include("../commun/model.php");
 $allBonus = getAllBonus();
 
 while ($titre = $allBonus->fetch()) {
@@ -68,6 +68,7 @@ while ($titre = $allBonus->fetch()) {
 ?>
 
 <table>
+	<!-- <caption>Récap pronostiques bonus des joueurs</caption> -->
 	<tr>
   	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
     <th colspan="2" align="center" valign="middle">RESULTAT OFFICIEL</th>

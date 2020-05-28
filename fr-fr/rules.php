@@ -6,7 +6,7 @@ session_start(); // On démarre la session AVANT toute chose
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
     <body>
 
@@ -100,10 +100,10 @@ session_start(); // On démarre la session AVANT toute chose
 
         	<p>Pour la programmation suivante:<br />
         	11h :<br />
-        	- Match1<br />
+        	- Match 1<br />
         	Suivi de <br />
-        	- Match2<br />
-        	- Match3<br />
+        	- Match 2<br />
+        	- Match 3<br />
         	Pas avant 16h :<br />
         	- Match 4<br />
         	- Match 5<br />
@@ -164,7 +164,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     <!-- Le pied de page -->
 
-    <?php require("piedDePage.php"); ?>
+    <?php require("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

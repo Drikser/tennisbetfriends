@@ -6,7 +6,7 @@ session_start(); // On démarre la session AVANT toute chose
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
     <body>
 
@@ -42,11 +42,11 @@ session_start(); // On démarre la session AVANT toute chose
     		//*************************************************************************************************************************************************
     		-->
     		<p>
-                <form id="registration_form" action="mdpInit.php?var=<?php echo $token ?>" method="post" enctype="multipart/form-data">
+                <form id="resetPassword_form" action="mdpInit.php?var=<?php echo $token ?>" method="post" enctype="multipart/form-data">
                 <p>
-                    Nouveau mot de passe  : <input type="password" name="MotDePasse" required="required"/><br />
-                    Confirmer le nouveau mot de passe : <input type="password" name="MotDePasseConfirme" required="required"/><br />
-                    Note : Le mot de passe doit faire au moins 8 caratères, avec une majuscule, une minuscule, un chiffre et un caractère spécial<br />
+                  <label>Nouveau mot de passe  : </label><input type="password" name="MotDePasse" required="required"/><br />
+                  <label>Confirmer le nouveau mot de passe : </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
+                  <b>NOTE : Le mot de passe doit faire au moins 8 caratères, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</b><br />
                 	<input type="submit" value="Valider" />
                 </p>
     	        </form>
@@ -91,7 +91,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     <!-- Le pied de page -->
 
-    <?php include("piedDePage.php"); ?>
+    <?php include("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

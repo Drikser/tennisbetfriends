@@ -15,22 +15,27 @@ else
 
 $message_txt = "Bonjour, bienvenue sur Tennis Bet Friends !";
 $message_html = "
-<html><head></head><body>Bonjour,<br />
+<html><head></head><body>Cher <var>$prenomValid</var>, <br />
 <p>
-Bienvenue sur le site <b><i>www.tennisbetfriends.com</i></b>. Merci de votre inscription.
+Bienvenue sur <i><a href='www.tennisbetfriends.com'>www.tennisbetfriends.com</a></i>. Merci de votre inscription.
+</p>
+<p>
+Votre pseudo est : <b><var>$pseudoValid</var></b>.
 </p>
 <p>
 Pour activer votre compte, veuillez cliquer sur le lien ci dessous
-ou copier/coller dans votre navigateur internet.
+ou le copier/coller dans votre navigateur internet.
 
-http://www.tennisbetfriends.com/inscriptionActivation.php?pseudo=$pseudoValid&key=$key
+<a href='http://localhost/pronos/fr-fr/inscriptionActivation.php?pseudo=$pseudoValid&key=$key'>http://localhost/pronos/fr-fr/inscriptionActivation.php?pseudo=$pseudoValid&key=$key</a>
 </p>
 <p>
----------------
-Ceci est un mail automatique, Merci de ne pas y répondre.'
+<br />
+---------------------------------------------------------<br />
+Ceci est un mail automatique, Merci de ne pas y répondre.<br />
+---------------------------------------------------------<br />
 </p>
 <br />
-Tennis Bet Friends
+<i>Tennis Bet Friends</i>
 </body></html>
 ";
 //==========

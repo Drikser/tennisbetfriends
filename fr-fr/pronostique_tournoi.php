@@ -6,7 +6,7 @@ session_start(); // On démarre la session AVANT toute chose
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
     <body>
 
@@ -30,7 +30,7 @@ session_start(); // On démarre la session AVANT toute chose
 	    		<?php
 	            //include("connexionSGBD.php");
 	            // insertion page qui contient toutes les requêtes
-	            //include("model.php");
+	            //include("../commun/model.php");
 
 	            $startDateTournament;
 
@@ -55,7 +55,7 @@ session_start(); // On démarre la session AVANT toute chose
 						         $startDateTournament = $donnees['SET_DAT_START'];
 					        }
 
-					        echo "Vous devez faire vos pronostiques sur le tournoi avant le début du tournoi, le " . $startDateTournament . "<br /><br />";
+					        echo "Vous devez faire vos pronostiques sur le tournoi avant le début du tournoi, le " . substr($startDateTournament,0,10) . " à " . substr($startDateTournament,11,8) . "<br /><br />";
 
 					        echo "INFO: vous devez valider vos choix catégorie par catégorie.<br />";
 
@@ -78,7 +78,8 @@ session_start(); // On démarre la session AVANT toute chose
 	                    <!--    Vainqueur du tournoi : <input type="text" name="Winner" label="Winner" required="required"/><br />-->
 
 	                    <?php
-	                    $listPlayersTournament = getAllPlayersTournament();
+                      $param = "disp";
+	                    $listPlayersTournament = getAllPlayersTournament($param);
 	                    ?>
 	                    Vainqueur du tournoi : <select name="Winner" id="Winner" required="required"/><br />
 
@@ -132,7 +133,8 @@ session_start(); // On démarre la session AVANT toute chose
 	                    <form action="pronostique_tournoi.php" method="post" enctype="multipart/form-data">
 	                    <p>
 	                        <?php
-	                        $listPlayersTournament = getAllPlayersTournament();
+                          $param = "disp";
+	                        $listPlayersTournament = getAllPlayersTournament($param);
 	                        ?>
 	                        Finaliste 1 : <select name="Final1" id="Final1" required="required"/>
 	                        <option value="">---faites votre choix ---</option>
@@ -148,7 +150,8 @@ session_start(); // On démarre la session AVANT toute chose
 
 
 	                        <?php
-	                        $listPlayersTournament = getAllPlayersTournament();
+                          $param = "disp";
+	                        $listPlayersTournament = getAllPlayersTournament($param);
 	                        ?>
 	                        Finaliste 2 : <select name="Final2" id="Final2" required="required"/>
 	                        <option value="">---faites votre choix ---</option>
@@ -205,7 +208,8 @@ session_start(); // On démarre la session AVANT toute chose
 	                    <form action="pronostique_tournoi.php" method="post" enctype="multipart/form-data">
 	                    <p>
 	                        <?php
-	                        $listPlayersTournament = getAllPlayersTournament();
+                          $param = "disp";
+	                        $listPlayersTournament = getAllPlayersTournament($param);
 	                        ?>
 	                        Demi-finaliste 1 : <select name="Semi1" id="Semi1" required="required"/>
 	                        <option value="">---faites votre choix ---</option>
@@ -221,7 +225,8 @@ session_start(); // On démarre la session AVANT toute chose
 
 
 	                        <?php
-	                        $listPlayersTournament = getAllPlayersTournament();
+                          $param = "disp";
+	                        $listPlayersTournament = getAllPlayersTournament($param);
 	                        ?>
 	                        Demi-finaliste 2 : <select name="Semi2" id="Semi2" required="required"/>
 	                        <option value="">---faites votre choix ---</option>
@@ -236,7 +241,8 @@ session_start(); // On démarre la session AVANT toute chose
 	                        </select><br />
 
 	                        <?php
-	                        $listPlayersTournament = getAllPlayersTournament();
+                          $param = "disp";
+	                        $listPlayersTournament = getAllPlayersTournament($param);
 	                        ?>
 	                        Demi-finaliste 3 : <select name="Semi3" id="Semi3" required="required"/>
 	                        <option value="">---faites votre choix ---</option>
@@ -251,7 +257,8 @@ session_start(); // On démarre la session AVANT toute chose
 	                        </select><br />
 
 	                        <?php
-	                        $listPlayersTournament = getAllPlayersTournament();
+                          $param = "disp";
+	                        $listPlayersTournament = getAllPlayersTournament($param);
 	                        ?>
 	                        Demi-finaliste 4 : <select name="Semi4" id="Semi4" required="required"/>
 	                        <option value="">---faites votre choix ---</option>
@@ -422,7 +429,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     <!-- Le pied de page -->
 
-    <?php include("piedDePage.php"); ?>
+    <?php include("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

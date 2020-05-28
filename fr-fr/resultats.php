@@ -5,7 +5,7 @@ session_start(); // On démarre la session AVANT toute chose
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
     <body>
 
@@ -45,7 +45,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     <!-- Le pied de page -->
 
-    <?php require("piedDePage.php"); ?>
+    <?php require("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

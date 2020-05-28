@@ -6,7 +6,7 @@ session_start(); // On démarre la session AVANT toute chose
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
     <body>
 
@@ -59,27 +59,28 @@ session_start(); // On démarre la session AVANT toute chose
                 if ($validEmail == false) {
                     echo "<span class='warning'>Adresse " . $_POST['Email'] . " invalide, veuillez saisir une adresse valide !</span><br />";
                 }
-
-                // Contrôle que l'email saisit existe bien en table
-                //------------------------------------------------------
-                $email = controlMail($_POST['Email']);
-
-                if ($email == true) {
-
-                    $token = sha1($_POST['Email']+time());
-
-                    //echo "token généré=" . $token . "<br />";
-
-                    updateToken($_POST['Email'],$token);
-
-                    include("mdpOublieMail.php");
-
-                    echo "Un email vous a été envoyé avec un lien pour réinitialiser votre mot de passe. Merci de vérifier vos emails.";
-                }
                 else {
-                    echo "<span class='warning'>Adresse email saisie n'est pas reconnue. Merci d'entrer l'adresse email avec laquelle vous vous êtes inscrit.</span><br />";
-                }
+                    // Contrôle que l'email saisit existe bien en table
+                    //------------------------------------------------------
+                    $email = controlMail($_POST['Email']);
 
+                    if ($email == true) {
+
+                        $token = sha1($_POST['Email']+time());
+
+                        //echo "token généré=" . $token . "<br />";
+
+                        $firstName = $email['JOU_PRE'];
+                        updateToken($_POST['Email'],$token);
+
+                        include("mdpOublieMail.php");
+
+                        echo "<span class='info'>Un email vous a été envoyé avec un lien pour réinitialiser votre mot de passe. Merci de vérifier vos emails.</span>";
+                    }
+                    else {
+                        echo "<span class='warning'>Adresse email saisie " .  $_POST['Email'] . " n'est pas reconnue. Merci d'entrer l'adresse email avec laquelle vous vous êtes inscrit.</span><br />";
+                    }
+                }
             }
             ?>
         </div>
@@ -88,7 +89,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     <!-- Le pied de page -->
 
-    <?php include("piedDePage.php"); ?>
+    <?php include("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

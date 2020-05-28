@@ -6,7 +6,7 @@ session_start(); // On démarre la session AVANT toute chose
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
     <body>
 
@@ -30,7 +30,7 @@ session_start(); // On démarre la session AVANT toute chose
         		<?php
                 //include("connexionSGBD.php");
                 // insertion page qui contient toutes les requêtes
-                //include("model.php");
+                //include("../commun/model.php");
 
 
                 if (isset($_SESSION['JOU_ID']) AND isset($_SESSION['JOU_PSE'])) {
@@ -41,10 +41,10 @@ session_start(); // On démarre la session AVANT toute chose
                     //*************************************************************************************************************
                     //*                                       PRONOSTIQUES DES MATCHS
                     //*************************************************************************************************************
-                    echo "<br /><h1>Pronostiques des matchs</h1><br />";
+                    echo "<br /><h1>Match predictions</h1><br />";
 
                     setlocale(LC_TIME, "fr_FR", "French");
-                    //--- 
+                    //---
                     //echo "Nous sommes le " . strftime('%A %d %B %Y, il est %H:%M:%S') . "<br />";
                     //---
                     //echo (date('l jS \of F Y\, \i\l \e\s\t H:i:s')) . "<br />";
@@ -53,38 +53,169 @@ session_start(); // On démarre la session AVANT toute chose
                     //echo date(DATE_RFC2822) . "<br />";
                     //echo date('l jS \of F Y h:i:s A') . "<br />";
 
-                    echo "<br />";
+                    echo (date('Y-m-d H:i:s')) . "<br /><br />";
+                    //echo (date('Y-m-d G:H:s')) . "<br /><br />";
+
+                    //echo "<br />";
 
                     $prognosisToDo = getPrognosisToDo();
 
                     $nbRow = $prognosisToDo->rowcount();
 
+                    $matchASaisir = 460;
+
                     if ($nbRow > 0) {
 
+                        ?>
+
+                        <!-- ======================================================= -->
+                        <!-- Début de la table pour l'affiche de la liste des macths -->
+                        <!-- ======================================================= -->
+                        <table>
+
+                        <?php
                         //while ($donnees = $response->fetch())
                         while ($donnees = $prognosisToDo->fetch()) {
                         //$donnees = $reponse->fetchAll();
 
-                        	$matchASaisir = $donnees['RES_MATCH_ID'];
+                        	   $matchASaisir = $donnees['RES_MATCH_ID'];
 
-                            //echo (date('Y-m-d G:H:s')) . "<br /><br />";
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+                            //echo (date('Y-m-d G:i:s')) . "<br /><br />";
                             //echo time() . "<br /><br />";
 
-                            //$remainingTime = strtotime($donnees['RES_MATCH_DAT']) - strtotime(date('Y-m-d G:H:s');
+                            //$remainingTime = strtotime($donnees['RES_MATCH_DAT']) - strtotime(date('Y-m-d G:i:s'));
 
-                            if (strtotime(date('Y-m-d G:H:s')) < strtotime($donnees['RES_MATCH_DAT'])) {
-                                //echo "Match à saisir = " . $matchASaisir . "<br />";
+                            //echo "Il vous reste " . $remainingTime . " pour faire votre pronostique.<br /><br />";
 
-                                // Si on clique sur "saisie du résultat", renvoi vers ancre "FinListeMatchs"
-                                echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . " --> " . "<a href=pronostique_matchs.php?ResMatchId=".$matchASaisir."#FinListeMatchs>" . " Saisir le score</a><br />";
+                            $dateMatchLocal = $donnees['RES_MATCH_DAT'];
+
+                            ?>
+
+                            <script scr='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.js'></script>
+                            <script scr='https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.26/moment-timezone-with-data-10-year-range.js'></script>
+                            <script>
+                            var dateMatchLocal = <?php echo json_encode($dateMatchLocal); ?>;
+
+                            //window.onload = moment;
+
+                            //-----------------------------------------------
+                            // Convertir date locale en date de l'ordinateur
+                            //-----------------------------------------------
+                            var mel = moment(dateMatchLocal).tz('Australia/Melbourne');
+                            var local = mel.clone().tz();
+                            local.format('YYYY-MM-DD HH:mm:ss');
+
+                            //console.log("Date du match heure de chez vous = ", local.format('YYYY-MM-DD HH:mm:ss'))
+                        		//---------------------------------------
+                        		// Calculer une différence entre 2 dates
+                        		//---------------------------------------
+                        		var timeMatchLocal = new Date(dateMatchLocal);
+
+                        		var timeNowHome = new Date();
+
+                            remainingTime = timeMatchLocal.getTime() - timeNowHome.getTime();
+
+                            //var remainingTimeHHMMSS = new Date();
+                            //remainingTimeHHMMSS.setTime();
+                            //new Date(remainingTime * 1000).toISOString().substr(11, 8);
+
+                            console.log("remainingTime = ", remainingTime)
+                            var sec_num = parseInt(remainingTime, 10); // don't forget the second param
+                            console.log("sec_num = ", sec_num)
+                            var hours   = Math.floor(sec_num / 3600000);
+                            console.log("hours = ", hours)
+                            var minutes = Math.floor((sec_num - (hours * 3600000)) / 60000);
+                            console.log("minutes = ", minutes)
+                            var seconds = ((sec_num - (hours * 3600000) - (minutes * 60000)) / 1000);
+                            //var seconds2 = seconds.substring(0,2);
+                            //console.log("seconds = ", seconds2)
+
+                            if (hours   < 10) {hours   = "0"+hours;}
+                            if (minutes < 10) {minutes = "0"+minutes;}
+                            if (seconds < 10) {seconds = "0"+seconds;}
+
+                            //  document.write((remainingTimeHHMMSS.getHours()-1)+":"+remainingTimeHHMMSS.getMinutes()+":"+remainingTimeHHMMSS.getSeconds());
+                            //sec=remainingTime%1000;
+                            //min=remainingTime%3600;
+                            //hrs=(remainingTime-min) / 60;
+
+                            //alert("debut script=" + debut + " fin script=" + fin);
+                            console.log("Date du match à Melbourne = ", dateMatchLocal)
+                        		console.log("Date courante chez vous =", timeNowHome)
+                        		//console.log("Temps restant pour le prono =", hrs, "heures et ", min, "minutes")
+                            console.log("Temps restant pour le prono =", hours, "heures, ", minutes, "minutes et ", seconds, "secondes")
+
+                            </script>
+
+                            <?php
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+
+                            $matchDate = $donnees['RES_MATCH_DAT'];
+                            $nowDate = date('Y-m-d H:i:s');
+
+                            $start = new \DateTime("{$matchDate}");
+                            $end = new \DateTime("{$nowDate}");
+
+                            $diff = $start->diff($end);
+                            $diffStr = $diff->format('%aj %Hh %Im %Ss');
+                            //var_dump($diff);
+                            //echo $diffStr;
+
+
+                            //$remainingTime = strtotime($donnees['RES_MATCH_DAT']) - strtotime(date('Y-m-d H:i:s'));
+
+                            //echo "Il vous reste " . $remainingTime . " pour faire votre pronostique.<br /><br />";
+
+                            if (($donnees['RES_MATCH_JOU1'] != "Bye") AND ($donnees['RES_MATCH_JOU2'] != "Bye")) {
+
+                              if (strtotime(date('Y-m-d H:i:s')) < strtotime($donnees['RES_MATCH_DAT'])) {
+                                  //echo "Match à saisir = " . $matchASaisir . "<br />";
+
+                                  // Si on clique sur "saisie du résultat", renvoi vers ancre "FinListeMatchs"
+                                  //echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . " --> " . "<a href=pronostique_matchs.php?ResMatchId=".$matchASaisir."#FinListeMatchs>" . " Saisir le score</a> (" . $diffStr . " restants)<br />";
+                                  ?>
+                                  <!-- ================================================== -->
+                                  <!-- Lines of the table to display matches to prognosis -->
+                                  <!-- ================================================== -->
+                                  <tr>
+                                    <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_DAT']; ?></td>
+                                    <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_TOUR']; ?></td>
+                                    <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU1']; ?></td>
+                                    <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU2']; ?></td>
+                                    <td width="100" align="center" valign="middle" class="cellule"><?php echo "<a href=pronostique_matchs.php?ResMatchId=".$matchASaisir."#FinListeMatchs class='button'>" . " Saisir le score</a><br />"; ?></td>
+                                    <!-- <td colspan="3" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Saisir le score" ></td> -->
+                                    <td width="200" align="center" valign="middle" class="cellule">(reste <?php echo $diffStr; ?> )</td>
+                                  </tr>
+                                  <?php
+                              }
+                              else {
+                                ?>
+                                <!-- ================================================== -->
+                                <!-- Lines of the table to display matches to prognosis -->
+                                <!-- ================================================== -->
+                                <tr>
+                                  <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_DAT']; ?></td>
+                                  <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_TOUR']; ?></td>
+                                  <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU1']; ?></td>
+                                  <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU2']; ?></td>
+                                  <td width="100" align="center" valign="middle" class="cellule" style="color:red;"><i>Date de saisie dépassée</i></td>
+                                  <!-- <td colspan="3" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Saisir le score" ></td> -->
+                                  <td width="200" align="center" valign="middle" class="cellule"></td>
+                                </tr>
+                                <?php
+                                  // echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . " --> " . "Date de saisie dépassée<br />";
+                              }
                             }
-                            else {
-                                echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . " --> " . "Date de saisie dépassée<br />";
-                            }
-
                         }
 
                         ?>
+
+                        <!-- ===================================================== -->
+                        <!-- Fin de la table pour l'affiche de la liste des macths -->
+                        <!-- ===================================================== -->
+                        </table>
+
                         <!-- creation nouvelle div pour créer une ancre et renvoyer vers cette ancre lors de la saisie d'un résultat -->
                         <!-- ancre renvoi vers la fin de la liste des matchs pour pouvoir tomber directement sur la saisie -->
                         <div id="FinListeMatchs"></div>
@@ -142,7 +273,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     <!-- Le pied de page -->
 
-    <?php include("piedDePage.php"); ?>
+    <?php include("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

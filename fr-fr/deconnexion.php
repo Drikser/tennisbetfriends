@@ -8,7 +8,7 @@ unset($_SESSION['JOU_PSE']);
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
     <body>
 
@@ -23,8 +23,7 @@ unset($_SESSION['JOU_PSE']);
     <!-- Le corps -->
 
     <?php
-    header('Location: index.php');
-    exit();
+    header('Location: /pronos/fr-fr/index.php');
     ?>
 
     <div id="corps">
@@ -49,7 +48,8 @@ unset($_SESSION['JOU_PSE']);
                 //setcookie('login', '');
                 //setcookie('pass_hache', '');
 
-                echo "Alleeeez, tchuuuuuussssssss !!!";
+                // No need
+                //echo "Alleeeez, tchuuuuuussssssss !!!";
 
 
                 //$nbfois == 1;
@@ -70,7 +70,7 @@ unset($_SESSION['JOU_PSE']);
 
     <!-- Le pied de page -->
 
-    <?php include("piedDePage.php"); ?>
+    <?php include("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

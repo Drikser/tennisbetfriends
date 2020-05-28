@@ -6,7 +6,7 @@ session_start(); // On démarre la session AVANT toute chose
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
     <body>
 
@@ -37,7 +37,7 @@ session_start(); // On démarre la session AVANT toute chose
 
         		<?php
         		//include("connexionSGBD.php");
-        		//include("model.php");
+        		//include("../commun/model.php");
 
                 if (isset($_SESSION['JOU_ID']) AND isset($_SESSION['JOU_PSE']) AND $_SESSION['JOU_PSE']=="Admin") {
 
@@ -51,7 +51,7 @@ session_start(); // On démarre la session AVANT toute chose
                     	$hrefParametre = "pronostique.php?ResMatchId=";
                     }
 
-                    //echo "Paramètre pour GET après test = " . $hrefParametre . "<br />";
+                    echo "Paramètre pour GET après test = " . $hrefParametre . "<br />";
 
                     echo "<br />Le(s) prochain(s) match(s) est(sont) :<br />";
 
@@ -62,7 +62,7 @@ session_start(); // On démarre la session AVANT toute chose
 
                     while ($donnees = $response->fetch()) {
 
-          	            $idSessionJoueur = $_SESSION['JOU_ID'];
+          	          $idSessionJoueur = $_SESSION['JOU_ID'];
         	            //echo "Id du pseudo=" . $idSessionJoueur . " (" . $_SESSION['JOU_PSE'] . ")<br />";
 
                     	$matchASaisir = $donnees['RES_MATCH_ID'];
@@ -95,14 +95,12 @@ session_start(); // On démarre la session AVANT toute chose
         	            echo "pseudo=" . $idSessionJoueur . "<br />";
         	            echo "Id du match à saisir" . $_GET['ResMatchId'] . "<br />";
 
-
-
         	            $matchChoisi = getResultToEnter($_GET['ResMatchId']);
 
         	            while ($donnees = $matchChoisi->fetch()) {
-        	 			//	echo $donnees['RES_MATCH_ID'] . " - " . $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_TOURNOI'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs " . $donnees['RES_MATCH_JOU2'] . "<br />";
+        	 			        //	echo $donnees['RES_MATCH_ID'] . " - " . $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_TOURNOI'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs " . $donnees['RES_MATCH_JOU2'] . "<br />";
 
-        	 				include ("formulairePronostiqueMatchASaisir.php");
+        	 				      include ("formulairePronostiqueMatchASaisir.php");
         	            }
 
                     //$reponse->closeCursor();
@@ -134,7 +132,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     <!-- Le pied de page -->
 
-    <?php include("piedDePage.php"); ?>
+    <?php include("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

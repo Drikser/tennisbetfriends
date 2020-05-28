@@ -29,7 +29,7 @@ $nbplayers = 0;
 //Sélection des pronostiques effectués par le joueur :
 
 //include("affichageResultatsPronoMatchsRequete.php");
-//include("model.php");
+//include("../commun/model.php");
 $allPrognosis = getAllPrognosis();
 
 while ($titre = $allPrognosis->fetch()) {
@@ -61,6 +61,7 @@ while ($titre = $allPrognosis->fetch()) {
 
 ?>
 <table>
+	<!-- <caption>Récap pronostiques matchs des joueurs</caption> -->
 	<tr>
   	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
     <th colspan="4" align="center" valign="middle">RESULTAT OFFICIEL</th>

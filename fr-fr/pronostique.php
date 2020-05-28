@@ -6,7 +6,7 @@ session_start(); // On démarre la session AVANT toute chose
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
     <body>
 
@@ -34,7 +34,7 @@ session_start(); // On démarre la session AVANT toute chose
     		<?php
             //include("connexionSGBD.php");
             // insertion page qui contient toutes les requêtes
-            //include("model.php");
+            //include("../commun/model.php");
 
 
             if (isset($_SESSION['JOU_ID']) AND isset($_SESSION['JOU_PSE'])) {
@@ -87,7 +87,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     <!-- Le pied de page -->
 
-    <?php include("piedDePage.php"); ?>
+    <?php include("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

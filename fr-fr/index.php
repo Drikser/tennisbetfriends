@@ -6,7 +6,7 @@ session_start(); // On démarre la session AVANT toute chose
 <!DOCTYPE html>
 <html>
 
-    <?php require("header.php"); ?>
+    <?php require("../commun/header.php"); ?>
 
 <!--
     <head>
@@ -38,14 +38,6 @@ session_start(); // On démarre la session AVANT toute chose
 	            Bienvenue sur <i>www.tennisbetfriends.com</i>, le site de concours de pronostiques de tennis entre amis !<br />
 
 	        </p>
-
-			<!-- Connexion base de données -->
-
-			 <?php
-			 //include("connexionSGBD.php");
-			 //include("model.php");
-			 //dbConnect();
-			 ?>
 
 			<?php
 			if (isset($_SESSION['JOU_PSE'])) {
@@ -167,10 +159,9 @@ session_start(); // On démarre la session AVANT toute chose
 	//echo '<p>Cette page a été vue ' . $pages_vues . ' fois !</p>';
 	?>
 
-
     <!-- Le pied de page -->
 
-    <?php require("piedDePage.php"); ?>
+    <?php require("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

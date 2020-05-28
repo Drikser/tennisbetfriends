@@ -6,9 +6,13 @@
 -->
 
 <?php
-    $Player1 = htmlentities($donnees['RES_MATCH_JOU1']);
-    $Player2 = htmlentities($donnees['RES_MATCH_JOU2']);
+    // $Player1 = htmlentities($donnees['RES_MATCH_JOU1']);
+    // $Player2 = htmlentities($donnees['RES_MATCH_JOU2']);
+    // $DateMatch = $donnees['RES_MATCH_DAT'];
 
+    // echo "date match from database=" . $donnees['RES_MATCH_DAT'] . "<br />";
+    // echo "date match from variable=" . $DateMatch . "<br />";
+    // echo "date avec htmlspecialchars=" . htmlspecialchars($DateMatch) . "<br />";
 
 //Redirection du formulaire selon si on fait une saisie de résultat (Admin) ou un pronostique (Autre)
   if ($_SESSION['JOU_PSE'] == "Admin") {
@@ -28,9 +32,8 @@
 <table>
     <tr>
 <!--        <th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>   -->
-        <th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
+<!-- Rows to display for the form -->
         <th width="150" align="center" valign="middle" class="cellule">Date du match</th>
-        <th width="150" align="center" valign="middle" class="cellule">Tournoi</th>
         <th width="150" align="center" valign="middle" class="cellule">Niveau</th>
         <th width="150" align="center" valign="middle" class="cellule">Joueur 1</th>
         <th width="100" align="center" valign="middle" class="cellule">V ou D</th>
@@ -38,14 +41,20 @@
         <th width="150" align="center" valign="middle" class="cellule">Score Vainqueur (nb sets)</th>
         <th width="150" align="center" valign="middle" class="cellule">Score Perdant (nb sets)</th>
         <th width="100" align="center" valign="middle" class="cellule">Type Match</th>
+<!-- Rows to not display, but which still need to send through the form -->
+        <th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
+        <th width="150" align="center" valign="middle" class="cellule" style="display:none">Date du match (à transmettre)</th>
+        <th width="150" align="center" valign="middle" class="cellule" style="display:none">Tournoi</th>
+        <th width="150" align="center" valign="middle" class="cellule" style="display:none">Categorie</th>
+        <th width="150" align="center" valign="middle" class="cellule" style="display:none">Poids</th>
+        <th width="150" align="center" valign="middle" class="cellule" style="display:none">Sequence</th>
     </tr>
 
     <tr>
-<!--            <td align="center" valign="middle" class="cellule" style="display:none" ><?php echo $donnees['RES_MATCH_ID']; ?></td> -->
-<!--            <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $idMatch; ?> required="required"></td>   -->
-        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $donnees['RES_MATCH_ID']; ?> required="required"></td>
+        <!-- <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $idMatch; ?> required="required"></td>   -->
+        <!-- <td align="center" valign="middle" class="cellule" type="text" name="DateMatch" class="form-control" id="DateMatch" required="required"><?php echo $donnees['RES_MATCH_DAT']; ?></td> --> 
         <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_DAT']; ?></td>
-        <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_TOURNOI']; ?></td>
+        <!-- <td align="center" valign="middle" class="cellule"><?php echo $DateMatch; ?></td> -->
         <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_TOUR']; ?></td>
         <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU1']; ?></td>
         <td align="center" valign="middle" width="31" ><select class="form-control" name="VouD" id="VouD" required="required">
@@ -318,10 +327,18 @@
           }
           ?>
         </select></td>
-       <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Player1" class="form-control" id="Player1" value="<?php echo $donnees['RES_MATCH_JOU1']; ?>" required="required"></td>
-       <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Player2" class="form-control" id="Player2" value="<?php echo $donnees['RES_MATCH_JOU2']; ?>" required="required"></td>
-       <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Round" class="form-control" id="Round" value="<?php echo $donnees['RES_MATCH_TOUR']; ?>" required="required"></td>
-       <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="TypeTournoi" class="form-control" id="TypeTournoi" value="<?php echo $donnees['RES_TYP_TOURNOI']; ?>" required="required"></td>
+
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $donnees['RES_MATCH_ID']; ?> required="required"></td>
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="DateMatch" class="form-control" id="DateMatch" value= <?php echo $donnees['RES_MATCH_DAT']; ?> required="required"></td>
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Tournoi" class="form-control" id="Tournoi" value= <?php echo $donnees['RES_TOURNOI']; ?> required="required"></td>
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Categorie" class="form-control" id="Categorie" value= <?php echo $donnees['RES_TYP_TOURNOI']; ?> required="required"></td>
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Poids" class="form-control" id="Poids" value= <?php echo $donnees['RES_MATCH_POIDS_TOUR']; ?> required="required"></td>
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Sequence" class="form-control" id="Sequence" value= <?php echo $donnees['RES_MATCH_TOUR_SEQ']; ?> required="required"></td>
+
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Player1" class="form-control" id="Player1" value="<?php echo $donnees['RES_MATCH_JOU1']; ?>" required="required"></td>
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Player2" class="form-control" id="Player2" value="<?php echo $donnees['RES_MATCH_JOU2']; ?>" required="required"></td>
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Round" class="form-control" id="Round" value="<?php echo $donnees['RES_MATCH_TOUR']; ?>" required="required"></td>
+        <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="TypeTournoi" class="form-control" id="TypeTournoi" value="<?php echo $donnees['RES_TYP_TOURNOI']; ?>" required="required"></td>
 <!-- ************************** bouton validation en fin de ligne ***************************** -->
         <td colspan="3" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Valider" onclick="return confirm('Êtes-vous sûr de votre choix ?')"></td>
     </tr>

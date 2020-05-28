@@ -12,12 +12,16 @@
             <nav>
                 <ul>
                     <li><a class="a_menu" href="index.php">Accueil</a></li>
-                    <li><a class="a_menu" href="creationMatch.php">Créer un match</a></li>
+                    <li><a class="a_menu" href="draw.php">Tableau</a></li>
+                    <li><a class="a_menu" href="gestionMatchs.php">Gestion des matchs</a></li>
                     <li><a class="a_menu" href="saisieResultat.php">Enregistrer un résultat</a></li>
                     <li><a class="a_menu" href="rules.php">Règlement</a></li>
                     <li><a class="a_menu" href="deconnexion.php">Se déconnecter</a></li>
                 </ul>
             </nav>
+
+            <h4><a href="../en-gb/index.php"><img src="../images/english_flag_rectangle_mini.png" alt="English flag" /></a><a class="a_menu" href="../en-gb/index.php"> Version anglaise</a></h4>
+
             <?php
             }
             else
@@ -37,6 +41,9 @@
                     <li><a class="a_menu" href="deconnexion.php">Se déconnecter</a></li>
                 </ul>
             </nav>
+
+            <h4><a href="../en-gb/index.php"><img src="../images/english_flag_rectangle_mini.png" alt="English flag" /></a><a class="a_menu" href="../en-gb/index.php"> Version anglaise</a></h4>
+
                 <?php
             }
         }
@@ -45,10 +52,13 @@
         ?>
         <nav>
             <ul>
-                <li><a class="a_menu" href="inscription.php">S'inscrire</a></li>
-                <li><a class="a_menu" href="connexion.php">Se connecter</a></li>
+              <li><a class="a_menu" href="inscription.php">S'inscrire</a></li>
+              <li><a class="a_menu" href="connexion.php">Se connecter</a></li>
             </ul>
         </nav>
+
+        <h4><a href="../en-gb/index.php"><img src="../images/english_flag_rectangle_mini.png" alt="English flag" /></a><a class="a_menu" href="../en-gb/index.php"> Version anglaise</a></h4>
+
         <?php
         }
         ?>
