@@ -1,5 +1,32 @@
 	<?php
 
+
+	//************************************************************************************************************************************************************
+	//****************************************************** Connexion à la base dedonnées ***********************************************************************
+	//************************************************************************************************************************************************************
+
+
+	function dbConnect(){
+		try
+		{
+			// On va se connecter à la base de données
+			//------------------------------------------
+
+			//--> Base de donnée de production
+			//$bdd = new PDO('mysql:host=tennisbefubddtbf.mysql.db;dbname=tennisbefubddtbf;charset=utf8', 'tennisbefubddtbf', 'nediamBDDTBF1975', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+			//--> Base de données pour le test
+			$bdd = new PDO('mysql:host=localhost;dbname=rolandgarros2020;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+			return $bdd;
+		}
+			catch(Exception $e)
+		{
+			// En cas d'erreur, on affiche un message et on arrête tout
+			die('Erreur : '.$e->getMessage());
+		}
+	}
+
+
 //************************************************************************************************************************************************************
 //****************************************************** Fonctions de séléction ******************************************************************************
 //************************************************************************************************************************************************************
@@ -33,6 +60,7 @@ function controlName($postNom, $postPrenom) {
 
 function controlMail($postMail) {
 	$bdd = dbConnect();
+	// $req = $bdd->prepare('SELECT * FROM joueur WHERE JOU_ADR_MAIL = ? and JOU_PSE <> "Admin" LIMIT 1'); // Limitation à une réponse (si on trouve le pseudo pas la peine d'aller plus loin, il faut choisir un autre pseudo)
 	$req = $bdd->prepare('SELECT * FROM joueur WHERE JOU_ADR_MAIL = ? LIMIT 1'); // Limitation à une réponse (si on trouve le pseudo pas la peine d'aller plus loin, il faut choisir un autre pseudo)
 	$req->execute(array($postMail));
 
@@ -175,14 +203,19 @@ function getPlayersTournament() {
 }
 
 
-function getAllPlayersTournament() {
+// function getAllPlayersTournament() {
+function getAllPlayersTournament($param) {
 	// Rechercher l'id du joueur créé
 	$bdd = dbConnect();
-	$response = $bdd->query('SELECT * FROM players');
+//	$response = $bdd->query('SELECT * FROM players');
+	if ($param == "disp") {
+		$response = $bdd->query('SELECT * FROM players WHERE PLA_DISP <> "N"');
+	} else {
+		$response = $bdd->query('SELECT * FROM players');
+	}
 
 	return $response;
 }
-
 
 function getAllFrenchTournament() {
 	// Rechercher l'id du joueur créé
@@ -233,9 +266,13 @@ function getLastPseudo() {
 
 
 function getLastCreatedMatch() {
-// Rechercher les 5 derniers inscrits
+// Rechercher liID du dernier match créé
+// + nom des joueurs. Cela va nous servir à savoir si il faut créer un nouveau match ou si il faut ajouter un joueur au match
 	$bdd = dbConnect();
-    $response = $bdd->query('SELECT Max(RES_MATCH_ID) as idMax FROM resultats');
+//    $response = $bdd->query('SELECT max(RES_MATCH_ID) as idMax, RES_MATCH_JOU1, RES_MATCH_JOU2 FROM resultats
+//														 ORDER BY RES_MATCH_ID desc');
+		$response = $bdd->query('SELECT RES_MATCH_ID, RES_MATCH_JOU1, RES_MATCH_JOU2 FROM resultats
+														 ORDER BY RES_MATCH_ID desc');
 
 	return $response;
 }
@@ -263,6 +300,15 @@ function getTable() {
 
 function getAllPrognosis() {
 	$bdd = dbConnect();
+	// $response = $bdd->query('SELECT *
+  //                         FROM pronostique p
+  //                   INNER JOIN resultats r
+  //                           ON p.PRO_MATCH_ID = r.RES_MATCH_ID
+  //                   INNER JOIN joueur j
+  //                           ON p.PRO_JOU_ID = j.JOU_ID
+  //                        WHERE p.PRO_MATCH_ID = r.RES_MATCH_ID
+  //                          AND r.RES_MATCH <> ""
+  //                     ORDER BY r.RES_MATCH_POIDS_TOUR ASC, r.RES_MATCH_DAT DESC, r.RES_MATCH_ID DESC, j.JOU_PSE ASC');
 	$response = $bdd->query('SELECT *
                           FROM pronostique p
                     INNER JOIN resultats r
@@ -270,8 +316,11 @@ function getAllPrognosis() {
                     INNER JOIN joueur j
                             ON p.PRO_JOU_ID = j.JOU_ID
                          WHERE p.PRO_MATCH_ID = r.RES_MATCH_ID
+												   AND j.JOU_PSE <> "Admin"
                            AND r.RES_MATCH <> ""
-                      ORDER BY r.RES_MATCH_POIDS_TOUR ASC, r.RES_MATCH_DAT DESC, r.RES_MATCH_ID DESC, j.JOU_PSE ASC');
+													 AND r.RES_MATCH_JOU1 <> "Bye"
+													 AND r.RES_MATCH_JOU2 <> "Bye"
+                      ORDER BY r.RES_MATCH_POIDS_TOUR ASC, r.RES_MATCH_TOUR_SEQ ASC, j.JOU_PSE ASC');
 
 	return $response;
 }
@@ -315,6 +364,8 @@ function getDailyMatchs() {
     //$reponse = $bdd->query('SELECT * FROM résultats WHERE RES_MATCH_DAT = CURDATE()');
     $response = $bdd->query('SELECT * FROM resultats
     						  WHERE SUBSTR(RES_MATCH_DAT,1,10) >= SUBSTR(CURDATE(),1,10)
+									  AND RES_MATCH_JOU1 <> ""
+										AND RES_MATCH_JOU2 <> ""
     						    AND RES_MATCH = ""
     					   ORDER BY RES_MATCH_DAT ASC');
 
@@ -352,14 +403,22 @@ function getPrognosisToDo() {
     //$response = $bdd->query('SELECT * FROM resultats
     //                               WHERE RES_MATCH = "" AND RES_MATCH_JOU1 != "" AND RES_MATCH_JOU2 != ""
     //                             ORDER BY RES_MATCH_DAT ASC');
-    $response = $bdd->query('SELECT * FROM resultats r INNER JOIN pronostique p
-    									ON r.RES_MATCH_ID = p.PRO_MATCH_ID
-                                     WHERE p.PRO_JOU_ID = "'.$_SESSION['JOU_ID'].'"
-                                       AND r.RES_MATCH = ""
-                                       AND r.RES_MATCH_JOU1 != ""
-                                       AND r.RES_MATCH_JOU2 != ""
-                                       AND p.PRO_RES_MATCH = ""
-                                  ORDER BY r.RES_MATCH_DAT ASC');
+    // $response = $bdd->query('SELECT * FROM resultats r INNER JOIN pronostique p
+    // 									ON r.RES_MATCH_ID = p.PRO_MATCH_ID
+    //                                  WHERE p.PRO_JOU_ID = "'.$_SESSION['JOU_ID'].'"
+    //                                    AND r.RES_MATCH = ""
+    //                                    AND r.RES_MATCH_JOU1 != ""
+    //                                    AND r.RES_MATCH_JOU2 != ""
+    //                                    AND p.PRO_RES_MATCH = ""
+    //                             	 ORDER BY r.RES_MATCH_TOUR desc, r.RES_MATCH_TOUR_SEQ asc');
+		 $response = $bdd->query('SELECT * FROM resultats r INNER JOIN pronostique p
+	   									ON r.RES_MATCH_ID = p.PRO_MATCH_ID
+	                                    WHERE p.PRO_JOU_ID = "'.$_SESSION['JOU_ID'].'"
+	                                      AND r.RES_MATCH = ""
+	                                      AND r.RES_MATCH_JOU1 != ""
+	                                      AND r.RES_MATCH_JOU2 != ""
+	                                      AND p.PRO_RES_MATCH = ""
+	                               	 ORDER BY r.RES_MATCH_DAT, r.RES_MATCH_POIDS_TOUR, r.RES_MATCH_TOUR_SEQ');
 	return $response;
 }
 
@@ -368,7 +427,7 @@ function getResultsToEnter() {
 	$bdd = dbConnect();
     $response = $bdd->query('SELECT * FROM resultats
  	                                WHERE RES_MATCH = "" AND RES_MATCH_JOU1 != "" AND RES_MATCH_JOU2 != ""
-                                 ORDER BY RES_MATCH_DAT ASC');
+                                 ORDER BY RES_MATCH_DAT ASC, RES_MATCH_POIDS_TOUR DESC, RES_MATCH_TOUR_SEQ ASC');
 	return $response;
 }
 
@@ -434,6 +493,27 @@ function getKey($pseudoValid) {
 	$req->execute(array($pseudoValid));
 
 return $req;
+}
+
+function searchIfMatchExists($newPoids, $newSeq) {
+	$bdd = dbConnect();
+
+	echo "function searchIfMatchExists() - newPoids=" . $newPoids . ", newSeq=" . $newSeq . "<br />";
+
+	$matchExists = $bdd->prepare('SELECT * FROM resultats
+ 	        	              		   WHERE RES_MATCH_POIDS_TOUR = ?
+																   AND RES_MATCH_TOUR_SEQ = ?
+																	 ');
+
+    // $matchExists = $bdd->prepare('SELECT * FROM resultats
+  	//         	              		   WHERE RES_MATCH_POIDS_TOUR = "'.$newPoids.'"
+ 		// 														   AND RES_MATCH_TOUR_SEQ = "'.$newSeq.'"
+ 		// 															 ');
+
+	$matchExists->execute(array($newPoids, $newSeq));
+
+	return $matchExists;
+
 }
 
 
@@ -508,49 +588,115 @@ function createMatchToPrognosis($postPlayerId, $postMatchId) {
 
 
 
-function createMatch() {
+// function createMatch() {
+// 	$bdd = dbConnect();
+//
+// 	global $poidsTour;
+//
+//     //Création du nouveau match à pronostiquer
+//     $req = $bdd->prepare('INSERT INTO resultats (RES_TOURNOI, RES_TYP_TOURNOI, RES_MATCH_DAT, RES_MATCH_TOUR, RES_MATCH_POIDS_TOUR, RES_MATCH_TOUR_SEQ, RES_MATCH_JOU1, RES_MATCH, RES_MATCH_TYP, RES_MATCH_SCR_JOU1, RES_MATCH_SCR_JOU2, RES_MATCH_JOU2) VALUES (:Tournoi, :Categorie, :DateMatch, :Niveau, :PoidsTour, :Sequence, :Joueur1, :ResultatMatch, :TypeResultatMatch, :ScoreJoueur1, :ScoreJoueur2, :Joueur2)');
+//     $req->execute(array(
+//         'Tournoi' => $_POST['Tournoi'],
+//         'Categorie' => $_POST['Categorie'],
+//         'DateMatch' => $_POST['DateMatch'],
+//         'Niveau' => $_POST['Niveau'],
+//         'PoidsTour' => $poidsTour,
+// 				'Sequence' => $seq,
+//         'Joueur1' => $_POST['Joueur1'],
+//         'ResultatMatch' => "",
+//         'TypeResultatMatch' => "",
+//         'ScoreJoueur1' => 0,
+//         'ScoreJoueur2' => 0,
+//         'Joueur2' => $_POST['Joueur2']));
+//
+//     return $req;
+// }
+function createNextMatch() {
 	$bdd = dbConnect();
 
-	global $poidsTour;
+	global $tournoi, $categorie, $newDateStr, $niveau, $newPoids, $newSeq, $newJou1, $newJou2;
 
     //Création du nouveau match à pronostiquer
-    $req = $bdd->prepare('INSERT INTO resultats (RES_TOURNOI, RES_TYP_TOURNOI, RES_MATCH_DAT, RES_MATCH_TOUR, RES_MATCH_POIDS_TOUR, RES_MATCH_JOU1, RES_MATCH, RES_MATCH_TYP, RES_MATCH_SCR_JOU1, RES_MATCH_SCR_JOU2, RES_MATCH_JOU2) VALUES (:Tournoi, :Categorie, :DateMatch, :Niveau, :PoidsTour, :Joueur1, :ResultatMatch, :TypeResultatMatch, :ScoreJoueur1, :ScoreJoueur2, :Joueur2)');
+    $req = $bdd->prepare('INSERT INTO resultats (RES_TOURNOI, RES_TYP_TOURNOI, RES_MATCH_DAT, RES_MATCH_TOUR, RES_MATCH_POIDS_TOUR, RES_MATCH_TOUR_SEQ, RES_MATCH_JOU1, RES_MATCH_JOU2, RES_MATCH, RES_MATCH_TYP, RES_MATCH_SCR_JOU1, RES_MATCH_SCR_JOU2) VALUES (:Tournoi, :Categorie, :DateMatch, :Niveau, :PoidsTour, :Sequence, :Joueur1, :Joueur2, :ResultatMatch, :TypeResultatMatch, :ScoreJoueur1, :ScoreJoueur2)');
     $req->execute(array(
-        'Tournoi' => $_POST['Tournoi'],
-        'Categorie' => $_POST['Categorie'],
-        'DateMatch' => $_POST['DateMatch'],
-        'Niveau' => $_POST['Niveau'],
-        'PoidsTour' => $poidsTour,
-        'Joueur1' => $_POST['Joueur1'],
+        'Tournoi' => $tournoi,
+        'Categorie' => $categorie,
+        'DateMatch' => $newDateStr,
+        'Niveau' => $niveau,
+        'PoidsTour' => $newPoids,
+				'Sequence' => $newSeq,
+        'Joueur1' => $newJou1,
+				'Joueur2' => $newJou2,
+        'ResultatMatch' => "",
+        'TypeResultatMatch' => "",
+        'ScoreJoueur1' => 0,
+        'ScoreJoueur2' => 0));
+
+    return $req;
+}
+
+
+function createMatchFirstRound() {
+	$bdd = dbConnect();
+
+	global $nomTournoi, $typTournoi, $datePremierMatch, $level, $poids, $seq, $playerFirstRound;
+
+    //Création du nouveau match à pronostiquer
+    $req = $bdd->prepare('INSERT INTO resultats (RES_TOURNOI, RES_TYP_TOURNOI, RES_MATCH_DAT, RES_MATCH_TOUR, RES_MATCH_POIDS_TOUR, RES_MATCH_TOUR_SEQ, RES_MATCH_JOU1, RES_MATCH, RES_MATCH_TYP, RES_MATCH_SCR_JOU1, RES_MATCH_SCR_JOU2, RES_MATCH_JOU2) VALUES (:Tournoi, :Categorie, :DateMatch, :Niveau, :PoidsTour, :Sequence, :Joueur1, :ResultatMatch, :TypeResultatMatch, :ScoreJoueur1, :ScoreJoueur2, :Joueur2)');
+    $req->execute(array(
+        'Tournoi' => $nomTournoi,
+        'Categorie' => $typTournoi,
+        'DateMatch' => $datePremierMatch,
+        'Niveau' => $level,
+        'PoidsTour' => $poids,
+				'Sequence' => $seq,
+        'Joueur1' => $playerFirstRound,
         'ResultatMatch' => "",
         'TypeResultatMatch' => "",
         'ScoreJoueur1' => 0,
         'ScoreJoueur2' => 0,
-        'Joueur2' => $_POST['Joueur2']));
+        'Joueur2' => ""));
 
     return $req;
 }
 
 
 // REPRENDRE ICI //
-function loadTournamentPlayers($player, $pays) {
+function loadTournamentPlayers($player, $pays, $display) {
 	$bdd = dbConnect();
 
+		//delete all record before loading
+		//$del = $bdd->query('DELETE FROM players');
+		//return $del;
+
     //insertion du joueur et du pays
-    $req = $bdd->prepare('INSERT INTO players (PLA_NOM, PLA_PAY) VALUES (:Name, :Pays)');
+    $req = $bdd->prepare('INSERT INTO players (PLA_NOM, PLA_PAY, PLA_DISP) VALUES (:Name, :Pays, :Disp)');
     $req->execute(array(
         'Name' => $player,
-        'Pays' => $pays));
+        'Pays' => $pays,
+				'Disp' => $display));
 
     return $req;
 }
 
 
 
-
+//*
+//*
+//*
+//*
+//*
 //************************************************************************************************************************************************************
 //****************************************************** Fonctions de mise à jour ****************************************************************************
 //************************************************************************************************************************************************************
+//*
+//*
+//*
+//*
+//*
+
+
+
 
 
 function updateWinner($postPlayerId) {
@@ -627,7 +773,9 @@ function updateLevelFrench($postPlayerId) {
 }
 
 
-function updatePrognosis($postPlayerId, $postMatchId) {
+// function updatePrognosis($postPlayerId, $postMatchId) {
+function updatePrognosis($postPlayerId, $postMatchId, $result, $scoreJ1, $scoreJ2, $typeMatch) {
+
 	$bdd = dbConnect();
 
 	//echo "fonction updatePrognosis() : paramètres=" . $postPlayerId . " / " . $postMatchId . "<br />";
@@ -638,11 +786,16 @@ function updatePrognosis($postPlayerId, $postMatchId) {
 						   WHERE PRO_JOU_ID = "'.$postPlayerId.'"
 						     AND PRO_MATCH_ID = "'.$postMatchId.'"');
 
+	// $req->execute(array(
+	// 	'Resultat' => $_POST['VouD'],
+	// 	'ScoreJoueur1' => $_POST['ScoreJ1'],
+	// 	'ScoreJoueur2' => $_POST['ScoreJ2'],
+	// 	'TypeMatch' => $_POST['TypeMatch']));
 	$req->execute(array(
-		'Resultat' => $_POST['VouD'],
-		'ScoreJoueur1' => $_POST['ScoreJ1'],
-		'ScoreJoueur2' => $_POST['ScoreJ2'],
-		'TypeMatch' => $_POST['TypeMatch']));
+		'Resultat' => $result,
+		'ScoreJoueur1' => $scoreJ1,
+		'ScoreJoueur2' => $scoreJ2,
+		'TypeMatch' => $typeMatch));
 
     return $req;
 }
@@ -752,27 +905,76 @@ function updateActive($player, $activeValue) {
     return $req;
 }
 
+function updateMatchFirstRound($maxID, $playerFirstRound) {
+//function updateMatchFirstRound($maxID) {
+	$bdd = dbConnect();
+
+	global $maxID, $playerFirstRound;
+
+    //Création du nouveau match à pronostiquer
+    $req = $bdd->prepare('UPDATE resultats
+													SET RES_MATCH_JOU2 = :joueur2
+													WHERE RES_MATCH_ID = "'.$maxID.'"');
+    $req->execute(array(
+        'joueur2' => $playerFirstRound));
+
+    return $req;
+}
+
+function updateNextMatchJou1($newPoids, $newSeq, $newJou1) {
+	$bdd = dbConnect();
+
+	global $newPoids, $newSeq, $newJou1;
+
+	$req = $bdd->prepare('UPDATE resultats
+												SET RES_MATCH_JOU1 = :newPlayer
+												WHERE RES_MATCH_POIDS_TOUR = "'.$newPoids.'"
+												  AND RES_MATCH_TOUR_SEQ = "'.$newSeq.'"');
+
+	$req->execute(array(
+			'newPlayer' => $newJou1));
+
+	return $req;
+
+}
+
+function updateNextMatchJou2($newPoids, $newSeq, $newJou2) {
+	$bdd = dbConnect();
+
+	global $newPoids, $newSeq, $newJou2;
+
+	$req = $bdd->prepare('UPDATE resultats
+												SET RES_MATCH_JOU2 = :newPlayer
+												WHERE RES_MATCH_POIDS_TOUR = "'.$newPoids.'"
+												  AND RES_MATCH_TOUR_SEQ = "'.$newSeq.'"');
+
+	$req->execute(array(
+			'newPlayer' => $newJou2));
+
+	return $req;
+
+}
+
+//*
+//*
+//*
+//*
+//*
 //************************************************************************************************************************************************************
-//****************************************************** Connexion à la base dedonnées ***********************************************************************
+//********************************************************** Autres fonctions ********************************************************************************
 //************************************************************************************************************************************************************
+//*
+//*
+//*
+//*
+//*
 
+function dateNextMatch($oldDate,$nbDays){
 
-function dbConnect(){
-	try
-	{
-		// On va se connecter à la base de données
-		//------------------------------------------
+	echo "FUNCTION dateNextMatch() --> date avant: " . $oldDate . "<br />";
+	$newDate = strtotime($oldDate) + (3600 * 24) * $nbDays;
+	echo "FUNCTION dateNextMatch() --> date après: " . $newDate . "<br />";
 
-		//--> Base de donnée de production
-		$bdd = new PDO('mysql:host=tennisbefubddtbf.mysql.db;dbname=tennisbefubddtbf;charset=utf8', 'tennisbefubddtbf', 'nediamBDDTBF1975', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+	return $newDate;
 
-		//--> Base de données pour le test
-		//$bdd = new PDO('mysql:host=localhost;dbname=usopen2019;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-		return $bdd;
-	}
-		catch(Exception $e)
-	{
-		// En cas d'erreur, on affiche un message et on arrête tout
-		die('Erreur : '.$e->getMessage());
-	}
 }
