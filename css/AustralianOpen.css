@@ -1,14 +1,16 @@
 body
 {
-    background-color: DarkGreen;
+/*    background-color: MediumAquaMarine; */
+    background-color: Gainsboro;
     margin: 10px 10px;
     padding: 0 ;
+    font-family: Segoe UI Semibold;
 }
 
 
 h1
 {
-    color: DarkGreen;
+    color: Red;
 /*
     text-shadow: 1px 0 0 white, 0 1px 0 white, 0 -1px 0 white, -1px 0 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 white;
 */
@@ -17,21 +19,23 @@ h1
 
 h2
 {
-    color: purple;
+    color: White;
 }
 
 
 /*.tournoi*/
 h6
 {
+    //font-family: Segoe UI Semibold;
+    font-style: italic;
     color: white;
     text-align: center;
-    font-size: 40px;
-    border: 5px solid purple;
-    background-image:url(../images/tennis-grass-3.jpg);
+    font-size: 80px;
+    border: 5px solid Red;
+    background-image:url(../images/AusOpen_logo.jpg);
     /*background-position: center;*/
-    background-position: 50% 18%;
-    background-repeat: no-repeat;
+    background-position: 50% 25%;
+    background-repeat: repeat;
     margin: 0px;
     padding-top:30px;
     padding-bottom:30px;
@@ -39,7 +43,7 @@ h6
 
 menu
 {
-    background-color: LightBlue;
+    background-color: SteelBlue;
 }
 
 .warning
@@ -53,6 +57,12 @@ font-size: 20px;
   text-align: right;
   float: right;
 }
+
+.info
+{
+color: black;
+}
+
 table
 {
     border-collapse: collapse; /* Les bordures du tableau seront collées (plus joli) */
@@ -61,20 +71,24 @@ table
 td, th
 {
     border: 1px solid black;
-    background-color: ForestGreen;
+    background-color: DarkCyan;
+    color: black;
 }
 
 th
 {
-    background-color: MediumSlateBlue;
+    background-color: DarkBlue;
+    color: White;
 }
 
 .lignecoloree td {
    background-color: Gold;
+   color: black;
 }
 
 .lignenormale td {
-   background-color: ForestGreen;
+   background-color: DarkCyan;
+   color: black;
 }
 
 #conteneur
@@ -85,42 +99,48 @@ th
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    background-color: YellowGreen;
+    background-color: #ff9600;
     /*background-image:url(images/terre-battue.jpg);*/
 }
 
 .element
 {
     /*margin: auto; */
-    background-color: LawnGreen;
+    background-color: #ff9600;
     /*background-image:url(images/terre-battue-bis.jpg);*/
+    position: relative;
 }
 
 .element_corps
 {
+    width: 75%;
     /*margin: auto; */
-    background-color: SeaGreen;
+    background-color: #1196ff;
     margin: 10px 10px;
     padding-left:10px;
     padding-right:10px;
     padding-top:2px;
     padding-bottom:2px;
+    color: White;
     /*background-image:ur
     /*background-image:url(images/terre-battue-bis.jpg);*/
+    position: relative;
 }
 
 .element_menu
 {
+    /*width: 75%;*/
     /*margin: auto; */
-    background-color: DarkKhaki;
+    background-color: DeepSkyBLue;
     margin: 10px 10px;
     padding-left:10px;
     padding-right:10px;
     padding-top:2px;
     padding-bottom:2px;
-    /*background-image:url(images/terre-battue-bis.jpg);*/
+    color: White;
     position: sticky;
     top: 10px;
+    /*background-image:url(images/terre-battue-bis.jpg);*/
 }
 
 /* On sélectionne tous les labels */
@@ -135,13 +155,34 @@ label
 #registration_form label
 {
     display:block;
-    width:200px;
+    width:250px;
     float:left;
 }
 
 #connection_form label
 {
     display:block;
-    width:100px;
+    width:150px;
     float:left;
+}
+
+.a_menu{
+text-decoration:none;
+color:white;
+}
+
+.a_text{
+text-decoration:underline;
+color:DarkBlue;
+font-style: italic;
+font-style: italic;
+}
+
+.div_localTime{
+  width:400px;
+  height:50px;
+  background:grey;
+  color:white;
+  text-align:center;
+  line-height:50px;
 }
