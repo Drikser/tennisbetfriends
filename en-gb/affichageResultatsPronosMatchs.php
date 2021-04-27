@@ -12,24 +12,6 @@ $i = 0;
 $idMatchPrecedent = '';
 $nbplayers = 0;
 
-// Renseigner un tableau contenant tous les pseudo des joueurs
-// ==> Pour affichage dynamique des pseudo dans les titres du tableau
-//$reqPseudo = $bdd->query('SELECT JOU_PSE
-//                          FROM joueur
-//                         WHERE JOU_PSE != "Admin"
-//                      ORDER BY JOU_PSE ASC');
-
-//while ($titre = $reqPseudo->fetch()) {
-
-//  $tabPseudo[] = $titre['JOU_PSE'];
-//  echo $titre['JOU_PSE'] . '<br />';
-//}
-
-
-//Sélection des pronostiques effectués par le joueur :
-
-//include("affichageResultatsPronoMatchsRequete.php");
-//include("../commun/model.php");
 $allPrognosis = getAllPrognosis();
 
 while ($titre = $allPrognosis->fetch()) {
@@ -52,7 +34,8 @@ while ($titre = $allPrognosis->fetch()) {
 	$tabPseudoProno[$i]['proRes'] = $outputResult;
 	$tabPseudoProno[$i]['proScore1'] = $titre['PRO_SCORE_JOU1'];
 	$tabPseudoProno[$i]['proScore2'] = $titre['PRO_SCORE_JOU2'];
-	$tabPseudoProno[$i]['proTypMatch'] = $titre['PRO_TYP_MATCH'];
+	$outputType = ConvertTypeResultFTE($titre['PRO_TYP_MATCH']);
+	$tabPseudoProno[$i]['proTypMatch'] = $outputType;
 	$tabPseudoProno[$i]['proPoints'] = $titre['PRO_PTS_JOU'];
 	$i++;
 
@@ -74,9 +57,10 @@ while ($titre = $allPrognosis->fetch()) {
   <tr>
 		<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
     <th width="150" align="center" valign="middle" class="cellule">Round</th>
-    <th width="150" align="center" valign="middle" class="cellule">Player 1</th>
+    <th width="200" align="center" valign="middle" class="cellule">Player 1</th>
     <th width="100" align="center" valign="middle" class="cellule">Result</th>
-    <th width="150" align="center" valign="middle" class="cellule">player 2</th>
+    <th width="200" align="center" valign="middle" class="cellule">player 2</th>
+		<th align="center" valign="middle" class="cellule"></th>
       <?php
 		foreach($tabPseudo as $element) {
 		?>
@@ -87,45 +71,60 @@ while ($titre = $allPrognosis->fetch()) {
 
   </tr>
 
-    <?php
+  <?php
 
-    //include("affichageResultatsPronoMatchsRequete.php");
+  //include("affichageResultatsPronoMatchsRequete.php");
 	$allPrognosis = getAllPrognosis();
 
+	$ResMatchPoidsTourPrecedent = "";
+	$colorLine = "";
 	//while ($donnees = $response->fetch()) {
-    while ($donnees = $allPrognosis->fetch()) {
+  while ($donnees = $allPrognosis->fetch()) {
 
-       	if ($donnees['RES_MATCH_ID'] != $idMatchPrecedent) {
 
-					//change display for english version of the website
-					$outputRound = ConvertRound($donnees['RES_MATCH_TOUR']);
-					$outputResult = ConvertResultFTE($donnees['RES_MATCH']);
+   	if ($donnees['RES_MATCH_ID'] != $idMatchPrecedent) {
 
-       		?>
-        	<tr>
-        		<td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $donnees['RES_MATCH_ID']; ?> required="required"></td>
-                <!-- <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH_TOUR']; ?></b></td> -->
-								<td align="center" valign="middle" class="cellule"><b><?php echo $outputRound; ?></b></td>
-                <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH_JOU1']; ?></b></td>
-                <!-- <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH'] . " " . $donnees['RES_MATCH_SCR_JOU1'] . "/" . $donnees['RES_MATCH_SCR_JOU2'] . " " . $donnees['RES_MATCH_TYP']; ?></b></td> -->
-								<td align="center" valign="middle" class="cellule"><b><?php echo $outputResult . " " . $donnees['RES_MATCH_SCR_JOU1'] . "/" . $donnees['RES_MATCH_SCR_JOU2'] . " " . $donnees['RES_MATCH_TYP']; ?></b></td>
-                <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH_JOU2']; ?></b></td>
-                <?php
-                $i = 0;
-                foreach($tabPseudoProno as $prono) {
-                	if ($tabPseudoProno[$i]['matchId'] == $donnees['RES_MATCH_ID']) {
-										?>
-										<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['proRes'] . " " . $tabPseudoProno[$i]['proScore1'] . "/" . $tabPseudoProno[$i]['proScore2'] . " " . $tabPseudoProno[$i]['proTypMatch'] . " (" . $tabPseudoProno[$i]['proPoints'] . "pts)"; ?></td>
-										<?php
-										}
-									$i++;
+			//change display for english version of the website
+			$outputRound = ConvertRoundFTE($donnees['RES_MATCH_TOUR']);
+			$outputResult = ConvertResultFTE($donnees['RES_MATCH']);
+			$outputType = ConvertTypeResultFTE($titre['PRO_TYP_MATCH']);
+
+			//Classe permettant de modifier légèrement la couleur des lignes en fonction du tour
+			if ($donnees['RES_MATCH_POIDS_TOUR'] !== $ResMatchPoidsTourPrecedent) {
+				if ($colorLine == '' or $colorLine == 'lignenormale2') {
+					$colorLine = 'lignenormale';
+				} else {
+					$colorLine = 'lignenormale2';
+				}
+			}
+			$ResMatchPoidsTourPrecedent = $donnees['RES_MATCH_POIDS_TOUR'];
+
+   		?>
+    	<tr class="<?php echo $colorLine; ?>">
+    		<td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $donnees['RES_MATCH_ID']; ?> required="required"></td>
+            <!-- <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH_TOUR']; ?></b></td> -->
+						<td align="center" valign="middle" class="cellule"><b><?php echo $outputRound; ?></b></td>
+            <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH_JOU1']; ?></b></td>
+            <!-- <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH'] . " " . $donnees['RES_MATCH_SCR_JOU1'] . "/" . $donnees['RES_MATCH_SCR_JOU2'] . " " . $donnees['RES_MATCH_TYP']; ?></b></td> -->
+						<td align="center" valign="middle" class="cellule"><b><?php echo $outputResult . " " . $donnees['RES_MATCH_SCR_JOU1'] . "/" . $donnees['RES_MATCH_SCR_JOU2'] . " " . $outputType; ?></b></td>
+            <td align="center" valign="middle" class="cellule"><b><?php echo $donnees['RES_MATCH_JOU2']; ?></b></td>
+						<th align="center" valign="middle" class="cellule"></th>
+            <?php
+            $i = 0;
+            foreach($tabPseudoProno as $prono) {
+            	if ($tabPseudoProno[$i]['matchId'] == $donnees['RES_MATCH_ID']) {
+								?>
+								<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['proRes'] . " " . $tabPseudoProno[$i]['proScore1'] . "/" . $tabPseudoProno[$i]['proScore2'] . " " . $tabPseudoProno[$i]['proTypMatch'] . " (" . $tabPseudoProno[$i]['proPoints'] . "pts)"; ?></td>
+								<?php
 								}
-        		?>
-            </tr>
+							$i++;
+						}
+    		?>
+        </tr>
 
-        	<?php
-        	$idMatchPrecedent = $donnees['RES_MATCH_ID'];
-           	}
+    	<?php
+    	$idMatchPrecedent = $donnees['RES_MATCH_ID'];
+      }
 		}
     ?>
 

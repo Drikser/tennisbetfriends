@@ -67,10 +67,10 @@ if ($nbRow > 0) {
 
 		//echo 'Point après = ' . $jouPtsProno . ' pts (+' . $donnees['PRO_PTS_JOU'] . ')<br />';
 
-		if ($donnees['PRO_PTS_JOU'] == 5){
+		if ($donnees['PRO_PTS_JOU'] == $ptsExactPrognosis){
 			$nbExactProno = $nbExactProno + 1;
 
-			echo 'Pronostique exact.<br />';
+			// echo 'Pronostique exact.<br />';
 
 		}
 	}

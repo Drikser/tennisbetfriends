@@ -1,54 +1,24 @@
 <?php
-session_start(); // On démarre la session AVANT toute chose
-?>
+  if (!isset($_SESSION))
+  {
+    session_start();
+  }
 
- <!--
-*************************************
-*  De mise à jour d'un pronostique  *
-*  ==> Un seul match pronostiqué    *
-*************************************
--->
+  $variableSESSION = $_SESSION['JOU_ID'];
+  echo "Session include2 = " . $variableSESSION . "<br />";
 
-<!DOCTYPE html>
-<html>
-
-    <?php require("../commun/header.php"); ?>
-
-    <body>
-
-    <!-- L'en-tête -->
-
-    <?php include("entete.php"); ?>
-
-
-    <div id="conteneur">
-
-
-	    <!-- Le menu -->
-
-	    <?php include("menu.php"); ?>
-
-	    <!-- Le corps -->
-
-	    <div id="corps">
-	        <h1>Pronostiques des matchs</h1>
-
-	        <p>
-	            Validation du pronostique<br />
-	        </p>
-
-			<!-- Connexion base de données -->
-
-			<?php
-			//include("connexionSGBD.php");
-			//include("../commun/model.php");
+  if (isset($_POST['TypeMatch'])
+  and isset($_POST['VouD'])
+  and isset($_POST['ScoreJ1'])
+  and isset($_POST['ScoreJ2']))
+  {
 
       $typeMatch = $_POST['TypeMatch'];
       $result = $_POST['VouD'];
       $scoreJ1 = $_POST['ScoreJ1'];
       $scoreJ2 = $_POST['ScoreJ2'];
 
-      // echo "Before conversion ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
+      echo "Before conversion ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
 
 			//if (empty($_POST['VouD']) OR empty($_POST['ScoreJ1']) OR empty($_POST['ScoreJ2']))
 			// if ($_POST['VouD']=="" OR $_POST['ScoreJ1']=="" OR $_POST['ScoreJ2']=="")
@@ -81,7 +51,7 @@ session_start(); // On démarre la session AVANT toute chose
 				//Contrôles avant chargement :
 				$pronoOK = 'OK';
 
-        // echo "After conversion  ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
+        echo "After conversion  ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
 
 				switch ($typeMatch) {
 					case 'AB':
@@ -160,76 +130,68 @@ session_start(); // On démarre la session AVANT toute chose
 						break;
 				}
 
+        echo "pronoOK=" . $pronoOK . "<br />";
+
 				//Chargement des scores en table MySQL des pronostiques
 				$nbRow = 0;
 
 				if ($pronoOK == 'OK') {
 
+          echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ") <br />";
 					$req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
 
 					$nbRow = $req->rowcount();
 				}
 				else {
+
+          echo "<span class='warning'>Votre pronostique: " . $result . " " . $scoreJ1 . "/" . $scoreJ2 . "</span><br />";
+          echo "<br />";
 					echo "<span class='warning'>Merci de ré-essayer " . '<a href="pronostique_matchs.php">ICI</a>' . ". Si l'erreur persiste, veuillez contacter l'admninistrateur du site.</span><br />";
 				}
 
 
 				if ($nbRow > 0)
 				{
-					echo 'Bravo ! Pronostique fait !<br />';
+					// echo 'Bravo ! Pronostique fait !<br />';
 
 					// if ($_POST['VouD'] == 'V') {
           if ($result == 'V') {
 					 	switch ($typeMatch) {
 					 	 	case 'AB':
-					 	 		echo 'Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' par abandon *** ' . htmlspecialchars($scoreJ1) . ' sets à ' . htmlspecialchars($scoreJ2) . ' avant l\'abandon de ' . htmlspecialchars($_POST['Player2']) . '<br />';
+					 	 		echo '<span class="congrats">Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' par abandon *** ' . htmlspecialchars($scoreJ1) . ' sets à ' . htmlspecialchars($scoreJ2) . ' avant l\'abandon de ' . htmlspecialchars($_POST['Player2']) . '</span><br />';
 					 	 		break;
 
 					 	 	case 'WO':
-				 	 			echo 'Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' par forfait. <br />';
+				 	 			echo '<span class="congrats">Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' par forfait. </span><br />';
 				 	 			break;
 
 					 	 	default:
-				 	 			echo 'Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' : ' . htmlspecialchars($scoreJ1) . ' sets à ' . htmlspecialchars($scoreJ2) . '<br />';
+				 	 			echo '<span class="congrats">Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' : ' . htmlspecialchars($scoreJ1) . ' sets à ' . htmlspecialchars($scoreJ2) . '</span><br />';
 				 	 			break;
 					 	 }
 					 }
 					 else {
 					 	switch ($typeMatch) {
 					 	 	case 'AB':
-					 	 		echo 'Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' par abandon *** ' . htmlspecialchars($scoreJ1) . ' sets à ' . htmlspecialchars($scoreJ2) . ' avant l\'abandon de ' . htmlspecialchars($_POST['Player1']) . '<br />';
+					 	 		echo '<span class="congrats">Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' par abandon *** ' . htmlspecialchars($scoreJ1) . ' sets à ' . htmlspecialchars($scoreJ2) . ' avant l\'abandon de ' . htmlspecialchars($_POST['Player1']) . '</span><br />';
 					 	 		break;
 
 					 	 	case 'WO':
-					 	 		echo 'Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' par forfait. <br />';
+					 	 		echo '<span class="congrats">Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' par forfait. </span><br />';
 					 	 		break;
 
 					 	 	default:
-					 	 		echo 'Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' : ' . htmlspecialchars($scoreJ1) . ' sets à ' . htmlspecialchars($scoreJ2) . '<br />';
+					 	 		echo '<span class="congrats">Tu as pronostiqué : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' : ' . htmlspecialchars($scoreJ1) . ' sets à ' . htmlspecialchars($scoreJ2) . '</span><br />';
 					 	 		break;
 					 	}
 					}
 
 					echo '<br />Vous pouvez modifier ce pronostique dans la section <a href="pagePerso.php">' . 'Page perso' . '</a><br/>';
-					echo '<br />Pour faire un nouveau pronostique, clique <a href="pronostique_matchs.php">' . 'ICI' . '</a><br/>';
-
+					// echo '<br />Pour faire un nouveau pronostique, clique <a href="pronostique_matchs.php">' . 'ICI' . '</a><br/>';
+          echo '<br /><a href="pronostique_matchs.php" class="button">' . 'Nouveau pronostique' . '</a><br/>';
 
 				} else {
           // echo "<br />Update n'a rien fait";
         }
 			}
-
-			?>
-
-
-	    </div>
-
-    </div>
-
-
-    <!-- Le pied de page -->
-
-    <?php include("../commun/piedDePAge.php"); ?>
-
-    </body>
-</html>
+    }

@@ -2,6 +2,8 @@
 
 	<!-- Ceci est l'entête de tennisbetfriends.com de pronostiques <br /> -->
 
+	<div id="banner">
+
 	<?php
     include("../commun/model.php");
 		include("../commun/functions.php");
@@ -18,31 +20,42 @@
 
 					case 'Australian Open':
 					case 'US Open':
-						?>
-						<h6><?php echo "Pronostiques de l'" . $donnees['SET_LIB_TOURNAMENT'] ?></h6>
-						<?php
+						echo "<h6>Pronostiques de l'" . $donnees['SET_LIB_TOURNAMENT'] . "</h6>";
 						break;
 
 					case 'Roland Garros':
 					case 'Wimbledon':
-					?>
-					<h6><?php echo "Pronostiques de " . $donnees['SET_LIB_TOURNAMENT'] ?></h6>
-					<?php
+						echo "<h6>Pronostiques de " . $donnees['SET_LIB_TOURNAMENT'] . "</h6>";
 					break;
 				}
 			}
 
 			else {
+/*
 				?>
 <!-- 				<h6><?php echo 'Pronostiques du ' . $donnees['SET_LIB_TOURNAMENT'] . ' (' . $donnees['SET_LIB_TYP'] . ')' ?></h6> -->
-				<h6><?php echo 'Pronostiques ' . $donnees['SET_LIB_TOURNAMENT'] . SUBSTR($donnees['SET_DAT_START'], 1, 4) . ' (' . $donnees['SET_LIB_TYP'] . ')'?></h6>
+				<!-- <h6><?php echo 'Pronostiques ' . $donnees['SET_LIB_TOURNAMENT'] . SUBSTR($donnees['SET_DAT_START'], 0, 3) . ' (' . $donnees['SET_LIB_TYP'] . ')'?></h6> -->
+				<h6><?php echo 'Pronostiques ' . $donnees['SET_LIB_TOURNAMENT'] . ' (' . $donnees['SET_LIB_TYP'] . ')'?></h6>
 				<?php
+*/
+				echo '<h6>Pronostiques ' . $donnees['SET_LIB_TOURNAMENT'] . ' (' . $donnees['SET_LIB_TYP'] . ')</h6>';
 			}
 		}
     ?>
 
+		<?php // require("menu.php"); ?>
+
+	</div>
+
+	<div class="language_choice" >
+		<br />
+		<!-- <a href="../en-gb/index.php"><img src="../images/french_flag_rectangle_mini.png" alt="English flag" /></a><a class="a_menu" href="../en-gb/index.php"> (Allez sur la version anglaise)</a>; -->
+		<img src="../images/french_flag_rectangle_mini.png" alt="French flag" /><a class="lang_menu" href="../en-gb/index.php"></a> (<a href="../en-gb/index.php"><img src="../images/english_flag_rectangle_mini2.png" alt="English flag" title="Allez sur la version anglaise"/></a><a class="lang_menu" href="../en-gb/index.php"></a>)
+	</div>
+
 	<?php
 	echo "<br />";
+
 	if (isset($_SESSION['JOU_ID']) AND isset($_SESSION['JOU_PSE']))
 	{
     	echo "<span class='Hello'>Bonjour " . $_SESSION['JOU_PSE'] . " </span><br />";
@@ -83,14 +96,15 @@
 					date_default_timezone_set('Europe/London');
 					//$H_Mel = date('d/m/Y H:i:s');
 					$H_Lon = date('d/m/Y H:i');
-					echo 'Heure à Londres			: ' . $H_Lon . '<br /><br />';
+					echo "<span class='localClock'>Heure à Londres : " . $H_Lon . "</span><br /><br />";
 				break;
 
 				case 'US Open':
 					date_default_timezone_set('America/New_York');
 					//$H_Mel = date('d/m/Y H:i:s');
 					$H_Nyk = date('d/m/Y H:i');
-					echo 'Heure à New-York		: ' . $H_Nyk . '<br /><br />';
+					// echo 'Heure à New-York		: ' . $H_Nyk . '<br /><br />';
+					echo "<span class='localClock'>Heure à New-York : " . $H_Nyk . "</span><br /><br />";
 				break;
 			}
 	}

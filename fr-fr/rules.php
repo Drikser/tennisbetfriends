@@ -30,7 +30,7 @@ session_start(); // On démarre la session AVANT toute chose
 
 	        <h2>Ce qu'il y a à gagner</h2>
 
-        	<p>Toute l'estime de votre serviteur ! ah ah ah </p>
+        	<p>Toute l'estime des autres participants bien sûr ! </p>
 
         	<p>D'entrée de jeu soyons clair, il n'y a rien à gagner, c'est un site purement pour s'amuser à faire des pronostiques entre potes. Le but est simplement de partager ensemble notre passion du tennis et de suivre les tournois ATP d'un autre oeil, en étant plus "actif".
         	</p>

@@ -1,6 +1,7 @@
 body
 {
-    background-color: Khaki;
+    /* background-color: Khak; */
+    font-family: Sans-serif;
     /*background-color: Chocolate;*/
     background-image: url(../images/terre-battue.jpg);
     background-attachment: fixed;
@@ -8,7 +9,7 @@ body
     background-size: cover;
     background-position: center;
     margin: 10px 10px;
-    padding: 0 ;
+    padding: 0;
 }
 
 
@@ -30,14 +31,15 @@ h2
 h6
 {
     font-family: sans-serif;
+    font-style: italic;
     color: white;
     text-align: center;
-    font-size: 40px;
+    font-size: 60px;
     /* border: 8px solid green; */
     border-width: 8px;
     border-style: solid;
     border-color: #275D0A;
-    border-radius: 60px;
+    /* border-radius: 60px; */
     /*background-color: Chocolate;*/
     background-image:url(../images/TERRE_BATTUE2894.jpg);
     background-position: center;
@@ -47,11 +49,28 @@ h6
     padding-bottom:30px;
 }
 
+menu
+{
+    background-color: orange;
+}
 
 .warning
 {
 color: red;
 font-size: 20px;
+}
+
+.congrats
+{
+color: black;
+font-size: 20px;
+}
+
+.language_choice
+{
+  color: white;
+  text-align: right;
+  float: right;
 }
 
 .localClock
@@ -69,6 +88,12 @@ font-size: 20px;
 .Hello
 {
   color: white;
+}
+
+.info
+{
+color: #275D0A;
+font-weight: bold;
 }
 
 table
@@ -115,7 +140,7 @@ th
     justify-content: flex-start;
     background-color: Peru;
     /*background-image:url(images/terre-battue.jpg);*/
-    opacity: 0.7;
+    opacity: 0.9;
 }
 
 .element
@@ -131,6 +156,8 @@ th
     /*margin: auto; */
     width: 70%;
     background-color: SandyBrown;
+    /* background-color: #F19B2D; */
+    /* background-color: #DF550B; */
     margin: 10px 10px;
     padding-left:10px;
     padding-right:10px;
@@ -148,7 +175,7 @@ th
     font-family: sans-serif;
     background-color: #DF550B;
     margin: 10px 10px;
-    padding-left:10px;
+    padding-left: -10px;
     padding-right:10px;
     padding-top:2px;
     padding-bottom:2px;
@@ -176,7 +203,7 @@ nav ul
 label
 {
     display:block;
-    width:200px; /* Attention : prenez une largeur suffisamment grande */
+    width:300px; /* Attention : prenez une largeur suffisamment grande */
     float:left;
 }
 
@@ -184,14 +211,14 @@ label
 #registration_form label
 {
     display:block;
-    width:200px;
+    width:220px;
     float:left;
 }
 
 #connection_form label
 {
     display:block;
-    width:100px;
+    width:150px;
     float:left;
 }
 
@@ -202,6 +229,21 @@ label
     float:left;
 }
 
+.clignote  {
+  animation: clignoter 1s infinite;
+   /* animation-duration: .8s;
+   animation-name: clignoter;
+   animation-iteration-count: infinite;
+   transition: none; */
+}
+
+@keyframes clignoter {
+  0%   { opacity:1; }
+  50%   {opacity:0; }
+  100% { opacity:1; }
+}
+
+
 .button
 {
   /** Ces directives indiquent au lien de ressembler à un bouton pour les principaux moteurs de rendu **/
@@ -211,4 +253,19 @@ label
  /**Les directives en dessous enlèvent l'apparence par défaut en bleu et avec du texte souligné pour un lien hypertexte **/
  text-decoration: none;
  color: initial;
+}
+
+.a_text{
+text-decoration:underline;
+color:DarkBlue;
+font-style: italic;
+}
+
+.div_localTime{
+  width:400px;
+  height:50px;
+  background:grey;
+  color:white;
+  text-align:center;
+  line-height:50px;
 }

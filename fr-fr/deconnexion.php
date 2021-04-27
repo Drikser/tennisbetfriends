@@ -23,7 +23,7 @@ unset($_SESSION['JOU_PSE']);
     <!-- Le corps -->
 
     <?php
-    header('Location: /pronos/fr-fr/index.php');
+    header('Location: ../fr-fr/index.php');
     ?>
 
     <div id="corps">

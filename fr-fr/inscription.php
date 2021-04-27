@@ -53,7 +53,7 @@ session_start(); // On démarre la session AVANT toute chose
 				<label>Pseudo : </label><input type="text" name="Pseudo" label="Pseudo" required="required"/> <b>(ATTENTION : Une fois inscrit, vous ne pourrez plus changer votre pseudo)</b><br />
 				<label>Adresse mail : </label><input type="email" name="Email" label="Email" required="required"/><br />
 				<label>Mot de passe de connexion : </label><input type="password" name="MotDePasse" required="required"/><br />
-				<label>Confirmez le mot de passe : </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
+				<label>Confirmez mot de passe : </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
         <b>NOTE : Le mot de passe doit faire au moins 8 caratères, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</b>
 			</p>
 
@@ -178,7 +178,9 @@ session_start(); // On démarre la session AVANT toute chose
 						//***********************************************************************************
 						//*              Création d'une ligne dans la table pronostique_bonus
 						//***********************************************************************************
-						insertTournamentToPrognosis($playerId);
+            if ($_POST['Pseudo'] != "Admin") {
+              insertTournamentToPrognosis($playerId);
+            }
 
             //***********************************************************************************
 						//*            Send an email with link to validate the registration
@@ -193,8 +195,8 @@ session_start(); // On démarre la session AVANT toute chose
 
             // Message to refer player to their email address
 						$pseudo = htmlspecialchars($_POST['Pseudo']);
-            echo "<span class='info'>Merci </span>" . $prenomValid . "<span class='info'> pour ton inscrition.</span><br />";
-            echo "<span class='info'>Afin de finaliser ton inscription, un email t'as été envoyé. Merci de te rendre sur </span>" . htmlspecialchars($_POST['Email']) . "<span class='info'> et de cliquer sur le lien d'activation reçu.</span><br />";
+            echo "<span class=info>Merci </span><b>" . $prenomValid . "</b><span class=info> pour ton inscrition.</span><br />";
+            echo "<span class=info>Afin de finaliser ton inscription, un email t'as été envoyé. Merci de te rendre sur </span><b>" . htmlspecialchars($_POST['Email']) . "</b><span class=info> et de cliquer sur le lien d'activation reçu.</span><br />";
 
             //echo 'Bravo ' . htmlspecialchars($_POST['Prenom']) . ', ton inscrition a bien été prise en compte avec le pseudo suivant : ' . htmlspecialchars($_POST['Pseudo']) . '.<br />';
 						//echo 'Bravo ' . htmlspecialchars($_POST['Prenom']) . ', ton inscrition a bien été prise en compte avec le pseudo suivant : ' . htmlspecialchars($_POST['Pseudo']) . ' (et le mot de passe suivant : ' . $_POST['MotDePasse'] . ') ... mais chuuuuuut faut pas le dire ... <br />';
@@ -249,11 +251,11 @@ session_start(); // On démarre la session AVANT toute chose
 
 	    </div>
 
-	</div>
+	   </div>
 
-    <!-- Le pied de page -->
+     <!-- Le pied de page -->
 
-    <?php include("../commun/piedDePAge.php"); ?>
+      <?php include("../commun/piedDePAge.php"); ?>
 
     </body>
 </html>

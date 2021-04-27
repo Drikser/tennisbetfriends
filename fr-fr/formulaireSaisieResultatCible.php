@@ -43,230 +43,251 @@ session_start(); // On démarre la session AVANT toute chose
 			<?php
 
 			//if (empty($_POST['VouD']) OR empty($_POST['ScoreJ1']) OR empty($_POST['ScoreJ2']))
-			if ($_POST['VouD']=="" OR $_POST['ScoreJ1']=="" OR $_POST['ScoreJ2']=="")
-
+      if (isset($_POST['TypeMatch'])
+      and isset($_POST['ScoreJ1'])
+      and isset($_POST['ScoreJ2']))
 			{
-				echo "Tous les champs doivent être remplis. Vous avez saisit : Resultat=" . $_POST['VouD'] . ", Score=" . $_POST['ScoreJ1'] . "/" . $_POST['ScoreJ2'] . "> <br />";
-				echo "Retour au formulaire de saisie de résultat : " . '<a href="gestionMatchs.php">Cliquer ici</a>';
-			}
-			else
-			{
-				echo "Le résultat saisit est pour le match n°" . $_POST['idMatch'] . '<br />'; //idMAtch est la valeur du champs caché du formulaire de saisie de score
-				echo "Le joueur est l'ID n°" . $_SESSION['JOU_ID'] . ' (' . $_SESSION['JOU_PSE'] . ')<br />';
+        $typeMatch = $_POST['TypeMatch'];
+        if (isset($_POST['VouD'])) {
+          // echo "VouD reçu = " . $_POST['VouD'] . "<br />";
+          $result = $_POST['VouD'];
+        } else {
+          // echo "VouD pas reçu - initialisé à blanc<br />";
+          $result = "";
+        }
+        $scoreJ1 = $_POST['ScoreJ1'];
+        $scoreJ2 = $_POST['ScoreJ2'];
 
-				$nbRow = 0;
+        // if ($_POST['VouD']=="" OR $_POST['ScoreJ1']=="" OR $_POST['ScoreJ2']=="") {
+        if ($result=="" OR ($scoreJ1=="0" and $scoreJ2=="0" and $typeMatch=="")) {
+          echo "<span class='warning'>Tous les champs doivent être remplis. Vous avez saisit : Resultat=" . $result . ", Score=" . $scoreJ1 . "/" . $scoreJ1 . " " . $typeMatch . " </span><br />";
+  				echo "<span class='warning'>Retour au formulaire de saisie de résultat : </span>";
+          ?>
+          <input type="button" value="OK" onclick="history.go(-1)">
+          <?php
+        } else {
+          echo "Le résultat saisit est pour le match n°" . $_POST['idMatch'] . '<br />'; //idMAtch est la valeur du champs caché du formulaire de saisie de score
+  				echo "Le joueur est l'ID n°" . $_SESSION['JOU_ID'] . ' (' . $_SESSION['JOU_PSE'] . ')<br />';
 
-				$req = updateResult($_POST['idMatch']);
+  				$nbRow = 0;
 
-				//$nbRow = $req->rowcount();
+  				$req = updateResult($_POST['idMatch']);
 
-				//if ($nbRow > 0)
-				if ($req == true)
-				{
-					echo 'Le Résultat définitif et officiel est bien rentré en base de données !<br />';
+  				//$nbRow = $req->rowcount();
 
-					$typeMatch = $_POST['TypeMatch'];
-          $tournoi = $_POST['Tournoi'];
-          $dateMatch = $_POST['DateMatch'];
-          // $dateMatch = $DateMatch;
-          $categorie = $_POST['Categorie'];
-          $poids = $_POST['Poids'];
-          $seq = $_POST['Sequence'];
+  				//if ($nbRow > 0)
+  				if ($req == true)
+  				{
+  					echo 'Le Résultat définitif et officiel est bien rentré en base de données !<br />';
 
-					if ($_POST['VouD'] == 'V') {
+  					$typeMatch = $_POST['TypeMatch'];
+            $tournoi = $_POST['Tournoi'];
+            $dateMatch = $_POST['DateMatch'];
+            // $dateMatch = $DateMatch;
+            $categorie = $_POST['Categorie'];
+            $poids = $_POST['Poids'];
+            $seq = $_POST['Sequence'];
 
-            $Winner = $_POST['Player1'];
+  					if ($_POST['VouD'] == 'V') {
 
-            switch ($typeMatch) {
-					 	 	case 'AB':
-					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' par abandon *** ' . htmlspecialchars($_POST['ScoreJ1']) . ' sets à ' . htmlspecialchars($_POST['ScoreJ2']) . ' avant l\'abandon de ' . htmlspecialchars($_POST['Player2']) . '<br />';
-					 	 		break;
+              $Winner = $_POST['Player1'];
 
-					 	 	case 'WO':
-					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' par forfait. <br />';
-					 	 		break;
+              switch ($typeMatch) {
+  					 	 	case 'AB':
+  					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' par abandon *** ' . htmlspecialchars($_POST['ScoreJ1']) . ' sets à ' . htmlspecialchars($_POST['ScoreJ2']) . ' avant l\'abandon de ' . htmlspecialchars($_POST['Player2']) . '<br />';
+  					 	 		break;
 
-					 	 	default:
-					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' : ' . htmlspecialchars($_POST['ScoreJ1']) . ' sets à ' . htmlspecialchars($_POST['ScoreJ2']) . '<br />';
-					 	 		break;
-					 	 }
-					}
-					else {
+  					 	 	case 'WO':
+  					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' par forfait. <br />';
+  					 	 		break;
 
-            $Winner = $_POST['Player2'];
+  					 	 	default:
+  					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player1']) . ' contre ' . htmlspecialchars($_POST['Player2']) . ' : ' . htmlspecialchars($_POST['ScoreJ1']) . ' sets à ' . htmlspecialchars($_POST['ScoreJ2']) . '<br />';
+  					 	 		break;
+  					 	 }
+  					}
+  					else {
 
-						switch ($typeMatch) {
-              case 'AB':
-					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' par abandon *** ' . htmlspecialchars($_POST['ScoreJ1']) . ' sets à ' . htmlspecialchars($_POST['ScoreJ2']) . ' avant l\'abandon de ' . htmlspecialchars($_POST['Player1']) . '<br />';
-					 	 		break;
+              $Winner = $_POST['Player2'];
 
-					 	 	case 'WO':
-					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' par forfait. <br />';
-					 	 		break;
+  						switch ($typeMatch) {
+                case 'AB':
+  					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' par abandon *** ' . htmlspecialchars($_POST['ScoreJ1']) . ' sets à ' . htmlspecialchars($_POST['ScoreJ2']) . ' avant l\'abandon de ' . htmlspecialchars($_POST['Player1']) . '<br />';
+  					 	 		break;
 
-					 	 	default:
-					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' : ' . htmlspecialchars($_POST['ScoreJ1']) . ' sets à ' . htmlspecialchars($_POST['ScoreJ2']) . '<br />';
-					 	 		break;
-						  }
+  					 	 	case 'WO':
+  					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' par forfait. <br />';
+  					 	 		break;
 
-	        }
+  					 	 	default:
+  					 	 		echo 'Résultat officiel : Victoire de ' . htmlspecialchars($_POST['Player2']) . ' contre ' . htmlspecialchars($_POST['Player1']) . ' : ' . htmlspecialchars($_POST['ScoreJ1']) . ' sets à ' . htmlspecialchars($_POST['ScoreJ2']) . '<br />';
+  					 	 		break;
+  						  }
 
-					echo 'Pour enregistrer un nouveau résultat, clique <a href="saisieResultat.php">' . 'ICI' . '</a><br/>';
+  	        }
 
-          // Ensuite il faut créer le nouveau match en fonction du vainqueur
-					// En fonction du numéro de séquence du match joué, le vainqueur se retrouvera en JOU1 ou en JOU2 du match suivant
-					// Si Seq impair --> JOU1 (et nouveau numero de séquence = (Seq+1)/2)
-					// Si Seq pair   --> JOU2 (et nouveau numero de séquence = Seq/2)
-          // Si le nouveau numéro de séquence existe
-          // - Mettre à jour le match avec le nouveau joueur
-          // sinon
-          // - Créer le nouveau match
+  					echo 'Pour enregistrer un nouveau résultat, clique <a href="gestionMatchs.php#saisieResultat">' . 'ICI' . '</a><br/>';
 
-          //
-          $newPoids = $poids / 2;
-          echo "Poids du match rentré = " . $poids . " ==> nouveau poids = " . $newPoids . "<br />";
+            // Ensuite il faut créer le nouveau match en fonction du vainqueur
+  					// En fonction du numéro de séquence du match joué, le vainqueur se retrouvera en JOU1 ou en JOU2 du match suivant
+  					// Si Seq impair --> JOU1 (et nouveau numero de séquence = (Seq+1)/2)
+  					// Si Seq pair   --> JOU2 (et nouveau numero de séquence = Seq/2)
+            // Si le nouveau numéro de séquence existe
+            // - Mettre à jour le match avec le nouveau joueur
+            // sinon
+            // - Créer le nouveau match
 
-          if ($seq % 2 == 1) {
-            $newSeq = ($seq + 1) / 2;
-            echo "Seq du match rentré (" . $seq . ") est impair ==> Nouveau seq = " . $newSeq . "<br />";
-            $newJou1 = $Winner;
-            $newJou2 = "";
-            echo "Nouveau match ==> Joueur1 = " . $newJou1 . " contre Joueur2 = " . $newJou2 . "<br />";
-          }
-          elseif ($seq % 2 == 0) {
-            $newSeq = $seq / 2;
-            echo "Seq du match rentré (" . $seq . ") est pair ==> Nouveau seq = " . $newSeq . "<br />";
-            $newJou1 = "";
-            $newJou2 = $Winner;
-            echo "Nouveau match ==> Joueur1 = " . $newJou1 . " contre Joueur2 = " . $newJou2 . "<br />";
-          }
+            // Si poids = 1, c'est la finale, pas besoin de créer un autre match
+            //-------------------------------------------------------------------
+            if ($poids > 1) {
 
-          $newDate = dateNextMatch($dateMatch,2); //next match is in 2 days
-          $newDateStr = date('Y-m-d 11:00:00', $newDate);
+              $newPoids = $poids / 2;
+              echo "Poids du match rentré = " . $poids . " ==> nouveau poids = " . $newPoids . "<br />";
 
-          echo "La date du nouveau match est: " . $newDateStr . " (" . $dateMatch . " + 2 jours)<br />";
+              if ($seq % 2 == 1) {
+                $newSeq = ($seq + 1) / 2;
+                echo "Seq du match rentré (" . $seq . ") est impair ==> Nouveau seq = " . $newSeq . "<br />";
+                $newJou1 = $Winner;
+                $newJou2 = "";
+                echo "Nouveau match ==> Joueur1 = " . $newJou1 . " contre Joueur2 = " . $newJou2 . "<br />";
+              }
+              elseif ($seq % 2 == 0) {
+                $newSeq = $seq / 2;
+                echo "Seq du match rentré (" . $seq . ") est pair ==> Nouveau seq = " . $newSeq . "<br />";
+                $newJou1 = "";
+                $newJou2 = $Winner;
+                echo "Nouveau match ==> Joueur1 = " . $newJou1 . " contre Joueur2 = " . $newJou2 . "<br />";
+              }
 
-          //Determination libellé du tour du tour
-          switch ($newPoids) {
+              $newDate = dateNextMatch($dateMatch,2); //next match is in 2 days
+              $newDateStr = date('Y-m-d 11:00:00', $newDate);
 
-          case 1:
-              $niveau = 'FINALE';
-              break;
+              echo "La date du nouveau match est: " . $newDateStr . " (" . $dateMatch . " + 2 jours)<br />";
 
-          case 2:
-              $niveau = 'DEMI-FINALE';
-              break;
+              //Determination libellé du tour du tour
+              switch ($newPoids) {
 
-          case 4:
-              $niveau = 'QUART DE FINALE';
-              break;
+              case 1:
+                  $niveau = 'FINALE';
+                  break;
 
-          case 8:
-              $niveau = 'HUITIEME DE FINALE';
-              break;
+              case 2:
+                  $niveau = 'DEMI-FINALE';
+                  break;
 
-          case 16:
-              $niveau = '3EME TOUR';
-              break;
+              case 4:
+                  $niveau = 'QUART DE FINALE';
+                  break;
 
-          case 32:
-              $niveau = '2EME TOUR';
-              break;
+              case 8:
+                  $niveau = 'HUITIEME DE FINALE';
+                  break;
 
-          case 64:
-              $niveau = '1ER TOUR';
-              break;
+              case 16:
+                  $niveau = '3EME TOUR';
+                  break;
 
-          default:
-              $Niveau = '';
-              break;
-          }
+              case 32:
+                  $niveau = '2EME TOUR';
+                  break;
 
-          // search if match exist: if YES, update with the 2nd player, if NO, create a new match
-          $matchExists = searchIfMatchExists($newPoids, $newSeq);
+              case 64:
+                  $niveau = '1ER TOUR';
+                  break;
 
-          $nbRow = $matchExists->rowCount();
+              default:
+                  $Niveau = '';
+                  break;
+              }
 
-          echo "nbRow=" . $nbRow . "<br />";
+              // search if match exist: if YES, update with the 2nd player, if NO, create a new match
+              $matchExists = searchIfMatchExists($newPoids, $newSeq);
 
-          if ($nbRow > 0) {
-          // update existing match
-          //---------------------------------------
-             echo "Il faut mettre à jour le match " . $newPoids . " - n° " . $newSeq . "<br />";
+              $nbRow = $matchExists->rowCount();
 
-             if ($newJou1 != "") {
-               updateNextMatchJou1($newPoids, $newSeq, $newJou1);
-               echo "Match " . $newPoids . " - n° " . $newSeq . " mis à jour avec le joueur 1 : " . $newJou1 . "<br />";
-             } else {
-               if ($newJou2 != "") {
-                 updateNextMatchJou2($newPoids, $newSeq, $newJou2);
-                 echo "Match " . $newPoids . " - n° " . $newSeq . " mis à jour avec le joueur 2 : " . $newJou2 . "<br />";
-               } else {
-                 echo "Au moins un des deux joueurs doit être renseignés, il y a un problème !!! <br />";
-               }
-             }
+              echo "nbRow=" . $nbRow . "<br />";
 
-          } else {
-            // create a new match
-            //---------------------------------------
-            $createMatchNextRound = createNextMatch();
-            // récupérer l'Id du dernier match créé
-            //---------------------------------------
-            $lastMatch = getLastCreatedMatch();
-            $donnees = $lastMatch->fetch();
-            $idMatch = $donnees['RES_MATCH_ID'];
-            echo "L'ID du dernier match créé est = " . $idMatch . "<br />";
-            // récupérer les Id de tous les joueurs inscrits
-            //------------------------------------------------
-            $allPlayers = getAllPlayers();
-            $nbRow = $allPlayers->rowcount();
+              if ($nbRow > 0) {
+              // update existing match
+              //---------------------------------------
+                 echo "Il faut mettre à jour le match " . $newPoids . " - n° " . $newSeq . "<br />";
 
-            if ($nbRow > 0) {
-                while ($donnees = $allPlayers->fetch()) {
+                 if ($newJou1 != "") {
+                   updateNextMatchJou1($newPoids, $newSeq, $newJou1);
+                   echo "Match " . $newPoids . " - n° " . $newSeq . " mis à jour avec le joueur 1 : " . $newJou1 . "<br />";
+                 } else {
+                   if ($newJou2 != "") {
+                     updateNextMatchJou2($newPoids, $newSeq, $newJou2);
+                     echo "Match " . $newPoids . " - n° " . $newSeq . " mis à jour avec le joueur 2 : " . $newJou2 . "<br />";
+                   } else {
+                     echo "Au moins un des deux joueurs doit être renseignés, il y a un problème !!! <br />";
+                   }
+                 }
 
-                    createMatchToPrognosis($donnees['JOU_ID'],$idMatch);
+              } else {
+                // create a new match
+                //---------------------------------------
+                $createMatchNextRound = createNextMatch();
+                // récupérer l'Id du dernier match créé
+                //---------------------------------------
+                $lastMatch = getLastCreatedMatch();
+                $donnees = $lastMatch->fetch();
+                $idMatch = $donnees['RES_MATCH_ID'];
+                echo "L'ID du dernier match créé est = " . $idMatch . "<br />";
+                // récupérer les Id de tous les joueurs inscrits
+                //------------------------------------------------
+                $allPlayers = getAllPlayers();
+                $nbRow = $allPlayers->rowcount();
 
-                    echo "Match " . $idMatch . " créé pour le joueur " . $donnees['JOU_ID'] . '<br />';
+                if ($nbRow > 0) {
+                    while ($donnees = $allPlayers->fetch()) {
+
+                        createMatchToPrognosis($donnees['JOU_ID'],$idMatch);
+
+                        echo "Match " . $idMatch . " créé pour le joueur " . $donnees['JOU_ID'] . '<br />';
+                    }
+
+                    //echo 'Bravo ! Match : ' . htmlspecialchars($_POST['Categorie']) . ' *** ' . htmlspecialchars($_POST['Tournoi']) . ' *** ' . htmlspecialchars($_POST['Niveau']) . ' *** ' . htmlspecialchars($_POST['DateMatch']) . ' : ' . htmlspecialchars($_POST['Joueur1']) . ' contre ' . htmlspecialchars($_POST['Joueur2']) . ' bien créé<br />';
+                    echo 'Pour créer un nouveau match, clique <a href="creationMatch.php">' . 'ICI' . '</a><br/>';
                 }
-
-                //echo 'Bravo ! Match : ' . htmlspecialchars($_POST['Categorie']) . ' *** ' . htmlspecialchars($_POST['Tournoi']) . ' *** ' . htmlspecialchars($_POST['Niveau']) . ' *** ' . htmlspecialchars($_POST['DateMatch']) . ' : ' . htmlspecialchars($_POST['Joueur1']) . ' contre ' . htmlspecialchars($_POST['Joueur2']) . ' bien créé<br />';
-                echo 'Pour créer un nouveau match, clique <a href="creationMatch.php">' . 'ICI' . '</a><br/>';
+                else {
+                    echo "<span class='warning'>Aucun joueur n'est encore enregistré pour le concours, les entrées n'ont pas été créées !</span><br />";
+                }
+               }
             }
-            else {
-                echo "<span class='warning'>Aucun joueur n'est encore enregistré pour le concours, les entrées n'ont pas été créées !</span><br />";
-            }
-           }
+            // -- fin test si poids = 1
 
 
-					// Il faut maintenant contrôler les pronostiques des joueurs !!!
-					// Les étapes :
-					// 1- Aller chercher tous les pronostiques pour ce match
-					// 2- Comparer chaque pronostique avec le résultat officiel
-					// 3- Attribuer les points correspondants aux pronostics
+  					// Il faut maintenant contrôler les pronostiques des joueurs !!!
+  					// Les étapes :
+  					// 1- Aller chercher tous les pronostiques pour ce match
+  					// 2- Comparer chaque pronostique avec le résultat officiel
+  					// 3- Attribuer les points correspondants aux pronostics
 
-					// 1----------------
-					$req = getAllPrognosisForAMatch($_POST['idMatch']);
+  					// 1----------------
+  					$req = getAllPrognosisForAMatch($_POST['idMatch']);
 
 
-						// affichage du résulatat du match :
-						echo "--------------------------------------------------------------------<br />";
-						echo "idMatch=" . $_POST['idMatch'] . " Résultat=" . $_POST['VouD'] . " " . $_POST['ScoreJ1'] . "/" . $_POST['ScoreJ2'] . "<br />";
-						echo "--------------------------------------------------------------------<br />";
+  						// affichage du résulatat du match :
+  						echo "--------------------------------------------------------------------<br />";
+  						echo "idMatch=" . $_POST['idMatch'] . " Résultat=" . $_POST['VouD'] . " " . $_POST['ScoreJ1'] . "/" . $_POST['ScoreJ2'] . "<br />";
+  						echo "--------------------------------------------------------------------<br />";
 
-	            		$level = $_POST['Round'];
+  	            		$level = $_POST['Round'];
 
-						while ($prono = $req->fetch())
-	            		{
-					// 2----------------
+  						while ($prono = $req->fetch())
+  	            		{
+  					// 2----------------
 
-	            			include("controleResultat.php");
-	            			include("controleBonus.php");
-	          			}
-				}
-				else
-				{
-					echo "Résultat non saisit pour une raison inconnue ... ";
-				}
+  	            			include("controleResultat.php");
+  	            			include("controleBonus.php");
+  	          			}
+  				}
+  				else
+  				{
+  					echo "Résultat non saisit pour une raison inconnue ... ";
+  				}
+        }
 			}
 
 			?>

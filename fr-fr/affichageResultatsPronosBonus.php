@@ -52,12 +52,34 @@ while ($titre = $allBonus->fetch()) {
 	$tabPseudoProno[$i]['jouId'] = $titre['JOU_ID'];
 	$tabPseudoProno[$i]['jouPse'] = $titre['JOU_PSE'];
 	$tabPseudoProno[$i]['winner'] = $titre['PROB_VQR'];
+	$tabPseudoProno[$i]['winner-pts'] = $titre['PROB_VQR_PTS'] . "pts";
 	$tabPseudoProno[$i]['finalist1'] = $titre['PROB_FINAL1'];
+	$tabPseudoProno[$i]['finalist1-pts'] = $titre['PROB_FINAL1_PTS'] . "pts";
 	$tabPseudoProno[$i]['finalist2'] = $titre['PROB_FINAL2'];
+	$tabPseudoProno[$i]['finalist2-pts'] = $titre['PROB_FINAL2_PTS'] . "pts";
 	$tabPseudoProno[$i]['semiFinalist1'] = $titre['PROB_DEMI1'];
-  $tabPseudoProno[$i]['semiFinalist2'] = $titre['PROB_DEMI2'];
+	$tabPseudoProno[$i]['semiFinalist1-pts'] = $titre['PROB_DEMI1_PTS'] . "pts";
+	$tabPseudoProno[$i]['semiFinalist2'] = $titre['PROB_DEMI2'];
+	$tabPseudoProno[$i]['semiFinalist2-pts'] = $titre['PROB_DEMI2_PTS'] . "pts";
   $tabPseudoProno[$i]['semiFinalist3'] = $titre['PROB_DEMI3'];
+	$tabPseudoProno[$i]['semiFinalist3-pts'] = $titre['PROB_DEMI3_PTS'] . "pts";
 	$tabPseudoProno[$i]['semiFinalist4'] = $titre['PROB_DEMI4'];
+	$tabPseudoProno[$i]['semiFinalist4-pts'] = $titre['PROB_DEMI4_PTS'] . "pts";
+	$tabPseudoProno[$i]['bestFrench'] = $titre['PROB_FR_NOM'];
+	$tabPseudoProno[$i]['bestFrench-pts'] = $titre['PROB_FR_NOM_PTS'] . "pts";
+	$tabPseudoProno[$i]['bestFrenchLevel'] = $titre['PROB_FR_NIV'];
+	$tabPseudoProno[$i]['bestFrenchLevel-pts'] = $titre['PROB_FR_NIV_PTS'] . "pts";
+	// $tabPseudoProno[$i]['jouId'] = $titre['JOU_ID'];
+	// $tabPseudoProno[$i]['jouPse'] = $titre['JOU_PSE'];
+	// $tabPseudoProno[$i]['winner'] = $titre['PROB_VQR'] . " (" . $titre['PROB_VQR_PTS'] . "pts)";
+	// $tabPseudoProno[$i]['finalist1'] = $titre['PROB_FINAL1'] . " (" . $titre['PROB_FINAL1_PTS'] . "pts)";
+	// $tabPseudoProno[$i]['finalist2'] = $titre['PROB_FINAL2'] . " (" . $titre['PROB_FINAL2_PTS'] . "pts)";
+	// $tabPseudoProno[$i]['semiFinalist1'] = $titre['PROB_DEMI1'] . " (" . $titre['PROB_DEMI1_PTS'] . "pts)";
+  // $tabPseudoProno[$i]['semiFinalist3'] = $titre['PROB_DEMI3'] . " (" . $titre['PROB_DEMI3_PTS'] . "pts)";
+	// $tabPseudoProno[$i]['semiFinalist2'] = $titre['PROB_DEMI2'] . " (" . $titre['PROB_DEMI2_PTS'] . "pts)";
+	// $tabPseudoProno[$i]['semiFinalist4'] = $titre['PROB_DEMI4'] . " (" . $titre['PROB_DEMI4_PTS'] . "pts)";
+	// $tabPseudoProno[$i]['bestFrench'] = $titre['PROB_FR_NOM'] . " (" . $titre['PROB_FR_NOM_PTS'] . "pts)";
+	// $tabPseudoProno[$i]['bestFrenchLevel'] = $titre['PROB_FR_NIV'] . " (" . $titre['PROB_FR_NIV_PTS'] . "pts)";
 	$i++;
 }
 
@@ -72,17 +94,19 @@ while ($titre = $allBonus->fetch()) {
 	<tr>
   	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
     <th colspan="2" align="center" valign="middle">RESULTAT OFFICIEL</th>
+		<th align="center" valign="middle"></th>
 		<th colspan="<?php echo $nbplayers ?>" align="center" valign="middle">PRONOSTIQUES JOUEURS</th>
   </tr>
 
   <tr>
 		<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
 		<th width="150" align="center" valign="middle" class="cellule">NIVEAU</th>
-		<th width="150" align="center" valign="middle" class="cellule">NOM</th>
+		<th width="190" align="center" valign="middle" class="cellule">NOM</th>
+		<th align="center" valign="middle" class="cellule"></th>
     <?php
 		foreach($tabPseudo as $element) {
 		?>
-			<th width="150" align="center" valign="middle" class="cellule"><?php echo $element; ?></th>
+			<th colspan="2" width="200" align="center" valign="middle" class="cellule"><?php echo $element; ?></th>
 		<?php
 		}
 		?>
@@ -142,11 +166,13 @@ while ($titre = $allBonus->fetch()) {
 		<tr>
 			<td align="center" valign="middle" class="cellule"><b>VAINQUEUR</b></td>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Winner; ?><b></td>
+			<td align="center" valign="middle" class="cellule"></td>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
 			 ?>
 				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['winner']; ?></td>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['winner-pts']; ?></td>
 			<?php
 			$i++;
 			}
@@ -163,11 +189,13 @@ while ($titre = $allBonus->fetch()) {
 		<tr>
 			<td rowspan="2" align="center" valign="middle" class="cellule"><b>FINALISTES</b></td>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Finalist1; ?></b></td>
+			<td align="center" valign="middle" class="cellule"></td>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
 			?>
 				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['finalist1']; ?></td>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['finalist1-pts']; ?></td>
 			<?php
 			$i++;
 			}
@@ -176,11 +204,13 @@ while ($titre = $allBonus->fetch()) {
 
 		 <tr>
  			<td align="center" valign="middle" class="cellule"><b><?php echo $Finalist2; ?></b></td>
+			<td align="center" valign="middle" class="cellule"></td>
  			<?php
  			$i = 0;
  			foreach($tabPseudoProno as $prono) {
  			?>
  				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['finalist2']; ?></td>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['finalist2-pts']; ?></td>
  			<?php
  			$i++;
  			}
@@ -197,11 +227,13 @@ while ($titre = $allBonus->fetch()) {
 		<tr>
 			<td rowspan="4" align="center" valign="middle" class="cellule"><b>DEMI-FINALISTES</b></td>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi1; ?></b></td>
+			<td align="center" valign="middle" class="cellule"></td>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
 			 ?>
 				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist1']; ?></td>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist1-pts']; ?></td>
 			<?php
 			$i++;
 			}
@@ -210,11 +242,13 @@ while ($titre = $allBonus->fetch()) {
 
 		<tr>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi2; ?></b></td>
+			<td align="center" valign="middle" class="cellule"></td>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
 			?>
 				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist2']; ?></td>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist2-pts']; ?></td>
 			<?php
 			$i++;
 			}
@@ -223,11 +257,13 @@ while ($titre = $allBonus->fetch()) {
 
 		<tr>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi3; ?></b></td>
+			<td align="center" valign="middle" class="cellule"></td>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
 			?>
 				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist3']; ?></td>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist3-pts']; ?></td>
 			<?php
 			$i++;
 			}
@@ -236,11 +272,13 @@ while ($titre = $allBonus->fetch()) {
 
 		<tr>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi4; ?></b></td>
+			<td align="center" valign="middle" class="cellule"></td>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
 			?>
 				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist4']; ?></td>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['semiFinalist4-pts']; ?></td>
 			<?php
 			$i++;
 			}

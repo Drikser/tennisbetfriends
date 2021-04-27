@@ -33,9 +33,9 @@ session_start(); // On démarre la session AVANT toute chose
 	    <div id="corps">
 	        <h1>Pronostiques des matchs</h1>
 
-	        <p>
+	        <!-- <p>
 	            Validation du pronostique<br />
-	        </p>
+	        </p> -->
 
 			<!-- Connexion base de données -->
 
@@ -177,42 +177,43 @@ session_start(); // On démarre la session AVANT toute chose
 
 				if ($nbRow > 0)
 				{
-					echo 'Congrats! Prediction done!<br />';
+					// echo 'Congrats! Prediction done!<br />';
 
 					// if ($_POST['VouD'] == 'V') {
           if ($result == 'V') {
 					 	switch ($typeMatch) {
 					 	 	case 'AB':
-					 	 		echo 'Your prediction: ' . htmlspecialchars($_POST['Player1']) . ' defeated ' . htmlspecialchars($_POST['Player2']) . ' by withdrawal *** ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . ' before ' . htmlspecialchars($_POST['Player2']) . ' withdrawal. <br />';
+					 	 		echo '<span class="congrats">Your prediction: ' . htmlspecialchars($_POST['Player1']) . ' defeated ' . htmlspecialchars($_POST['Player2']) . ' by withdrawal *** ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . ' before ' . htmlspecialchars($_POST['Player2']) . ' withdrawal. </span><br />';
 					 	 		break;
 
 					 	 	case 'WO':
-				 	 			echo 'Your prediction: ' . htmlspecialchars($_POST['Player1']) . ' defeated ' . htmlspecialchars($_POST['Player2']) . ' by W.O. <br />';
+				 	 			echo '<span class="congrats">Your prediction: ' . htmlspecialchars($_POST['Player1']) . ' defeated ' . htmlspecialchars($_POST['Player2']) . ' by W.O. </span><br />';
 				 	 			break;
 
 					 	 	default:
-				 	 			echo 'Your prediction: ' . htmlspecialchars($_POST['Player1']) . ' defeated ' . htmlspecialchars($_POST['Player2']) . ' : ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . '<br />';
+				 	 			echo '<span class="congrats">Your prediction: ' . htmlspecialchars($_POST['Player1']) . ' defeated ' . htmlspecialchars($_POST['Player2']) . ' : ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . '</span><br />';
 				 	 			break;
 					 	 }
 					 }
 					 else {
 					 	switch ($typeMatch) {
 					 	 	case 'AB':
-					 	 		echo 'Your prediction: ' . htmlspecialchars($_POST['Player2']) . ' defeated ' . htmlspecialchars($_POST['Player1']) . ' by withdrawal *** ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . ' before ' . htmlspecialchars($_POST['Player1']) . ' withdrawal. <br />';
+					 	 		echo '<span class="congrats">Your prediction: ' . htmlspecialchars($_POST['Player2']) . ' defeated ' . htmlspecialchars($_POST['Player1']) . ' by withdrawal *** ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . ' before ' . htmlspecialchars($_POST['Player1']) . ' withdrawal. </span><br />';
 					 	 		break;
 
 					 	 	case 'WO':
-					 	 		echo 'Your prediction: ' . htmlspecialchars($_POST['Player2']) . ' defeated ' . htmlspecialchars($_POST['Player1']) . ' by W.O. <br />';
+					 	 		echo '<span class="congrats">Your prediction: ' . htmlspecialchars($_POST['Player2']) . ' defeated ' . htmlspecialchars($_POST['Player1']) . ' by W.O. </span><br />';
 					 	 		break;
 
 					 	 	default:
-					 	 		echo 'Your prediction: ' . htmlspecialchars($_POST['Player2']) . ' defeated ' . htmlspecialchars($_POST['Player1']) . ' : ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . '<br />';
+					 	 		echo '<span class="congrats">Your prediction: ' . htmlspecialchars($_POST['Player2']) . ' defeated ' . htmlspecialchars($_POST['Player1']) . ' : ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . '</span><br />';
 					 	 		break;
 					 	}
 					}
 
 					echo '<br />You can change your prediction in your <a href="pagePerso.php">' . 'Personal page ' . '</a><br/>';
-					echo '<br />To make a new prediction, click <a href="pronostique_matchs.php">' . 'HERE' . '</a><br/>';
+					// echo '<br />To make a new prediction, click <a href="pronostique_matchs.php">' . 'HERE' . '</a><br/>';
+          echo '<br /><a href="pronostique_matchs.php" class="button">' . 'New prediction' . '</a><br/>';
 
 
 				} else {

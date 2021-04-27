@@ -17,7 +17,7 @@ else
 //
 // REMARQUE :
 // Pour le test, l'addresse du lien commence par http://localhost/pronos/xxxxxxxxxx.php
-// En production, l'addresse du lien commence par http://www.tennisbetfriends/xxxxxxxxxx.php
+// En production, l'addresse du lien commence par http://www.tennisbetfriends.com/xxxxxxxxxx.php
 //
 //----------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ Your Username is: <b><var>$pseudoValid</var></b>.
 To activate your account, please click on the link below
 or copy and paste it into your browser.
 
-<a href='http://localhost/pronos/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key'>http://localhost/pronos/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key</a>
+<a href='http://www.tennisbetfriends.com/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key'>http://www.tennisbetfriends.com/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key</a>
 </p>
 <p>
 <br />

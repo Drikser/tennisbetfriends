@@ -1,4 +1,4 @@
-<h1>Suivi pronostiques joueurs</h1>
+<!-- <h1>Suivi pronostiques joueurs</h1> -->
 
 <?php
 
@@ -16,6 +16,9 @@ if ($nbRow > 0) {
 	<table>
 		<tr>
 			<th>Pseudo</th>
+			<th>Tour</th>
+			<th>Date</th>
+			<th>N°du match</th>
 			<th>Match</th>
 		</tr>
 		<?php
@@ -23,8 +26,11 @@ if ($nbRow > 0) {
 			{
 		?>
 				<tr>
-					<td><?php echo $donnees['JOU_PSE']; ?></td>
-					<td><?php echo $donnees['RES_MATCH_JOU1'] . ' / ' . $donnees['RES_MATCH_JOU2']; ?></td>
+					<td align="center" valign="middle"><?php echo $donnees['JOU_PSE']; ?></td>
+					<td align="center" valign="middle"><?php echo $donnees['RES_MATCH_TOUR']; ?></td>
+					<td align="center" valign="middle"><?php echo $donnees['RES_MATCH_DAT']; ?></td>
+					<td align="center" valign="middle"><?php echo $donnees['RES_MATCH_TOUR_SEQ']; ?></td>
+					<td align="center" valign="middle"><?php echo $donnees['RES_MATCH_JOU1'] . ' / ' . $donnees['RES_MATCH_JOU2']; ?></td>
 				</tr>
 
 		<?php

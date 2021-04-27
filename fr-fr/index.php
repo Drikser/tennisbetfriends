@@ -47,7 +47,7 @@ session_start(); // On démarre la session AVANT toute chose
 
 				 	// Affichage des joueurs pour lesquels il reste des pronostiques à faire
 				 	// *** Suivi pronostiques joueurs ***
-				 	include ("suiviPronostiquesJoueurs.php");
+				 	// include ("suiviPronostiquesJoueurs.php");
 				 	?>
 
 				 	<p></p>
@@ -96,12 +96,20 @@ session_start(); // On démarre la session AVANT toute chose
   				<?php
 
 					$dailyMatchs = getDailyMatchs();
+          $niveauPrecedent = "";
 
 					//while ($donnees = $reponse->fetch()) {
 					while ($donnees = $dailyMatchs->fetch()) {
 
-							echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . '<br />';
-						}
+            if ($niveauPrecedent != $donnees['RES_MATCH_TOUR']) {
+              echo "<br />" . $donnees['RES_MATCH_TOUR'] . "<br />";
+            };
+
+						// echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . '<br />';
+            echo "(" . $donnees['RES_MATCH_TOUR_SEQ'] . ") - " . $donnees['RES_MATCH_DAT'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . '<br />';
+
+            $niveauPrecedent = $donnees['RES_MATCH_TOUR'];
+          }
 
 					//$reponse->closeCursor();
 
@@ -127,40 +135,19 @@ session_start(); // On démarre la session AVANT toute chose
 				}
 			}
 			else {
-				?>
-
-
-        <?php
-        //  include ("clock.php");
-        ?>
-
-				<p>
+			  ?>
+			  <p>
 					Pas encore inscrit ? Faites partie de la communauté en cliquant en allant sur la page : <a href="inscription.php">Inscription</a><br />
 
-		            Pour pronostiquer, vous devez vous connecter à votre compte en allant sur la page :  <a href="connexion.php">Connexion</a><br />
-
-		        </p>
+		      Pour pronostiquer, vous devez vous connecter à votre compte en allant sur la page :  <a href="connexion.php">Connexion</a><br />
+		    </p>
 		    <?php
 			}
 			?>
 		</div>
     </div>
 
-	<?php
-	//$monfichier = fopen('compteurPageIndex.txt', 'r+');
-
-	//$pages_vues = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
-	//$pages_vues++; // On augmente de 1 ce nombre de pages vues
-	//fseek($monfichier, 0); // On remet le curseur au début du fichier
-	//fputs($monfichier, $pages_vues); // On écrit le nouveau nombre de pages vues
-
-	//fclose($monfichier);
-
-	//echo '<p>Cette page a été vue ' . $pages_vues . ' fois !</p>';
-	?>
-
     <!-- Le pied de page -->
-
     <?php require("../commun/piedDePAge.php"); ?>
 
     </body>

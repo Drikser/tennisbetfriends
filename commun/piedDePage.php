@@ -1,4 +1,4 @@
-<footer id="pied_de_page">
+<footer class = "footer" id="pied_de_page">
 
     <p>
     <br />

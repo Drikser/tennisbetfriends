@@ -1,4 +1,5 @@
 <?php
+// echo "préparation envoi mail pour " . $prenomValid . " à l'adresse " . $emailValid . "<br />";
 //$mail = htmlspecialchars($_POST['Email']); // Déclaration de l'adresse de destination.
 if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $emailValid)) // On filtre les serveurs qui rencontrent des bogues.
 {
@@ -13,7 +14,10 @@ else
 // Pour le test, l'addresse du lien commence par http://localhost/pronos/xxxxxxxxxx.php
 // En production, l'addresse du lien commence par http://www.tennisbetfriends.com/xxxxxxxxxx.php
 
+
 $message_txt = "Bonjour, bienvenue sur Tennis Bet Friends !";
+// echo "message txt = " . $message_txt . "<br />";
+
 $message_html = "
 <html><head></head><body>Cher <var>$prenomValid</var>, <br />
 <p>
@@ -26,7 +30,7 @@ Votre pseudo est : <b><var>$pseudoValid</var></b>.
 Pour activer votre compte, veuillez cliquer sur le lien ci dessous
 ou le copier/coller dans votre navigateur internet.
 
-<a href='http://localhost/pronos/fr-fr/inscriptionActivation.php?pseudo=$pseudoValid&key=$key'>http://localhost/pronos/fr-fr/inscriptionActivation.php?pseudo=$pseudoValid&key=$key</a>
+<a href='http://www.tennisbetfriends.com/fr-fr/inscriptionActivation.php?pseudo=$pseudoValid&key=$key'>http://www.tennisbetfriends.com/fr-fr/inscriptionActivation.php?pseudo=$pseudoValid&key=$key</a>
 </p>
 <p>
 <br />
@@ -38,6 +42,7 @@ Ceci est un mail automatique, Merci de ne pas y répondre.<br />
 <i>Tennis Bet Friends</i>
 </body></html>
 ";
+// echo "message html = " . $message_html . "<br />";
 //==========
 
 //=====Création de la boundary
@@ -76,6 +81,8 @@ $message.= $passage_ligne."--".$boundary."--".$passage_ligne;
 
 //=====Envoi de l'e-mail.
 //mail($mail,$sujet,$message,$header);
+// echo 'envoi email à ' . $emailValid . '<br />';
 mail($emailValid,$sujet,$message,$header);
+// var_dump(mail($emailValid,$sujet,$message,$header));
 //==========
 ?>

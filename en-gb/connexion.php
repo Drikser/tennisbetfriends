@@ -30,17 +30,43 @@ session_start(); // On démarre la session AVANT toute chose
                 Please enter your username and password to sign in.<br />
             </p>
 
-    		<!-- Connexion base de données -->
-
-    		<?php
-            //*************************************************************************************************************************************************
-    		//*                                         APPEL PAGE CONNEXION BDD + FONCTIONS
+            <?php
     		//*************************************************************************************************************************************************
-            //include("../commun/model.php");
+    		//*                                         TRAITEMENT DE VERIFICATION DES DONNEES SAISIES
+    		//*************************************************************************************************************************************************
+            if (isset($_POST['PseudoConnexion'])) {
+
+            	// Controle existance pseudo en base de donnée
+        			$pseudo = controlPseudo($_POST['PseudoConnexion']);
+
+        			if ($pseudo == false) {
+                ob_start();
+        				echo "<span class='warning'>Username not registered or account not activated.</span><br />";
+                echo "<span class='warning'>Please register visiting the following page: <a href='inscription.php'>Register</a>, or check your email address and find your activation e-mail.</span><br />";
+                ob_end_flush();
+              }
+        			else {
+        				// Si pseudo existe, contrôle du mot de passe
+        				if (password_verify($_POST['MotDePasseConnexion'], $pseudo['JOU_MDP'])) {
+        			    //echo 'Le mot de passe est valide !<br />';
+
+        					$_SESSION['JOU_ID'] = $pseudo['JOU_ID'];
+        					$_SESSION['JOU_PSE'] = $_POST['PseudoConnexion'];
+        					//echo 'Bienvenue ' . $_POST['PseudoConnexion'] . ', vous êtes maintenant connecté !<br />';
+        					//echo 'Bienvenue ' . $_SESSION['JOU_PSE'] . ', vous êtes maintenant connecté !<br />';
+
+        					header('Location: ../en-gb/index.php');
+                  //exit();
+        				}
+        				else
+        				{
+        		    		echo "<span class='warning'>The password you entered is not valid.</span><br />";
+        				}
+        			}
+            }
             ?>
 
-
-            <!--
+        <!--
      		//*************************************************************************************************************************************************
     		//*                                         AFFICHAGE DU FORMULAIRE DE CONNEXION
     		//*************************************************************************************************************************************************
@@ -58,43 +84,6 @@ session_start(); // On démarre la session AVANT toute chose
                     Forgotten your password ? Click on this link to change it: <a href="mdpOublie.php">Forgotten password</a>
                 </p>
             </p>
-
-            <?php
-    		//*************************************************************************************************************************************************
-    		//*                                         TRAITEMENT DE VERIFICATION DES DONNEES SAISIES
-    		//*************************************************************************************************************************************************
-            if (isset($_POST['PseudoConnexion'])) {
-
-            	// Controle existance pseudo en base de donnée
-        			$pseudo = controlPseudo($_POST['PseudoConnexion']);
-
-        			if ($pseudo == false) {
-                ob_start();
-        				echo "<span class='warning'>Username not registered, account not activated.</span><br />";
-                echo "<span class='warning'>Please register visiting the following page: <a href='inscription.php'>Register</a>, or check your email address and find your activation e-mail.</span><br />";
-                ob_end_flush();
-              }
-        			else {
-        				// Si pseudo existe, contrôle du mot de passe
-        				if (password_verify($_POST['MotDePasseConnexion'], $pseudo['JOU_MDP'])) {
-        			    //echo 'Le mot de passe est valide !<br />';
-
-        					$_SESSION['JOU_ID'] = $pseudo['JOU_ID'];
-        					$_SESSION['JOU_PSE'] = $_POST['PseudoConnexion'];
-        					//echo 'Bienvenue ' . $_POST['PseudoConnexion'] . ', vous êtes maintenant connecté !<br />';
-        					//echo 'Bienvenue ' . $_SESSION['JOU_PSE'] . ', vous êtes maintenant connecté !<br />';
-
-        					header('Location: /pronos/en-gb/index.php');
-                  //exit();
-        				}
-        				else
-        				{
-        		    		echo "<span class='warning'>The password you entered is not valid.</span><br />";
-        				}
-        			}
-            }
-            ?>
-
 
         </div>
 

@@ -47,7 +47,7 @@ session_start(); // On démarre la session AVANT toute chose
 
 				 	// Affichage des joueurs pour lesquels il reste des pronostiques à faire
 				 	// *** Suivi pronostiques joueurs ***
-				 	include ("suiviPronostiquesJoueurs.php");
+				 	// include ("suiviPronostiquesJoueurs.php");
 				 	?>
 
 				 	<p></p>
@@ -96,12 +96,22 @@ session_start(); // On démarre la session AVANT toute chose
   				<?php
 
 					$dailyMatchs = getDailyMatchs();
+          $niveauPrecedent = "";
 
 					//while ($donnees = $reponse->fetch()) {
 					while ($donnees = $dailyMatchs->fetch()) {
 
-							echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . '<br />';
-						}
+              $outputRound = ConvertRoundFTE($donnees['RES_MATCH_TOUR']);
+
+              if ($niveauPrecedent != $outputRound) {
+                echo "<br />" . $outputRound . "<br />";
+              };
+
+  						// echo $donnees['RES_MATCH_DAT'] . " - " . $outputRound . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . '<br />';
+              echo "(" . $donnees['RES_MATCH_TOUR_SEQ'] . ") - " . $donnees['RES_MATCH_DAT'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . '<br />';
+
+              $niveauPrecedent = $outputRound;
+          }
 
 					//$reponse->closeCursor();
 

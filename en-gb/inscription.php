@@ -178,7 +178,9 @@ session_start(); // On démarre la session AVANT toute chose
 						//***********************************************************************************
 						//*              Création d'une ligne dans la table pronostique_bonus
 						//***********************************************************************************
-						insertTournamentToPrognosis($playerId);
+            if ($_POST['Pseudo'] != "Admin") {
+              insertTournamentToPrognosis($playerId);
+            }
 
             //***********************************************************************************
 						//*            Send an email with link to validate the registration
