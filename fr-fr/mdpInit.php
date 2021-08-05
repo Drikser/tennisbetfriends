@@ -34,26 +34,7 @@ session_start(); // On démarre la session AVANT toute chose
                 //echo "variable = " . $_GET['var'];
 
                 $token = $_GET['var'];
-            ?>
 
-            <!--
-     		//*************************************************************************************************************************************************
-    		//*                                         AFFICHAGE DU FORMULAIRE POUR RENSEIGNER L'ADRESSE EMAIL
-    		//*************************************************************************************************************************************************
-    		-->
-    		<p>
-                <form id="resetPassword_form" action="mdpInit.php?var=<?php echo $token ?>" method="post" enctype="multipart/form-data">
-                <p>
-                  <label>Nouveau mot de passe  : </label><input type="password" name="MotDePasse" required="required"/><br />
-                  <label>Confirmer le nouveau mot de passe : </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
-                  <b>NOTE : Le mot de passe doit faire au moins 8 caratères, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</b><br />
-                	<input type="submit" value="Valider" />
-                </p>
-    	        </form>
-
-            </p>
-
-            <?php
             //*************************************************************************************************************************************************
             //*                                         TRAITEMENT DE VERIFICATION DES DONNEES SAISIES
             //*************************************************************************************************************************************************
@@ -77,12 +58,30 @@ session_start(); // On démarre la session AVANT toute chose
 
                         updatePwd($token);
 
-                        echo "Votre mot de passe a été mis à jour. Vous pouvez maintenant vous connecter en utilisant la page de connexion : . <a href='connexion.php'>" . "Connexion" . "</a><br/>";
+                        echo "<span class='info'>Votre mot de passe a été mis à jour. Vous pouvez maintenant vous connecter en utilisant la page de connexion : </span> <a href='connexion.php'>" . "Connexion" . "</a><br/>";
                     }
                     else {
                         echo "<span class='warning'>Le lien utilisé n'est plus valide. Pour mettre à jour votre mot de passe, utilisez l'option 'Mot de passe oublié'.</span><br />";
                     }
                 }
+            } else {
+              ?>
+              <!--
+       		    //*************************************************************************************************************************************************
+      		    //*                                         AFFICHAGE DU FORMULAIRE POUR RENSEIGNER L'ADRESSE EMAIL
+      		    //*************************************************************************************************************************************************
+      		    -->
+              <p>
+                <form id="resetPassword_form" action="mdpInit.php?var=<?php echo $token ?>" method="post" enctype="multipart/form-data">
+                  <p>
+                    <label>Nouveau mot de passe  : </label><input type="password" name="MotDePasse" required="required"/><br />
+                    <label>Confirmer : </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
+                    <b>NOTE : Le mot de passe doit faire au moins 8 caratères, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</b><br />
+                    <input type="submit" value="Valider" />
+                  </p>
+        	       </form>
+                </p>
+            <?php
             }
             ?>
         </div>

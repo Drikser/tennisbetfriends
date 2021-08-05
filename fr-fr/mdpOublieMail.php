@@ -14,7 +14,7 @@ else
 //----------------------------------------------------------------------------------------------
 //
 // REMARQUE :
-// Pour le test, l'addresse du lien commence par http://localhost/pronos/fr-fr/xxxxxxxxxx.php
+// Pour le test, l'addresse du lien commence par http://localhost/tennisbetfriends/www/fr-fr/xxxxxxxxxx.php
 // En production, l'addresse du lien commence par http://www.tennisbetfriends.com/xxxxxxxxxx.php
 //
 //----------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ $message_html = "
 Nous avons reçu une demande pour réinitialiser votre mot de passe de votre compte Tennisbetfriends. <br />
 Si vous n'êtes pas à l'origine de ce changement, merci de contacter immédiatement l'administrateur de ce site.<br />
 <p>
-Si vous êtes à l'origine de cette demande, voici le lien pour définir un nouveau mot de passe : <a href=http://www.tennisbetfriends.com/fr-fr/mdpInit.php?var=$token>http://www.tennisbetfriends.com/fr-fr/mdpInit.php?var=$token</a><br />
+Si vous êtes à l'origine de cette demande, voici le lien pour définir un nouveau mot de passe : <a href=http://localhost/tennisbetfriends/www/fr-fr/mdpInit.php?var=$token>http://localhost/tennisbetfriends/www/fr-fr/mdpInit.php?var=$token</a><br />
 </p>
 Merci d'être inscrit sur <i>www.tennisbetfriends.com</i>. <br />
 <br />

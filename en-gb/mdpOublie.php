@@ -31,21 +31,6 @@ session_start(); // On démarre la session AVANT toute chose
                 No worries, fill in your e-mail address and you will be sent a link to change it. <br />
             </p>
 
-            <!--
-     		//*************************************************************************************************************************************************
-    		//*                                         AFFICHAGE DU FORMULAIRE POUR RENSEIGNER L'ADRESSE EMAIL
-    		//*************************************************************************************************************************************************
-    		-->
-    		<p>
-                <form id="registration_form" action="mdpOublie.php" method="post" enctype="multipart/form-data">
-                <p>
-                	E-email address: <input type="text" name="Email" required="required"/><br />
-                	<input type="submit" value="Send link" />
-                </p>
-    	        </form>
-
-            </p>
-
             <?php
             //*************************************************************************************************************************************************
             //*                                         TRAITEMENT DE VERIFICATION DES DONNEES SAISIES
@@ -80,8 +65,26 @@ session_start(); // On démarre la session AVANT toute chose
                         echo "<span class='warning'>The entered e-mail address " . $_POST['Email'] . " is not registered for this competition. Please enter the e-mail address your registered with.</span><br />";
                     }
                 }
+            } else {
+              ?>
+              <!--
+           		//*************************************************************************************************************************************************
+          		//*                                         AFFICHAGE DU FORMULAIRE POUR RENSEIGNER L'ADRESSE EMAIL
+          		//*************************************************************************************************************************************************
+          		-->
+              <p>
+                <form id="registration_form" action="mdpOublie.php" method="post" enctype="multipart/form-data">
+                  <p>
+                    E-email address: <input type="text" name="Email" required="required"/><br />
+                    <input type="submit" value="Send link" />
+                  </p>
+                </form>
+              </p>
+              <?php
             }
             ?>
+
+
         </div>
 
     </div>

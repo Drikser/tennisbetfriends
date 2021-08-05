@@ -14,7 +14,7 @@ else
 //----------------------------------------------------------------------------------------------
 //
 // REMARQUE :
-// Pour le test, l'addresse du lien commence par http://localhost/pronos/en-gb/xxxxxxxxxx.php
+// Pour le test, l'addresse du lien commence par http://localhost/tennisbetfriends/www/en-gb/xxxxxxxxxx.php
 // En production, l'addresse du lien commence par http://www.tennisbetfriends.com/xxxxxxxxxx.php
 //
 //----------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ $message_html = "
 We received a request to change the password registered to your Tennisbetfriends account. <br />
 If you are not the source of the password change, please contact the site of this site immediately. <br />
 <p>
-If you are the source of this change, please here is he link to reset your password: <a href=http://www.tennisbetfriends.com/en-gb/mdpInit.php?var=$token>http://www.tennisbetfriends.com/en-gb/mdpInit.php?var=$token</a>
+If you are the source of this change, please here is he link to reset your password: <a href=http://localhost/tennisbetfriends/www/en-gb/mdpInit.php?var=$token>http://localhost/tennisbetfriends/www/en-gb/mdpInit.php?var=$token</a>
 </p>
 Thank you for being registered on <i>www.tennisbetfriends.com</i>. <br />
 <br />
