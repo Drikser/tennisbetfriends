@@ -28,12 +28,12 @@
             <nav>
                 <ul>
                     <li><a class="a_menu" href="index.php">Accueil</a></li>
-                    <li><a class="a_menu" href="pagePerso.php">Page perso</a></li>
                     <li><a class="a_menu" href="resultats.php">Résultats</a></li>
-                    <li><a class="a_menu" href="pronostique.php">Faire un pronostique</a></li>
+                    <li><a class="a_menu" href="pronostique.php">Les pronostiques</a></li>
                     <ul>
-                        <li><a class="a_menu" href="pronostique_tournoi.php">Pronostiques tournoi</a></li>
-                        <li><a class="a_menu" href="pronostique_matchs.php">Pronostiques matchs</a></li>
+                        <li><a class="a_menu" href="pronostique_tournoi.php">Bonus</a></li>
+                        <li><a class="a_menu" href="pronostique_matchs.php">Matchs</a></li>
+                        <li><a class="a_menu" href="pagePerso.php">Vos pronostiques</a></li>
                     </ul>
                     <li><a class="a_menu" href="rules.php">Règlement</a></li>
                     <li><a class="a_menu" href="deconnexion.php">Se déconnecter</a></li>

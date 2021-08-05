@@ -27,13 +27,13 @@
             <nav>
                 <ul>
                     <li><a class="a_menu" href="index.php">Home</a></li>
-                    <li><a class="a_menu" href="pagePerso.php">Personal page</a></li>
                     <li><a class="a_menu" href="resultats.php">Results</a></li>
-                    <li><a class="a_menu" href="pronostique.php">Make a prediction</a></li>
+                    <li><a class="a_menu" href="pronostique.php">Prediction</a></li>
                     <ul>
-                        <li><a class="a_menu" href="pronostique_tournoi.php">Bonus predictions</a></li>
-                        <li><a class="a_menu" href="pronostique_matchs.php">Match predictions</a></li>
-                    </ul>
+                        <li><a class="a_menu" href="pronostique_tournoi.php">Bonus</a></li>
+                        <li><a class="a_menu" href="pronostique_matchs.php">Match</a></li>
+                        <li><a class="a_menu" href="pagePerso.php">Your predictions</a></li>
+                        </ul>
                     <li><a class="a_menu" href="rules.php">Rules</a></li>
                     <li><a class="a_menu" href="deconnexion.php">Sign off</a></li>
                 </ul>
