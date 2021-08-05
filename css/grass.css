@@ -1,0 +1,253 @@
+body
+{
+    font-family: Sans-serif;
+    background-image:url(../images/Wimbledon-Grass-3.jpg);
+    /* background-color: DarkGreen; */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: 10px 10px;
+    padding: 0 ;
+}
+
+
+h1
+{
+    color: DarkGreen;
+/*
+    text-shadow: 1px 0 0 white, 0 1px 0 white, 0 -1px 0 white, -1px 0 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 white;
+*/
+    /* text-shadow: rgb(255, 255, 255) 1px 0px 0px, rgb(255, 255, 255) 0.540302px 0.841471px 0px, rgb(255, 255, 255) -0.416147px 0.909297px 0px, rgb(255, 255, 255) -0.989992px 0.14112px 0px, rgb(255, 255, 255) -0.653644px -0.756802px 0px, rgb(255, 255, 255) 0.283662px -0.958924px 0px, rgb(255, 255, 255) 0.96017px -0.279415px 0px; */
+}
+
+h2
+{
+    color: purple;
+}
+
+
+/*.tournoi*/
+h6
+{
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    border: 8px solid purple;
+    background-image:url(../images/Wimbledon-Lawn-ZoomIn.jpg);
+    /*background-position: center;*/
+    /* background-position: 50% 18%;
+    background-repeat: no-repeat; */
+    margin: 0px;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+
+menu
+{
+    background-color: Green;
+}
+
+.warning
+{
+color: red;
+font-size: 20px;
+}
+
+.congrats
+{
+color: black;
+font-size: 20px;
+}
+
+.language_choice
+{
+  color: white;
+  text-align: right;
+  float: right;
+}
+
+.localClock
+{
+  text-align: right;
+  float: right;
+}
+
+.clock2
+{
+  color: white;
+}
+
+.Hello
+{
+  color: white;
+}
+
+.info
+{
+color: white;
+font-weight: bold;
+}
+
+table
+{
+    border-collapse: collapse; /* Les bordures du tableau seront collées (plus joli) */
+}
+
+td, th
+{
+    border: 1px solid black;
+    background-color: ForestGreen;
+}
+
+th
+{
+    background-color: MediumSlateBlue;
+}
+
+.lignecoloree td {
+   background-color: Gold;
+}
+
+.lignenormale td {
+   background-color: ForestGreen;
+}
+
+.lignenormale2 td {
+   background-color: DarkGreen;
+   color: black;
+}
+
+#conteneur
+{
+    /*display: float;*/
+    display: flex;
+    /*display: inline;*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    background-color: YellowGreen;
+    /*background-image:url(images/terre-battue.jpg);*/
+    opacity: 0.75;
+}
+
+.element
+{
+    /*margin: auto; */
+    background-color: LawnGreen;
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+    position: relative;
+}
+
+.element_corps
+{
+    /*margin: auto; */
+    width: 70%;
+    background-color: SeaGreen;
+    margin: 10px 10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:2px;
+    padding-bottom:2px;
+}
+
+.element_menu
+{
+    /*margin: auto; */
+    background-color: Green;
+    font-family: sans-serif;
+    margin: 10px 10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:2px;
+    padding-bottom:2px;
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+    position: sticky;
+    top: 10px;
+}
+
+.a_menu
+{
+    color: white;
+    font-family: sans-serif;
+    /* background-color: LightBlue; */
+    list-style-type: none;
+}
+
+nav ul
+{
+    list-style-type: none;
+    display:flex;
+    flex-direction: column;
+}
+
+/* On sélectionne tous les labels */
+label
+{
+    display:block;
+    width:200px; /* Attention : prenez une largeur suffisamment grande */
+    float:left;
+}
+
+/* On sélectionne tout les labels contenu dans le formulaire avec l'id : id_form */
+#registration_form label
+{
+    display:block;
+    width:200px;
+    float:left;
+}
+
+#connection_form label
+{
+    display:block;
+    width:100px;
+    float:left;
+}
+
+#resetPassword_form label
+{
+    display:block;
+    width:200px;
+    float:left;
+}
+
+.clignote  {
+  animation: clignoter 1s infinite;
+   /* animation-duration: .8s;
+   animation-name: clignoter;
+   animation-iteration-count: infinite;
+   transition: none; */
+}
+
+@keyframes clignoter {
+  0%   { opacity:1; }
+  50%   {opacity:0; }
+  100% { opacity:1; }
+}
+
+
+.button
+{
+  /** Ces directives indiquent au lien de ressembler à un bouton pour les principaux moteurs de rendu **/
+ -webkit-appearance: button;
+ -moz-appearance: button;
+ appearance: button;
+ /**Les directives en dessous enlèvent l'apparence par défaut en bleu et avec du texte souligné pour un lien hypertexte **/
+ text-decoration: none;
+ color: initial;
+}
+
+.a_text{
+text-decoration:underline;
+color:DarkBlue;
+font-style: italic;
+}
+
+.div_localTime{
+  width:400px;
+  height:50px;
+  background:grey;
+  color:white;
+  text-align:center;
+  line-height:50px;
+}

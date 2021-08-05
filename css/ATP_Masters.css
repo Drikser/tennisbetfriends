@@ -1,0 +1,188 @@
+body
+{
+/*    background-color: MediumAquaMarine; */
+    background-color: Gainsboro;
+    margin: 10px 10px;
+    padding: 0 ;
+    font-family: Segoe UI Semibold;
+}
+
+
+h1
+{
+    color: Red;
+/*
+    text-shadow: 1px 0 0 white, 0 1px 0 white, 0 -1px 0 white, -1px 0 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 white;
+*/
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px, rgb(255, 255, 255) 0.540302px 0.841471px 0px, rgb(255, 255, 255) -0.416147px 0.909297px 0px, rgb(255, 255, 255) -0.989992px 0.14112px 0px, rgb(255, 255, 255) -0.653644px -0.756802px 0px, rgb(255, 255, 255) 0.283662px -0.958924px 0px, rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+}
+
+h2
+{
+    color: White;
+}
+
+
+/*.tournoi*/
+h6
+{
+    font-family: Segoe UI Semibold;
+    font-style: italic;
+    color: DarkBlue;
+    text-align: center;
+    font-size: 90px;
+    border: 5px solid DarkBlue ;
+    background-image:url(../images/ATPFinals_trophee.jpg);
+    /*background-position: center;*/
+    background-position: 50% 15%;
+    /*background-repeat: no-repeat;*/
+    background-repeat: repeat;
+    margin: 0px;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+
+menu
+{
+    background-color: SteelBlue;
+    position: sticky;
+}
+
+.warning
+{
+color: red;
+font-size: 20px;
+}
+
+.localClock
+{
+  text-align: right;
+  float: right;
+}
+
+.info
+{
+color: black;
+}
+
+table
+{
+    border-collapse: collapse; /* Les bordures du tableau seront collées (plus joli) */
+}
+
+td, th
+{
+    border: 1px solid black;
+    background-color: DarkCyan;
+    color: black;
+}
+
+th
+{
+    background-color: DarkBlue;
+    color: White;
+}
+
+.lignecoloree td {
+   background-color: Gold;
+   color: black;
+}
+
+.lignenormale td {
+   background-color: DarkCyan;
+   color: black;
+}
+
+#conteneur /* include menu + corps */
+{
+    /*display: float;*/
+    display: flex;
+    /*display: inline;*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    background-color: Blue;
+    /*background-image:url(images/terre-battue.jpg);*/
+}
+
+.element
+{
+    /*margin: auto; */
+    background-color: SteelBlue;
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+}
+
+.element_corps
+{
+    /*margin: auto; */
+    background-color: SteelBlue;
+    margin: 10px 10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:2px;
+    padding-bottom:2px;
+    color: White;
+    /*background-image:ur
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+    position: relative;
+}
+
+.element_menu
+{
+    /*margin: auto; */
+    background-color: Blue;
+    margin: 10px 10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:2px;
+    padding-bottom:2px;
+    color: White;
+    position: sticky;
+    top: 10px;
+    /*background-image:url(images/terre-battue-bis.jpg);*/
+    position: relative;
+}
+
+/* On sélectionne tous les labels */
+label
+{
+    display:block;
+    width:200px; /* Attention : prenez une largeur suffisamment grande */
+    float:left;
+}
+
+/* On sélectionne tout les labels contenu dans le formulaire avec l'id : id_form */
+#registration_form label
+{
+    display:block;
+    width:250px;
+    float:left;
+}
+
+#connection_form label
+{
+    display:block;
+    width:150px;
+    float:left;
+}
+
+.a_menu{
+text-decoration:none;
+color:white;
+}
+
+.a_text{
+text-decoration:underline;
+color:DarkBlue;
+font-style: italic;
+font-style: italic;
+}
+
+.div_localTime{
+  width:400px;
+  height:50px;
+  background:grey;
+  color:white;
+  text-align:center;
+  line-height:50px;
+}
