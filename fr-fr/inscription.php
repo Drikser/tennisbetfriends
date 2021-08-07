@@ -29,47 +29,6 @@ session_start(); // On démarre la session AVANT toute chose
 	            Merci de vous inscrire au concours de pronostiques.<br />
 	        </p>
 
-			 <?php
-	 		//*************************************************************************************************************************************************
-			//*                                         Appel page de connexion Base de données + toutes les fonctions
-			//*************************************************************************************************************************************************
-			//include("connexionSGBD.php");
-			//include("../commun/model.php");
-			?>
-
-			 <!--
-	 		//*************************************************************************************************************************************************
-			//*                                         AFFICHAGE DU FORMAULAIRE D'INSCRIPTION
-			//*************************************************************************************************************************************************
-			-->
-			<p>
-				Pour cela, veuillez renseigner les infos suivantes :
-			</p>
-
-			<form id="registration_form" action="inscription.php" method="post" enctype="multipart/form-data">
-			<p>
-        <label>Prénom : </label><input type="text" name="Prenom" label="Prenom" required="required"/><br />
-				<label>Nom : </label><input type="text" name="Nom" label="Nom" required="required"/><br />
-				<label>Pseudo : </label><input type="text" name="Pseudo" label="Pseudo" required="required"/> <b>(ATTENTION : Une fois inscrit, vous ne pourrez plus changer votre pseudo)</b><br />
-				<label>Adresse mail : </label><input type="email" name="Email" label="Email" required="required"/><br />
-				<label>Mot de passe de connexion : </label><input type="password" name="MotDePasse" required="required"/><br />
-				<label>Confirmez mot de passe : </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
-        <b>NOTE : Le mot de passe doit faire au moins 8 caratères, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</b>
-			</p>
-
-      <!--
-      <p>
-        <img src="captcha.php" alt="captcha" />
-        Copier le mot ici: <input type="text" name="captcha" />
-      </p>
-      -->
-			<p>
-				<input type="submit" value="Valider" />
-			</p>
-			</form>
-
-
-
 			<?php
 			//*************************************************************************************************************************************************
 			//*                                         TRAITEMENT DE VERIFICATION DES DONNEES SAISIES
@@ -213,11 +172,35 @@ session_start(); // On démarre la session AVANT toute chose
 						//}
 				}
 
-			}
+			} else {
+        ?>
+        <!--
+ 	 		  //*************************************************************************************************************************************************
+ 			  //*                                         AFFICHAGE DU FORMAULAIRE D'INSCRIPTION
+ 			  //*************************************************************************************************************************************************
+ 			  -->
+ 			  <p>
+ 				Pour cela, veuillez renseigner les infos suivantes :
+ 			  </p>
 
-			?>
+ 			  <form id="registration_form" action="inscription.php" method="post" enctype="multipart/form-data">
+ 			  <p>
+          <label>Prénom : </label><input type="text" name="Prenom" label="Prenom" required="required"/><br />
+ 				  <label>Nom : </label><input type="text" name="Nom" label="Nom" required="required"/><br />
+ 				  <label>Pseudo : </label><input type="text" name="Pseudo" label="Pseudo" required="required"/> <b>(ATTENTION : Une fois inscrit, vous ne pourrez plus changer votre pseudo)</b><br />
+ 				  <label>Adresse mail : </label><input type="email" name="Email" label="Email" required="required"/><br />
+ 				  <label>Mot de passe de connexion : </label><input type="password" name="MotDePasse" required="required"/><br />
+ 				  <label>Confirmez mot de passe : </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
+          <b>NOTE : Le mot de passe doit faire au moins 8 caratères, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</b>
+ 			  </p>
 
-			<?php
+ 			  <p>
+ 				  <input type="submit" value="Valider" />
+ 			  </p>
+ 			  </form>
+        <?php
+      }
+
 			//*************************************************************************************************************************************************
 			//*                                         AFFICHAGE DES DERNIERS INSCRITS + DU NB TOTAL D'INSCRITS
 			//*************************************************************************************************************************************************

@@ -29,47 +29,6 @@ session_start(); // On démarre la session AVANT toute chose
 	            Do you want to register for the predictions competition?<br />
 	        </p>
 
-			 <?php
-	 		//*************************************************************************************************************************************************
-			//*                                         Appel page de connexion Base de données + toutes les fonctions
-			//*************************************************************************************************************************************************
-			//include("connexionSGBD.php");
-			//include("../commun/model.php");
-			?>
-
-			 <!--
-	 		//*************************************************************************************************************************************************
-			//*                                         AFFICHAGE DU FORMAULAIRE D'INSCRIPTION
-			//*************************************************************************************************************************************************
-			-->
-			<p>
-				If yes, please provide the following information:
-			</p>
-
-			<form id="registration_form" action="inscription.php" method="post" enctype="multipart/form-data">
-			<p>
-        <label>First name: </label><input type="text" name="Prenom" label="Prenom" required="required"/><br />
-				<label>Surname: </label><input type="text" name="Nom" label="Nom" required="required"/><br />
-				<label>Username: </label><input type="text" name="Pseudo" label="Pseudo" required="required"/> <b>(Please note that once you have registered you will no longer be able to change your username)</b><br />
-				<label>E-mail Address: </label><input type="email" name="Email" label="Email" required="required"/><br />
-				<label>Password: </label><input type="password" name="MotDePasse" required="required"/><br />
-				<label>Confirm your password: </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
-				<b>N.B: The password must be at least 8 characters long, with an upper-case letter, a lower-case letter, a number and a special character.</b>
-			</p>
-
-      <!--
-      <p>
-        <img src="captcha.php" alt="captcha" />
-        Copier le mot ici: <input type="text" name="captcha" />
-      </p>
-      -->
-			<p>
-				<input type="submit" value="Submit" />
-			</p>
-			</form>
-
-
-
 			<?php
 			//*************************************************************************************************************************************************
 			//*                                         TRAITEMENT DE VERIFICATION DES DONNEES SAISIES
@@ -195,9 +154,9 @@ session_start(); // On démarre la session AVANT toute chose
 
             // Message to refer player to their email address
 						$pseudo = htmlspecialchars($_POST['Pseudo']);
-            echo "<span class='info'>Thank you </span>" . $prenomValid . "<span class='info'> for your registration.</span><br />";
+            echo "<span class='info'>Thank you </span><b>" . $prenomValid . "</b><span class='info'> for your registration.</span><br />";
             // echo "<span class='info'>Thank you </span>" . htmlspecialchars($_POST['Prenom']) . "<span class='info'> for your registration.</span><br />";
-            echo "<span class='info'>To complete your registration, an e-mail has been sent to you. Please go to your e-mail address </span>" . htmlspecialchars($_POST['Email']) . "<span class='info'> and click on the activation link.</span><br />";
+            echo "<span class='info'>To complete your registration, an e-mail has been sent to you. Please go to your e-mail address </span><b>" . htmlspecialchars($_POST['Email']) . "</b><span class='info'> and click on the activation link.</span><br />";
 
             //echo 'Bravo ' . htmlspecialchars($_POST['Prenom']) . ', ton inscrition a bien été prise en compte avec le pseudo suivant : ' . htmlspecialchars($_POST['Pseudo']) . '.<br />';
 						//echo 'Bravo ' . htmlspecialchars($_POST['Prenom']) . ', ton inscrition a bien été prise en compte avec le pseudo suivant : ' . htmlspecialchars($_POST['Pseudo']) . ' (et le mot de passe suivant : ' . $_POST['MotDePasse'] . ') ... mais chuuuuuut faut pas le dire ... <br />';
@@ -214,11 +173,35 @@ session_start(); // On démarre la session AVANT toute chose
 						//}1
 				}
 
-			}
+			} else {
+        ?>
+        <!--
+ 	 		//*************************************************************************************************************************************************
+ 			//*                                         AFFICHAGE DU FORMAULAIRE D'INSCRIPTION
+ 			//*************************************************************************************************************************************************
+ 			-->
+ 			  <p>
+ 				If yes, please provide the following information:
+ 			  </p>
 
-			?>
+ 			  <form id="registration_form" action="inscription.php" method="post" enctype="multipart/form-data">
+ 			  <p>
+          <label>First name: </label><input type="text" name="Prenom" label="Prenom" required="required"/><br />
+ 				  <label>Surname: </label><input type="text" name="Nom" label="Nom" required="required"/><br />
+ 				  <label>Username: </label><input type="text" name="Pseudo" label="Pseudo" required="required"/> <b>(Please note that once you have registered you will no longer be able to change your username)</b><br />
+ 				  <label>E-mail Address: </label><input type="email" name="Email" label="Email" required="required"/><br />
+ 				  <label>Password: </label><input type="password" name="MotDePasse" required="required"/><br />
+ 				  <label>Confirm your password: </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
+ 				  <b>N.B: The password must be at least 8 characters long, with an upper-case letter, a lower-case letter, a number and a special character.</b>
+ 			  </p>
 
-			<?php
+ 			  <p>
+ 				<input type="submit" value="Submit" />
+ 			  </p>
+ 			  </form>
+        <?php
+      }
+
 			//*************************************************************************************************************************************************
 			//*                                         AFFICHAGE DES DERNIERS INSCRITS + DU NB TOTAL D'INSCRITS
 			//*************************************************************************************************************************************************
