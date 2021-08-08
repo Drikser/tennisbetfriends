@@ -189,7 +189,7 @@ session_start(); // On démarre la session AVANT toute chose
  				  <label>Nom : </label><input type="text" name="Nom" label="Nom" required="required"/><br />
  				  <label>Pseudo : </label><input type="text" name="Pseudo" label="Pseudo" required="required"/> <b>(ATTENTION : Une fois inscrit, vous ne pourrez plus changer votre pseudo)</b><br />
  				  <label>Adresse mail : </label><input type="email" name="Email" label="Email" required="required"/><br />
- 				  <label>Mot de passe de connexion : </label><input type="password" name="MotDePasse" required="required"/><br />
+ 				  <label>Mot de passe : </label><input type="password" name="MotDePasse" required="required"/><br />
  				  <label>Confirmez mot de passe : </label><input type="password" name="MotDePasseConfirme" required="required"/><br />
           <b>NOTE : Le mot de passe doit faire au moins 8 caratères, avec une majuscule, une minuscule, un chiffre et un caractère spécial.</b>
  			  </p>
