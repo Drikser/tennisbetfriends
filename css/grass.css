@@ -31,9 +31,10 @@ h2
 h6
 {
     color: white;
-    text-align: center;
+    font-family: Segoe UI Semibold;
     font-style: italic;
     font-size: 60px;
+    text-align: center;
     border: 8px solid purple;
     background-image:url(../images/Wimbledon-Lawn-ZoomIn.jpg);
     /*background-position: center;*/
