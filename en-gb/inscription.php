@@ -87,19 +87,6 @@ session_start(); // On démarre la session AVANT toute chose
 				$name = controlName($_POST['Nom'], $_POST['Prenom']);
 				$email = controlMail($_POST['Email']);
 
-
-				// Contrôle si nom est  valide
-				//-------------------------------
-				//if ($validNom == false) {
-	        	//	echo "<span class='warning'>Nom " . $_POST['Nom'] . " invalide, veuillez saisir un nom valide !</span><br />";
-	    		//}
-
-				// Contrôle si prénom est  valide
-				//-------------------------------
-				//if ($validPrenom == false) {
-	        	//	echo "<span class='warning'>Prénom " . $_POST['Prenom'] . " invalide, veuillez saisir un prénom valide !</span><br />";
-	    		//}
-
 				// Contrôle si adresse mail est une adresse valide
 				//--------------------------------------------------
 				if ($validEmail == false) {
@@ -111,7 +98,6 @@ session_start(); // On démarre la session AVANT toute chose
 				if ($validPassword == false) {
 	        		echo "<span class='warning'>Your password does not meet the security criteria ==> Please enter a new password</span><br />";
 	    		}
-
 
 				// Si le pseudo existe, on demande d'en choisir un autre
 				//-------------------------------------------------------
@@ -130,7 +116,6 @@ session_start(); // On démarre la session AVANT toute chose
 				if ($email == true) {
 					echo "<span class='warning'>Existing e-mail address ==> You cannot create more than one account</span><br />";
 				}
-
 
 
 				if ($pseudo != true
@@ -190,8 +175,14 @@ session_start(); // On démarre la session AVANT toute chose
             $pseudoValid = $_POST['Pseudo'];
             $prenomValid = htmlspecialchars($_POST['Prenom']);
 
-						//include("inscriptionMail.php");
-            include("inscriptionMailValidation.php");
+            $local = $_SERVER['REMOTE_ADDR']=='127.0.0.1' ? 1 : 0;
+            if $local = 1 {
+              // Send message with localhost link (http://localhost/pronos/xxxxxxxxxx.php)
+              include("inscriptionMailValidation_localhost.php");
+            } else {
+              // Send message with website link (http://www.tennisbetfriends.com/xxxxxxxxxx.php)
+              include("inscriptionMailValidation.php");
+            }
 
             // Message to refer player to their email address
 						$pseudo = htmlspecialchars($_POST['Pseudo']);
