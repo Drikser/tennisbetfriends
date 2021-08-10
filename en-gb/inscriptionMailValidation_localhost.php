@@ -17,7 +17,7 @@ else
 //
 // REMARQUE :
 // Pour le test, l'addresse du lien commence par http://localhost/tennisbetfriends/www/en-gb/xxxxxxxxxx.php
-// En production, l'addresse du lien commence par http://www.tennisbetfriends.com/en-gb/xxxxxxxxxx.php
+// En production, l'addresse du lien commence par http://www.tennisbetfriends.com/xxxxxxxxxx.php
 //
 //----------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ $message_txt = "Welcome to Tennis Bet Friends !";
 $message_html = "
 <html><head></head><body>Dear <var>$prenomValid</var>,<br />
 <p>
-Welcome to <i><a href='http://www.tennisbetfriends.com/en-gb/index.php'>www.tennisbetfriends.com</a></i>. Thanks for registering.
+Welcome to <i><a href='http://localhost/tennisbetfriends/www/en-gb/index.php'>www.tennisbetfriends.com</a></i>. Thanks for registering.
 </p>
 <p>
 Your Username is: <b><var>$pseudoValid</var></b>.
@@ -37,7 +37,7 @@ Your Username is: <b><var>$pseudoValid</var></b>.
 To activate your account, please click on the link below
 or copy and paste it into your browser.
 
-<a href='http://www.tennisbetfriends.com/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key'>http://www.tennisbetfriends.com/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key</a>
+<a href='http://localhost/tennisbetfriends/www/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key'>http://localhost/tennisbetfriends/www/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key</a>
 </p>
 <p>
 <br />

@@ -1,4 +1,5 @@
 <?php
+// echo "préparation envoi mail pour " . $prenomValid . " à l'adresse " . $emailValid . "<br />";
 //$mail = htmlspecialchars($_POST['Email']); // Déclaration de l'adresse de destination.
 if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $emailValid)) // On filtre les serveurs qui rencontrent des bogues.
 {
@@ -8,47 +9,40 @@ else
 {
 	$passage_ligne = "\n";
 }
-
-
 //=====Déclaration des messages au format texte et au format HTML.
-
-//----------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------
-//
 // REMARQUE :
-// Pour le test, l'addresse du lien commence par http://localhost/tennisbetfriends/www/en-gb/xxxxxxxxxx.php
-// En production, l'addresse du lien commence par http://www.tennisbetfriends.com/en-gb/xxxxxxxxxx.php
-//
-//----------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------
+// Pour le test, l'addresse du lien commence par http://localhost/tennisbetfriends/www/fr-fr/xxxxxxxxxx.php
+// En production, l'addresse du lien commence par http://www.tennisbetfriends.com/xxxxxxxxxx.php
 
 
+$message_txt = "Bonjour, bienvenue sur Tennis Bet Friends !";
+// echo "message txt = " . $message_txt . "<br />";
 
-$message_txt = "Welcome to Tennis Bet Friends !";
 $message_html = "
-<html><head></head><body>Dear <var>$prenomValid</var>,<br />
+<html><head></head><body>Cher <var>$prenomValid</var>, <br />
 <p>
-Welcome to <i><a href='http://www.tennisbetfriends.com/en-gb/index.php'>www.tennisbetfriends.com</a></i>. Thanks for registering.
+Bienvenue sur <i><a href='http://localhost/tennisbetfriends/www/fr-fr/index.php'>www.tennisbetfriends.com</a></i>. Merci de votre inscription.
 </p>
 <p>
-Your Username is: <b><var>$pseudoValid</var></b>.
+Votre pseudo est : <b><var>$pseudoValid</var></b>.
 </p>
 <p>
-To activate your account, please click on the link below
-or copy and paste it into your browser.
+Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+ou le copier/coller dans votre navigateur internet.
 
-<a href='http://www.tennisbetfriends.com/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key'>http://www.tennisbetfriends.com/en-gb/inscriptionActivation.php?pseudo=$pseudoValid&key=$key</a>
+<a href='http://localhost/tennisbetfriends/www/fr-fr/inscriptionActivation.php?pseudo=$pseudoValid&key=$key'>http://localhost/tennisbetfriends/www/fr-fr/inscriptionActivation.php?pseudo=$pseudoValid&key=$key</a>
 </p>
 <p>
 <br />
---------------------------------------------------<br />
-This is an automatic e-mail, please do not answer.<br />
---------------------------------------------------<br />
+---------------------------------------------------------<br />
+Ceci est un mail automatique, Merci de ne pas y répondre.<br />
+---------------------------------------------------------<br />
 </p>
 <br />
 <i>Tennis Bet Friends</i>
 </body></html>
 ";
+// echo "message html = " . $message_html . "<br />";
 //==========
 
 //=====Création de la boundary
@@ -56,7 +50,7 @@ $boundary = "-----=".md5(rand());
 //==========
 
 //=====Définition du sujet.
-$sujet = "Validate your registration on Tennis Bet Friends !";
+$sujet = "Validez votre inscription sur Tennis Bet Friends !";
 //=========
 
 //=====Création du header de l'e-mail.
@@ -87,6 +81,8 @@ $message.= $passage_ligne."--".$boundary."--".$passage_ligne;
 
 //=====Envoi de l'e-mail.
 //mail($mail,$sujet,$message,$header);
+// echo 'envoi email à ' . $emailValid . '<br />';
 mail($emailValid,$sujet,$message,$header);
+// var_dump(mail($emailValid,$sujet,$message,$header));
 //==========
 ?>
