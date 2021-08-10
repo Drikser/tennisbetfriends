@@ -134,8 +134,10 @@ session_start(); // On démarre la session AVANT toute chose
             $pseudoValid = $_POST['Pseudo'];
             $prenomValid = htmlspecialchars($_POST['Prenom']);
 
-            $local = $_SERVER['REMOTE_ADDR']=='127.0.0.1' ? 1 : 0;
-            if ($local = 1) {
+            // $local = $_SERVER['REMOTE_ADDR']=='127.0.0.1' ? 1 : 0;
+            // if ($local = 1) {
+            // echo 'HTTP HOST=' . $_SERVER['HTTP_HOST'] . '<br />';
+            if ($_SERVER['HTTP_HOST'] == 'localhost') {
               // Send message with localhost link (http://localhost/pronos/xxxxxxxxxx.php)
               include("inscriptionMailValidation_localhost.php");
             } else {
