@@ -11,8 +11,8 @@ else
 }
 //=====Déclaration des messages au format texte et au format HTML.
 // REMARQUE :
-// Pour le test, l'addresse du lien commence par http://localhost/pronos/xxxxxxxxxx.php
-// En production, l'addresse du lien commence par http://www.tennisbetfriends.com/xxxxxxxxxx.php
+// Pour le test, l'addresse du lien commence par http://localhost/tennisbetfriends/www/fr-fr/xxxxxxxxxx.php
+// En production, l'addresse du lien commence par http://www.tennisbetfriends.com/fr-fr/xxxxxxxxxx.php
 
 
 $message_txt = "Bonjour, bienvenue sur Tennis Bet Friends !";
@@ -21,7 +21,7 @@ $message_txt = "Bonjour, bienvenue sur Tennis Bet Friends !";
 $message_html = "
 <html><head></head><body>Cher <var>$prenomValid</var>, <br />
 <p>
-Bienvenue sur <i><a href='www.tennisbetfriends.com'>www.tennisbetfriends.com</a></i>. Merci de votre inscription.
+Bienvenue sur <i><a href='http://www.tennisbetfriends.com/fr-fr/index.php'>www.tennisbetfriends.com</a></i>. Merci de votre inscription.
 </p>
 <p>
 Votre pseudo est : <b><var>$pseudoValid</var></b>.
