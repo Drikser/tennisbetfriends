@@ -41,7 +41,7 @@ session_start(); // On démarre la session AVANT toute chose
 
         			if ($pseudo == false) {
         				echo "<span class='warning'>Pseudo non présent en base ou compte non activé.</span><br />";
-                echo "<span class='warning'>Inscrivez-vous en suivant ce lien: <a href='inscription.php'>Inscription</a>, ou vérifier votre adresse email pour trouver votre email d'activation.</span><br />";
+                echo "<span class='warning'>Inscrivez-vous en suivant ce lien: <a href='inscription.php'>Inscription</a>, ou vérifiez votre adresse email pour trouver votre email d'activation.</span><br />";
         			}
         			else {
         				// Si pseudo existe, contrôle du mot de passe
