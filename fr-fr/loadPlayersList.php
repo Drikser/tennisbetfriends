@@ -40,7 +40,7 @@ session_start(); // On démarre la session AVANT toute chose
 
             if ($donnees['NbPlayersTournament'] == 0) {
 
-              $adresse = "https://www.atptour.com/en/scores/current/wimbledon/540/draws";
+              $adresse = "https://www.atptour.com/en/scores/current/us-open/560/draws";
 
               $page = file_get_contents($adresse);
 
