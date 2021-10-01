@@ -26,11 +26,6 @@ session_start(); // On démarre la session AVANT toute chose
 
         <div class="element_corps" id="corps">
 
-            <p>
-                Vous avez oublié votre mot de passe ?<br />
-                Pas d'inquiétudes, renseignez votre adresse email et il vous sera envoyé un lien pour pouvoir le changer. <br />
-            </p>
-
             <?php
             //*************************************************************************************************************************************************
             //*                                         TRAITEMENT DE VERIFICATION DES DONNEES SAISIES
@@ -73,6 +68,10 @@ session_start(); // On démarre la session AVANT toute chose
           		//*                                         AFFICHAGE DU FORMULAIRE POUR RENSEIGNER L'ADRESSE EMAIL
           		//*************************************************************************************************************************************************
           		-->
+              <p>
+                  Vous avez oublié votre mot de passe ?<br />
+                  Pas d'inquiétudes, renseignez votre adresse email et il vous sera envoyé un lien pour pouvoir le changer. <br />
+              </p>
               <p>
                 <form id="registration_form" action="mdpOublie.php" method="post" enctype="multipart/form-data">
                   <p>
