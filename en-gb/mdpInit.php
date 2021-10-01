@@ -26,10 +26,6 @@ session_start(); // On démarre la session AVANT toute chose
 
         <div class="element_corps" id="corps">
 
-            <p>
-                Please enter your new password: <br />
-            </p>
-
             <?php
                 //echo "variable = " . $_GET['var'];
 
@@ -71,6 +67,9 @@ session_start(); // On démarre la session AVANT toute chose
       		    //*                                         AFFICHAGE DU FORMULAIRE POUR RENSEIGNER L'ADRESSE EMAIL
       		    //*************************************************************************************************************************************************
       		    -->
+              <p>
+                  Please enter your new password: <br />
+              </p>
               <p>
                 <form id="resetPassword_form" action="mdpInit.php?var=<?php echo $token ?>" method="post" enctype="multipart/form-data">
                   <p>
