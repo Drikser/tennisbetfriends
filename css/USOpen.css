@@ -182,15 +182,17 @@ th
     color: white;
     /* font-family: sans-serif; */
     /* background-color: LightBlue; */
-    list-style-type: none;
     text-decoration:none;
 }
 
 nav ul
 {
     list-style-type: none;
+    /* list-style-type: disc; */
     display:flex;
     flex-direction: column;
+    /* list-style-position: inside; */
+    /* list-style-image: url(../images/balleDeTennis.jpg); */
 }
 
 

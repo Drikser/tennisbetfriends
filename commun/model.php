@@ -209,7 +209,7 @@ function getAllPlayersTournament($param) {
 	$bdd = dbConnect();
 //	$response = $bdd->query('SELECT * FROM players');
 	if ($param == "disp") {
-		$response = $bdd->query('SELECT * FROM players WHERE PLA_DISP <> "N" ORDER BY PLA_NOM');
+		$response = $bdd->query('SELECT * FROM players WHERE PLA_DISP <> "N" ORDER BY PLA_SEED_STRENGHT, PLA_NOM');
 	} else {
 		$response = $bdd->query('SELECT * FROM players');
 	}
@@ -723,8 +723,33 @@ function createMatchFirstRound() {
 }
 
 
-// REPRENDRE ICI //
-function loadTournamentPlayers($player, $pays, $display) {
+function dropTablePlayers() {
+	$bdd = dbConnect();
+
+	$response = $bdd->query('DROP TABLE players');
+
+	return $response;
+}
+
+
+function createTablePlayers() {
+	$bdd = dbConnect();
+
+	$response = $bdd->query('CREATE TABLE players (
+			PLA_ID INT(4) NOT NULL AUTO_INCREMENT,
+			PLA_NOM VARCHAR(255) NOT NULL,
+			PLA_PAY CHAR(3) NOT NULL,
+			PLA_DISP CHAR (1) NOT NULL,
+			PLA_SEED CHAR (2) NOT NULL,
+			PLA_SEED_STRENGHT INT (2) NOT NULL,
+			PRIMARY KEY (PLA_ID)
+	)
+	ENGINE=INNODB');
+
+	return $response;
+}
+
+function loadTournamentPlayers($player, $pays, $display, $seed, $seedStrenght) {
 	$bdd = dbConnect();
 
 		//delete all record before loading
@@ -732,11 +757,13 @@ function loadTournamentPlayers($player, $pays, $display) {
 		//return $del;
 
     //insertion du joueur et du pays
-    $req = $bdd->prepare('INSERT INTO players (PLA_NOM, PLA_PAY, PLA_DISP) VALUES (:Name, :Pays, :Disp)');
+    $req = $bdd->prepare('INSERT INTO players (PLA_NOM, PLA_PAY, PLA_DISP, PLA_SEED, PLA_SEED_STRENGHT) VALUES (:Name, :Pays, :Disp, :Seed, :SeedStrenght)');
     $req->execute(array(
         'Name' => $player,
         'Pays' => $pays,
-				'Disp' => $display));
+				'Disp' => $display,
+				'Seed' => $seed,
+				'SeedStrenght' => $seedStrenght));
 
     return $req;
 }

@@ -163,7 +163,7 @@ session_start(); // On démarre la session AVANT toute chose
     	                if (strtotime(date('Y-m-d G:H:s')) < strtotime($startDateTournament)) {
 
     	                	// echo "Choisissez un vainqueur puis validez.<br />";
-                        echo "Qui va remporter cette édition 2020 ?<br />";
+                        echo "Qui va remporter cette édition ?<br />";
 
 
     	                    ?>
@@ -182,9 +182,15 @@ session_start(); // On démarre la session AVANT toute chose
     	                    <?php
     	                        while ($donnees = $listPlayersTournament->fetch())
     	                        {
+                                if (!empty($donnees['PLA_SEED'])) {
     	                    ?>
-    	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+    	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . '] '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
     	                    <?php
+                                } else {
+                          ?>
+    	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+    	                    <?php
+                                }
     	                        }
     	                    ?>
     	                    </select>
@@ -193,6 +199,12 @@ session_start(); // On démarre la session AVANT toute chose
     	                    <p>
     	                        <input type="submit" value="Valider" />
     	                    </p>
+
+                          <u>NOTE:</u> <br />
+                          [1], [2], ... = Tête de série numéro 1, 2, ... <br />
+                          [WC]          = Wild Card (joueur invité) <br />
+                          [Q]           = Qualifié (joueur entré dans le tableau principal grâce aux qualifications) <br />
+                          [LL]          = Lucky loser (joueur ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait) <br />
                           </fieldset>
     	                    </form>
     	                    <?php
@@ -236,11 +248,14 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <?php
     	                            while ($donnees = $listPlayersTournament->fetch())
     	                            {
-                                    $finalist1_wanted = $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')';
-                                    if ($finalist1_wanted != $finalist2_wanted) {
-    	                        ?>
-    	                            <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
-    	                        <?php
+                                    if (!empty($donnees['PLA_SEED'])) {
+        	                    ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . '] '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+        	                    <?php
+                                    } else {
+                              ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+        	                    <?php
                                     }
                                   }
     	                        ?>
@@ -256,9 +271,15 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <?php
     	                            while ($donnees = $listPlayersTournament->fetch())
     	                            {
-    	                        ?>
-    	                            <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
-    	                        <?php
+                                    if (!empty($donnees['PLA_SEED'])) {
+        	                    ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . '] '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+        	                    <?php
+                                    } else {
+                              ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+        	                    <?php
+                                    }
     	                            }
     	                        ?>
     	                        </select><br />
@@ -267,6 +288,12 @@ session_start(); // On démarre la session AVANT toute chose
     	                    <p>
     	                        <input type="submit" value="Valider" />
     	                    </p>
+
+                          <u>NOTE:</u> <br />
+                          [1], [2], ... = Tête de série numéro 1, 2, ... <br />
+                          [WC]          = Wild Card (joueur invité) <br />
+                          [Q]           = Qualifié (joueur entré dans le tableau principal grâce aux qualifications) <br />
+                          [LL]          = Lucky loser (joueur ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait) <br />
                           </fieldset>
     	                    </form>
     	                    <?php
@@ -301,9 +328,15 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <?php
     	                            while ($donnees = $listPlayersTournament->fetch())
     	                            {
-    	                        ?>
-    	                            <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
-    	                        <?php
+                                    if (!empty($donnees['PLA_SEED'])) {
+        	                    ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . '] '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+        	                    <?php
+                                    } else {
+                              ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+        	                    <?php
+                                    }
     	                            }
     	                        ?>
     	                        </select><br />
@@ -318,9 +351,15 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <?php
     	                            while ($donnees = $listPlayersTournament->fetch())
     	                            {
-    	                        ?>
-    	                            <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
-    	                        <?php
+                                    if (!empty($donnees['PLA_SEED'])) {
+        	                    ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . '] '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+        	                    <?php
+                                    } else {
+                              ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+        	                    <?php
+                                    }
     	                            }
     	                        ?>
     	                        </select><br />
@@ -334,9 +373,15 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <?php
     	                            while ($donnees = $listPlayersTournament->fetch())
     	                            {
-    	                        ?>
-    	                            <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
-    	                        <?php
+                                    if (!empty($donnees['PLA_SEED'])) {
+        	                    ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . '] '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+        	                    <?php
+                                    } else {
+                              ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+        	                    <?php
+                                    }
     	                            }
     	                        ?>
     	                        </select><br />
@@ -350,9 +395,15 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <?php
     	                            while ($donnees = $listPlayersTournament->fetch())
     	                            {
-    	                        ?>
-    	                            <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
-    	                        <?php
+                                    if (!empty($donnees['PLA_SEED'])) {
+        	                    ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . '] '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+        	                    <?php
+                                    } else {
+                              ?>
+        	                        <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+        	                    <?php
+                                    }
     	                            }
     	                        ?>
     	                        </select><br />
@@ -360,6 +411,12 @@ session_start(); // On démarre la session AVANT toute chose
     	                    <p>
     	                        <input type="submit" value="Valider" />
     	                    </p>
+
+                          <u>NOTE:</u> <br />
+                          [1], [2], ... = Tête de série numéro 1, 2, ... <br />
+                          [WC]          = Wild Card (joueur invité) <br />
+                          [Q]           = Qualifié (joueur entré dans le tableau principal grâce aux qualifications) <br />
+                          [LL]          = Lucky loser (joueur ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait) <br />
                           </fieldset>
     	                    </form>
     	                    <?php
