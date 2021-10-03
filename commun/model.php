@@ -877,6 +877,20 @@ function updateResult($postMatchId) {
     return $req;
 }
 
+function updateDate($postMatchId) {
+	$bdd = dbConnect();
+
+	//Chargement des scores en table MySQL des résultats
+	$req = $bdd->prepare('UPDATE resultats
+							 SET RES_MATCH_DAT = :NewDateMatch, RES_MATCH_TMSTP = now()
+							   WHERE RES_MATCH_ID = "'.$postMatchId.'"');
+
+	$req->execute(array(
+		'NewDateMatch' => $_POST['NewDateMatch']));
+
+    return $req;
+}
+
 
 function updateScorePronostique($postPlayerId, $postMatchId, $postPtsPrognosis) {
 	$bdd = dbConnect();

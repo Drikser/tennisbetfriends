@@ -135,24 +135,6 @@ session_start(); // On démarre la session AVANT toute chose
         		<?php
             if (isset($_SESSION['JOU_ID']) AND isset($_SESSION['JOU_PSE']) AND $_SESSION['JOU_PSE']=="Admin") {
 
-                $hrefParametre = "";
-                // echo "Paramètre pour GET avant test = " . $hrefParametre . "<br />";
-
-                if ($_SESSION['JOU_PSE'] == "Admin") {
-                  // $hrefParametre = "saisieResultat.php?ResMatchId=";
-                  $hrefParametre = "gestionMatchs.php?ResMatchId=";
-                }
-                else {
-                  $hrefParametre = "pronostique.php?ResMatchId=";
-                }
-
-                // echo "Paramètre pour GET après test = " . $hrefParametre . "<br />";
-
-                // echo "<br />Le(s) prochain(s) match(s) est(sont) :<br />";
-
-                //$reponse = $bdd->query('SELECT * FROM résultats WHERE RES_MATCH_DAT = CURDATE()');
-                //$reponse = $bdd->query('SELECT * FROM résultats WHERE RES_MATCH_DAT >= CURDATE() AND RES_MATCH = ""'); //en commentaire le temps des tests
-
                 $response = getResultsToEnter();
                 $niveauPrecedent = "";
 
@@ -169,10 +151,10 @@ session_start(); // On démarre la session AVANT toute chose
 
                   if ($_SESSION['JOU_PSE'] == "Admin") {
 
-                        // Si on clique sur "saisie du résultat", renvoi vers ancre "FinListeMatchs"
+                      // Si on clique sur "saisie du résultat", renvoi vers ancre "FinListeMatchs"
                       // echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . " --> " . "<a href=saisieResultat.php?ResMatchId=" . $matchASaisir . "#FinListeMatchs>" . " Saisir le score" . "</a><br />";
                       // echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " (" . $donnees['RES_MATCH_TOUR_SEQ'] . ") : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . " --> " . "<a href=gestionMatchs.php?ResMatchId=" . $matchASaisir . "#FinListeMatchs>" . " Saisir le score" . "</a><br />";
-                    echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " (" . $donnees['RES_MATCH_TOUR_SEQ'] . ") : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . " --> " . "<a href=gestionMatchs.php?ResMatchId=" . $matchASaisir . "#FinListeMatchs>" . " Saisir le score" . "</a>" . " / " . "<a href=gestionMatchs.php?ResMatchId=" . $matchASaisir . "#FinListeMatchs>" . " Modifier la date" . "</a><br />";
+                    echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " (" . $donnees['RES_MATCH_TOUR_SEQ'] . ") : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . " --> " . "<a href=gestionMatchs.php?ResMatchId=" . $matchASaisir . "&Action=Score#FinListeMatchs>" . " Saisir le score" . "</a>" . " / " . "<a href=gestionMatchs.php?ResMatchId=" . $matchASaisir . "&Action=Date#FinListeMatchs>" . " Modifier la date" . "</a><br />";
 
                     $niveauPrecedent = $donnees['RES_MATCH_TOUR'];
                   }
@@ -191,23 +173,42 @@ session_start(); // On démarre la session AVANT toute chose
 
                 <?php
 
-
                 if (isset($_GET['ResMatchId'])) {
 
-                  echo "<br /> SAISIE RESULTAT A FAIRE :<br />";
-
                   $idSessionJoueur = $_SESSION['JOU_ID'];
-                  echo "pseudo=" . $idSessionJoueur . "<br />";
-                  echo "Id du match à saisir: " . $_GET['ResMatchId'] . "<br />";
+                  echo "<br />";
+                  echo "pseudo = " . $idSessionJoueur . "<br />";
+                  echo "Id du match à saisir = " . $_GET['ResMatchId'] . "<br />";
+                  echo "Action = " . $_GET['Action'] . "<br />";
 
-                  $matchChoisi = getResultToEnter($_GET['ResMatchId']);
+                  if ($_GET['Action'] == 'Score') {
 
-                  while ($donnees = $matchChoisi->fetch()) {
-                    //	echo $donnees['RES_MATCH_ID'] . " - " . $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_TOURNOI'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs " . $donnees['RES_MATCH_JOU2'] . "<br />";
-                    $GLOBALS['pageOrigine'] = 'gestionMatchs_saisie';
-                    include ("formulairePronostiqueMatchASaisir.php");
+                    echo "<br /> SAISIE RESULTAT A FAIRE :<br />";
+
+                    $matchChoisi = getResultToEnter($_GET['ResMatchId']);
+
+                    while ($donnees = $matchChoisi->fetch()) {
+                      //	echo $donnees['RES_MATCH_ID'] . " - " . $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_TOURNOI'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs " . $donnees['RES_MATCH_JOU2'] . "<br />";
+                      $GLOBALS['pageOrigine'] = 'gestionMatchs_saisie';
+                        include ("formulairePronostiqueMatchASaisir.php");
+                    }
+
+                  } else {
+
+                    echo "<br /> NOUVELLE DATE DU MATCH :<br />";
+
+                    $matchChoisi = getResultToEnter($_GET['ResMatchId']);
+
+                    while ($donnees = $matchChoisi->fetch()) {
+                      //	echo $donnees['RES_MATCH_ID'] . " - " . $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_TOURNOI'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs " . $donnees['RES_MATCH_JOU2'] . "<br />";
+                      $GLOBALS['pageOrigine'] = 'gestionMatchs_saisie';
+                      include ("formulairePronostiqueDateAChanger.php");
+                    }
                   }
+
+
                 }
+
             }
             ?>
 
