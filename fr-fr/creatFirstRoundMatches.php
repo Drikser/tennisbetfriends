@@ -93,10 +93,14 @@ session_start(); // On démarre la session AVANT toute chose
               // - else
               //   . update match with player 2
 
-              //******* Créer le nom du joueur ave son pays pour les matchs
+              //******* Créer le nom du joueur avec son pays et si il est tête de série pour les matchs
               //******* Si "Bye", laisser tel quel
               if ($loop['PLA_NOM'] != "Bye") {
-                $playerFirstRound = $loop['PLA_NOM'] . " (" . $loop['PLA_PAY'] . ")";
+                if (!empty($loop['PLA_SEED'])) {
+                  $playerFirstRound = $loop['PLA_NOM'] . " (" . $loop['PLA_PAY'] . ") [" . $loop['PLA_SEED'] . "]";
+                } else {
+                  $playerFirstRound = $loop['PLA_NOM'] . " (" . $loop['PLA_PAY'] . ")";
+                }
               } else {
                 $playerFirstRound = $loop['PLA_NOM'];
               }
