@@ -197,16 +197,18 @@ session_start(); // On démarre la session AVANT toute chose
     	                    ?>
     	                    </select>
 
+                          <span data-html="true" info-text="NOTE:
+                          [1], [2], ... = Seed number 1, 2, ...
+                          [WC] = Wild Card (player accepted in the main draw at the discretion of the tournament)
+                          [Q] = Qualifier (player who reaches the tournament's main draw by competing in a pre-tournament qualifying)
+                          [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
+                          class='tooltip'> info</span>
+
     	                    </p>
     	                    <p>
     	                        <input type="submit" value="Confirm" />
     	                    </p>
 
-                          <u>NOTE:</u> <br />
-                          [1], [2], ... = Seed number 1, 2, ... <br />
-                          [WC]          = Wild Card (player has been invited) <br />
-                          [Q]           = Qualifier (player entered the main draw throught qualifying) <br />
-                          [LL]          = Lucky loser (player didn't qualify but entered the main draw because of a player withdrawing) <br />
                           </fieldset>
     	                    </form>
     	                    <?php
@@ -252,7 +254,16 @@ session_start(); // On démarre la session AVANT toute chose
                                     }
                                   }
     	                        ?>
-    	                        </select><br />
+    	                        </select>
+
+                              <span data-html="true" info-text="NOTE:
+                              [1], [2], ... = Seed number 1, 2, ...
+                              [WC] = Wild Card (player accepted in the main draw at the discretion of the tournament)
+                              [Q] = Qualifier (player who reaches the tournament's main draw by competing in a pre-tournament qualifying)
+                              [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
+                              class='tooltip'> info</span>
+
+                              <br />
 
 
     	                        <?php
@@ -282,11 +293,6 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <input type="submit" value="Confirm" />
     	                    </p>
 
-                          <u>NOTE:</u> <br />
-                          [1], [2], ... = Seed number 1, 2, ... <br />
-                          [WC]          = Wild Card (player has been invited) <br />
-                          [Q]           = Qualifier (player entered the main draw throught qualifying) <br />
-                          [LL]          = Lucky loser (player didn't qualify but entered the main draw because of a player withdrawing) <br />
                           </fieldset>
     	                    </form>
     	                    <?php
@@ -333,8 +339,16 @@ session_start(); // On démarre la session AVANT toute chose
                                     }
     	                            }
     	                        ?>
-    	                        </select><br />
+    	                        </select>
 
+                              <span data-html="true" info-text="NOTE:
+                              [1], [2], ... = Seed number 1, 2, ...
+                              [WC] = Wild Card (player accepted in the main draw at the discretion of the tournament)
+                              [Q] = Qualifier (player who reaches the tournament's main draw by competing in a pre-tournament qualifying)
+                              [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
+                              class='tooltip'> info</span>
+
+                              <br />
 
     	                        <?php
                               $param = "disp";
@@ -406,11 +420,6 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <input type="submit" value="Confirm" />
     	                    </p>
 
-                          <u>NOTE:</u> <br />
-                          [1], [2], ... = Seed number 1, 2, ... <br />
-                          [WC]          = Wild Card (player has been invited) <br />
-                          [Q]           = Qualifier (player entered the main draw throught qualifying) <br />
-                          [LL]          = Lucky loser (player didn't qualify but entered the main draw because of a player withdrawing) <br />
                           </fieldset>
     	                    </form>
     	                    <?php

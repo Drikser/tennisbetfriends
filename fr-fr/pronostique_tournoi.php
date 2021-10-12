@@ -195,16 +195,18 @@ session_start(); // On démarre la session AVANT toute chose
     	                    ?>
     	                    </select>
 
+                          <span data-html="true" info-text="NOTE:
+                          [1], [2], ... = Tête de série numéro 1, 2, ...
+                          [WC] = Wild Card (joueur invité par le tournoi)
+                          [Q] = Qualifié (joueur entré dans le tableau principal grâce aux qualifications)
+                          [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
+                          class='tooltip'> info</span>
+
     	                    </p>
     	                    <p>
     	                        <input type="submit" value="Valider" />
     	                    </p>
 
-                          <u>NOTE:</u> <br />
-                          [1], [2], ... = Tête de série numéro 1, 2, ... <br />
-                          [WC]          = Wild Card (joueur invité) <br />
-                          [Q]           = Qualifié (joueur entré dans le tableau principal grâce aux qualifications) <br />
-                          [LL]          = Lucky loser (joueur ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait) <br />
                           </fieldset>
     	                    </form>
     	                    <?php
@@ -259,8 +261,16 @@ session_start(); // On démarre la session AVANT toute chose
                                     }
                                   }
     	                        ?>
-    	                        </select><br />
+    	                        </select>
 
+                              <span data-html="true" info-text="NOTE:
+                              [1], [2], ... = Tête de série numéro 1, 2, ...
+                              [WC] = Wild Card (joueur invité par le tournoi)
+                              [Q] = Qualifié (joueur entré dans le tableau principal grâce aux qualifications)
+                              [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
+                              class='tooltip'> info</span>
+
+                              <br />
 
     	                        <?php
                               $param = "disp";
@@ -289,11 +299,6 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <input type="submit" value="Valider" />
     	                    </p>
 
-                          <u>NOTE:</u> <br />
-                          [1], [2], ... = Tête de série numéro 1, 2, ... <br />
-                          [WC]          = Wild Card (joueur invité) <br />
-                          [Q]           = Qualifié (joueur entré dans le tableau principal grâce aux qualifications) <br />
-                          [LL]          = Lucky loser (joueur ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait) <br />
                           </fieldset>
     	                    </form>
     	                    <?php
@@ -339,8 +344,16 @@ session_start(); // On démarre la session AVANT toute chose
                                     }
     	                            }
     	                        ?>
-    	                        </select><br />
+    	                        </select>
 
+                              <span data-html="true" info-text="NOTE:
+                              [1], [2], ... = Tête de série numéro 1, 2, ...
+                              [WC] = Wild Card (joueur invité par le tournoi)
+                              [Q] = Qualifié (joueur entré dans le tableau principal grâce aux qualifications)
+                              [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
+                              class='tooltip'> info</span>
+
+                              <br />
 
     	                        <?php
                               $param = "disp";
@@ -412,11 +425,6 @@ session_start(); // On démarre la session AVANT toute chose
     	                        <input type="submit" value="Valider" />
     	                    </p>
 
-                          <u>NOTE:</u> <br />
-                          [1], [2], ... = Tête de série numéro 1, 2, ... <br />
-                          [WC]          = Wild Card (joueur invité) <br />
-                          [Q]           = Qualifié (joueur entré dans le tableau principal grâce aux qualifications) <br />
-                          [LL]          = Lucky loser (joueur ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait) <br />
                           </fieldset>
     	                    </form>
     	                    <?php

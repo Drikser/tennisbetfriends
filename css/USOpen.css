@@ -93,6 +93,43 @@ font-size: 20px;
 color: black;
 }
 
+
+/* Part for tooltip in tournament predictions --- start */
+.tooltip {
+  position:relative; /* making the .tooltip span a container for the tooltip text */
+  border-bottom:1px dashed #000; /* little indicater to indicate it's hoverable */
+}
+
+.tooltip:before {
+  content: attr(info-text); /* here's the magic */
+  position:absolute;
+
+  /* vertically center */
+  top:50%;
+  transform:translateY(-50%);
+
+  /* move to right */
+  left:100%;
+  margin-left:15px; /* and add a small left margin */
+
+  /* basic styles */
+  width:500px;
+  padding:10px;
+  border-radius:10px;
+  background:#000;
+  color: #fff;
+  text-align:left;
+  white-space: pre-line;
+
+  display:none; /* hide by default */
+}
+
+.tooltip:hover:before {
+  display:block;
+}
+/* Part for tooltip in tournament predictions --- end */
+
+
 table
 {
     border-collapse: collapse; /* Les bordures du tableau seront collées (plus joli) */
