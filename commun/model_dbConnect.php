@@ -20,7 +20,7 @@
 
 			//----------------------------------
 			//--> Base de données pour le test
-			$bdd = new PDO('mysql:host=localhost;dbname=wimbledon2021;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+			$bdd = new PDO('mysql:host=localhost;dbname=australianopen2022;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 			// $bdd = new PDO('mysql:host=localhost;dbname=marseille2020;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 			//----------------------------------
 
