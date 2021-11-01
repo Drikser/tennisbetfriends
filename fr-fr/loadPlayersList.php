@@ -40,12 +40,16 @@ session_start(); // On démarre la session AVANT toute chose
 
             if ($donnees['NbPlayersTournament'] == 0) {
 
+<<<<<<< HEAD
               // ----- Gran Slams -----
               // $adresse = "https://www.atptour.com/en/scores/current/australian-open/580/2022/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/roland-garros/520/2022/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/wimbledon/540/2022/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/us-open/560/2022/draws";
               // ----- Other tournaments for tests -----
+=======
+              // $adresse = "https://www.atptour.com/en/scores/current/us-open/560/draws";
+>>>>>>> DisplaySeeds
               $adresse = "https://www.atptour.com/en/scores/current/paris/352/draws";
 
               $page = file_get_contents($adresse);

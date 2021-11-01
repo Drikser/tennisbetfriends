@@ -40,12 +40,15 @@ session_start(); // On démarre la session AVANT toute chose
 
             if ($donnees['NbPlayersTournament'] == 0) {
 
+<<<<<<< HEAD
               // ----- Gran Slams -----
               // $adresse = "https://www.atptour.com/en/tournaments/australian-open/580/overview";
               // $adresse = "https://www.atptour.com/en/tournaments/roland-garros/520/overview";
               // $adresse = "https://www.atptour.com/en/tournaments/wimbledon/540/overview";
               // $adresse = "https://www.atptour.com/en/tournaments/us-open/560/overview";
               // ----- Other tournaments for tests -----
+=======
+>>>>>>> DisplaySeeds
               $adresse = "https://www.atptour.com/en/tournaments/paris/352/overview";
 
               $page = file_get_contents($adresse);
@@ -63,16 +66,19 @@ session_start(); // On démarre la session AVANT toute chose
 
               var_dump($player); // Le var_dump() du tableau $prix nous montre que $prix[0] contient l'ensemble du morceau trouvé et que $prix[1] contient le contenu de la parenthèse capturante
 
+              dropTablePlayers();
+              createTablePlayers();
+
               for($i = 0; $i < count($player[1]); $i++) // On parcourt le tableau $player[1]
               {
                   echo "ligne=" . $player[1][$i] . " (" . $player[6][$i] . ")<br />"; // On affiche le joueur et son pays
 
                   if (empty($player[1][$i])) {
                     // loadTournamentPlayers("Bye", $player[4][$i], "N");
-                    loadTournamentPlayers("Qualifier/Lucky Loser", $player[6][$i], "N");
+                    loadTournamentPlayers("Qualifier/Lucky Loser", $player[6][$i], "N", " ", 99);
                   }
                   else {
-                    loadTournamentPlayers($player[1][$i], $player[6][$i], "Y");
+                    loadTournamentPlayers($player[1][$i], $player[6][$i], "Y", " ", 99);
                   }
                   //    echo "ligne=" . $player[1][$i] . "<br />"; // On affiche le joueur
               }
