@@ -199,7 +199,7 @@ if ($nbRow > 0) {
 
 // Requête pour savoir si tous les matchs du tour sont saisis
 //echo 'Recherche si les matchs du niveau ' . $level . ' sont tous terminés.<br />';
-$request = getResultLevel($level);
+$request = getFrenchResultLevel($level);
 
 // Si le retour est nul, on peut tester le bonus
 $nbRow = $request->rowcount();
@@ -212,7 +212,7 @@ if ($nbRow == 0) {
 	echo 'Tous les matchs du niveau ' . $level . ' sont terminés --> Recherche si il y a encore des français en liste.<br />';
 
 	// On regarde si il a des français en course
-	$frenchLeft = getFrenchLeft($level);
+	// $frenchLeft = getFrenchLeft($level);
 
 	// On va chercher si le français a gagné ou perdu
 	// - Si tous les français ont perdus ==> Bonus Niveau et Meilleur français

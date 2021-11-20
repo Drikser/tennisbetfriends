@@ -220,7 +220,7 @@ function getAllPlayersTournament($param) {
 function getAllFrenchTournament() {
 	// Rechercher l'id du joueur créé
 	$bdd = dbConnect();
-	$response = $bdd->query('SELECT * FROM players WHERE PLA_PAY = "fra"');
+	$response = $bdd->query('SELECT * FROM players WHERE PLA_PAY = "fra" ORDER BY PLA_SEED_STRENGHT, PLA_NOM');
 
 	return $response;
 }
@@ -458,13 +458,15 @@ function getResultToEnter($postMatchId) {
 	return $req;
 }
 
-function getResultLevel($postLevel) {
+function getFrenchResultLevel($postLevel) {
 	$bdd = dbConnect();
 
     $request = $bdd->prepare("SELECT *
-        	                  FROM resultats
-                    	     WHERE RES_MATCH = ''
-                               AND RES_MATCH_TOUR = ?");
+        	                  FROM  resultats
+                    	     WHERE  RES_MATCH = ''
+													   AND (RES_MATCH_JOU1 LIKE '%(fra)'
+                    	        OR  RES_MATCH_JOU2 LIKE '%(fra)')
+                             AND  RES_MATCH_TOUR = ?");
 	$request->execute(array($postLevel));
 
 	return $request;

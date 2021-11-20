@@ -86,48 +86,97 @@ return $outputTypeResult;
 //** convert round french to english
 //************************************************************************************************************************************************************
 
-function ConvertRoundFTE($inputRound) {
+function ConvertRoundFTE($inputRoundF) {
 
-	switch ($inputRound) {
+	switch ($inputRoundF) {
 
 		case 'VAINQUEUR':
-			$outputRound = 'WINNER';
+			$outputRoundE = 'WINNER';
 			break;
 
 		case 'FINALE':
-			$outputRound = 'FINAL';
+			$outputRoundE = 'FINAL';
 			break;
 
 		case 'DEMI-FINALE':
-			$outputRound = 'SEMI-FINAL';
+			$outputRoundE = 'SEMI-FINAL';
 			break;
 
 		case 'QUART DE FINALE':
-			$outputRound = 'QUARTER FINAL';
+			$outputRoundE = 'QUARTER FINAL';
 			break;
 
 		case 'HUITIEME DE FINALE':
-			$outputRound = 'ROUND OF 16';
+			$outputRoundE = 'ROUND OF 16';
 			break;
 
 		case '3EME TOUR':
-			$outputRound = '3RD ROUND';
+			$outputRoundE = '3RD ROUND';
 			break;
 
 		case '2EME TOUR':
-			$outputRound = '2ND ROUND';
+			$outputRoundE = '2ND ROUND';
 			break;
 
 		case '1ER TOUR':
-			$outputRound = '1ST ROUND';
+			$outputRoundE = '1ST ROUND';
 			break;
 
 		default:
-			$outputRound = '';
+			$outputRoundE = '';
 			break;
 	}
 
-	return $outputRound;
+	return $outputRoundE;
+}
+
+
+//************************************************************************************************************************************************************
+//** convert round english to french
+//************************************************************************************************************************************************************
+
+function ConvertRoundETF($inputRoundE) {
+
+	switch ($inputRoundE) {
+
+		case 'WINNER':
+			$outputRoundF = 'VAINQUEUR';
+			break;
+
+		case 'FINAL':
+			$outputRoundF = 'FINALE';
+			break;
+
+		case 'SEMI-FINAL':
+			$outputRoundF = 'DEMI-FINALE';
+			break;
+
+		case 'QUARTER FINAL':
+			$outputRoundF = 'QUART DE FINALE';
+			break;
+
+		case 'ROUND OF 16':
+			$outputRoundF = 'HUITIEME DE FINALE';
+			break;
+
+		case '3RD ROUND':
+			$outputRoundF = '3EME TOUR';
+			break;
+
+		case '2ND ROUND':
+			$outputRoundF = '2EME TOUR';
+			break;
+
+		case '1ST ROUND':
+			$outputRoundF = '1ER TOUR';
+			break;
+
+		default:
+			$outputRoundF = '';
+			break;
+	}
+
+	return $outputRoundF;
 }
 
 

@@ -116,7 +116,7 @@ session_start(); // On démarre la session AVANT toute chose
 
               $nbRow = $req->rowcount();
               if ($nbRow > 0) {
-                  echo "<span class=info>You have chosen as the best French player: </span>" . $_POST['BestFrench'] . "<br />";
+                  echo "<span class=info>You have chosen as the best Frenchman: </span>" . $_POST['BestFrench'] . "<br />";
                   echo "<span class=info>As long as the tournament has not yet started, you can still change your prediction.</span> ";
                   ?>
                   <input type="button" value="OK" onclick="window.location.href='pagePerso.php'">
@@ -131,7 +131,7 @@ session_start(); // On démarre la session AVANT toute chose
 
               if ($nbRow > 0) {
                   $outputRound = ConvertRoundFTE($_POST['LevelFrench']);
-                  echo "<span class=info>You think the level of the best French player will be: </span>" . $outputRound . "<br />";
+                  echo "<span class=info>You think the level of the best Frenchman will be: </span>" . $outputRound . "<br />";
                   echo "<span class=info>As long as the tournament has not yet started, you can still change your prediction.</span> ";
                   ?>
                   <input type="button" value="OK" onclick="window.location.href='pagePerso.php'">
@@ -271,34 +271,32 @@ session_start(); // On démarre la session AVANT toute chose
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI4']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI4_PTS']; ?></td>
                 </tr>
-                <!-- <tr>
+                <tr>
                     <td align="center" valign="middle" class="cellule">Best French</td>
                     <td align="center" valign="middle" class="cellule"></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM']; ?></td>
-                    <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM_PTS']; ?></td> -->
+                    <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM_PTS']; ?></td>
                     <?php
-                    // if ((strtotime(date('Y-m-d H:i:s')) < $startDateTournament)
-                    // if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
+                    if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
                     ?>
-                        <!-- <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=4>" . "Modifier pronostique</a>"; ?></td> -->
+                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=4>" . "Modifier pronostique</a>"; ?></td>
                     <?php
-                    // }
+                    }
                     ?>
-                <!-- </tr>
+                </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule">Level of best French</td>
                     <td align="center" valign="middle" class="cellule"></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $outputRound; ?></td>
-                    <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NIV_PTS']; ?></td> -->
+                    <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NIV_PTS']; ?></td>
                     <?php
-                    // if ((strtotime(date('Y-m-d H:i:s')) < $startDateTournament)
-                    // if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
+                    if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
                     ?>
-                        <!-- <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=5>" . "Modifier pronostique</a>"; ?></td> -->
+                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=5>" . "Modifier pronostique</a>"; ?></td>
                     <?php
-                    // }
+                    }
                     ?>
-                <!-- </tr> -->
+                </tr>
             <?php
             }
             ?>

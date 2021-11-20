@@ -135,6 +135,37 @@ session_start(); // On démarre la session AVANT toute chose
                     }
                   }
 
+                  //* --- meilleur français ---
+                  if (isset($_POST['BestFrench'])) {
+                      $req = updateBestFrench($_SESSION['JOU_ID']);
+
+                      $nbRow = $req->rowcount();
+                      if ($nbRow > 0) {
+                          echo "<span class=info>You choose as the best Frenchman: </span>" . $_POST['BestFrench'] . "<br />";
+                          echo "<span class=info>As long as the tournament has not yet started, you can still change your prediction in your <a href='pagePerso.php'>" . "Personal page " . "</a> </span>";
+                          ?>
+                          <input type="button" value="OK" onclick="window.location.href='pronostique_tournoi.php'"><br />
+                          <?php
+                      }
+                  }
+
+                  //* --- niveau du meilleur français ---
+                  if (isset($_POST['LevelFrench'])) {
+                      $req = updateLevelFrench($_SESSION['JOU_ID']);
+
+                      $nbRow = $req->rowcount();
+
+                      if ($nbRow > 0) {
+                          $outputRoundE = ConvertRoundFTE($_POST['LevelFrench']);
+                          echo "<span class=info>You think the best round reached by the best Frenchman will be: </span>" . $outputRoundE . "<br />";
+                          echo "<span class=info>As long as the tournament has not yet started, you can still change your prediction in your <a href='pagePerso.php'>" . "Personal page " . "</a> </span>";
+                          ?>
+                          <input type="button" value="OK" onclick="window.location.href='pronostique_tournoi.php'"><br />
+                          <?php
+                      }
+                  }
+
+
 
                   //*******************************************************************
                   //**      Contrôle si il y a encore des pronostiques à saisir      **
@@ -149,8 +180,8 @@ session_start(); // On démarre la session AVANT toute chose
                   or  $bonusPrognosis['PROB_DEMI2'] == ''
                   or  $bonusPrognosis['PROB_DEMI3'] == ''
                   or  $bonusPrognosis['PROB_DEMI4'] == ''
-                  // or  $bonusPrognosis['PROB_FR_NOM'] == ''
-                  // or  $bonusPrognosis['PROB_FR_NIV'] == ''
+                  or  $bonusPrognosis['PROB_FR_NOM'] == ''
+                  or  $bonusPrognosis['PROB_FR_NIV'] == ''
                   )
                   {
 
@@ -432,7 +463,118 @@ session_start(); // On démarre la session AVANT toute chose
 
   	                //---------------------------------------------------------------------------
   	                //03/03/2019: FONCTIONNALITE MEILLEUR FRANCAIS ET NIVEAU ATTEINT EN SUSPEND
+                    // 19/11/2021: Reinstate best french functionality
   	                //---------------------------------------------------------------------------
+
+  	                //**************************************** MEILLEUR FRANCAIS *****************************************
+                    if ($bonusPrognosis['PROB_FR_NOM'] == '') {
+
+    	                echo "<h2>Best French player</h2>";
+
+    	                // echo "playerId=" . $_SESSION['JOU_ID'] . " PROB_FR_NOM=" . $bonusPrognosis['PROB_FR_NOM'] . "<br />";
+
+    	                if (strtotime(date('Y-m-d G:H:s')) < strtotime($startDateTournament)) {
+
+                          echo "Who do you think will be the best Frenchman in this tournament?<br />";
+
+    	                    ?>
+                          <fieldset>
+    	                    <form action="pronostique_tournoi.php" method="post" enctype="multipart/form-data">
+
+    	                    <?php
+    	                    $listFrenchTournament = getAllFrenchTournament();
+    	                    ?>
+
+                          <p>
+    	                    Best Frenchman : <select name="BestFrench" id="BestFrench" required="required"/><br />
+    	                    <option value="---">--- make your choice ---</option>
+    	                    <?php
+    	                        while ($donnees = $listFrenchTournament->fetch())
+    	                        {
+                                if (!empty($donnees['PLA_SEED'])) {
+                          ?>
+                              <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . '] '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+                          <?php
+                                } else {
+                          ?>
+                              <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+                          <?php
+                                }
+                              }
+                          ?>
+    	                    </select>
+
+                          <span data-html="true" info-text="NOTE:
+                          [1], [2], ... = Seed number 1, 2, ...
+                          [WC] = Wild Card (player accepted in the main draw at the discretion of the tournament)
+                          [Q] = Qualifier (player who reaches the tournament's main draw by competing in a pre-tournament qualifying)
+                          [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
+                          class='tooltip'> info</span>
+
+    	                    </p>
+    	                    <p>
+    	                        <input type="submit" value="Valider" />
+    	                    </p>
+                          </fieldset>
+    	                    </form>
+    	                    <?php
+
+    	                }
+    	                else {
+    	                    // echo "<span class=info>Tu as choisi comme meilleur français du tournoi : </span>" . $bonusPrognosis['PROB_FR_NOM'] . "<br />";
+    	                    // echo "<span class=info>Tant que le tournoi n'est pas encore commencé, tu peux encore changer tes pronostiques dans la section 'Page Perso'</span><br />";
+                          echo "<span class=info>The tournament has started, you can no longer enter your prediction.</span><br />";
+    	                }
+                    }
+
+  	                //**************************************** NIVEAU MEILLEUR FRANCAIS *****************************************
+                    if ($bonusPrognosis['PROB_FR_NIV'] == '') {
+
+    	                echo "<h2>Round reached by the best Frenchman</h2>";
+
+    	                // echo "playerId=" . $_SESSION['JOU_ID'] . " PROB_FR_NIV=" . $bonusPrognosis['PROB_FR_NIV'] . "<br />";
+
+                      if (strtotime(date('Y-m-d G:H:s')) < strtotime($startDateTournament)) {
+    	                // if ($bonusPrognosis['PROB_FR_NIV'] == '') {
+
+                          echo "... and what will be his best result?<br />";
+
+    	                    ?>
+                          <fieldset>
+    	                    <form action="pronostique_tournoi.php" method="post" enctype="multipart/form-data">
+
+    	                    <?php
+    	                    $listLevel = getAllLevel();
+    	                    ?>
+
+    	                    <p>
+    	                    Niveau du meilleur français : <select type="text" name="LevelFrench" label="LevelFrench" required="required"/><br />
+
+    	                    <option value="---">--- make your choice ---</option>
+
+    	                    <?php
+    	                    while ($donnees = $listLevel->fetch()) {
+                              $outputRoundE = ConvertRoundFTE($donnees['SET_LVL_LIBELLE']);
+    	                    ?>
+    	                       	<option value="<?php echo $donnees['SET_LVL_LIBELLE']; ?>"><?php echo $outputRoundE; ?></option>
+    	                    <?php
+    	                       	}
+    	                    ?>
+    	                    </select>
+
+    	                    </p>
+    	                    <p>
+    	                        <input type="submit" value="Valider" />
+    	                    </p>
+                          </fieldset>
+    	                    </form>
+    	                    <?php
+
+    	                }
+    	                else {
+                          echo "<span class=info>The tournament has started, you can no longer enter your prediction.</span><br />";
+    	                }
+                    }
 
                   } else {
                     echo "<br />";

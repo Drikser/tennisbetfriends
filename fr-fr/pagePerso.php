@@ -129,7 +129,7 @@ session_start(); // On démarre la session AVANT toute chose
               $nbRow = $req->rowcount();
 
               if ($nbRow > 0) {
-                  echo "<span class=info>Tu penses que le niveau du meilleur sera : </span>" . $_POST['LevelFrench'] . "<br />";
+                  echo "<span class=info>Tu penses que le niveau du meilleur français sera : </span>" . $_POST['LevelFrench'] . "<br />";
                   echo "<span class=info>Tant que le tournoi n'est pas encore commencé, tu peux encore changer ton pronostique.</span> ";
                   ?>
                   <input type="button" value="OK" onclick="window.location.href='pagePerso.php'">
@@ -206,7 +206,7 @@ session_start(); // On démarre la session AVANT toute chose
               ?>
 
                 <tr>
-                    <td align="center" valign="middle" class="cellule">Vainqueur du tournoi</td>
+                    <td align="center" valign="middle" class="cellule">Vainqueur</td>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialWinner; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_VQR']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_VQR_PTS']; ?></td>
@@ -265,34 +265,32 @@ session_start(); // On démarre la session AVANT toute chose
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI4']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI4_PTS']; ?></td>
                 </tr>
-                <!-- <tr>
+                <tr>
                     <td align="center" valign="middle" class="cellule">Meilleur français</td>
                     <td align="center" valign="middle" class="cellule"></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM']; ?></td>
-                    <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM_PTS']; ?></td> -->
+                    <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM_PTS']; ?></td>
                     <?php
-                    // if ((strtotime(date('Y-m-d H:i:s')) < $startDateTournament)
-                    // if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
+                    if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
                     ?>
-                        <!-- <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=4>" . "Modifier pronostique</a>"; ?></td> -->
+                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=4>" . "Modifier pronostique</a>"; ?></td>
                     <?php
-                    // }
+                    }
                     ?>
-                <!-- </tr>
+                </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule">Niveau du meilleur français</td>
                     <td align="center" valign="middle" class="cellule"></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NIV']; ?></td>
-                    <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NIV_PTS']; ?></td> -->
+                    <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NIV_PTS']; ?></td>
                     <?php
-                    // if ((strtotime(date('Y-m-d H:i:s')) < $startDateTournament)
-                    // if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
+                    if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
                     ?>
-                        <!-- <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=5>" . "Modifier pronostique</a>"; ?></td> -->
+                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=5>" . "Modifier pronostique</a>"; ?></td>
                     <?php
-                    // }
+                    }
                     ?>
-                <!-- </tr> -->
+                </tr>
             <?php
             }
             ?>
@@ -553,10 +551,16 @@ session_start(); // On démarre la session AVANT toute chose
                       <?php
                           while ($donnees = $listFrenchTournament->fetch())
                           {
+                            if (!empty($donnees['PLA_SEED'])) {
                       ?>
-                          <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
+                          <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . '] '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+                      <?php
+                            } else {
+                      ?>
+                          <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') '; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
                       <?php
                           }
+                        }
                       ?>
                       </select>
 
