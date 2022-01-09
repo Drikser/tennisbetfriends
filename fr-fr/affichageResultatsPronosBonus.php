@@ -6,7 +6,9 @@
 <?php
 $tabPseudo = array();
 $tabPseudoProno = array();
+$tabBestFrench = array();
 $i = 0;
+$iTab = 0;
 $idMatchPrecedent = '';
 $nbplayers = 0;
 $Winner = "";
@@ -151,6 +153,22 @@ while ($titre = $allBonus->fetch()) {
 		}
 	}
 
+	$iTab = 0;
+	$bonusFrNom = getBonusBestFrench();
+	while ($donnees = $bonusFrNom->fetch()) {
+		$tabBestFrench[$iTab] = $donnees['RESB_VALUE'];
+		$BestFrench = 'Y';
+		$iTab++;
+	}
+	echo '<pre>';
+	print_r($tabBestFrench);
+	echo '</pre>';
+
+	$bonusFrNiv = getBonusLevelBestFrench();
+	while ($donnees = $bonusFrNiv->fetch()) {
+		$BestFrenchLevel = $donnees['RESB_VALUE'];
+	}
+
 	//echo "Après chargement variables<br />";
 	//echo "Vainqueur        = "	. $Winner . "<br />";
 	//echo "Finaliste 1      = "	. $Finalist1 . "<br />";
@@ -290,14 +308,24 @@ while ($titre = $allBonus->fetch()) {
 	<?php
 	}
 
-	// Affichage des pronostiques bonnus des meilleurs français choisis si mailleur français connu
+	// Affichage des pronostiques bonus des meilleurs français choisis si meilleur français connu
 	//---------------------------------------------------------------------------------------------
-
 	if ($BestFrench != "") {
 		?>
-		<tr>
+		<tr class="<?php echo 'lignenormale2'; ?>">
 			<td align="center" valign="middle" class="cellule"><b>MEILLEUR FRANÇAIS</b></td>
-			<td align="center" valign="middle" class="cellule"><b><?php echo $BestFrench; ?><b></td>
+			<td align="center" valign="middle" class="cellule"><b>
+				<?php
+				$i = 0;
+				foreach($tabBestFrench as $bestFrench) {
+					if ($i <= $iTab) {
+						echo $tabBestFrench[$i] . '<br />';
+						$i++;
+					}
+				}
+				?>
+				<b>
+			</td>
 			<td align="center" valign="middle" class="cellule"></td>
 			<?php
 			$i = 0;
@@ -305,6 +333,28 @@ while ($titre = $allBonus->fetch()) {
 			 ?>
 				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['bestFrench']; ?></td>
 				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['bestFrench-pts']; ?></td>
+			<?php
+			$i++;
+			}
+		 ?>
+		 </tr>
+		 <?php
+	}
+
+	// Affichage des pronostiques bonus du niveau des meilleurs français choisis
+	//----------------------------------------------------------------------------
+	if ($BestFrenchLevel != "") {
+		?>
+		<tr>
+			<td align="center" valign="middle" class="cellule"><b>NIVEAU MEILLEUR FRANÇAIS</b></td>
+			<td align="center" valign="middle" class="cellule"><b><?php echo $BestFrenchLevel; ?><b></td>
+			<td align="center" valign="middle" class="cellule"></td>
+			<?php
+			$i = 0;
+			foreach($tabPseudoProno as $prono) {
+			 ?>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['bestFrenchLevel']; ?></td>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['bestFrenchLevel-pts']; ?></td>
 			<?php
 			$i++;
 			}
