@@ -16,6 +16,8 @@ $Semi1 = "";
 $Semi2 = "";
 $Semi3 = "";
 $Semi4 = "";
+$BestFrench = "";
+$BestFrenchLevel = "";
 
 
 // Renseigner un tableau contenant tous les pseudo des joueurs
@@ -287,6 +289,31 @@ while ($titre = $allBonus->fetch()) {
 
 	<?php
 	}
+
+	// Affichage des pronostiques bonnus des meilleurs français choisis si mailleur français connu
+	//---------------------------------------------------------------------------------------------
+
+	if ($BestFrench != "") {
+		?>
+		<tr>
+			<td align="center" valign="middle" class="cellule"><b>MEILLEUR FRANÇAIS</b></td>
+			<td align="center" valign="middle" class="cellule"><b><?php echo $BestFrench; ?><b></td>
+			<td align="center" valign="middle" class="cellule"></td>
+			<?php
+			$i = 0;
+			foreach($tabPseudoProno as $prono) {
+			 ?>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['bestFrench']; ?></td>
+				<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['bestFrench-pts']; ?></td>
+			<?php
+			$i++;
+			}
+		 ?>
+		 </tr>
+		 <?php
+	}
+
+
 	?>
 
 </table>

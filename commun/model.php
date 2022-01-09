@@ -369,6 +369,31 @@ function getFinalists() {
 	return $response;
 }
 
+
+function getBonusBestFrench() {
+	// Recherche si le bonus meilleur français a été attribué, pour pouvoir l'afficher
+	// dans le récap des résultas bonus
+	$bdd = dbConnect();
+	$response = $bdd->query('SELECT *
+                          FROM resultats_bonus
+													WHERE RESB_TYPE_BONUS = "Meilleur Français"');
+
+	return $response;
+}
+
+
+function getBonusLevelBestFrench() {
+	// Recherche si le bonus niveau du meilleur français a été attribué, pour pouvoir l'afficher
+	// dans le récap des résultas bonus
+	$bdd = dbConnect();
+	$response = $bdd->query('SELECT *
+                          FROM resultats_bonus
+													WHERE RESB_TYPE_BONUS = "Niveau Meilleur Français"');
+
+	return $response;
+}
+
+
 function getDailyMatchs() {
 	$bdd = dbConnect();
     //$reponse = $bdd->query('SELECT * FROM résultats WHERE RES_MATCH_DAT = CURDATE()');
@@ -438,9 +463,10 @@ function getPrognosisToDo() {
 
 function getResultsToEnter() {
 	$bdd = dbConnect();
-    $response = $bdd->query('SELECT * FROM resultats
- 	                                WHERE RES_MATCH = "" AND RES_MATCH_JOU1 != "" AND RES_MATCH_JOU2 != ""
-																 ORDER BY RES_MATCH_POIDS_TOUR DESC, RES_MATCH_DAT ASC, RES_MATCH_TOUR_SEQ ASC');
+  $response = $bdd->query('SELECT *
+		                         FROM resultats
+ 	                          WHERE RES_MATCH = "" AND RES_MATCH_JOU1 != "" AND RES_MATCH_JOU2 != ""
+									  		 ORDER BY RES_MATCH_POIDS_TOUR DESC, RES_MATCH_DAT ASC, RES_MATCH_TOUR_SEQ ASC');
 	return $response;
 }
 
@@ -458,31 +484,45 @@ function getResultToEnter($postMatchId) {
 	return $req;
 }
 
-function getFrenchResultLevel($postLevel) {
-	$bdd = dbConnect();
-
-    $request = $bdd->prepare("SELECT *
-        	                  FROM  resultats
-                    	     WHERE  RES_MATCH = ''
-													   AND (RES_MATCH_JOU1 LIKE '%(fra)'
-                    	        OR  RES_MATCH_JOU2 LIKE '%(fra)')
-                             AND  RES_MATCH_TOUR = ?");
-	$request->execute(array($postLevel));
-
-	return $request;
-}
-
 function getFrenchLeft($postLevel) {
 	$bdd = dbConnect();
 
     $req = $bdd->prepare("SELECT *
         	                  FROM resultats
-                    	     WHERE (RES_MATCH_JOU1 LIKE '%(fra)'
-                    	        OR  RES_MATCH_JOU2 LIKE '%(fra)')
-                               AND RES_MATCH_TOUR = ?");
+                    	     WHERE (RES_MATCH_JOU1 LIKE '%(fra)%'
+                    	        OR  RES_MATCH_JOU2 LIKE '%(fra)%')
+                             AND RES_MATCH_TOUR = ?");
 	$req->execute(array($postLevel));
 
 	return $req;
+}
+
+function getFrenchResultEntered($postLevel) {
+	$bdd = dbConnect();
+
+  $request = $bdd->prepare("SELECT *
+          	                  FROM  resultats
+                      	     WHERE  RES_MATCH = ' '
+			  										   AND (RES_MATCH_JOU1 LIKE '%(fra)%'
+                      	        OR  RES_MATCH_JOU2 LIKE '%(fra)%')
+                               AND  RES_MATCH_TOUR = ?");
+	$request->execute(array($postLevel));
+
+	return $request;
+}
+
+function getFrenchResultLevel($postLevel) {
+	$bdd = dbConnect();
+
+  $request = $bdd->prepare("SELECT *
+        	                    FROM  resultats
+                             WHERE  RES_MATCH != ''
+											 	       AND (RES_MATCH_JOU1 LIKE '%(fra)%'
+                    	          OR  RES_MATCH_JOU2 LIKE '%(fra)%')
+                               AND  RES_MATCH_TOUR = ?");
+	$request->execute(array($postLevel));
+
+	return $request;
 }
 
 function getAllPtsPrognosisPlayer($postPlayerId) {
@@ -506,6 +546,8 @@ function getAllPtsBonusPrognosisPlayer($postPlayerId) {
 														 , PROB_FINAL1_PTS
 														 + PROB_FINAL2_PTS as total_finalist
 														 , PROB_VQR_PTS as total_vqr
+														 , PROB_FR_NOM_PTS as best_Fr
+														 , PROB_FR_NIV_PTS as level_Best_Fr
 											 		FROM pronostique_bonus
  	        			   WHERE PROB_JOU_ID = "'.$postPlayerId.'"');
 
@@ -725,15 +767,6 @@ function createMatchFirstRound() {
 }
 
 
-function dropTablePlayers() {
-	$bdd = dbConnect();
-
-	$response = $bdd->query('DROP TABLE players');
-
-	return $response;
-}
-
-
 function createTablePlayers() {
 	$bdd = dbConnect();
 
@@ -769,6 +802,30 @@ function loadTournamentPlayers($player, $pays, $display, $seed, $seedStrenght) {
 
     return $req;
 }
+
+function loadBonusBestFrench($BestFrench) {
+	$bdd = dbConnect();
+
+    $req = $bdd->prepare('INSERT INTO resultats_bonus (RESB_TYPE_BONUS, RESB_VALUE) VALUES (:TypeBonus, :Value)');
+    $req->execute(array(
+        'TypeBonus' => 'Meilleur Français',
+        'Value' => $BestFrench));
+
+    return $req;
+}
+
+
+function loadBonusLevelBestFrench($LevelBestFrench) {
+	$bdd = dbConnect();
+
+    $req = $bdd->prepare('INSERT INTO resultats_bonus (RESB_TYPE_BONUS, RESB_VALUE) VALUES (:TypeBonus, :Value)');
+    $req->execute(array(
+        'TypeBonus' => 'Niveau Meilleur Français',
+        'Value' => $LevelBestFrench));
+
+    return $req;
+}
+
 //*
 //*
 //*
@@ -969,6 +1026,32 @@ function updateScoreJoueur($postPlayerId, $postPtsPrognosis, $postAddNbExactProg
 	//$req->execute(array(
 	//	'Points' => JOU_PTS_PRONO+$postPtsPrognosis,
 	//	'NbResultsOk' => JOU_NB_RES_OK+$postAddNbExactPrognosis));
+
+    //return $req;
+}
+
+function updateBonusPrognosisFrNomPts($postPlayerId, $postPtsFrNom) {
+	$bdd = dbConnect();
+
+	$req = $bdd->prepare('UPDATE pronostique_bonus
+ 	        			  SET PROB_FR_NOM_PTS = :Points
+   						WHERE PROB_JOU_ID = "'.$postPlayerId.'"');
+
+	$req->execute(array(
+		'Points' => $postPtsFrNom));
+
+    //return $req;
+}
+
+function updateBonusPrognosisFrNivPts($postPlayerId, $postPtsFrNiv) {
+	$bdd = dbConnect();
+
+	$req = $bdd->prepare('UPDATE pronostique_bonus
+ 	        			  SET PROB_FR_NIV_PTS = :Points
+   						WHERE PROB_JOU_ID = "'.$postPlayerId.'"');
+
+	$req->execute(array(
+		'Points' => $postPtsFrNiv));
 
     //return $req;
 }
@@ -1179,6 +1262,17 @@ function resetListPlayers() {
 	$response = $bdd->query('DELETE FROM players');
 	return $response;
 }
+
+
+
+function dropTablePlayers() {
+	$bdd = dbConnect();
+
+	$response = $bdd->query('DROP TABLE players');
+
+	return $response;
+}
+
 
 
 

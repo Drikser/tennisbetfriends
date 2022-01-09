@@ -33,8 +33,8 @@ $table = getTable();
 		<th align="center" valign="middle">Bonus Semi-finalists</th>
 		<th align="center" valign="middle">Bonus Finalists</th>
 		<th align="center" valign="middle">Bonus Winner</th>
-<!--		<th align="center" valign="middle">Bonus Meilleur Français</th>		-->
-<!--		<th align="center" valign="middle">Bonus Niveau meilleur Français</th>		-->
+		<th align="center" valign="middle">Bonus Best Frenchman</th>
+		<th align="center" valign="middle">Bonus Level Best Frenchman</th>
 	</tr>
 	<?php
 	//while ($donnees = $reponse->fetch()) {
@@ -85,8 +85,8 @@ $table = getTable();
 			<td align="center" valign="middle"><?php echo $donnees['JOU_BONUS_DF']; ?></td>
 			<td align="center" valign="middle"><?php echo $donnees['JOU_BONUS_FINAL']; ?></td>
 			<td align="center" valign="middle"><?php echo $donnees['JOU_BONUS_VQR']; ?></td>
-<!--			<td align="center" valign="middle"><?php echo $donnees['JOU_BONUS_FR_NOM']; ?></td>		-->
-<!--			<td align="center" valign="middle"><?php echo $donnees['JOU_BONUS_FR_NIV']; ?></td>		-->
+			<td align="center" valign="middle"><?php echo $donnees['JOU_BONUS_FR_NOM']; ?></td>
+			<td align="center" valign="middle"><?php echo $donnees['JOU_BONUS_FR_NIV']; ?></td>		
 		</tr>
 
 		<?php

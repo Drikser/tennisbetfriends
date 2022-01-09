@@ -5,8 +5,8 @@ $ptsBadPrognosis = 0;
 $ptsWinner = 10;
 $ptsFinalist = 5; //= points par finaliste trouvé
 $ptsSemi = 3; //= points par demi-finaliste trouvé
-$ptsFrenchLevel = 10;
-$ptsFrenchName = 10;
+$ptsFrNiv = 10;
+$ptsFrNom = 10;
 
 $one = 1;
 $zero = 0;
