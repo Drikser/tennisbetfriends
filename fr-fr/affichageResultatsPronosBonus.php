@@ -160,9 +160,9 @@ while ($titre = $allBonus->fetch()) {
 		$BestFrench = 'Y';
 		$iTab++;
 	}
-	echo '<pre>';
-	print_r($tabBestFrench);
-	echo '</pre>';
+	// echo '<pre>';
+	// print_r($tabBestFrench);
+	// echo '</pre>';
 
 	$bonusFrNiv = getBonusLevelBestFrench();
 	while ($donnees = $bonusFrNiv->fetch()) {
