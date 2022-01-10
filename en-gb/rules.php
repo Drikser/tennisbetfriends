@@ -51,7 +51,7 @@ session_start(); // On démarre la session AVANT toute chose
         	- The four semi-finalists<br />
           - The best Frenchman (last standing Frenchman)<br />
           &ensp;NOTE: There might be more than one player, but if your choice is in the list, you win the bonus.<br />
-          - Level of best Frenchman (choose the round the last Frenchman will be out)
+          - Level of best Frenchman (choose the round the last Frenchman will be out)<br />
           &ensp;NOTE: If you think a Frenchman will win the tournament, then select 'WINNER'.
         	</p>
         	<p>

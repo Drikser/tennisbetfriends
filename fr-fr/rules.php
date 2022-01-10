@@ -51,8 +51,8 @@ session_start(); // On démarre la session AVANT toute chose
         	- Les quatre demi-finalistes <br />
           - Le meilleur français (le français qui ira le plus loin dans le tournoi)<br />
           &ensp;NB: il peut y en avoir plusieurs mais si votre choix est dans cette liste, vous gagnez ce bonus<br />
-          - Le niveau du meilleur français (le tour où le dernier français est éliminé) <br />
-          &emsp;NB: Si vous voyez un français gagner le tournoi, renseigner 'VAINQUEUR' pour ce bonus.
+          - Le niveau du meilleur français (le tour où le dernier français est éliminé)<br />
+          &ensp;NB: Si vous voyez un français gagner le tournoi, renseigner 'VAINQUEUR' pour ce bonus.
         	</p>
         	<p>
         	Chaque bon pronostique vous rapportera des points.
