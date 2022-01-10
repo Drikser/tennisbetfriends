@@ -511,6 +511,9 @@ session_start(); // On démarre la session AVANT toute chose
                           [Q] = Qualifié (joueur entré dans le tableau principal grâce aux qualifications)
                           [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
                           class='tooltip'> info</span>
+                          <p>
+                            <span class="info">NOTE : Saisie possible après la sortie du tableau principal (le jeudi avant le début du tournoi)</span><br />
+                          </p>
 
     	                    </p>
     	                    <p>
@@ -519,7 +522,6 @@ session_start(); // On démarre la session AVANT toute chose
                           </fieldset>
     	                    </form>
     	                    <?php
-
     	                }
     	                else {
     	                    // echo "<span class=info>Tu as choisi comme meilleur français du tournoi : </span>" . $bonusPrognosis['PROB_FR_NOM'] . "<br />";

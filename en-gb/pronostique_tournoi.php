@@ -510,6 +510,9 @@ session_start(); // On démarre la session AVANT toute chose
                           [Q] = Qualifier (player who reaches the tournament's main draw by competing in a pre-tournament qualifying)
                           [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
                           class='tooltip'> info</span>
+                          <p>
+                            <span class="info">NOTE : You can enter this bonus after the draw (the Thursday before the tournament starts)</span><br />
+                          </p>
 
     	                    </p>
     	                    <p>

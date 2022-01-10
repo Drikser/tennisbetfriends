@@ -61,11 +61,11 @@ session_start(); // On démarre la session AVANT toute chose
         	<h3>Matches predictions</h3>
 
         	<p>You will be able to enter your prediction for the day's matches every day.</p>
-        	<p>The match score will be in number of sets, i.e. the scores can be 2/0 or 2/1 for non-Grand Slam tournaments, and 3/0, 3/1 or 3/2 for Grand Slams.</p>
+        	<p>The match score will be in number of sets, i.e. the score can be 3/0, 3/1 or 3/2.</p>
 
         	<p>
-        	The matches are in the following format: Player1 against Player2, which means that if you think that Player 2 will win, you will predict the defeat of Player 1.<br />
-        	The score will always be in favour of the winner. A victory for Player 2 will therefore be recorded as follows: L 3/0, L 3/1 or L 3/2.<br />
+        	The matches are in the following format: Player1 against Player2, to select the winner, tick the appropriate box.<br />
+        	The score will always be in favour of the winner. If you select Player 2 as a winner the score must be recorded as follows: 3/0, 3/1 or 3/2.<br />
         	Exceptions:<br />
         	- Retirement: A player can retire during a match, and you can choose the format RET, with the score at the point when the player retired.<br />
         	- Forfeit: A player can forfeit a match before it starts. In this case the result will be: 0/0 (WO). <br />

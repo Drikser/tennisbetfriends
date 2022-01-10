@@ -61,11 +61,11 @@ session_start(); // On démarre la session AVANT toute chose
         	<h3>Pronostiques matchs</h3>
 
         	<p>Tous les jours, vous aurez la possibilité de saisir votre pronostique pour les matchs de la journée.</p>
-        	<p>Le score d'un match sera en nombre de set, c'est à dire que les scores peuvent être 2/0 ou 2/1 pour les tournois hors Grand Chelem, et 3/0, 3/1 ou 3/2 pour les Grand Chelem.</p>
+        	<p>Le score d'un match sera en nombre de set, c'est à dire que le score peut être 3/0, 3/1 ou 3/2.</p>
 
         	<p>
-        	Les matchs sont proposés au format: Joueur1 contre Joueur2, ce qui veut dire que si vous pensez que le Joueur 2 va gagner, vous devrez pronostiquer la défaite du joueur 1.<br />
-        	Le score sera toujours en faveur du vainqueur. Une victoire du joueur 2 sera donc enregistrée comme : D 3/0, D 3/1 ou D 3/2.<br />
+        	Les matchs sont proposés au format: Joueur1 contre Joueur2, pour sélectionner le vainqueur, cocher simplement la case correspondante.<br />
+        	Le score sera toujours en faveur du vainqueur. Si vous sélectionnez joueur 2 comme vainqueur, le score devra être enregistrée comme suit : 3/0, 3/1 ou 3/2.<br />
         	Cas particuliers :<br />
         	- Abandon : Un joueur peut abandonner en cours de match, et vous pouvez choisir le format AB, avec le score qu'il y avait au moment de l'abandon.<br />
         	- Forfait : Un joueur peut déclarer forfait avant la rencontre, dans ce cas le résultat sera : 0/0 (WO).<br />
