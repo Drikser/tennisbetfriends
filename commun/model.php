@@ -299,7 +299,7 @@ function getNbRegistered() {
 function getTable() {
 // Affiche le classement des joueurs
 	$bdd = dbConnect();
-	$response = $bdd->query('SELECT * FROM joueur WHERE JOU_PSE != "Admin" AND JOU_PSE != "Test" ORDER BY JOU_TOT_PTS DESC, JOU_PTS_PRONO DESC, JOU_NB_RES_OK DESC, JOU_BONUS_VQR DESC, JOU_BONUS_FINAL DESC, JOU_BONUS_DF DESC, JOU_DAT_INS');
+	$response = $bdd->query('SELECT * FROM joueur WHERE JOU_PSE != "Admin" AND JOU_PSE != "Test" ORDER BY JOU_TOT_PTS DESC, JOU_PTS_PRONO DESC, JOU_NB_RES_OK DESC, JOU_BONUS_VQR DESC, JOU_BONUS_FINAL DESC, JOU_BONUS_DF DESC, JOU_BONUS_FR_NOM DESC, JOU_BONUS_FR_NIV DESC, JOU_DAT_INS');
 
 	return $response;
 }

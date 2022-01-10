@@ -48,7 +48,11 @@ session_start(); // On démarre la session AVANT toute chose
         	 Before the start of the tournament, you can choose:<br />
         	- The winner<br />
         	- The two finalists<br />
-        	- The four semi-finalists
+        	- The four semi-finalists<br />
+          - The best Frenchman (last standing Frenchman)<br />
+          &ensp;NOTE: There might be more than one player, but if your choice is in the list, you win the bonus.<br />
+          - Level of best Frenchman (choose the round the last Frenchman will be out)
+          &ensp;NOTE: If you think a Frenchman will win the tournament, then select 'WINNER'.
         	</p>
         	<p>
         	Each correct prediction will earn you points.
@@ -71,23 +75,103 @@ session_start(); // On démarre la session AVANT toute chose
         	<table>
         		<tr>
         			<th>Your prediction</td>
-        			<th>To be entered on the website</td>
+        			<th colspan="6">To be entered on the website</td>
         		</tr>
         		<tr>
         			<td>Player1 beats Player2 by 3 sets to 0</td>
-        			<td><img src="../images/Rules-P1-V-P2-3-0.PNG" /></td>
+              <td width="150" align="center" valign="middle" class="cellule">Player 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio" checked>
+                <input type="radio" >
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Player 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>3</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>0</option>
+              </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option></option>
+              </select>
+              </td>
+        			<!-- <td><img src="../images/Rules-P1-V-P2-3-0.PNG" /></td> -->
         		</tr>
         		<tr>
         			<td>Player 2 beats Player1 by 3 sets to 1</td>
-        			<td><img src="../images/Rules-P1-D-P2-3-1.PNG" /></td>
+              <td width="150" align="center" valign="middle" class="cellule">Player 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio">
+                <input type="radio" checked>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Player 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>3</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>1</option>
+              </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option selected></option>
+              </select>
+              </td>
+        			<!-- <td><img src="../images/Rules-P1-D-P2-3-1.PNG" /></td> -->
         		</tr>
         		<tr>
         			<td>Player 1 retires through injury despite leading 1 set to 0</td>
-        			<td><img src="../images/Rules-P1-D-P2-0-1-RET.PNG" /></td>
+              <td width="150" align="center" valign="middle" class="cellule">Player 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio">
+                <input type="radio" checked>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Player 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>0</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>1</option>
+              </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>RET</option>
+              </select>
+              </td>
+        			<!-- <td><img src="../images/Rules-P1-D-P2-0-1-RET.PNG" /></td> -->
         		</tr>
         		<tr>
         			<td>Player 2 forfeits their match</td>
-        			<td><img src="../images/Rules-P1-V-P2-0-0-WO.PNG" /></td>
+              <td width="150" align="center" valign="middle" class="cellule">Player 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio" checked>
+                <input type="radio">
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Player 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>0</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>0</option>
+              </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>WO</option>
+              </select>
+              </td>
+        			<!-- <td><img src="../images/Rules-P1-V-P2-0-0-WO.PNG" /></td> -->
         		</tr>
         	</table>
         	</p>
@@ -121,6 +205,8 @@ session_start(); // On démarre la session AVANT toute chose
             		<li>10 points for the winner</li>
 		            <li>5 points per finalist predicted</li>
 		            <li>3 points per semi-finalist predicted</li>
+                <li>6 points for the best Frenchman</li>
+                <li>6 points for the level of the best Frenchman</li>
 		       	</ul>
         	</p>
 

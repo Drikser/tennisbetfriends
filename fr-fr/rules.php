@@ -48,7 +48,11 @@ session_start(); // On démarre la session AVANT toute chose
         	Avant le début du tournoi, vous pouvez choisir : <br />
         	- Le vainqueur <br />
         	- Les deux finalistes <br />
-        	- Les quatre demi-finalistes
+        	- Les quatre demi-finalistes <br />
+          - Le meilleur français (le français qui ira le plus loin dans le tournoi)<br />
+          &ensp;NB: il peut y en avoir plusieurs mais si votre choix est dans cette liste, vous gagnez ce bonus<br />
+          - Le niveau du meilleur français (le tour où le dernier français est éliminé) <br />
+          &emsp;NB: Si vous voyez un français gagner le tournoi, renseigner 'VAINQUEUR' pour ce bonus.
         	</p>
         	<p>
         	Chaque bon pronostique vous rapportera des points.
@@ -71,23 +75,103 @@ session_start(); // On démarre la session AVANT toute chose
         	<table>
         		<tr>
         			<th>Votre pronostique</td>
-        			<th>A renseigner sur le site</td>
+        			<th colspan="6">A renseigner sur le site</td>
         		</tr>
         		<tr>
         			<td>Le joueur1 bat le joueur2 par 3 sets à 0</td>
-        			<td><img src="../images/Rules-J1-V-J2-3-0.PNG" /></td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio" checked>
+                <input type="radio" >
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>3</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>0</option>
+              </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option></option>
+              </select>
+              </td>
+        			<!-- <td><img src="../images/Rules-J1-V-J2-3-0.PNG" /></td> -->
         		</tr>
         		<tr>
         			<td>Le joueur2 bat le joueur1 par 3 sets à 1</td>
-        			<td><img src="../images/Rules-J1-D-J2-3-1.PNG" /></td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio">
+                <input type="radio" checked>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>3</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>1</option>
+              </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option selected></option>
+              </select>
+              </td>
+        			<!-- <td><img src="../images/Rules-J1-D-J2-3-1.PNG" /></td> -->
         		</tr>
         		<tr>
         			<td>Le joueur1 abandonne sur blessure alors qu'il menait 1 set à 0</td>
-        			<td><img src="../images/Rules-J1-D-J2-0-1-AB.PNG" /></td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio">
+                <input type="radio" checked>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>0</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>1</option>
+              </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>AB</option>
+              </select>
+              </td>
+        			<!-- <td><img src="../images/Rules-J1-D-J2-0-1-AB.PNG" /></td> -->
         		</tr>
         		<tr>
         			<td>Le joueur2 déclare forfait pour son match</td>
-        			<td><img src="../images/Rules-J1-V-J2-0-0-WO.PNG" /></td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio" checked>
+                <input type="radio">
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>0</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>0</option>
+              </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>WO</option>
+              </select>
+              </td>
+        			<!-- <td><img src="../images/Rules-J1-V-J2-0-0-WO.PNG" /></td> -->
         		</tr>
         	</table>
         	</p>
@@ -121,6 +205,8 @@ session_start(); // On démarre la session AVANT toute chose
             		<li>10 points pour le vainqueur</li>
 		            <li>5 points par finaliste trouvé</li>
 		            <li>3 points par demi-finaliste trouvé</li>
+                <li>6 points pour le meilleur français</li>
+                <li>6 points pour le niveau du meilleur français</li>
 		       	</ul>
         	</p>
 
@@ -143,6 +229,8 @@ session_start(); // On démarre la session AVANT toute chose
 		            <li>Nombre de demi-finalistes trouvés</li>
 		            <li>Nombre de finalistes trouvés</li>
 		            <li>Vainqueur trouvé ou pas</li>
+                <li>Meilleur français trouvé ou pas</li>
+                <li>Niveau du meilleur français trouvé ou pas</li>
 		        </ul>
 
 		    Si malgré tout il devait encore y avoir égalité, c'est la date d'inscription qui rentrerait en jeu, avec priorité à celui qui s'est inscrit le plus tôt . En espérant ne pas en arriver sur ce dernier critère pour vous départager !
