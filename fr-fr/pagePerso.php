@@ -354,6 +354,13 @@ session_start(); // On démarre la session AVANT toute chose
                       ?>
                       </select>
 
+                      <span data-html="true" info-text="NOTE:
+                      [1], [2], ... = Tête de série numéro 1, 2, ...
+                      [WC] = Wild Card (joueur invité par le tournoi)
+                      [Q] = Qualifié (joueur entré dans le tableau principal grâce aux qualifications)
+                      [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
+                      class='tooltip'> info</span>
+
                       </p>
                       <p>
                           <input type="submit" value="Valider" />
@@ -393,7 +400,16 @@ session_start(); // On démarre la session AVANT toute chose
                                     }
                                   }
     	                        ?>
-    	                        </select><br />
+    	                        </select>
+
+                              <span data-html="true" info-text="NOTE:
+                              [1], [2], ... = Tête de série numéro 1, 2, ...
+                              [WC] = Wild Card (joueur invité par le tournoi)
+                              [Q] = Qualifié (joueur entré dans le tableau principal grâce aux qualifications)
+                              [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
+                              class='tooltip'> info</span>
+
+                              <br />
 
 
     	                        <?php
@@ -455,7 +471,16 @@ session_start(); // On démarre la session AVANT toute chose
                                   }
                                 }
   	                        ?>
-  	                        </select><br />
+  	                        </select>
+
+                            <span data-html="true" info-text="NOTE:
+                            [1], [2], ... = Tête de série numéro 1, 2, ...
+                            [WC] = Wild Card (joueur invité par le tournoi)
+                            [Q] = Qualifié (joueur entré dans le tableau principal grâce aux qualifications)
+                            [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
+                            class='tooltip'> info</span>
+
+                            <br />
 
 
   	                        <?php
@@ -563,6 +588,13 @@ session_start(); // On démarre la session AVANT toute chose
                         }
                       ?>
                       </select>
+
+                      <span data-html="true" info-text="NOTE:
+                      [1], [2], ... = Tête de série numéro 1, 2, ...
+                      [WC] = Wild Card (joueur invité par le tournoi)
+                      [Q] = Qualifié (joueur entré dans le tableau principal grâce aux qualifications)
+                      [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
+                      class='tooltip'> info</span>
 
                       </p>
                       <p>
@@ -819,7 +851,7 @@ session_start(); // On démarre la session AVANT toute chose
               }
             }
           //****************************************************************************
-          // fin copy formulairePronostiqueUnitaireCible.php
+          // fin copy formulairePronostiqueUnitaireCible.php 
           //****************************************************************************
 
             ?>

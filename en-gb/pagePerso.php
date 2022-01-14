@@ -220,7 +220,7 @@ session_start(); // On démarre la session AVANT toute chose
                     if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
                     ?>
                         <!-- <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=1#FinListeBonus>" . "Modifier pronostique</a>"; ?></td> -->
-                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=1>" . "Modifier pronostique</a>"; ?></td>
+                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=1>" . "Change prediction</a>"; ?></td>
                     <?php
                     }
                     ?>
@@ -233,7 +233,7 @@ session_start(); // On démarre la session AVANT toute chose
                     <?php
                     if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
                     ?>
-                        <td align="center" valign="middle" class="cellule" rowspan="2"><?php echo "<a href=pagePerso.php?updateBonus=2>" . "Modifier pronostique</a>"; ?></td>
+                        <td align="center" valign="middle" class="cellule" rowspan="2"><?php echo "<a href=pagePerso.php?updateBonus=2>" . "Change prediction</a>"; ?></td>
                     <?php
                     }
                     ?>
@@ -251,7 +251,7 @@ session_start(); // On démarre la session AVANT toute chose
                     <?php
                     if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
                     ?>
-                        <td align="center" valign="middle" class="cellule" rowspan="4"><?php echo "<a href=pagePerso.php?updateBonus=3>" . "Modifier pronostique</a>"; ?></td>
+                        <td align="center" valign="middle" class="cellule" rowspan="4"><?php echo "<a href=pagePerso.php?updateBonus=3>" . "Change prediction</a>"; ?></td>
                     <?php
                     }
                     ?>
@@ -272,27 +272,27 @@ session_start(); // On démarre la session AVANT toute chose
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI4_PTS']; ?></td>
                 </tr>
                 <tr>
-                    <td align="center" valign="middle" class="cellule">Best French</td>
+                    <td align="center" valign="middle" class="cellule">Best Frenchman</td>
                     <td align="center" valign="middle" class="cellule"></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM_PTS']; ?></td>
                     <?php
                     if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
                     ?>
-                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=4>" . "Modifier pronostique</a>"; ?></td>
+                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=4>" . "Change prediction</a>"; ?></td>
                     <?php
                     }
                     ?>
                 </tr>
                 <tr>
-                    <td align="center" valign="middle" class="cellule">Level of best French</td>
+                    <td align="center" valign="middle" class="cellule">Level of the best Frenchman</td>
                     <td align="center" valign="middle" class="cellule"></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $outputRound; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NIV_PTS']; ?></td>
                     <?php
                     if ((date('Y-m-d H:i:s') < $startDateTournament) and ($donnees['PROB_VQR'] != "")) {
                     ?>
-                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=5>" . "Modifier pronostique</a>"; ?></td>
+                        <td align="center" valign="middle" class="cellule"><?php echo "<a href=pagePerso.php?updateBonus=5>" . "Change prediction</a>"; ?></td>
                     <?php
                     }
                     ?>
@@ -363,6 +363,13 @@ session_start(); // On démarre la session AVANT toute chose
                       ?>
                       </select>
 
+                      <span data-html="true" info-text="NOTE:
+                      [1], [2], ... = Seed number 1, 2, ...
+                      [WC] = Wild Card (player accepted in the main draw at the discretion of the tournament)
+                      [Q] = Qualifier (player who reaches the tournament's main draw by competing in a pre-tournament qualifying)
+                      [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
+                      class='tooltip'> info</span>
+
                       </p>
                       <p>
                           <input type="submit" value="Submit" />
@@ -402,7 +409,16 @@ session_start(); // On démarre la session AVANT toute chose
     	                             }
                                  }
     	                        ?>
-    	                        </select><br />
+    	                        </select>
+
+                              <span data-html="true" info-text="NOTE:
+                              [1], [2], ... = Seed number 1, 2, ...
+                              [WC] = Wild Card (player accepted in the main draw at the discretion of the tournament)
+                              [Q] = Qualifier (player who reaches the tournament's main draw by competing in a pre-tournament qualifying)
+                              [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
+                              class='tooltip'> info</span>
+
+                              <br />
 
 
     	                        <?php
@@ -464,7 +480,16 @@ session_start(); // On démarre la session AVANT toute chose
                                   }
                                 }
   	                        ?>
-  	                        </select><br />
+  	                        </select>
+
+                            <span data-html="true" info-text="NOTE:
+                            [1], [2], ... = Seed number 1, 2, ...
+                            [WC] = Wild Card (player accepted in the main draw at the discretion of the tournament)
+                            [Q] = Qualifier (player who reaches the tournament's main draw by competing in a pre-tournament qualifying)
+                            [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
+                            class='tooltip'> info</span>
+
+                            <br />
 
 
   	                        <?php
@@ -566,6 +591,13 @@ session_start(); // On démarre la session AVANT toute chose
   	                        }
   	                    ?>
   	                    </select>
+
+                        <span data-html="true" info-text="NOTE:
+                        [1], [2], ... = Seed number 1, 2, ...
+                        [WC] = Wild Card (player accepted in the main draw at the discretion of the tournament)
+                        [Q] = Qualifier (player who reaches the tournament's main draw by competing in a pre-tournament qualifying)
+                        [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
+                        class='tooltip'> info</span>
 
   	                    </p>
   	                    <p>

@@ -230,6 +230,10 @@ session_start(); // On démarre la session AVANT toute chose
                           [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
                           class='tooltip'> info</span>
 
+                          <p>
+                            <span class="info">NOTE : Pré-sélection de 8 joueurs avant le tirage au sort, mais le choix parmis tous les joueurs sera possible après le tirage au sort (le jeudi avant le début du tournoi)</span><br />
+                          </p>
+
     	                    </p>
     	                    <p>
     	                        <input type="submit" value="Valider" />
@@ -321,6 +325,10 @@ session_start(); // On démarre la session AVANT toute chose
     	                            }
     	                        ?>
     	                        </select><br />
+
+                              <p>
+                                <span class="info">NOTE : Pré-sélection de 8 joueurs avant le tirage au sort, mais le choix parmis tous les joueurs sera possible après le tirage au sort (le jeudi avant le début du tournoi)</span><br />
+                              </p>
 
     	                    </p>
     	                    <p>
@@ -448,6 +456,11 @@ session_start(); // On démarre la session AVANT toute chose
     	                            }
     	                        ?>
     	                        </select><br />
+
+                              <p>
+                                <span class="info">NOTE : Pré-sélection de 8 joueurs avant le tirage au sort, mais le choix parmis tous les joueurs sera possible après le tirage au sort (le jeudi avant le début du tournoi)</span><br />
+                              </p>
+
     	                    </p>
     	                    <p>
     	                        <input type="submit" value="Valider" />
@@ -512,7 +525,7 @@ session_start(); // On démarre la session AVANT toute chose
                           [LL] = Lucky Loser (joueur de plus haut classement ne s'étant pas qualifié directement mais entré dans le tableau principal suite à un retrait)"
                           class='tooltip'> info</span>
                           <p>
-                            <span class="info">NOTE : Saisie possible après la sortie du tableau principal (le jeudi avant le début du tournoi)</span><br />
+                            <span class="info">NOTE : Saisie possible après le tirage au sort (le jeudi avant le début du tournoi)</span><br />
                           </p>
 
     	                    </p>

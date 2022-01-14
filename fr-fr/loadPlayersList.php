@@ -41,7 +41,7 @@ session_start(); // On démarre la session AVANT toute chose
             if ($donnees['NbPlayersTournament'] == 0) {
 
               // ----- Gran Slams -----
-              $adresse = "https://www.atptour.com/en/scores/current/australian-open/580/2022/draws";
+              $adresse = "https://www.atptour.com/en/scores/current/australian-open/580/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/roland-garros/520/2022/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/wimbledon/540/2022/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/us-open/560/2022/draws";
@@ -70,8 +70,15 @@ session_start(); // On démarre la session AVANT toute chose
               //                         1ère partie si tête de série trouvée                        |          2ème partie si pas de tête de série trouvée
               // preg_match_all ('#<td>([0-9]{1,2})</td>\s*<td>\s*<span>\s*\(([0-9A-Z]{1,2})\)\s*</span>|<td>([0-9]{1,2})</td>\s*<td>#', $page, $player);   // OK --> renvoi soit numéro du match soit tête de série / Q / LL /WC
               //                         1ère partie si tête de série trouvée                        |          2ème partie si pas de tête de série trouvée
-              preg_match_all ('#<td>([0-9]{1,2})</td>\s*<td>\s*<span>\s*\(([0-9A-Z]{1,2})\)\s*</span>\s*</td>\s*<td>\s*<a href="/en/players/([A-Za-z\.]+(([ -])[A-Za-z]+)+)/(.{4})/overview" class="scores-draw-entry-box-players-item" data-ga-action="Click"\s*data-ga-category="" data-ga-label="([A-Za-z\.]+(([ -])[A-Za-z]+)+)">\s*<img alt="Country Flag" class="scores-draw-entry-box-players-item-flag" src="/en/~/media/images/flags/([a-z]{3}).svg"/>|<td>([0-9]{1,2})</td>\s*<td>\s*</td>\s*<td>\s*<a href="/en/players/([A-Za-z\.]+(([ -])[A-Za-z]+)+)/(.{4})/overview" class="scores-draw-entry-box-players-item" data-ga-action="Click"\s*data-ga-category="" data-ga-label="([A-Za-z\.]+(([ -])[A-Za-z]+)+)">\s*<img alt="Country Flag" class="scores-draw-entry-box-players-item-flag" src="/en/~/media/images/flags/([a-z]{3}).svg"/>|<td>\s*Bye\s*</td>#', $page, $player);   // OK --> renvoi soit numéro du match soit tête de série / Q / LL /WC
-
+              //----------------------------------------------------------------------------
+              // Regedit avec 3 options:
+              //----------------------------------------------------------------------------
+              //1. Tête de série      :<td>([0-9]{1,3})</td>\s*<td>\s*<span>\s*\(([0-9A-Z]{1,2})\)\s*</span>\s*</td>\s*<td>\s*<a href="/en/players/([A-Za-z\.]+(([ -])[A-Za-z]+)+)/(.{4})/overview" class="scores-draw-entry-box-players-item" data-ga-action="Click"\s*data-ga-category="" data-ga-label="([A-Za-z\.]+(([ -])[A-Za-z]+)+)">\s*<img alt="Country Flag" class="scores-draw-entry-box-players-item-flag" src="/en/~/media/images/flags/([a-z]{3}).svg"/>
+              //2. Non tête de série  :<td>([0-9]{1,3})</td>\s*<td>\s*</td>\s*<td>\s*<a href="/en/players/([A-Za-z\.]+(([ -])[A-Za-z]+)+)/(.{4})/overview" class="scores-draw-entry-box-players-item" data-ga-action="Click"\s*data-ga-category="" data-ga-label="([A-Za-z\.]+(([ -])[A-Za-z]+)+)">\s*<img alt="Country Flag" class="scores-draw-entry-box-players-item-flag" src="/en/~/media/images/flags/([a-z]{3}).svg"/>
+              //3. Autre (Q/LL)       :<td>\s*Qualifier/Lucky Loser\s*</td>
+              //----------------------------------------------------------------------------
+              // preg_match_all ('#<td>([0-9]{1,3})</td>\s*<td>\s*<span>\s*\(([0-9A-Z]{1,2})\)\s*</span>\s*</td>\s*<td>\s*<a href="/en/players/([A-Za-z\.]+(([ -])[A-Za-z]+)+)/(.{4})/overview" class="scores-draw-entry-box-players-item" data-ga-action="Click"\s*data-ga-category="" data-ga-label="([A-Za-z\.]+(([ -])[A-Za-z]+)+)">\s*<img alt="Country Flag" class="scores-draw-entry-box-players-item-flag" src="/en/~/media/images/flags/([a-z]{3}).svg"/>|<td>([0-9]{1,3})</td>\s*<td>\s*</td>\s*<td>\s*<a href="/en/players/([A-Za-z\.]+(([ -])[A-Za-z]+)+)/(.{4})/overview" class="scores-draw-entry-box-players-item" data-ga-action="Click"\s*data-ga-category="" data-ga-label="([A-Za-z\.]+(([ -])[A-Za-z]+)+)">\s*<img alt="Country Flag" class="scores-draw-entry-box-players-item-flag" src="/en/~/media/images/flags/([a-z]{3}).svg"/>#', $page, $player);#', $page, $player);   // OK --> renvoi soit numéro du match soit tête de série / Q / LL /WC
+              preg_match_all ('#<td>([0-9]{1,3})</td>\s*<td>\s*<span>\s*\(([0-9A-Z]{1,2})\)\s*</span>\s*</td>\s*<td>\s*<a href="/en/players/([A-Za-z\.]+(([ -])[A-Za-z\.]+)+)/(.{4})/overview" class="scores-draw-entry-box-players-item" data-ga-action="Click"\s*data-ga-category="" data-ga-label="([A-Za-z\.]+(([ -])[A-Za-z\.]+)+)">\s*<img alt="Country Flag" class="scores-draw-entry-box-players-item-flag" src="/en/~/media/images/flags/([a-z]{3}).svg"/>|<td>([0-9]{1,3})</td>\s*<td>\s*</td>\s*<td>\s*<a href="/en/players/([A-Za-z\.]+(([ -])[A-Za-z\.]+)+)/(.{4})/overview" class="scores-draw-entry-box-players-item" data-ga-action="Click"\s*data-ga-category="" data-ga-label="([A-Za-z\.]+(([ -])[A-Za-z\.]+)+)">\s*<img alt="Country Flag" class="scores-draw-entry-box-players-item-flag" src="/en/~/media/images/flags/([a-z]{3}).svg"/>|<td>\s*Qualifier/Lucky Loser\s*</td>#', $page, $player);   // OK --> renvoi soit numéro du match soit tête de série / Q / LL /WC
               echo "URL=" . $adresse . "<br />";
               var_dump($player); // Le var_dump() du tableau $prix nous montre que $prix[0] contient l'ensemble du morceau trouvé et que $prix[1] contient le contenu de la parenthèse capturante
 
@@ -94,8 +101,8 @@ session_start(); // On démarre la session AVANT toute chose
                     echo $player[11][$i] . ". " . $player[16][$i] . " (" . $player[19][$i] . ") <br />";
                     loadTournamentPlayers($player[16][$i], $player[19][$i], "Y", " ", 99);
                   } else {
-                    echo " . Bye <br />";
-                    loadTournamentPlayers("Bye", " ", "N", " ", 99);
+                    echo "Qualifier/Lucky Loser<br />";
+                    loadTournamentPlayers("Qualifier/Lucky Loser", " ", "N", " ", 99);
                   }
                 }
               }

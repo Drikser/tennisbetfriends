@@ -55,7 +55,7 @@ session_start(); // On démarre la session AVANT toute chose
 						         $startDateTournament = $donnees['SET_DAT_START'];
                      $cityTournament = $donnees['SET_TOURNAMENT'];
 					        }
-                  echo "You must make your bonus tournament predictions <span class=warning>before the start of the tournament</span>, on <span class=warning>Monday " . substr($startDateTournament,0,10) . "</span> at <span class=warning>" . substr($startDateTournament,11,8) . "</span> (London time)<br /><br />";
+                  echo "You must make your bonus tournament predictions <span class=warning>before the start of the tournament</span>, on <span class=warning>Monday " . substr($startDateTournament,0,10) . "</span> at <span class=warning>" . substr($startDateTournament,11,8) . "</span> (" . $cityTournament . " time)<br /><br />";
                   // echo "You must make your bonus tournament predictions before the start of the tournament, on " . $startDateTournament . "<br /><br />";
 
                   echo "<span class=congrats>INFO:</span> You must validate your choices category by category.<br /><br />";
@@ -235,6 +235,10 @@ session_start(); // On démarre la session AVANT toute chose
                           [LL] = Lucky loser (highest-ranked player to lose in the final round of qualifying, but still ends up qualifying because of a withdrawal)"
                           class='tooltip'> info</span>
 
+                          <p>
+                            <span class="info">NOTE : Shortlist of 8 players before the draw, but you will be able to choose among all players after the draw (the Thursday before the tournament starts)</span><br />
+                          </p>
+
     	                    </p>
     	                    <p>
     	                        <input type="submit" value="Confirm" />
@@ -318,6 +322,10 @@ session_start(); // On démarre la session AVANT toute chose
     	                            }
     	                        ?>
     	                        </select><br />
+
+                              <p>
+                                <span class="info">NOTE : Shortlist of 8 players before the draw, but you will be able to choose among all players after the draw (the Thursday before the tournament starts)</span><br />
+                              </p>
 
     	                    </p>
     	                    <p>
@@ -446,6 +454,11 @@ session_start(); // On démarre la session AVANT toute chose
     	                            }
     	                        ?>
     	                        </select><br />
+
+                              <p>
+                                <span class="info">NOTE : Shortlist of 8 players before the draw, but you will be able to choose among all players after the draw (the Thursday before the tournament starts)</span><br />
+                              </p>
+
     	                    </p>
     	                    <p>
     	                        <input type="submit" value="Confirm" />
@@ -469,7 +482,7 @@ session_start(); // On démarre la session AVANT toute chose
   	                //**************************************** MEILLEUR FRANCAIS *****************************************
                     if ($bonusPrognosis['PROB_FR_NOM'] == '') {
 
-    	                echo "<h2>Best French player</h2>";
+    	                echo "<h2>Best Frenchman</h2>";
 
     	                // echo "playerId=" . $_SESSION['JOU_ID'] . " PROB_FR_NOM=" . $bonusPrognosis['PROB_FR_NOM'] . "<br />";
 
@@ -516,7 +529,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     	                    </p>
     	                    <p>
-    	                        <input type="submit" value="Valider" />
+    	                        <input type="submit" value="Confirm" />
     	                    </p>
                           </fieldset>
     	                    </form>
@@ -567,7 +580,7 @@ session_start(); // On démarre la session AVANT toute chose
 
     	                    </p>
     	                    <p>
-    	                        <input type="submit" value="Valider" />
+    	                        <input type="submit" value="Confirm" />
     	                    </p>
                           </fieldset>
     	                    </form>
