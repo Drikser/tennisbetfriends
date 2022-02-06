@@ -329,9 +329,15 @@ session_start(); // On démarre la session AVANT toute chose
                       <?php
                       while ($donnees = $listPlayersTournament->fetch())
                       {
-                      ?>
+                        if (!empty($donnees['PLA_SEED'])) {
+                          ?>
+                          <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+                          <?php
+                        } else {
+                          ?>
                           <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
-                      <?php
+                          <?php
+                        }
                       }
                       ?>
                       </select>
@@ -345,9 +351,15 @@ session_start(); // On démarre la session AVANT toute chose
                       <?php
                       while ($donnees = $listPlayersTournament->fetch())
                       {
-                      ?>
+                        if (!empty($donnees['PLA_SEED'])) {
+                          ?>
+                          <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ') [' . $donnees['PLA_SEED'] . ']'; ?></option>
+                          <?php
+                        } else {
+                          ?>
                           <option value="<?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?>"><?php echo $donnees['PLA_NOM'] . ' (' . $donnees['PLA_PAY'] . ')'; ?></option>
-                      <?php
+                          <?php
+                        }
                       }
                       ?>
                       </select>

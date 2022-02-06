@@ -50,7 +50,8 @@ while ($titre = $allPrognosis->fetch()) {
 	<!-- <caption>Players match predictions</caption> -->
 	<tr>
   	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
-    <th colspan="4" align="center" valign="middle">OFFICIAL RESULTS</th>
+    <th colspan="4" align="center" valign="middle" class="cellule">OFFICIAL RESULTS</th>
+		<th align="center" valign="middle" class="cellule"></th>
 		<th colspan="<?php echo $nbplayers ?>" align="center" valign="middle">PLAYERS PREDICTIONS</th>
   </tr>
 

@@ -177,7 +177,7 @@ while ($titre = $allBonus->fetch()) {
 		<tr>
 			<td align="center" valign="middle" class="cellule"><b>WINNER</b></td>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Winner; ?><b></td>
-			<td align="center" valign="middle" class="cellule"></td>
+			<th align="center" valign="middle" class="cellule"></th>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
@@ -200,7 +200,7 @@ while ($titre = $allBonus->fetch()) {
 		<tr class="<?php echo 'lignenormale2'; ?>">
 			<td rowspan="2" align="center" valign="middle" class="cellule"><b>FINALISTS</b></td>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Finalist1; ?></b></td>
-			<td align="center" valign="middle" class="cellule"></td>
+			<th align="center" valign="middle" class="cellule"></th>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
@@ -215,7 +215,7 @@ while ($titre = $allBonus->fetch()) {
 
 		 <tr class="<?php echo 'lignenormale2'; ?>">
  			<td align="center" valign="middle" class="cellule"><b><?php echo $Finalist2; ?></b></td>
-			<td align="center" valign="middle" class="cellule"></td>
+			<th align="center" valign="middle" class="cellule"></th>
  			<?php
  			$i = 0;
  			foreach($tabPseudoProno as $prono) {
@@ -238,7 +238,7 @@ while ($titre = $allBonus->fetch()) {
 		<tr>
 			<td rowspan="4" align="center" valign="middle" class="cellule"><b>SEMI-FINALISTS</b></td>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi1; ?></b></td>
-			<td align="center" valign="middle" class="cellule"></td>
+			<th align="center" valign="middle" class="cellule"></th>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
@@ -253,7 +253,7 @@ while ($titre = $allBonus->fetch()) {
 
 		<tr>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi2; ?></b></td>
-			<td align="center" valign="middle" class="cellule"></td>
+			<th align="center" valign="middle" class="cellule"></th>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
@@ -268,7 +268,7 @@ while ($titre = $allBonus->fetch()) {
 
 		<tr>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi3; ?></b></td>
-			<td align="center" valign="middle" class="cellule"></td>
+			<th align="center" valign="middle" class="cellule"></th>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
@@ -283,7 +283,7 @@ while ($titre = $allBonus->fetch()) {
 
 		<tr>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $Semi4; ?></b></td>
-			<td align="center" valign="middle" class="cellule"></td>
+			<th align="center" valign="middle" class="cellule"></th>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
@@ -318,7 +318,7 @@ while ($titre = $allBonus->fetch()) {
 				?>
 				<b>
 			</td>
-			<td align="center" valign="middle" class="cellule"></td>
+			<th align="center" valign="middle" class="cellule"></th>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {
@@ -340,7 +340,7 @@ while ($titre = $allBonus->fetch()) {
 		<tr>
 			<td align="center" valign="middle" class="cellule"><b>LEVEL BEST FRENCHMAN</b></td>
 			<td align="center" valign="middle" class="cellule"><b><?php echo $BestFrenchLevel; ?><b></td>
-			<td align="center" valign="middle" class="cellule"></td>
+				<th align="center" valign="middle" class="cellule"></th>
 			<?php
 			$i = 0;
 			foreach($tabPseudoProno as $prono) {

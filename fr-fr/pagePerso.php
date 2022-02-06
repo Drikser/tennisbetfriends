@@ -146,11 +146,13 @@ session_start(); // On démarre la session AVANT toute chose
           <table>
               <tr>
                   <th colspan="2" align="center" valign="middle" class="cellule">OFFICIEL</th>
+                  <th align="center" valign="middle" class="cellule"></th>
                   <th colspan="2" align="center" valign="middle" class="cellule">VOTRE PRONOSTIQUE</th>
               </tr>
               <tr>
                   <th width="200" align="center" valign="middle" class="cellule">Description</th>
                   <th width="200" align="center" valign="middle" class="cellule">Résultat</th>
+                  <th align="center" valign="middle" class="cellule"></th>
                   <th width="200" align="center" valign="middle" class="cellule">Votre choix</th>
                   <th width="80" align="center" valign="middle" class="cellule">Nb pts</th>
               </tr>
@@ -169,6 +171,9 @@ session_start(); // On démarre la session AVANT toute chose
               $OfficialFinalist1 ="";
               $OfficialFinalist2 ="";
               $OfficialWinner ="";
+              $tabOfficialBestFrench = array();
+              $OfficialBestFrench = "";
+              $OfficialBestFrenchLevel = "";
 
               $allSemisAndFinalists = getSemisAndFinalists();
               //$allFinalists = getFinalists();
@@ -200,6 +205,20 @@ session_start(); // On démarre la session AVANT toute chose
                 }
               }
 
+              $iTab = 0;
+            	$bonusFrNom = getBonusBestFrench();
+            	while ($donnees = $bonusFrNom->fetch()) {
+            		$tabOfficialBestFrench[$iTab] = $donnees['RESB_VALUE'];
+            		$OfficialBestFrench = 'Y';
+            		$iTab++;
+            	}
+
+              $bonusFrNiv = getBonusLevelBestFrench();
+              while ($donnees = $bonusFrNiv->fetch()) {
+                $OfficialBestFrenchLevel = $donnees['RESB_VALUE'];
+              }
+
+
               $bonus= getPronostique_Bonus($_SESSION['JOU_ID']);
 
               while ($donnees = $bonus->fetch()) {
@@ -208,6 +227,7 @@ session_start(); // On démarre la session AVANT toute chose
                 <tr>
                     <td align="center" valign="middle" class="cellule">Vainqueur</td>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialWinner; ?></td>
+                    <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_VQR']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_VQR_PTS']; ?></td>
                     <?php
@@ -222,6 +242,7 @@ session_start(); // On démarre la session AVANT toute chose
                 <tr>
                     <td align="center" valign="middle" class="cellule" rowspan="2">Finalistes</td>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialFinalist1; ?></td>
+                    <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FINAL1']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FINAL1_PTS']; ?></td>
                     <?php
@@ -234,12 +255,14 @@ session_start(); // On démarre la session AVANT toute chose
                 </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialFinalist2; ?></td>
+                    <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FINAL2']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FINAL2_PTS']; ?></td>
                 </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule" rowspan="4">Demi-finalistes</td>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialSemi1; ?></td>
+                    <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI1']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI1_PTS']; ?></td>
                     <?php
@@ -252,22 +275,37 @@ session_start(); // On démarre la session AVANT toute chose
                 </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialSemi2; ?></td>
+                    <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI2']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI2_PTS']; ?></td>
                 </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialSemi3; ?></td>
+                    <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI3']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI3_PTS']; ?></td>
                 </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialSemi4; ?></td>
+                    <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI4']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI4_PTS']; ?></td>
                 </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule">Meilleur français</td>
-                    <td align="center" valign="middle" class="cellule"></td>
+                    <td align="center" valign="middle" class="cellule"><b>
+                      <?php
+                      $i = 0;
+                      foreach($tabOfficialBestFrench as $OfficialbestFrench) {
+                        if ($i <= $iTab) {
+                          echo $tabOfficialBestFrench[$i] . '<br />';
+                          $i++;
+                        }
+                      }
+                      ?>
+                      <b>
+                    </td>
+                    <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM_PTS']; ?></td>
                     <?php
@@ -280,7 +318,8 @@ session_start(); // On démarre la session AVANT toute chose
                 </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule">Niveau du meilleur français</td>
-                    <td align="center" valign="middle" class="cellule"></td>
+                    <td align="center" valign="middle" class="cellule"><?php echo $OfficialBestFrenchLevel; ?></td>
+                    <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NIV']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NIV_PTS']; ?></td>
                     <?php
@@ -851,7 +890,7 @@ session_start(); // On démarre la session AVANT toute chose
               }
             }
           //****************************************************************************
-          // fin copy formulairePronostiqueUnitaireCible.php 
+          // fin copy formulairePronostiqueUnitaireCible.php
           //****************************************************************************
 
             ?>
@@ -859,6 +898,7 @@ session_start(); // On démarre la session AVANT toute chose
                     <tr>
                         <!--<th width="100" align="center" valign="middle" class="cellule">Id Match</th> -->
                         <th colspan="5" align="center" valign="middle" class="cellule">OFFICIEL</th>
+                        <th align="center" valign="middle" class="cellule"></th>
                         <th colspan="2" align="center" valign="middle" class="cellule">VOTRE PRONOSTIQUE</th>
                     </tr>
                     <tr>
@@ -870,6 +910,7 @@ session_start(); // On démarre la session AVANT toute chose
                         <th width="200" align="center" valign="middle" class="cellule">Joueur 2</th>
                         <!-- <th width="100" align="center" valign="middle" class="cellule">Pronostique Type Match</th> -->
                         <!-- <th width="50" align="center" valign="middle" class="cellule">OFFICIEL Type Match</th> -->
+                        <th align="center" valign="middle" class="cellule"></th>
                         <th width="100" align="center" valign="middle" class="cellule">Résultat</th>
                         <th width="80" align="center" valign="middle" class="cellule">Nb pts</th>
                     </tr>
@@ -907,6 +948,7 @@ session_start(); // On démarre la session AVANT toute chose
                         <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU2']; ?></td>
                         <!-- <td align="center" valign="middle" class="cellule"><?php //echo $donnees['PRO_TYP_MATCH']; ?></td> -->
                         <!-- <td align="center" valign="middle" class="cellule"><?php //echo $donnees['RES_MATCH_TYP']; ?></td> -->
+                        <th align="center" valign="middle" class="cellule"></th>
                         <td align="center" valign="middle" class="cellule"><?php echo $donnees['PRO_RES_MATCH'] . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $donnees['PRO_TYP_MATCH']; ?></td>
                         <td align="center" valign="middle" class="cellule"><?php echo $donnees['PRO_PTS_JOU']; ?></td>
 
