@@ -32,16 +32,29 @@ session_start(); // On démarre la session AVANT toute chose
     		//*************************************************************************************************************************************************
             //1) extraction du noms des joueurs à partir du tableau issu du site de l'atp: www.atpworldtour.com;
 
+
             $rowcount = getPlayersTournament();
 
             $donnees = $rowcount->fetch();
 
             echo '<br />' . 'Nombre de joueurs avant chargement = ' . $donnees['NbPlayersTournament'] . '<br />';
 
+            /////////////////////////////////////////////////////////////////
+            // Test another way to extract data in web page
+            // include_once('simple_html_dom.php');
+            // require_once 'simple_html_dom.php';
+            // $adresse = "https://www.atptour.com/en/tournaments/roland-garros/520/overview";
+            // $htmlPage = file_get_html($adresse, false);
+            //
+            // foreach($html->find('.action-player') as $actionPlayerClass)
+            //   echo $actionPlayerClass->src . '<br>';
+            /////////////////////////////////////////////////////////////////
+
+
             if ($donnees['NbPlayersTournament'] == 0) {
 
               // ----- Gran Slams -----
-              $adresse = "https://www.atptour.com/en/tournaments/australian-open/580/overview";
+              $adresse = "https://www.atptour.com/en/tournaments/roland-garros/520/overview";
               // $adresse = "https://www.atptour.com/en/tournaments/roland-garros/520/overview";
               // $adresse = "https://www.atptour.com/en/tournaments/wimbledon/540/overview";
               // $adresse = "https://www.atptour.com/en/tournaments/us-open/560/overview";
@@ -49,7 +62,6 @@ session_start(); // On démarre la session AVANT toute chose
               // $adresse = "https://www.atptour.com/en/tournaments/paris/352/overview";
 
               $page = file_get_contents($adresse);
-
               // Charger les premiers joueurs à partir de "Who is playing"
               //-------------------------------------------------------------
               preg_match_all ('#ga-label="([A-Za-z\.]+(([ -])[A-Za-z]+)+)" ga-action=""\s*ga-category="Who is Playing - Tournaments" ga-use="true">\s*<span>(.*?)<\/span><span>(.*?)<\/span>\s*</a>\s*<img alt="Country Flag" class="movement-flag " src="/-/media/images/flags/([a-z]{3}).svg#', $page, $player);
