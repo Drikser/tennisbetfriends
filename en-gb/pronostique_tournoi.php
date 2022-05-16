@@ -55,10 +55,14 @@ session_start(); // On démarre la session AVANT toute chose
 						         $startDateTournament = $donnees['SET_DAT_START'];
                      $cityTournament = $donnees['SET_TOURNAMENT'];
 					        }
-                  echo "You must make your bonus tournament predictions <span class=warning>before the start of the tournament</span>, on <span class=warning>Monday " . substr($startDateTournament,0,10) . "</span> at <span class=warning>" . substr($startDateTournament,11,8) . "</span> (" . $cityTournament . " time)<br /><br />";
-                  // echo "You must make your bonus tournament predictions before the start of the tournament, on " . $startDateTournament . "<br /><br />";
 
-                  echo "<span class=congrats>INFO:</span> You must validate your choices category by category.<br /><br />";
+                  if ($cityTournament = 'Paris') {
+                    echo "You must make your bonus tournament predictions <span class=warning>before the start of the tournament</span>, on <span class=warning>Sunday " . substr($startDateTournament,0,10) . "</span> at <span class=warning>" . substr($startDateTournament,11,8) . "</span> (" . $cityTournament . " time)<br /><br />";
+                    echo "<span class=congrats>INFO:</span> You must validate your choices category by category.<br /><br />";
+                  } else {
+                    echo "You must make your bonus tournament predictions <span class=warning>before the start of the tournament</span>, on <span class=warning>Monday " . substr($startDateTournament,0,10) . "</span> at <span class=warning>" . substr($startDateTournament,11,8) . "</span> (" . $cityTournament . " time)<br /><br />";
+                    echo "<span class=congrats>INFO:</span> You must validate your choices category by category.<br /><br />";
+                  }
 
                   //*****************************************************************
                   //**      Contrôle si il y a eu des des pronostiques saisis      **

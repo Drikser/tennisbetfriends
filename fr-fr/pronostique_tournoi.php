@@ -56,9 +56,14 @@ session_start(); // On démarre la session AVANT toute chose
 						         $startDateTournament = $donnees['SET_DAT_START'];
                      $cityTournament = $donnees['SET_TOURNAMENT'];
 					        }
-                  echo "Vous devez faire vos pronostiques sur le tournoi <span class=warning>avant le début du tournoi</span>, le <span class=warning>lundi " . substr($startDateTournament,0,10) . "</span> à <span class=warning>" . substr($startDateTournament,11,8) . "</span> (heure de " . $cityTournament . ").<br /><br />";
 
-                  echo "<span class=congrats>INFO:</span> Vous devez valider vos choix catégorie par catégorie.<br /><br />";
+                  if ($cityTournament = 'Paris') {
+                    echo "Vous devez faire vos pronostiques sur le tournoi <span class=warning>avant le début du tournoi</span>, le <span class=warning>dimanche " . substr($startDateTournament,0,10) . "</span> à <span class=warning>" . substr($startDateTournament,11,8) . "</span> (heure de " . $cityTournament . ").<br /><br />";
+                    echo "<span class=congrats>INFO:</span> Vous devez valider vos choix catégorie par catégorie.<br /><br />";
+                  } else {
+                    echo "Vous devez faire vos pronostiques sur le tournoi <span class=warning>avant le début du tournoi</span>, le <span class=warning>lundi " . substr($startDateTournament,0,10) . "</span> à <span class=warning>" . substr($startDateTournament,11,8) . "</span> (heure de " . $cityTournament . ").<br /><br />";
+                    echo "<span class=congrats>INFO:</span> Vous devez valider vos choix catégorie par catégorie.<br /><br />";
+                  }
 
                   //*****************************************************************
                   //**      Contrôle si il y a eu des des pronostiques saisis      **
