@@ -211,7 +211,7 @@ function getAllPlayersTournament($param) {
 	if ($param == "disp") {
 		$response = $bdd->query('SELECT * FROM players WHERE PLA_DISP <> "N" ORDER BY PLA_SEED_STRENGHT, PLA_NOM');
 	} else {
-		$response = $bdd->query('SELECT * FROM players');
+		$response = $bdd->query('SELECT * FROM players ORDER BY PLA_ID');
 	}
 
 	return $response;
@@ -771,20 +771,21 @@ function createTablePlayers() {
 	$bdd = dbConnect();
 
 	$response = $bdd->query('CREATE TABLE players (
-			PLA_ID INT(4) NOT NULL AUTO_INCREMENT,
+			PLA_ID INT(4) NOT NULL,
 			PLA_NOM VARCHAR(255) NOT NULL,
 			PLA_PAY CHAR(3) NOT NULL,
 			PLA_DISP CHAR (1) NOT NULL,
 			PLA_SEED CHAR (2) NOT NULL,
-			PLA_SEED_STRENGHT INT (2) NOT NULL,
-			PRIMARY KEY (PLA_ID)
+			PLA_SEED_STRENGHT INT (2) NOT NULL
+			-- PRIMARY KEY (PLA_ID)
 	)
 	ENGINE=INNODB');
 
 	return $response;
 }
 
-function loadTournamentPlayers($player, $pays, $display, $seed, $seedStrenght) {
+//------ version pour permettre de modifier index --------------------
+function loadTournamentPlayers($id, $player, $pays, $display, $seed, $seedStrenght) {
 	$bdd = dbConnect();
 
 		//delete all record before loading
@@ -792,8 +793,9 @@ function loadTournamentPlayers($player, $pays, $display, $seed, $seedStrenght) {
 		//return $del;
 
     //insertion du joueur et du pays
-    $req = $bdd->prepare('INSERT INTO players (PLA_NOM, PLA_PAY, PLA_DISP, PLA_SEED, PLA_SEED_STRENGHT) VALUES (:Name, :Pays, :Disp, :Seed, :SeedStrenght)');
+    $req = $bdd->prepare('INSERT INTO players (PLA_ID, PLA_NOM, PLA_PAY, PLA_DISP, PLA_SEED, PLA_SEED_STRENGHT) VALUES (:Id, :Name, :Pays, :Disp, :Seed, :SeedStrenght)');
     $req->execute(array(
+				'Id' => $id,
         'Name' => $player,
         'Pays' => $pays,
 				'Disp' => $display,
@@ -802,6 +804,26 @@ function loadTournamentPlayers($player, $pays, $display, $seed, $seedStrenght) {
 
     return $req;
 }
+
+// ------ SAve version prod
+// function loadTournamentPlayers($player, $pays, $display, $seed, $seedStrenght) {
+// 	$bdd = dbConnect();
+//
+// 		//delete all record before loading
+// 		//$del = $bdd->query('DELETE FROM players');
+// 		//return $del;
+//
+//     //insertion du joueur et du pays
+//     $req = $bdd->prepare('INSERT INTO players (PLA_NOM, PLA_PAY, PLA_DISP, PLA_SEED, PLA_SEED_STRENGHT) VALUES (:Name, :Pays, :Disp, :Seed, :SeedStrenght)');
+//     $req->execute(array(
+//         'Name' => $player,
+//         'Pays' => $pays,
+// 				'Disp' => $display,
+// 				'Seed' => $seed,
+// 				'SeedStrenght' => $seedStrenght));
+//
+//     return $req;
+// }
 
 function loadBonusBestFrench($BestFrench) {
 	$bdd = dbConnect();

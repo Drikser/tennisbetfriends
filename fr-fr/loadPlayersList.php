@@ -41,8 +41,9 @@ session_start(); // On démarre la session AVANT toute chose
             if ($donnees['NbPlayersTournament'] == 0) {
 
               // ----- Gran Slams -----
-              $adresse = "https://www.atptour.com/en/scores/current/australian-open/580/draws";
-              // $adresse = "https://www.atptour.com/en/scores/current/roland-garros/520/2022/draws";
+              // $adresse = "https://www.atptour.com/en/scores/current/australian-open/580/draws";
+              $adresse = "https://www.atptour.com/en/scores/current/roland-garros/520/draws";
+              // $adresse = "C:/wamp64/www/tennisbetfriends/tablesMySQL/tennisbetfriends/Database%20creations/Draw_RG2022/view-source_https___www.atptour.com_en_scores_current_roland-garros_520_draws.html";
               // $adresse = "https://www.atptour.com/en/scores/current/wimbledon/540/2022/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/us-open/560/2022/draws";
               // ----- Other tournaments for tests -----
@@ -85,24 +86,35 @@ session_start(); // On démarre la session AVANT toute chose
               dropTablePlayers();
               createTablePlayers();
 
+              $id =0;
+
               for($i = 0; $i < count($player[7]); $i++) // On parcourt le tableau $player[1]
               {
+                $id++;
+                if ($player[7][$i] == 'Pablo Cuevas') {
+                  $id++;
+                  echo "Ajustement pour cet enflure d'O'Connell --> id de Cuevas est maintenant " . $id . "<br />";
+                }
                 if (!empty($player[7][$i]))
                 {
                   echo $player[1][$i] . ". " . $player[7][$i] . " (" . $player[10][$i] . ") [" . $player[2][$i] . "]<br />";
                   if (is_numeric($player[2][$i])) {
-                    loadTournamentPlayers($player[7][$i], $player[10][$i], "Y", $player[2][$i], $player[2][$i]);
+                    loadTournamentPlayers($player[1][$i], $player[7][$i], $player[10][$i], "Y", $player[2][$i], $player[2][$i]);
+                    // loadTournamentPlayers($player[7][$i], $player[10][$i], "Y", $player[2][$i], $player[2][$i]);
                   } else {
-                    loadTournamentPlayers($player[7][$i], $player[10][$i], "Y", $player[2][$i], 99);
+                    loadTournamentPlayers($player[1][$i], $player[7][$i], $player[10][$i], "Y", $player[2][$i], 99);
+                    // loadTournamentPlayers($player[7][$i], $player[10][$i], "Y", $player[2][$i], 99);
                   }
                 } else {
                   if (!empty($player[16][$i]))
                   {
                     echo $player[11][$i] . ". " . $player[16][$i] . " (" . $player[19][$i] . ") <br />";
-                    loadTournamentPlayers($player[16][$i], $player[19][$i], "Y", " ", 99);
+                    loadTournamentPlayers($player[11][$i], $player[16][$i], $player[19][$i], "Y", " ", 99);
+                    // loadTournamentPlayers($player[16][$i], $player[19][$i], "Y", " ", 99);
                   } else {
                     echo "Qualifier/Lucky Loser<br />";
-                    loadTournamentPlayers("Qualifier/Lucky Loser", " ", "N", " ", 99);
+                    loadTournamentPlayers($id, "Qualifier/Lucky Loser", " ", "N", " ", 99);
+                    // loadTournamentPlayers("Qualifier/Lucky Loser", " ", "N", " ", 99);
                   }
                 }
               }
