@@ -91,10 +91,21 @@ session_start(); // On démarre la session AVANT toute chose
               for($i = 0; $i < count($player[7]); $i++) // On parcourt le tableau $player[1]
               {
                 $id++;
+                //-------------------------------------------------------------------------------------------------
+                // - Si Christopher O'Connell est dans le tableau, exécuter le code ci-dessous:
+                //      - Prendre le joueur suivant dans le tableau et ajouter 1 à son id
+                //      - Ajouter manuellement Christopher O'Connell au tableau via update SQL
+                // - sinon
+                //      - NE PAS EXECUTER LE CODE CI-DESSOUS (mettre en commentaire avant de charger les joueurs)
+                //-------------------------------------------------------------------------------------------------
                 if ($player[7][$i] == 'Pablo Cuevas') {
                   $id++;
                   echo "Ajustement pour cet enflure d'O'Connell --> id de Cuevas est maintenant " . $id . "<br />";
                 }
+                //--------------------------------------------------------------------------------------------------
+                // Fin du code à exécuter si Christopher O'Connell est dans le tableau
+                //--------------------------------------------------------------------------------------------------
+
                 if (!empty($player[7][$i]))
                 {
                   echo $player[1][$i] . ". " . $player[7][$i] . " (" . $player[10][$i] . ") [" . $player[2][$i] . "]<br />";

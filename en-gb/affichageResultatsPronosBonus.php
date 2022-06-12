@@ -1,6 +1,6 @@
 <!-- Afichage de tous les résultats des joueurs -->
 
-<h1>Players bonus predictions</h1>
+<h1>Player bonus predictions</h1>
 
 
 <?php
@@ -88,7 +88,7 @@ while ($titre = $allBonus->fetch()) {
   	<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
     <th colspan="2" align="center" valign="middle">OFFICIAL RESULT</th>
 		<th align="center" valign="middle"></th>
-		<th colspan="<?php echo $nbplayers ?>" align="center" valign="middle">PLAYERS PREDICTIONS</th>
+		<th colspan="<?php echo $nbplayers ?>" align="center" valign="middle">PLAYER PREDICTIONS</th>
   </tr>
 
   <tr>

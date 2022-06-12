@@ -72,6 +72,12 @@ session_start(); // On démarre la session AVANT toute chose
             <h2>Télécharger tous les joueurs :</h2>
 
             <p>
+              <span class='warning'>Vérifier si Christopher O'Connell est dans le tableau (ou nom avec apostrophe) !!!</span><br />
+              <span class='warning'>Si OUI, modifier loadPlayerList.php avant de charger tous les joueurs ! </span><br />
+              <span class='warning'>Si NON, ok pour télécharger les joueurs </span>
+            </p>
+
+            <p>
               <form action="loadPlayersList.php" method="post" enctype="multipart/form-data">
                 <input type="submit" value="Télécharger joueurs" />
                 <!-- <input type="submit" value="Reset liste des joueurs" /> -->
