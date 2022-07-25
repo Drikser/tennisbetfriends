@@ -293,7 +293,7 @@ session_start(); // On démarre la session AVANT toute chose
                 </tr>
                 <tr>
                     <td align="center" valign="middle" class="cellule">Meilleur français</td>
-                    <td align="center" valign="middle" class="cellule"><b>
+                    <td align="center" valign="middle" class="cellule">
                       <?php
                       $i = 0;
                       foreach($tabOfficialBestFrench as $OfficialbestFrench) {
@@ -303,7 +303,6 @@ session_start(); // On démarre la session AVANT toute chose
                         }
                       }
                       ?>
-                      <b>
                     </td>
                     <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FR_NOM']; ?></td>
