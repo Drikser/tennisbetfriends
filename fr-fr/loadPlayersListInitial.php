@@ -56,8 +56,8 @@ session_start(); // On démarre la session AVANT toute chose
               // ----- Gran Slams -----
               // $adresse = "https://www.atptour.com/en/tournaments/roland-garros/520/overview";
               // $adresse = "https://www.atptour.com/en/tournaments/roland-garros/520/overview";
-              $adresse = "https://www.atptour.com/en/tournaments/wimbledon/540/overview";
-              // $adresse = "https://www.atptour.com/en/tournaments/us-open/560/overview";
+              // $adresse = "https://www.atptour.com/en/tournaments/wimbledon/540/overview";
+              $adresse = "https://www.atptour.com/en/tournaments/us-open/560/overview";
               // ----- Other tournaments for tests -----
               // $adresse = "https://www.atptour.com/en/tournaments/paris/352/overview";
 
@@ -79,6 +79,7 @@ session_start(); // On démarre la session AVANT toute chose
               createTablePlayers();
 
               $id = 0;
+              $seed = 0;
 
               for($i = 0; $i < count($player[1]); $i++) // On parcourt le tableau $player[1]
               {
@@ -90,7 +91,8 @@ session_start(); // On démarre la session AVANT toute chose
                     loadTournamentPlayers($id, "Qualifier/Lucky Loser", $player[6][$i], "N", " ", 99);
                   }
                   else {
-                    loadTournamentPlayers($id, $player[1][$i], $player[6][$i], "Y", " ", 99);
+                    $seed++;
+                    loadTournamentPlayers($id, $player[1][$i], $player[6][$i], "Y", " ", $seed);
                   }
                   //    echo "ligne=" . $player[1][$i] . "<br />"; // On affiche le joueur
               }

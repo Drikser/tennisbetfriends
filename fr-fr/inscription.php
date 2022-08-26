@@ -25,10 +25,6 @@ session_start(); // On démarre la session AVANT toute chose
 
 	    <div class="element_corps" id="corps">
 
-	        <p>
-	            Merci de vous inscrire au concours de pronostiques.<br />
-	        </p>
-
 			<?php
 			//*************************************************************************************************************************************************
 			//*                                         TRAITEMENT DE VERIFICATION DES DONNEES SAISIES
@@ -171,8 +167,11 @@ session_start(); // On démarre la session AVANT toute chose
  			  //*                                         AFFICHAGE DU FORMAULAIRE D'INSCRIPTION
  			  //*************************************************************************************************************************************************
  			  -->
+        <p>
+          Merci de vous inscrire au concours de pronostiques.<br />
+        </p>
  			  <p>
- 				Pour cela, veuillez renseigner les infos suivantes :
+          Pour cela, veuillez renseigner les infos suivantes :
  			  </p>
 
  			  <form id="registration_form" action="inscription.php" method="post" enctype="multipart/form-data">
