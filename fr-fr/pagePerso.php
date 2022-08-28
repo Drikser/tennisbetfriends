@@ -224,7 +224,7 @@ session_start(); // On démarre la session AVANT toute chose
               while ($donnees = $bonus->fetch()) {
               ?>
 
-                <tr>
+                <tr class="lignenormale">
                     <td align="center" valign="middle" class="cellule">Vainqueur</td>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialWinner; ?></td>
                     <th align="center" valign="middle" class="cellule"></th>
@@ -239,7 +239,7 @@ session_start(); // On démarre la session AVANT toute chose
                     }
                     ?>
                 </tr>
-                <tr>
+                <tr class="lignenormale2">
                     <td align="center" valign="middle" class="cellule" rowspan="2">Finalistes</td>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialFinalist1; ?></td>
                     <th align="center" valign="middle" class="cellule"></th>
@@ -253,13 +253,13 @@ session_start(); // On démarre la session AVANT toute chose
                     }
                     ?>
                 </tr>
-                <tr>
+                <tr class="lignenormale2">
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialFinalist2; ?></td>
                     <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FINAL2']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_FINAL2_PTS']; ?></td>
                 </tr>
-                <tr>
+                <tr class="lignenormale">
                     <td align="center" valign="middle" class="cellule" rowspan="4">Demi-finalistes</td>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialSemi1; ?></td>
                     <th align="center" valign="middle" class="cellule"></th>
@@ -273,25 +273,25 @@ session_start(); // On démarre la session AVANT toute chose
                     }
                     ?>
                 </tr>
-                <tr>
+                <tr class="lignenormale">
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialSemi2; ?></td>
                     <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI2']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI2_PTS']; ?></td>
                 </tr>
-                <tr>
+                <tr class="lignenormale">
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialSemi3; ?></td>
                     <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI3']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI3_PTS']; ?></td>
                 </tr>
-                <tr>
+                <tr class="lignenormale">
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialSemi4; ?></td>
                     <th align="center" valign="middle" class="cellule"></th>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI4']; ?></td>
                     <td align="center" valign="middle" class="cellule"><?php echo $donnees['PROB_DEMI4_PTS']; ?></td>
                 </tr>
-                <tr>
+                <tr class="lignenormale2">
                     <td align="center" valign="middle" class="cellule">Meilleur français</td>
                     <td align="center" valign="middle" class="cellule">
                       <?php
@@ -315,7 +315,7 @@ session_start(); // On démarre la session AVANT toute chose
                     }
                     ?>
                 </tr>
-                <tr>
+                <tr class="lignenormale">
                     <td align="center" valign="middle" class="cellule">Niveau du meilleur français</td>
                     <td align="center" valign="middle" class="cellule"><?php echo $OfficialBestFrenchLevel; ?></td>
                     <th align="center" valign="middle" class="cellule"></th>

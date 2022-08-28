@@ -165,6 +165,12 @@ th
    color: black;
 }
 
+.lignenormale2 td {
+   /* background-color: CadetBlue; */
+   background-color: Teal;
+   color: black;
+}
+
 #conteneur
 {
     /*display: float;*/
