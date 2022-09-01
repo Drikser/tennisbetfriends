@@ -162,12 +162,14 @@ th
 
 .lignenormale td {
    background-color: DarkCyan;
+   /* background-color: PowderBlue	; */
    color: black;
 }
 
 .lignenormale2 td {
-   background-color: CadetBlue;
-   /* background-color: Teal; */
+   /* background-color: CadetBlue; */
+   /* background-color: CadetBlue; */
+   background-color: Teal;
    color: black;
 }
 
