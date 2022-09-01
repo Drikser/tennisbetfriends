@@ -54,26 +54,26 @@ session_start(); // On démarre la session AVANT toute chose
                     //echo date(DATE_RFC2822) . "<br />";
                     //echo date('l jS \of F Y h:i:s A') . "<br />";
 
-                    echo (date('Y-m-d H:i:s')) . " <i>(heure locale)</i><br /><br />";
+                    // echo (date('Y-m-d H:i:s')) . " <i>(heure locale)</i><br /><br />";
                     //echo (date('Y-m-d G:H:s')) . "<br /><br />";
 
                     // Calcul difference dates
                     $H_here = date('Y-m-d H:i:s');
-                    echo "H1 = " . $H_here . "<br />";
+                    // echo "H1 = " . $H_here . "<br />";
                     date_default_timezone_set('America/New_York');
           					$H_Nyk = date('Y-m-d H:i:s');
-          					echo "H2 = " . $H_Nyk . "<br />";
+          					// echo "H2 = " . $H_Nyk . "<br />";
                     $jetlag = $H_Nyk - $H_here;
-                    echo "H3 = " . $jetlag . "<br />";
+                    // echo "H3 = " . $jetlag . "<br />";
                     //echo "<br />";
                     $Heure_NY = new \DateTime("{$H_Nyk}");
                     $Heure_Here = new \DateTime("{$H_here}");
 
                     $Heure_diff = $Heure_NY->diff($Heure_Here);
                     $Heure_diffStr = $Heure_diff->format('%aj %Hh %Im %Ss');
-                    echo "Diff = " . $Heure_diffStr . "<br />";
+                    // echo "Diff = " . $Heure_diffStr . "<br />";
                     $Heure_diffStr = $Heure_diff->format('%h');
-                    echo "Diff = " . $Heure_diffStr . "<br />";
+                    // echo "Diff = " . $Heure_diffStr . "<br />";
 
                     // 06/07/2020: ajout cible ici pour essayer d'afficher le message sur la même page
                     // include ("formulairePronostiqueUnitaireCible.php");
@@ -366,7 +366,7 @@ session_start(); // On démarre la session AVANT toute chose
                                 setlocale(LC_TIME, 'fr_FR.utf8','fra');
                                 // $Heure_match_YourTime = $Heure_match_NY->format('Y-m-d, H:i');
                                 $Heure_match_YourTime = $Heure_match_NY->format('l d F, H:i');
-                                echo "Saisie à faire avant " . $Heure_match_YourTime . " (chez vous)<br />";
+                                // echo "Saisie à faire avant " . $Heure_match_YourTime . " (chez vous)<br />";
                                 $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::SHORT);
                                 echo "Saisie à faire avant " . $formatter->format($Heure_match_NY) . " (chez vous)<br />";
 
