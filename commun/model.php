@@ -1325,7 +1325,7 @@ function dateNextMatch($oldDate,$nbDays){
 function getDateFinal(){
 
 	$bdd = dbConnect();
-	$response = $bdd->query('SELECT SET_DATE_END FROM settings_tournament');
+	$response = $bdd->query('SELECT SET_DAT_END FROM settings_tournament');
 
 	return $response;
 

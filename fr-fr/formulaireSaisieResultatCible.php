@@ -147,16 +147,19 @@ session_start(); // On démarre la session AVANT toute chose
             // IF poids=2 (semi-final), the new date will be the one in the settings_tournament table
             if ($poids != 2) {
               $newDate = dateNextMatch($dateMatch,2); //next match is in 2 days
+              $newDateStr = date('Y-m-d 11:00:00', $newDate);
+              echo "La date du nouveau match est: " . $newDateStr . " (" . $dateMatch . " + 2 jours)<br />";
             } else {
               $finalDate = getDateFinal();
               while ($donnees = $finalDate->fetch())
               {
-                  $newDate = $donnees['SET_DAT_END'];
+                  $newDateStr = $donnees['SET_DAT_END'];
+                  echo "La date de la finale est: " . $newDateStr . "<br />";
               }
             }
-            $newDateStr = date('Y-m-d 11:00:00', $newDate);
+            // $newDateStr = date('Y-m-d 11:00:00', $newDate);
 
-            echo "La date du nouveau match est: " . $newDateStr . " (" . $dateMatch . " + 2 jours)<br />";
+            // echo "La date du nouveau match est: " . $newDateStr . " (" . $dateMatch . " + 2 jours)<br />";
 
             //Determination libellé du tour du tour
             switch ($newPoids) {
