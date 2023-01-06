@@ -11,7 +11,7 @@
 			if ($_SERVER['HTTP_HOST'] == 'localhost') {
 				//----------------------------------
 				//--> Base de données pour le test
-				$bdd = new PDO('mysql:host=localhost;dbname=usopen2022;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+				$bdd = new PDO('mysql:host=localhost;dbname=australianopen2023;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 				// $bdd = new PDO('mysql:host=localhost;dbname=marseille2020;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 				//----------------------------------
 			} else {
