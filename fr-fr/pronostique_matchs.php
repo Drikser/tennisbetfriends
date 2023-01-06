@@ -381,7 +381,13 @@ session_start(); // On démarre la session AVANT toute chose
                                   </table>
                                   <br />
                                   <?php
-                                  echo "<span class='info'>Saisie à faire avant " . $donnees['RES_MATCH_DAT'] . "</span><br />";
+                                  // echo "Saisie à faire avant " . $donnees['RES_MATCH_DAT'] . "<br />";
+                                  $Heure_match_NY = new \DateTime("{$donnees['RES_MATCH_DAT']}");
+                                  $Heure_match_NY->add(new DateInterval("PT{$Heure_diffStr}H"));
+                                  setlocale(LC_TIME, 'fr_FR.utf8','fra');
+                                  $Heure_match_YourTime = $Heure_match_NY->format('l d F, H:i');
+                                  $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::SHORT);
+                                  echo "Saisie à faire avant " . $formatter->format($Heure_match_NY) . " (chez vous)<br />";
                                   ?>
                                   <table>
                                   <?php
