@@ -65,7 +65,7 @@ session_start(); // On démarre la session AVANT toute chose
 					echo 'La date du match a bien été mise à jour dans la base de données !<br />';
 
 					$newDateMatch = $_POST['NewDateMatch'];
-					echo 'Nouvelle date = ' . htmlspecialchars($_POST['NewDateMatch']) . '<br />';
+					echo '<span class=congrats>Nouvelle date = </span><b>' . htmlspecialchars($_POST['NewDateMatch']) . '<br />';
 
 					echo 'Pour retourner à la page de gestion des matchs, clique <a href="gestionMatchs.php#saisieResultat">' . 'ICI' . '</a><br/>';
 

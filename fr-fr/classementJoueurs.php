@@ -30,11 +30,13 @@ $table = getTable();
 		<th align="center" valign="middle" class="cellule">Total points</th>
 		<th align="center" valign="middle" class="cellule"></th>
 		<th align="center" valign="middle" class="cellule">Points pronostiques<br />(Dont nb prono exacts)</th>
+		<th align="center" valign="middle" class="cellule">Bonus Meilleur Français</th>
+		<th align="center" valign="middle" class="cellule">Bonus Niveau meilleur Français</th>
 		<th align="center" valign="middle" class="cellule">Bonus Demi-finalistes</th>
 		<th align="center" valign="middle" class="cellule">Bonus Finalistes</th>
 		<th align="center" valign="middle" class="cellule">Bonus Vainqueur</th>
-		<th align="center" valign="middle" class="cellule">Bonus Meilleur Français</th>
-		<th align="center" valign="middle" class="cellule">Bonus Niveau meilleur Français</th>
+		<!-- <th align="center" valign="middle" class="cellule">Bonus Meilleur Français</th>
+		<th align="center" valign="middle" class="cellule">Bonus Niveau meilleur Français</th> -->
 	</tr>
 	<?php
 	//while ($donnees = $reponse->fetch()) {
@@ -82,11 +84,13 @@ $table = getTable();
 			<td align="center" valign="middle" class="cellule"><?php echo '<b>' . $donnees['JOU_TOT_PTS'] . '</b>'; ?></td>
 			<th align="center" valign="middle" class="cellule"></th>
 			<td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_PTS_PRONO'] . " (" . $donnees['JOU_NB_RES_OK'] . ")"; ?></td>
+			<td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_BONUS_FR_NOM']; ?></td>
+			<td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_BONUS_FR_NIV']; ?></td>
 			<td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_BONUS_DF']; ?></td>
 			<td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_BONUS_FINAL']; ?></td>
 			<td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_BONUS_VQR']; ?></td>
-			<td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_BONUS_FR_NOM']; ?></td>
-			<td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_BONUS_FR_NIV']; ?></td>
+			<!-- <td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_BONUS_FR_NOM']; ?></td>
+			<td align="center" valign="middle" class="cellule"><?php echo $donnees['JOU_BONUS_FR_NIV']; ?></td> -->
 		</tr>
 
 		<?php

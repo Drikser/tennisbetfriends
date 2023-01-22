@@ -20,12 +20,24 @@
 
 					case 'Australian Open':
 					case 'US Open':
+						if ($_SERVER['HTTP_HOST'] == 'localhost') {
+							echo "<span class='warning'>TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</span>";
+						}
 						echo "<h6>Pronostiques de l'" . $donnees['SET_LIB_TOURNAMENT'] . "</h6>";
+						if ($_SERVER['HTTP_HOST'] == 'localhost') {
+							echo "<span class='warning'>TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</span>";
+						}
 						break;
 
 					case 'Roland Garros':
 					case 'Wimbledon':
+						if ($_SERVER['HTTP_HOST'] == 'localhost') {
+							echo "<span class='warning'>TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</span>";
+						}
 						echo "<h6>Pronostiques de " . $donnees['SET_LIB_TOURNAMENT'] . "</h6>";
+						if ($_SERVER['HTTP_HOST'] == 'localhost') {
+							echo "<span class='warning'>TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</span>";
+						}
 					break;
 				}
 			}
