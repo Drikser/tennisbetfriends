@@ -60,7 +60,7 @@ session_start(); // On démarre la session AVANT toute chose
                     // Calcul difference dates
                     $H_here = date('Y-m-d H:i:s');
                     // echo "H1 = " . $H_here . "<br />";
-                    date_default_timezone_set('America/New_York');
+                    date_default_timezone_set('Australia/Melbourne');
           					$H_Nyk = date('Y-m-d H:i:s');
           					// echo "H2 = " . $H_Nyk . "<br />";
                     $jetlag = $H_Nyk - $H_here;

@@ -41,11 +41,11 @@ session_start(); // On démarre la session AVANT toute chose
             if ($donnees['NbPlayersTournament'] == 0) {
 
               // ----- Gran Slams -----
-              // $adresse = "https://www.atptour.com/en/scores/current/australian-open/580/draws";
+              $adresse = "https://www.atptour.com/en/scores/current/australian-open/580/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/roland-garros/520/draws";
               // $adresse = "C:/wamp64/www/tennisbetfriends/tablesMySQL/tennisbetfriends/Database%20creations/Draw_RG2022/view-source_https___www.atptour.com_en_scores_current_roland-garros_520_draws.html";
               // $adresse = "https://www.atptour.com/en/scores/current/wimbledon/540/draws";
-              $adresse = "https://www.atptour.com/en/scores/current/us-open/560/draws";
+              // $adresse = "https://www.atptour.com/en/scores/current/us-open/560/draws";
               // ----- Other tournaments for tests -----
               // $adresse = "https://www.atptour.com/en/scores/current/paris/352/draws";
 
@@ -98,7 +98,7 @@ session_start(); // On démarre la session AVANT toute chose
                 // - sinon
                 //      - NE PAS EXECUTER LE CODE CI-DESSOUS (mettre en commentaire avant de charger les joueurs)
                 //-------------------------------------------------------------------------------------------------
-                if ($player[7][$i] == 'Jiri Vesely') {
+                if ($player[7][$i] == 'Jenson Brooksby') {
                  $id++;
                  echo "Ajustement pour cet enflure d'O'Connell --> id de Vesely est maintenant " . $id . "<br />";
                 }
@@ -150,6 +150,8 @@ session_start(); // On démarre la session AVANT toute chose
                 if ($nbPlayersTournament != 128) {
                   echo "<span class='warning'>128 joueurs attendus, seulement " . $nbPlayersTournament . " chargés !</span><br />";
                   echo "<span class='warning'>Vérifier la liste</span><br />";
+                } else {
+                  echo "<span class=congrats>INFO:</span>Totalité des 128 joueurs chargés avec succès.</span><br />";
                 }
               // }
 

@@ -46,7 +46,7 @@ session_start(); // On démarre la session AVANT toute chose
 
             <p>
               <form action="loadPlayersListInitial.php" method="post" enctype="multipart/form-data">
-                <input type="submit" value="Télécharger 8 meilleurs joueurs" />
+                <input type="submit" value="Télécharger 8 premères têtes de série" />
                 <!-- <input type="submit" value="Reset liste des joueurs" /> -->
               </form>
 

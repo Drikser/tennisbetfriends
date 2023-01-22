@@ -92,7 +92,7 @@ session_start(); // On démarre la session AVANT toute chose
                   }
                   else {
                     $seed++;
-                    loadTournamentPlayers($id, $player[1][$i], $player[6][$i], "Y", " ", $seed);
+                    loadTournamentPlayers($id, $player[1][$i], $player[6][$i], "Y", $seed, $seed);
                   }
                   //    echo "ligne=" . $player[1][$i] . "<br />"; // On affiche le joueur
               }
@@ -114,9 +114,11 @@ session_start(); // On démarre la session AVANT toute chose
               // test pour vérifier qu'on a bien chargé le bon nombre de joueurs
               // if ($typTournament == 'GC') {
               //   echo "Grand chelem, 128 joueurs attendus";
-                if ($nbPlayersTournament != 128) {
-                  echo "<span class='warning'>128 joueurs attendus, seulement " . $nbPlayersTournament . " chargés !</span><br />";
+                if ($nbPlayersTournament != 8) {
+                  echo "<span class='warning'>8 joueurs attendus, seulement " . $nbPlayersTournament . " chargés !</span><br />";
                   echo "<span class='warning'>Vérifier la liste</span><br />";
+                } else {
+                  echo "<span class=congrats>Les 8 premières têtes de série ont bien été chargées.</span><br />";
                 }
               // }
 
