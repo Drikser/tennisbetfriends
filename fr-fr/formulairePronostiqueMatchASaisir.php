@@ -57,6 +57,7 @@
         <th width="150" align="center" valign="middle" class="cellule">Score Vainqueur (nb sets)</th>
         <th width="150" align="center" valign="middle" class="cellule">Score Perdant (nb sets)</th>
         <th width="100" align="center" valign="middle" class="cellule">Type Match</th>
+        <th width="100" align="center" valign="middle" class="cellule">Doubler tes points ?</th>
 <!-- Rows to not display, but which still need to send through the form -->
         <th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
         <th width="150" align="center" valign="middle" class="cellule" style="display:none">Date du match (à transmettre)</th>
@@ -515,6 +516,30 @@
           }
           ?>
         </select></td>
+        <!-- Add option to double points on prediction from Round of 16 onwards -->
+        <?php
+        if ($_SESSION['JOU_PSE'] !== 'Admin') {
+          switch ($donnees['PRO_DBL_PTS']) {
+            case '1':
+            ?>
+            <td align="center" valign="middle" class="cellule">
+            <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
+              <input type="checkbox" name="Joker" id="DoublePoints"><br>
+            </td>
+            <?php
+            break;
+
+            case '2':
+            ?>
+            <td align="center" valign="middle" class="cellule">
+            <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
+              <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><br>
+            </td>
+            <?php
+            break;
+          }
+        }
+        ?>
 
         <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $donnees['RES_MATCH_ID']; ?> required="required"></td>
         <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="DateMatch" class="form-control" id="DateMatch" value= <?php echo $donnees['RES_MATCH_DAT']; ?> required="required"></td>

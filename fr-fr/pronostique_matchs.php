@@ -214,6 +214,13 @@ session_start(); // On démarre la session AVANT toute chose
                               break;
                           }
 
+                          $joker = $_POST['Joker'];
+                          echo "Joker=" . $joker;
+                          if ($joker == "yes") {
+                            $doublePoints = 2;
+                          } else {
+                            $doublePoints = 1;
+                          }
                           // echo "pronoOK=" . $pronoOK . "<br />";
 
                           //Chargement des scores en table MySQL des pronostiques
@@ -221,8 +228,9 @@ session_start(); // On démarre la session AVANT toute chose
 
                           if ($pronoOK == 'OK') {
 
-                            // echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ") <br />";
-                            $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
+                            echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ", " . $doublePoints . ") <br />";
+                            // $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
+                            $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints);
 
                             $nbRow = $req->rowcount();
                           }

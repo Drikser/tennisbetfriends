@@ -688,6 +688,22 @@ session_start(); // On démarre la session AVANT toute chose
     			//***********************************************************************************************************************************
     		 	echo '<br /><h2>Pronostiques des matchs</h2>';
 
+          // Compter le nombre de jokers utilisés / restants
+          $Nb_joker = getNbJoker();
+          $donnees = $Nb_joker->fetch();
+          if ($donnees['nbJoker'] > 1) {
+            echo "NOTE: Vous avez utilisé " . $donnees['nbJoker'] . " jokers sur 3.<br />";
+            echo "<br />";
+          } else {
+            if ($donnees['nbJoker'] == 1) {
+              echo "NOTE: Vous avez utilisé " . $donnees['nbJoker'] . " joker sur 3.<br />";
+              echo "<br />";
+            } else {
+              echo "NOTE: Vous n'avez pas encore utilisé de joker. Il vous en reste encore 3 sur 3.<br />";
+              echo "<br />";
+            }
+          }
+
           //****************************************************************************
           // debut copy formulairePronostiqueUnitaireCible.php
           //****************************************************************************
@@ -701,6 +717,11 @@ session_start(); // On démarre la session AVANT toute chose
               $result = $_POST['VouD'];
               $scoreJ1 = $_POST['ScoreJ1'];
               $scoreJ2 = $_POST['ScoreJ2'];
+              if (isset($_POST['Joker'])) {
+                $joker = $_POST['Joker'];
+              } else {
+                $joker = " ";
+              }
 
               // echo "Before conversion ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
 
@@ -818,14 +839,21 @@ session_start(); // On démarre la session AVANT toute chose
                 }
 
                 // echo "pronoOK=" . $pronoOK . "<br />";
+                echo "Joker=" . $joker . "<br />";
+                if ($joker == "on") {
+                  $doublePoints = 2;
+                } else {
+                  $doublePoints = 1;
+                }
 
                 //Chargement des scores en table MySQL des pronostiques
                 $nbRow = 0;
 
                 if ($pronoOK == 'OK') {
 
+                  echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ", " . $doublePoints . ") <br />";
                   // echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ") <br />";
-                  $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
+                  $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints);
 
                   $nbRow = $req->rowcount();
                 }
@@ -948,7 +976,17 @@ session_start(); // On démarre la session AVANT toute chose
                         <!-- <td align="center" valign="middle" class="cellule"><?php //echo $donnees['PRO_TYP_MATCH']; ?></td> -->
                         <!-- <td align="center" valign="middle" class="cellule"><?php //echo $donnees['RES_MATCH_TYP']; ?></td> -->
                         <th align="center" valign="middle" class="cellule"></th>
-                        <td align="center" valign="middle" class="cellule"><?php echo $donnees['PRO_RES_MATCH'] . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $donnees['PRO_TYP_MATCH']; ?></td>
+                        <?php
+                        if ($donnees['PRO_DBL_PTS'] == 2) {
+                        ?>
+                          <td align="center" valign="middle" class="cellule"><?php echo $donnees['PRO_RES_MATCH'] . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $donnees['PRO_TYP_MATCH'] . " &#9733"; ?></td>
+                        <?php
+                        } else {
+                        ?>
+                          <td align="center" valign="middle" class="cellule"><?php echo $donnees['PRO_RES_MATCH'] . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $donnees['PRO_TYP_MATCH']; ?></td>
+                        <?php
+                        }
+                        ?>
                         <td align="center" valign="middle" class="cellule"><?php echo $donnees['PRO_PTS_JOU']; ?></td>
 
                         <?php
