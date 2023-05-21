@@ -467,7 +467,7 @@ session_start(); // On démarre la session AVANT toute chose
 
                       if ($nbRow == 0) {
                         // Le tournament hasn't started yet
-                        echo "<span class='congrats'>the tournament hasn't started yet. 1st round matches will be online soon.<br /></span><br />";
+                        echo "<span class='congrats'>The tournament hasn't started yet. 1st round matches will be online soon.<br /></span><br />";
                       }
                       else {
                         // Le joueur est à jour de ses pronostiques
