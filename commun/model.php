@@ -471,6 +471,13 @@ function getResultsToEnter() {
 }
 
 
+function getResultatsTableNbRows() {
+	$bdd = dbConnect();
+  $response = $bdd->query('SELECT * FROM resultats');
+	return $response;
+}
+
+
 function getResultToEnter($postMatchId) {
 	$bdd = dbConnect();
 

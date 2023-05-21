@@ -485,8 +485,19 @@ session_start(); // On démarre la session AVANT toute chose
                         }
                     }
                     else {
+                      // Y a-t-il des matchs dans la table "resultats" ?
+                      $isresultatstableempty = getResultatsTableNbRows();
+                      $nbRow = $isresultatstableempty->rowcount();
+                      
+                      if ($nbRow == 0) {
+                        // Le tournoi n'a pas encore commencé
+                        echo "<span class='congrats'>Le tournoi n'a pas encore commencé. Les matchs du 1er tour seront en ligne bientôt<br /></span><br />";
+                      }
+                      else {
+                        // Le joueur est à jour de ses pronostiques
                         echo "<span class='congrats'>Vous êtes à jour dans vos pronostiques.<br /></span><br />";
                         echo "Vous pouvez toutefois les modifier si vous le souhaitez dans la section <a href='pagePerso.php'>Page Perso</a><br />";
+                      }
                     }
                 }
                 else {

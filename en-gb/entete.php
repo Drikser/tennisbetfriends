@@ -11,10 +11,22 @@
     while ($donnees = $tournament->fetch()) {
 
 			if ($donnees['SET_TYP_TOURNAMENT'] ==  "GC") {
+				if ($_SERVER['HTTP_HOST'] == 'localhost') {
+					echo "<span class='warning'>TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</span>";
+				}
 				echo "<h6>" . $donnees['SET_LIB_TOURNAMENT'] . " forecasts</h6>";
+				if ($_SERVER['HTTP_HOST'] == 'localhost') {
+					echo "<span class='warning'>TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</span>";
+				}
 			}
 			else {
+				if ($_SERVER['HTTP_HOST'] == 'localhost') {
+					echo "<span class='warning'>TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</span>";
+				}
 				echo "<h6>" . $donnees['SET_LIB_TOURNAMENT'] . " forecasts (" . $donnees['SET_LIB_TYP'] . ")</h6>";
+				if ($_SERVER['HTTP_HOST'] == 'localhost') {
+					echo "<span class='warning'>TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</span>";
+				}
 			}
 
 		}
