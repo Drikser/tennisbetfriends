@@ -352,7 +352,7 @@ session_start(); // On démarre la session AVANT toute chose
           //-----------------------------------------------------------------------------------------
           if (isset($_GET['updateBonus'])) {
 
-              echo "<br />Vous souhaitez modifier le pronostique bonus suivant :<br />";
+              echo "<br />You want to change the following Bonus Prediction :<br />";
 
               $idSessionJoueur = $_SESSION['JOU_ID'];
 
@@ -621,7 +621,7 @@ session_start(); // On démarre la session AVANT toute chose
   	                    ?>
 
                         <p>
-  	                    Best French player : <select name="BestFrench" id="BestFrench" required="required"/><br />
+  	                    Best Frenchman : <select name="BestFrench" id="BestFrench" required="required"/><br />
   	                    <option value="<?php echo $updateBestFrench; ?>"><?php echo $updateBestFrench; ?></option>
   	                    <?php
   	                        while ($donnees = $listFrenchTournament->fetch())
@@ -664,7 +664,7 @@ session_start(); // On démarre la session AVANT toute chose
   	                    ?>
 
   	                    <p>
-  	                    Level of the best French player : <select type="text" name="LevelFrench" label="LevelFrench" required="required"/><br />
+  	                    Level of the best Frenchman : <select type="text" name="LevelFrench" label="LevelFrench" required="required"/><br />
 
                         <?php
                         $outputRound = ConvertRoundFTE($updateBestFrenchLevel);
