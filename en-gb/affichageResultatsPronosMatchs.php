@@ -88,7 +88,8 @@ while ($titre = $allPrognosis->fetch()) {
 			//change display for english version of the website
 			$outputRound = ConvertRoundFTE($donnees['RES_MATCH_TOUR']);
 			$outputResult = ConvertResultFTE($donnees['RES_MATCH']);
-			$outputType = ConvertTypeResultFTE($titre['PRO_TYP_MATCH']);
+			// $outputType = ConvertTypeResultFTE($titre['PRO_TYP_MATCH']);
+			$outputType = ConvertTypeResultFTE($donnees['RES_MATCH_TYP']);
 
 			//Classe permettant de modifier légèrement la couleur des lignes en fonction du tour
 			if ($donnees['RES_MATCH_POIDS_TOUR'] !== $ResMatchPoidsTourPrecedent) {

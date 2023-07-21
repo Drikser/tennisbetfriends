@@ -59,7 +59,31 @@ session_start(); // On démarre la session AVANT toute chose
                     // Calcul difference dates
                     $H_here = date('Y-m-d H:i:s');
                     // echo "H1 = " . $H_here . "<br />";
-                    date_default_timezone_set('America/New_York');
+                    // date_default_timezone_set('Australia/Melbourne');
+                    // date_default_timezone_set('Europe/Paris');
+                    // date_default_timezone_set('Europe/London');
+                    // date_default_timezone_set('America/New_York');
+                    $tournament= getTournament();
+                    while ($donnees = $tournament->fetch()) {
+                        switch ($donnees['SET_LIB_TOURNAMENT']) {
+                          case 'Australian Open':
+                            date_default_timezone_set('Australia/Melbourne');
+                          break;
+
+                          case 'Roland Garros':
+                            date_default_timezone_set('Europe/Paris');
+                          break;
+
+                          case 'Wimbledon':
+                            date_default_timezone_set('Europe/London');
+                          break;
+
+                          case 'US Open':
+                            date_default_timezone_set('America/New_York');
+                          break;
+                        }
+                    }
+
           					$H_Nyk = date('Y-m-d H:i:s');
           					// echo "H2 = " . $H_Nyk . "<br />";
                     $jetlag = $H_Nyk - $H_here;
@@ -352,7 +376,8 @@ session_start(); // On démarre la session AVANT toute chose
                               <?php
                               // echo "<br /><span class='info'>" . $outputRound . "</span><br />";
                               echo "<br />" . $outputRound . "<br />";
-                              echo "Enter your prediction before " . $Heure_match_YourTime . " (your time)<br />";
+                              // echo "Enter your prediction before " . $Heure_match_YourTime . " (your time)<br />";
+                              echo "Enter your prediction before: ";
                               ?>
                               <table>
                               <?php
@@ -363,7 +388,8 @@ session_start(); // On démarre la session AVANT toute chose
                                 </table>
                                 <br />
                                 <?php
-                                echo "Enter your prediction before " . $Heure_match_YourTime . " (your time)<br />";
+                                // echo "Enter your prediction before " . $Heure_match_YourTime . " (your time)<br />";
+                                echo "Enter your prediction before: ";
                                 ?>
                                 <table>
                                 <?php

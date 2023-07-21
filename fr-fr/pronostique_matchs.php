@@ -60,7 +60,31 @@ session_start(); // On démarre la session AVANT toute chose
                     // Calcul difference dates
                     $H_here = date('Y-m-d H:i:s');
                     // echo "H1 = " . $H_here . "<br />";
-                    date_default_timezone_set('Australia/Melbourne');
+                    // date_default_timezone_set('Australia/Melbourne');
+                    // date_default_timezone_set('Europe/Paris');
+                    // date_default_timezone_set('Europe/London');
+                    // date_default_timezone_set('America/New_York');
+                    $tournament= getTournament();
+                    while ($donnees = $tournament->fetch()) {
+                        switch ($donnees['SET_LIB_TOURNAMENT']) {
+                          case 'Australian Open':
+                            date_default_timezone_set('Australia/Melbourne');
+                          break;
+
+                          case 'Roland Garros':
+                            date_default_timezone_set('Europe/Paris');
+                          break;
+
+                          case 'Wimbledon':
+                            date_default_timezone_set('Europe/London');
+                          break;
+
+                          case 'US Open':
+                            date_default_timezone_set('America/New_York');
+                          break;
+                        }
+                    }
+
           					$H_Nyk = date('Y-m-d H:i:s');
           					// echo "H2 = " . $H_Nyk . "<br />";
                     $jetlag = $H_Nyk - $H_here;
@@ -368,7 +392,9 @@ session_start(); // On démarre la session AVANT toute chose
                                 $Heure_match_YourTime = $Heure_match_NY->format('l d F, H:i');
                                 // echo "Saisie à faire avant " . $Heure_match_YourTime . " (chez vous)<br />";
                                 $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::SHORT);
-                                echo "Saisie à faire avant " . $formatter->format($Heure_match_NY) . " (chez vous)<br />";
+                                // echo "Saisie à faire avant " . $formatter->format($Heure_match_NY) . " (chez vous)<br />";
+                                // echo "Saisie à faire avant " . $formatter->format($donnees['RES_MATCH_DAT']) . " (chez vous)<br />";
+                                echo "Saisie à faire avant: ";
 
 
                                 ?>
@@ -387,7 +413,8 @@ session_start(); // On démarre la session AVANT toute chose
                                   setlocale(LC_TIME, 'fr_FR.utf8','fra');
                                   $Heure_match_YourTime = $Heure_match_NY->format('l d F, H:i');
                                   $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::SHORT);
-                                  echo "Saisie à faire avant " . $formatter->format($Heure_match_NY) . " (chez vous)<br />";
+                                  // echo "Saisie à faire avant " . $formatter->format($Heure_match_NY) . " (chez vous)<br />";
+                                  echo "Saisie à faire avant: ";
                                   ?>
                                   <table>
                                   <?php
@@ -488,7 +515,7 @@ session_start(); // On démarre la session AVANT toute chose
                       // Y a-t-il des matchs dans la table "resultats" ?
                       $isresultatstableempty = getResultatsTableNbRows();
                       $nbRow = $isresultatstableempty->rowcount();
-                      
+
                       if ($nbRow == 0) {
                         // Le tournoi n'a pas encore commencé
                         echo "<span class='congrats'>Le tournoi n'a pas encore commencé. Les matchs du 1er tour seront en ligne bientôt<br /></span><br />";
