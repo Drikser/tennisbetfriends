@@ -111,7 +111,7 @@ session_start(); // On démarre la session AVANT toute chose
 
 	        }
 
-					echo 'Pour enregistrer un nouveau résultat, clique <a href="gestionMatchs.php#saisieResultat">' . 'ICI' . '</a><br/>';
+					echo 'Pour enregistrer un nouveau résultat, clique <a href="gestionMatchs.php#saisieResultat">' . '<span class=warning>ICI</span>' . '</a><br/>';
 
           // Ensuite il faut créer le nouveau match en fonction du vainqueur
 					// En fonction du numéro de séquence du match joué, le vainqueur se retrouvera en JOU1 ou en JOU2 du match suivant

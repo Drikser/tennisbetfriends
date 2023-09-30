@@ -33,6 +33,7 @@
                     <ul>
                         <li><a class="a_menu" href="pronostique_tournoi.php">Bonus</a></li>
                         <li><a class="a_menu" href="pronostique_matchs.php">Matchs</a></li>
+                        <li><a class="a_menu" href="pronostique_matchs2.php">Matchs (1er & 2ème tour - En construction)</a></li>
                         <li><a class="a_menu" href="pagePerso.php">Vos pronostiques</a></li>
                     </ul>
                     <li><a class="a_menu" href="rules.php">Règlement</a></li>

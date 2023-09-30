@@ -3,8 +3,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- <link rel="stylesheet" type="text/css" href="../css/AustralianOpen.css" /> -->
     <!-- <link rel="stylesheet" type="text/css" href="../css/clay.css" /> -->
-    <link rel="stylesheet" href="../css/grass.css" />
-    <!-- <link rel="stylesheet" href="../css/USOpen.css" /> -->
+    <!-- <link rel="stylesheet" href="../css/grass.css" /> -->
+    <link rel="stylesheet" href="../css/USOpen.css" />
     <title>tennisbetfriends.com</title>
     <link rel="shortcut icon" href="../images/tennisbetfriends-profile.ico"/>
     <!-- ************************************************************************************************ -->

@@ -18,7 +18,7 @@ if (isset($_POST['VouD']) or isset($_POST['ScoreJ1']) or isset($_POST['ScoreJ2']
     echo "Le joueur est l'ID n°" . $_SESSION['JOU_ID'] . ' (' . $_SESSION['JOU_PSE'] . ')<br />';
 
     $nbRow = 0;
- 
+
     $req = updateResult($_POST['idMatch']);
 
     //$nbRow = $req->rowcount();
@@ -74,7 +74,7 @@ if (isset($_POST['VouD']) or isset($_POST['ScoreJ1']) or isset($_POST['ScoreJ2']
 
       }
 
-      echo 'Pour enregistrer un nouveau résultat, clique <a href="saisieResultat.php">' . 'ICI' . '</a><br/>';
+      echo 'Pour enregistrer un nouveau résultat, clique <a href="saisieResultat.php">' . '<span class=congrats>ICI</span>' . '</a><br/>';
 
       // Ensuite il faut créer le nouveau match en fonction du vainqueur
       // En fonction du numéro de séquence du match joué, le vainqueur se retrouvera en JOU1 ou en JOU2 du match suivant
