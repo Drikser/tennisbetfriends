@@ -688,22 +688,6 @@ session_start(); // On démarre la session AVANT toute chose
     			//***********************************************************************************************************************************
     		 	echo '<br /><h2>Pronostiques des matchs</h2>';
 
-          // Compter le nombre de jokers utilisés / restants
-          $Nb_joker = getNbJoker();
-          $donnees = $Nb_joker->fetch();
-          if ($donnees['nbJoker'] > 1) {
-            echo "NOTE: Vous avez utilisé " . $donnees['nbJoker'] . " jokers sur 3.<br />";
-            echo "<br />";
-          } else {
-            if ($donnees['nbJoker'] == 1) {
-              echo "NOTE: Vous avez utilisé " . $donnees['nbJoker'] . " joker sur 3.<br />";
-              echo "<br />";
-            } else {
-              echo "NOTE: Vous n'avez pas encore utilisé de joker. Il vous en reste encore 3 sur 3.<br />";
-              echo "<br />";
-            }
-          }
-
           //****************************************************************************
           // debut copy formulairePronostiqueUnitaireCible.php
           //****************************************************************************
@@ -839,7 +823,7 @@ session_start(); // On démarre la session AVANT toute chose
                 }
 
                 // echo "pronoOK=" . $pronoOK . "<br />";
-                echo "Joker=" . $joker . "<br />";
+                // echo "Joker=" . $joker . "<br />";
                 if ($joker == "on") {
                   $doublePoints = 2;
                 } else {
@@ -851,7 +835,7 @@ session_start(); // On démarre la session AVANT toute chose
 
                 if ($pronoOK == 'OK') {
 
-                  echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ", " . $doublePoints . ") <br />";
+                  // echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ", " . $doublePoints . ") <br />";
                   // echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ") <br />";
                   $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints);
 
@@ -860,6 +844,9 @@ session_start(); // On démarre la session AVANT toute chose
                 else {
 
                   echo "<span class='warning'>Votre pronostique: " . $result . " " . $scoreJ1 . "/" . $scoreJ2 . "</span><br />";
+                  if ($doublePoints == 2) {
+                    echo "<span class='warning'>!!! Joker joué sur ce match !!!</span>";
+                  }
                   echo "<br />";
                   echo "<span class='warning'>Retour au formulaire de saisie: </span>";
                   ?>
@@ -919,6 +906,22 @@ session_start(); // On démarre la session AVANT toute chose
           //****************************************************************************
           // fin copy formulairePronostiqueUnitaireCible.php
           //****************************************************************************
+          // Compter le nombre de jokers utilisés / restants
+          $Nb_joker = getNbJoker();
+          $donnees = $Nb_joker->fetch();
+          echo 'Nb Joker=' . $donnees['nbJoker'] . '<br />';
+          if ($donnees['nbJoker'] > 2) {
+            echo "NOTE: Vous avez utilisé tous vos jokers.<br />";
+            echo "<br />";
+          } else {
+            if ($donnees['nbJoker'] >= 1) {
+              echo "NOTE: Vous avez utilisé " . $donnees['nbJoker'] . " joker sur 3.<br />";
+              echo "<br />";
+            } else {
+              echo "NOTE: Vous n'avez pas encore utilisé de joker. Il vous en reste encore 3 sur 3.<br />";
+              echo "<br />";
+            }
+          }
 
             ?>
                 <table>

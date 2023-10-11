@@ -691,7 +691,8 @@ function createMatchToPrognosis($postPlayerId, $postMatchId) {
 	//echo "Dans la fonction createMatchToPrognosis() : joueur=" . $postPlayerId . " / match=" . $postMatchId . "<br />";
 
 	//Création du match à saisir pour tous les joueurs enregistrés
-	$req = $bdd->prepare('INSERT INTO pronostique (PRO_JOU_ID, PRO_MATCH_ID, PRO_RES_MATCH, PRO_SCORE_JOU1, PRO_SCORE_JOU2, PRO_TYP_MATCH, PRO_PTS_JOU) VALUES (:IdJoueur, :IdMatch, :ResMatch, :ScoreJou1, :ScoreJou2, :TypMatch, :PointsPronostique)');
+	// $req = $bdd->prepare('INSERT INTO pronostique (PRO_JOU_ID, PRO_MATCH_ID, PRO_RES_MATCH, PRO_SCORE_JOU1, PRO_SCORE_JOU2, PRO_TYP_MATCH, PRO_PTS_JOU) VALUES (:IdJoueur, :IdMatch, :ResMatch, :ScoreJou1, :ScoreJou2, :TypMatch, :PointsPronostique)');
+	$req = $bdd->prepare('INSERT INTO pronostique (PRO_JOU_ID, PRO_MATCH_ID, PRO_RES_MATCH, PRO_SCORE_JOU1, PRO_SCORE_JOU2, PRO_TYP_MATCH, PRO_DBL_PTS, PRO_PTS_JOU) VALUES (:IdJoueur, :IdMatch, :ResMatch, :ScoreJou1, :ScoreJou2, :TypMatch, :DoublePoints, :PointsPronostique)');
 	$req->execute(array(
 		'IdJoueur' => $postPlayerId,
 		'IdMatch' => $postMatchId,
@@ -699,6 +700,7 @@ function createMatchToPrognosis($postPlayerId, $postMatchId) {
 		'ScoreJou1' => 0,
 		'ScoreJou2' => 0,
 		'TypMatch' => "",
+		'DoublePoints' => 1,
         'PointsPronostique' => 0));
 }
 
