@@ -1,11 +1,10 @@
- <!--
-*********************************************************
-*  Page pour saisie de plusieurs matchs d'un seul coup  *
-*  ==> Un formulaire par match saisit                   *
-*********************************************************
--->
-
 <?php
+    // *********************************************************
+    // *  Page pour saisie de plusieurs matchs d'un seul coup  *
+    // *  ==> Un formulaire par match saisit                   *
+    // *********************************************************
+
+
     // $Player1 = htmlentities($donnees['RES_MATCH_JOU1']);
     // $Player2 = htmlentities($donnees['RES_MATCH_JOU2']);
     // $DateMatch = $donnees['RES_MATCH_DAT'];
@@ -15,6 +14,7 @@
     // echo "date avec htmlspecialchars=" . htmlspecialchars($DateMatch) . "<br />";
 
 //Redirection du formulaire selon si on fait une saisie de résultat (Admin) ou un pronostique (Autre)
+
   if ($_SESSION['JOU_PSE'] == "Admin") {
     // echo "Formulaire - pageOrigine = " . $pageOrigine . "<br />";
     if ($pageOrigine == 'gestionMatchs_correction') {
@@ -49,15 +49,14 @@
     <tr>
 <!--        <th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>   -->
 <!-- Rows to display for the form -->
-        <th width="150" align="center" valign="middle" class="cellule">Match date</th>
-        <th width="150" align="center" valign="middle" class="cellule">Round</th>
-        <th width="150" align="center" valign="middle" class="cellule">Player 1</th>
-        <th width="50" align="center" valign="middle" class="cellule">Choose winner</th>
-        <th width="150" align="center" valign="middle" class="cellule">Player 2</th>
-        <th width="150" align="center" valign="middle" class="cellule">Winner score (nb sets)</th>
-        <th width="150" align="center" valign="middle" class="cellule">Loser score (nb sets)</th>
-        <th width="100" align="center" valign="middle" class="cellule">Match Type</th>
-        <th width="100" align="center" valign="middle" class="cellule">Double your points ?</th>
+        <!-- <th width="150" align="center" valign="middle" class="cellule">Date du match</th> -->
+        <th width="150" align="center" valign="middle" class="cellule">Niveau</th>
+        <th width="150" align="center" valign="middle" class="cellule">Joueur 1</th>
+        <th width="50" align="center" valign="middle" class="cellule">Choisir vainqueur</th>
+        <th width="150" align="center" valign="middle" class="cellule">Joueur 2</th>
+        <th width="150" align="center" valign="middle" class="cellule">Score Vainqueur (nb sets)</th>
+        <th width="150" align="center" valign="middle" class="cellule">Score Perdant (nb sets)</th>
+        <th width="100" align="center" valign="middle" class="cellule">Type Match</th>
 <!-- Rows to not display, but which still need to send through the form -->
         <th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
         <th width="150" align="center" valign="middle" class="cellule" style="display:none">Date du match (à transmettre)</th>
@@ -70,7 +69,7 @@
     <tr>
         <!-- <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $idMatch; ?> required="required"></td>   -->
         <!-- <td align="center" valign="middle" class="cellule" type="text" name="DateMatch" class="form-control" id="DateMatch" required="required"><?php echo $donnees['RES_MATCH_DAT']; ?></td> -->
-        <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_DAT']; ?></td>
+        <!-- <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_DAT']; ?></td> -->
         <!-- <td align="center" valign="middle" class="cellule"><?php echo $DateMatch; ?></td> -->
         <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_TOUR']; ?></td>
         <td align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU1']; ?></td>
@@ -81,28 +80,28 @@
             switch ($donnees['RES_MATCH']) {
               case 'V':
                 ?>
-                <!-- <input type="radio" id="W" name="VouD" value="W" checked><label for="W"></label>
-                <input type="radio" id="L" name="VouD" value="L"><label for="L"></label> -->
-                <input type="radio" id="W" name="VouD" value="W" checked>
-                <input type="radio" id="L" name="VouD" value="L">
+                <!-- <input type="radio" id="V" name="VouD" value="V" checked><label for="V"></label>
+                <input type="radio" id="D" name="VouD" value="D"><label for="D"></label> -->
+                <input type="radio" id="V" name="VouD" value="V" checked>
+                <input type="radio" id="D" name="VouD" value="D">
                 <?php
                 break;
 
               case 'D':
                 ?>
-                <!-- <input type="radio" id="W" name="VouD" value="W"><label for="W"></label>
-                <input type="radio" id="L" name="VouD" value="L" checked><label for="L"></label> -->
-                <input type="radio" id="W" name="VouD" value="W">
-                <input type="radio" id="L" name="VouD" value="L" checked>
+                <!-- <input type="radio" id="V" name="VouD" value="V"><label for="V"></label>
+                <input type="radio" id="D" name="VouD" value="D" checked><label for="D"></label> -->
+                <input type="radio" id="V" name="VouD" value="V">
+                <input type="radio" id="D" name="VouD" value="D" checked>
                 <?php
                 break;
 
               default:
               ?>
-                <!-- <input type="radio" id="W" name="VouD" value="W"><label for="W"></label>
-                <input type="radio" id="L" name="VouD" value="L"><label for="L"></label> -->
-                <input type="radio" id="W" name="VouD" value="W">
-                <input type="radio" id="L" name="VouD" value="L">
+                <!-- <input type="radio" id="V" name="VouD" value="V"><label for="V"></label>
+                <input type="radio" id="D" name="VouD" value="D"><label for="D"></label> -->
+                <input type="radio" id="V" name="VouD" value="V">
+                <input type="radio" id="D" name="VouD" value="D">
                 <?php
                 break;
             }
@@ -111,28 +110,28 @@
             switch ($donnees['PRO_RES_MATCH']) {
               case 'V':
                 ?>
-                <!-- <input type="radio" id="W" name="VouD" value="W" checked><label for="W"></label>
-                <input type="radio" id="L" name="VouD" value="L"><label for="L"></label> -->
-                <input type="radio" id="W" name="VouD" value="W" checked>
-                <input type="radio" id="L" name="VouD" value="L">
+                <!-- <input type="radio" id="V" name="VouD" value="V" checked><label for="V"></label>
+                <input type="radio" id="D" name="VouD" value="D"><label for="D"></label> -->
+                <input type="radio" id="V" name="VouD" value="V" checked>
+                <input type="radio" id="D" name="VouD" value="D">
                 <?php
                 break;
 
               case 'D':
                 ?>
-                <!-- <input type="radio" id="W" name="VouD" value="W"><label for="W"></label>
-                <input type="radio" id="L" name="VouD" value="L" checked><label for="L"></label> -->
-                <input type="radio" id="W" name="VouD" value="W">
-                <input type="radio" id="L" name="VouD" value="L" checked>
+                <!-- <input type="radio" id="V" name="VouD" value="V"><label for="V"></label>
+                <input type="radio" id="D" name="VouD" value="D" checked><label for="D"></label> -->
+                <input type="radio" id="V" name="VouD" value="V">
+                <input type="radio" id="D" name="VouD" value="D" checked>
                 <?php
                 break;
 
               default:
               ?>
-                <!-- <input type="radio" id="W" name="VouD" value="W"><label for="W"></label>
-                <input type="radio" id="L" name="VouD" value="L"><label for="L"></label> -->
-                <input type="radio" id="W" name="VouD" value="W">
-                <input type="radio" id="L" name="VouD" value="L">
+                <!-- <input type="radio" id="V" name="VouD" value="V"><label for="V"></label>
+                <input type="radio" id="D" name="VouD" value="D"><label for="D"></label> -->
+                <input type="radio" id="V" name="VouD" value="V">
+                <input type="radio" id="D" name="VouD" value="D">
                 <?php
                 break;
             }
@@ -183,6 +182,12 @@
                   break;
 
                 default:
+                ?>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <?php
                   break;
               }
             }
@@ -225,6 +230,12 @@
                   break;
 
                 default:
+                ?>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <?php
                   break;
               }
             }
@@ -453,7 +464,7 @@
               case 'AB':
                 ?>
                 <option value=""></option>
-                <option value="AB" selected>RET</option>
+                <option value="AB" selected>AB</option>
                 <option value="WO">WO</option>
                 <?php
                 break;
@@ -461,7 +472,7 @@
               case 'WO':
                 ?>
                 <option value=""></option>
-                <option value="AB">RET</option>
+                <option value="AB">AB</option>
                 <option value="WO" selected>WO</option>
                 <?php
                 break;
@@ -469,18 +480,18 @@
               default:
               ?>
                 <option value="" selected></option>
-                <option value="AB">RET</option>
+                <option value="AB">AB</option>
                 <option value="WO">WO</option>
                 <?php
                 break;
             }
-            }
-            else {
+          }
+          else {
               switch ($donnees['PRO_TYP_MATCH']) {
                 case 'AB':
                   ?>
                   <option value=""></option>
-                  <option value="AB" selected>RET</option>
+                  <option value="AB" selected>AB</option>
                   <option value="WO">WO</option>
                   <?php
                   break;
@@ -488,7 +499,7 @@
                 case 'WO':
                   ?>
                   <option value=""></option>
-                  <option value="AB">RET</option>
+                  <option value="AB">AB</option>
                   <option value="WO" selected>WO</option>
                   <?php
                   break;
@@ -496,7 +507,7 @@
                 default:
                 ?>
                   <option value="" selected></option>
-                  <option value="AB">RET</option>
+                  <option value="AB">AB</option>
                   <option value="WO">WO</option>
                   <?php
                   break;
@@ -504,44 +515,6 @@
           }
           ?>
         </select></td>
-
-        <!-- Add option to double points on prediction from Round of 16 onwards -->
-        <?php
-        if ($_SESSION['JOU_PSE'] !== 'Admin') {
-            switch ($donnees['PRO_DBL_PTS']) {
-              case '1':
-              // Si la case à cocher est vide
-              // Recherche nb de joker disponibles
-              // Si plus de joker, affiche message info au lieu de la case à cocher
-              $Nb_joker = getNbJoker();
-              $result = $Nb_joker->fetch();
-              echo 'Nb Joker=' . $result['nbJoker'] . '<br />';
-              if ($result['nbJoker'] > 2) {
-                ?>
-                 <td align="center" valign="middle" class="cellule">No more wildcard</td>
-                 <?php
-                 break;
-              } else {
-                ?>
-                <td align="center" valign="middle" class="cellule">
-                  <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
-                  <input type="checkbox" name="Joker" id="DoublePoints"><br>
-                </td>
-                <?php
-                break;
-              }
-              case '2':
-              ?>
-              <td align="center" valign="middle" class="cellule">
-              <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
-                <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><br>
-              </td>
-              <?php
-              break;
-            // }
-          }
-        }
-        ?>
 
         <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="idMatch" class="form-control" id="idMatch" value= <?php echo $donnees['RES_MATCH_ID']; ?> required="required"></td>
         <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="DateMatch" class="form-control" id="DateMatch" value= <?php echo $donnees['RES_MATCH_DAT']; ?> required="required"></td>
@@ -555,8 +528,8 @@
         <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="Round" class="form-control" id="Round" value="<?php echo $donnees['RES_MATCH_TOUR']; ?>" required="required"></td>
         <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="TypeTournoi" class="form-control" id="TypeTournoi" value="<?php echo $donnees['RES_TYP_TOURNOI']; ?>" required="required"></td>
 <!-- ************************** bouton validation en fin de ligne ***************************** -->
-        <!-- <td colspan="3" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Submit" onclick="return confirm('Are you sure of your choice?')"></td> -->
-        <td colspan="3" align="center" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Submit"></td>
+        <!-- <td colspan="3" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Valider" onclick="return confirm('Êtes-vous sûr de votre choix ?')"></td> -->
+        <td colspan="3" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Valider"></td>
 
 <!-- ************************** bouton annulation en fin de ligne ***************************** -->
         <!-- <td colspan="3" valign="middle"><input type="button" value="Annuler" onclick="history.go(-1)"></td> -->
@@ -565,11 +538,11 @@
         if ($_SESSION['JOU_PSE'] != "Admin") {
           if ($pageOrigine == 'pronostique_matchs') {
           ?>
-            <td colspan="3" align="center" valign="middle"><input type="button" value="Cancel" onclick="window.location.href='pronostique_matchs.php#FinListeMatchs'">
+            <td colspan="3" align="center" valign="middle"><input type="button" value="Annuler" onclick="window.location.href='pronostique_matchs.php#FinListeMatchs'">
           <?php
             } else {
               ?>
-              <td colspan="3" align="center" valign="middle"><input type="button" value="Cancel" onclick="window.location.href='pagePerso.php#FinListeMatchs'">
+              <td colspan="3" align="center" valign="middle"><input type="button" value="Annuler" onclick="window.location.href='pagePerso.php#FinListeMatchs'">
               <?php
             }
         } else {

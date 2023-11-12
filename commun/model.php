@@ -295,6 +295,16 @@ function getNbRegistered() {
 }
 
 
+function getNbJoker() {
+// Comptage du nb d'inscrits
+	$bdd = dbConnect();
+	$response = $bdd->query('SELECT count(*) AS nbJoker FROM pronostique, joueur
+	                          WHERE PRO_JOU_ID = JOU_ID
+														  AND JOU_PSE = "'.$_SESSION['JOU_PSE'].'"
+															AND PRO_DBL_PTS = 2');
+	return $response;
+}
+
 
 function getTable() {
 // Affiche le classement des joueurs
@@ -688,7 +698,8 @@ function createMatchToPrognosis($postPlayerId, $postMatchId) {
 	//echo "Dans la fonction createMatchToPrognosis() : joueur=" . $postPlayerId . " / match=" . $postMatchId . "<br />";
 
 	//Création du match à saisir pour tous les joueurs enregistrés
-	$req = $bdd->prepare('INSERT INTO pronostique (PRO_JOU_ID, PRO_MATCH_ID, PRO_RES_MATCH, PRO_SCORE_JOU1, PRO_SCORE_JOU2, PRO_TYP_MATCH, PRO_PTS_JOU) VALUES (:IdJoueur, :IdMatch, :ResMatch, :ScoreJou1, :ScoreJou2, :TypMatch, :PointsPronostique)');
+	// $req = $bdd->prepare('INSERT INTO pronostique (PRO_JOU_ID, PRO_MATCH_ID, PRO_RES_MATCH, PRO_SCORE_JOU1, PRO_SCORE_JOU2, PRO_TYP_MATCH, PRO_PTS_JOU) VALUES (:IdJoueur, :IdMatch, :ResMatch, :ScoreJou1, :ScoreJou2, :TypMatch, :PointsPronostique)');
+	$req = $bdd->prepare('INSERT INTO pronostique (PRO_JOU_ID, PRO_MATCH_ID, PRO_RES_MATCH, PRO_SCORE_JOU1, PRO_SCORE_JOU2, PRO_TYP_MATCH, PRO_DBL_PTS, PRO_PTS_JOU) VALUES (:IdJoueur, :IdMatch, :ResMatch, :ScoreJou1, :ScoreJou2, :TypMatch, :DoublePoints, :PointsPronostique)');
 	$req->execute(array(
 		'IdJoueur' => $postPlayerId,
 		'IdMatch' => $postMatchId,
@@ -696,6 +707,7 @@ function createMatchToPrognosis($postPlayerId, $postMatchId) {
 		'ScoreJou1' => 0,
 		'ScoreJou2' => 0,
 		'TypMatch' => "",
+		'DoublePoints' => 1,
         'PointsPronostique' => 0));
 }
 
@@ -948,7 +960,7 @@ function updateLevelFrench($postPlayerId) {
 
 
 // function updatePrognosis($postPlayerId, $postMatchId) {
-function updatePrognosis($postPlayerId, $postMatchId, $result, $scoreJ1, $scoreJ2, $typeMatch) {
+function updatePrognosis($postPlayerId, $postMatchId, $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints) {
 
 	$bdd = dbConnect();
 
@@ -956,7 +968,7 @@ function updatePrognosis($postPlayerId, $postMatchId, $result, $scoreJ1, $scoreJ
 	//echo "Saisie=" . $_POST['VouD'] . " " . $_POST['ScoreJ1'] . "/" . $_POST['ScoreJ2'] . " (" . $_POST['TypeMatch'] . ")<br />";
 
 	$req = $bdd->prepare('UPDATE pronostique
-							 SET PRO_RES_MATCH = :Resultat, PRO_SCORE_JOU1 = :ScoreJoueur1, PRO_SCORE_JOU2 = :ScoreJoueur2, PRO_TYP_MATCH = :TypeMatch
+							 SET PRO_RES_MATCH = :Resultat, PRO_SCORE_JOU1 = :ScoreJoueur1, PRO_SCORE_JOU2 = :ScoreJoueur2, PRO_TYP_MATCH = :TypeMatch, PRO_DBL_PTS = :DoublePoints
 						   WHERE PRO_JOU_ID = "'.$postPlayerId.'"
 						     AND PRO_MATCH_ID = "'.$postMatchId.'"');
 
@@ -969,7 +981,8 @@ function updatePrognosis($postPlayerId, $postMatchId, $result, $scoreJ1, $scoreJ
 		'Resultat' => $result,
 		'ScoreJoueur1' => $scoreJ1,
 		'ScoreJoueur2' => $scoreJ2,
-		'TypeMatch' => $typeMatch));
+		'TypeMatch' => $typeMatch,
+		'DoublePoints' => $doublePoints));
 
     return $req;
 }

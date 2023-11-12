@@ -238,13 +238,6 @@ session_start(); // On démarre la session AVANT toute chose
                               break;
                           }
 
-                          $joker = $_POST['Joker'];
-                          echo "Joker=" . $joker;
-                          if ($joker == "yes") {
-                            $doublePoints = 2;
-                          } else {
-                            $doublePoints = 1;
-                          }
                           // echo "pronoOK=" . $pronoOK . "<br />";
 
                           //Chargement des scores en table MySQL des pronostiques
@@ -252,9 +245,8 @@ session_start(); // On démarre la session AVANT toute chose
 
                           if ($pronoOK == 'OK') {
 
-                            echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ", " . $doublePoints . ") <br />";
-                            // $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
-                            $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints);
+                            // echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ") <br />";
+                            $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
 
                             $nbRow = $req->rowcount();
                           }
@@ -442,6 +434,10 @@ session_start(); // On démarre la session AVANT toute chose
                                     <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_DAT']; ?></td>
                                     <td width="150" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_TOUR']; ?></td>
                                     <td width="200" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU1']; ?></td>
+                                    <td align="center" valign="middle" class="cellule">
+                                        <input type="radio" id="V" name="VouD" value="V" checked>
+                                        <input type="radio" id="D" name="VouD" value="D">
+                                    </select></td>
                                     <td width="200" align="center" valign="middle" class="cellule"><?php echo $donnees['RES_MATCH_JOU2']; ?></td>
                                     <td width="150" align="center" valign="middle" class="cellule"><?php echo "<a href=pronostique_matchs.php?ResMatchId=".$matchASaisir."#FinListeMatchs class='button'>" . "<b>Saisir le score</b></a><br />"; ?></td>
                                     <!-- <td colspan="3" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Saisir le score" ></td> -->
@@ -504,7 +500,8 @@ session_start(); // On démarre la session AVANT toute chose
                                     echo "<br />Pronostiquez votre score pour ce match :<br /><br />";
 
                                     $GLOBALS['pageOrigine'] = 'pronostique_matchs';
-                                    include ("formulairePronostiqueMatchASaisir.php");
+                                    // include ("formulairePronostiqueMatchASaisir.php");
+                                    include ("formulairePronostiqueMatchASaisir2.php");
                                     // if (isset($_POST['TypeMatch'])
                                     // or  isset($_POST['VouD'])
                                     // or  isset($_POST['ScoreJ1'])

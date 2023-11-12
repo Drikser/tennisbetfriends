@@ -713,6 +713,11 @@ session_start(); // On démarre la session AVANT toute chose
             $result = $_POST['VouD'];
             $scoreJ1 = $_POST['ScoreJ1'];
             $scoreJ2 = $_POST['ScoreJ2'];
+            if (isset($_POST['Joker'])) {
+              $joker = $_POST['Joker'];
+            } else {
+              $joker = " ";
+            }
 
             // echo "Before conversion ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
 
@@ -828,19 +833,31 @@ session_start(); // On démarre la session AVANT toute chose
       						break;
       				}
 
+              // echo "pronoOK=" . $pronoOK . "<br />";
+              // echo "Joker=" . $joker . "<br />";
+              if ($joker == "on") {
+                $doublePoints = 2;
+              } else {
+                $doublePoints = 1;
+              }
+
       				//Chargement des scores en table MySQL des pronostiques
       				$nbRow = 0;
 
       				if ($pronoOK == 'OK') {
 
       					// $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch']);
-                $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
+                // $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
+                $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints);
 
       					$nbRow = $req->rowcount();
       				}
       				else {
 
                 echo "<span class='warning'>Your prediction: " . $result . " " . $scoreJ1 . "/" . $scoreJ2 . "</span><br />";
+                if ($doublePoints == 2) {
+                  echo "<span class='warning'>!!! You have played a wildcard !!!</span>";
+                }
                 echo "<br />";
                 echo "<span class='warning'>Go back to the form: </span>";
                 ?>
@@ -902,6 +919,22 @@ session_start(); // On démarre la session AVANT toute chose
           //****************************************************************************
           // fin copy formulairePronostiqueUnitaireCible.php
           //****************************************************************************
+          // Compter le nombre de jokers utilisés / restants
+          $Nb_joker = getNbJoker();
+          $donnees = $Nb_joker->fetch();
+          echo 'Nb Joker=' . $donnees['nbJoker'] . '<br />';
+          if ($donnees['nbJoker'] > 2) {
+            echo "NOTE: You have played all your wildcards.<br />";
+            echo "<br />";
+          } else {
+            if ($donnees['nbJoker'] >= 1) {
+              echo "NOTE: You have used " . $donnees['nbJoker'] . " wildcard(s) out of 3.<br />";
+              echo "<br />";
+            } else {
+              echo "NOTE: You haven't played any wildcard. You still have 3 left out of 3.<br />";
+              echo "<br />";
+            }
+          }
 
           ?>
                 <table>
@@ -965,7 +998,18 @@ session_start(); // On démarre la session AVANT toute chose
                         <!-- <td align="center" valign="middle" class="cellule"><?php //echo $donnees['PRO_TYP_MATCH']; ?></td> -->
                         <!-- <td align="center" valign="middle" class="cellule"><?php //echo $donnees['RES_MATCH_TYP']; ?></td> -->
                         <th align="center" valign="middle" class="cellule"></th>
-                        <td align="center" valign="middle" class="cellule"><?php echo $ProResMatch . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $ResTypeMatch; ?></td>
+                        <!-- <td align="center" valign="middle" class="cellule"><?php echo $ProResMatch . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $ResTypeMatch; ?></td> -->
+                        <?php
+                        if ($donnees['PRO_DBL_PTS'] == 2) {
+                        ?>
+                          <td align="center" valign="middle" class="cellule"><?php echo $ProResMatch . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $ResTypeMatch . " &#9733"; ?></td>
+                        <?php
+                        } else {
+                        ?>
+                          <td align="center" valign="middle" class="cellule"><?php echo $ProResMatch . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $ResTypeMatch; ?></td>
+                        <?php
+                        }
+                        ?>
                         <td align="center" valign="middle" class="cellule"><?php echo $donnees['PRO_PTS_JOU']; ?></td>
 
                         <?php
