@@ -50,6 +50,7 @@ while ($titre = $allPrognosis->fetch()) {
 	$tabPseudoProno[$i]['proScore1'] = $titre['PRO_SCORE_JOU1'];
 	$tabPseudoProno[$i]['proScore2'] = $titre['PRO_SCORE_JOU2'];
 	$tabPseudoProno[$i]['proTypMatch'] = $titre['PRO_TYP_MATCH'];
+	$tabPseudoProno[$i]['proDoublePoints'] = $titre['PRO_DBL_PTS'];
 	$tabPseudoProno[$i]['proPoints'] = $titre['PRO_PTS_JOU'];
 	$i++;
 
@@ -121,12 +122,18 @@ while ($titre = $allPrognosis->fetch()) {
                 $i = 0;
                 foreach($tabPseudoProno as $prono) {
                 	if ($tabPseudoProno[$i]['matchId'] == $donnees['RES_MATCH_ID']) {
-					?>
-						<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['proRes'] . " " . $tabPseudoProno[$i]['proScore1'] . "/" . $tabPseudoProno[$i]['proScore2'] . " " . $tabPseudoProno[$i]['proTypMatch'] . " (" . $tabPseudoProno[$i]['proPoints'] . "pts)"; ?></td>
-					<?php
-					}
-					$i++;
-				}
+										if ($tabPseudoProno[$i]['proDoublePoints'] == 2) {
+								?>
+											<td align="center" valign="middle" class="cellule"><?php echo "&#9733 " . $tabPseudoProno[$i]['proRes'] . " " . $tabPseudoProno[$i]['proScore1'] . "/" . $tabPseudoProno[$i]['proScore2'] . " " . $tabPseudoProno[$i]['proTypMatch'] . " (" . $tabPseudoProno[$i]['proPoints'] . "pts)"; ?></td>
+								<?php
+										} else {
+								?>
+											<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['proRes'] . " " . $tabPseudoProno[$i]['proScore1'] . "/" . $tabPseudoProno[$i]['proScore2'] . " " . $tabPseudoProno[$i]['proTypMatch'] . " (" . $tabPseudoProno[$i]['proPoints'] . "pts)"; ?></td>
+								<?php
+										}
+									}
+									$i++;
+								}
         		?>
             </tr>
 

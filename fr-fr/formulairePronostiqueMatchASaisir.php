@@ -520,36 +520,73 @@
         <!-- Add option to double points on prediction from Round of 16 onwards -->
         <?php
         if ($_SESSION['JOU_PSE'] !== 'Admin') {
+          // Recherche nb de joker disponibles
+          // Si plus de joker:
+          // 1. Si case vide: affiche message info au lieu de la case à cocher. Pas possible de cocher une autre case.
+          // 2. Si case non vide: afficher la case cochée pour offrir l'option de décocher. Et afficher qu'il rest 0 jokers.
+          $Nb_joker = getNbJoker();
+          $result = $Nb_joker->fetch();
+          $Nb_remaining_joker = 3 - $result['nbJoker'];
+          echo 'Nb Joker(s) (&#9733) restant(s) = ' . $Nb_remaining_joker . '<br />';
+
             switch ($donnees['PRO_DBL_PTS']) {
               case '1':
               // Si la case à cocher est vide
-              // Recherche nb de joker disponibles
-              // Si plus de joker, affiche message info au lieu de la case à cocher
-              $Nb_joker = getNbJoker();
-              $result = $Nb_joker->fetch();
-              echo 'Nb Joker=' . $result['nbJoker'] . '<br />';
-              if ($result['nbJoker'] > 2) {
+              if ($Nb_remaining_joker == 0) {
                 ?>
                  <td align="center" valign="middle" class="cellule">Plus de Joker</td>
                  <?php
                  break;
-              } else {
+              }
+              else {
+                if ($Nb_remaining_joker == 1) {
                 ?>
                 <td align="center" valign="middle" class="cellule">
                   <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
-                  <input type="checkbox" name="Joker" id="DoublePoints"><br>
+                  <input type="checkbox" name="Joker" id="DoublePoints"><label for="DoublePoints"><?php echo "(reste " . $Nb_remaining_joker . " joker)" ?></label><br>
                 </td>
                 <?php
                 break;
+                }
+                else {
+                ?>
+                <td align="center" valign="middle" class="cellule">
+                  <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
+                  <input type="checkbox" name="Joker" id="DoublePoints"><label for="DoublePoints"><?php echo "(reste " . $Nb_remaining_joker . " jokers)" ?></label><br>
+                </td>
+                <?php
+                break;
+                }
               }
+
               case '2':
-              ?>
-              <td align="center" valign="middle" class="cellule">
-              <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
-                <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><br>
-              </td>
-              <?php
-              break;
+              // Si la case à cocher est n'est pas vide - il faut offrir la possibilité de la décocher
+              if ($Nb_remaining_joker == 0) {
+                ?>
+                 <td align="center" valign="middle" class="cellule">
+                   <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><label for="DoublePoints"><?php echo "(reste " . $Nb_remaining_joker . " joker)" ?></label><br>
+                 </td>
+                 <?php
+                 break;
+              } else {
+                if ($Nb_remaining_joker == 1) {
+                  ?>
+                  <td align="center" valign="middle" class="cellule">
+                  <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
+                    <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><label for="DoublePoints"><?php echo "(reste " . $Nb_remaining_joker . " joker)" ?></label><br>
+                  </td>
+                  <?php
+                  break;
+                } else {
+                  ?>
+                  <td align="center" valign="middle" class="cellule">
+                  <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
+                    <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><label for="DoublePoints"><?php echo "(reste " . $Nb_remaining_joker . " jokers)" ?></label><br>
+                  </td>
+                  <?php
+                  break;
+                }
+              }
             // }
           }
         }

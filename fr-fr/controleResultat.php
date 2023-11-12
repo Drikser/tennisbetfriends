@@ -21,13 +21,15 @@ if ($prono['PRO_RES_MATCH'] == $_POST['VouD']) {
     	$prono['PRO_TYP_MATCH']==$_POST['TypeMatch']) {
 
 		// RESULTAT OK ET SCORE EXACT
-		$ptsPrognosis = $ptsExactPrognosis;
+		// $ptsPrognosis = $ptsExactPrognosis;
+    $ptsPrognosis = $ptsExactPrognosis * $prono['PRO_DBL_PTS'];
 		//$nbPrognosisOK = $one;
 	}
 	else {
 
 		// RESULTAT OK MAIS PAS LE SCORE EXACT
-		$ptsPrognosis = $ptsGoodPrognosis;
+    // $ptsPrognosis = $ptsGoodPrognosis;
+		$ptsPrognosis = $ptsGoodPrognosis * $prono['PRO_DBL_PTS'];
 		//$nbPrognosisOK = $zero;
 	}
 

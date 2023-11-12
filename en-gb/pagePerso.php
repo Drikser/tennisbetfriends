@@ -922,19 +922,20 @@ session_start(); // On démarre la session AVANT toute chose
           // Compter le nombre de jokers utilisés / restants
           $Nb_joker = getNbJoker();
           $donnees = $Nb_joker->fetch();
-          echo 'Nb Joker=' . $donnees['nbJoker'] . '<br />';
-          if ($donnees['nbJoker'] > 2) {
-            echo "NOTE: You have played all your wildcards.<br />";
-            echo "<br />";
-          } else {
-            if ($donnees['nbJoker'] >= 1) {
-              echo "NOTE: You have used " . $donnees['nbJoker'] . " wildcard(s) out of 3.<br />";
-              echo "<br />";
-            } else {
-              echo "NOTE: You haven't played any wildcard. You still have 3 left out of 3.<br />";
-              echo "<br />";
-            }
-          }
+          $Nb_remaining_joker = 3 - $donnees['nbJoker'];
+          echo 'Nb remaining wildcard(s) (&#9733) = ' . $Nb_remaining_joker . '<br /><br />';
+          // if ($donnees['nbJoker'] > 2) {
+          //   echo "NOTE: You have played all your wildcards.<br />";
+          //   echo "<br />";
+          // } else {
+          //   if ($donnees['nbJoker'] >= 1) {
+          //     echo "NOTE: You have used " . $donnees['nbJoker'] . " wildcard(s) out of 3.<br />";
+          //     echo "<br />";
+          //   } else {
+          //     echo "NOTE: You haven't played any wildcard. You still have 3 left out of 3.<br />";
+          //     echo "<br />";
+          //   }
+          // }
 
           ?>
                 <table>
@@ -1002,7 +1003,7 @@ session_start(); // On démarre la session AVANT toute chose
                         <?php
                         if ($donnees['PRO_DBL_PTS'] == 2) {
                         ?>
-                          <td align="center" valign="middle" class="cellule"><?php echo $ProResMatch . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $ResTypeMatch . " &#9733"; ?></td>
+                          <td align="center" valign="middle" class="cellule"><?php echo "&#9733 " . $ProResMatch . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $ResTypeMatch; ?></td>
                         <?php
                         } else {
                         ?>

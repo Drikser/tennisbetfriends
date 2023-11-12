@@ -98,6 +98,11 @@ session_start(); // On démarre la session AVANT toute chose
                       $scoreJ1 = $_POST['ScoreJ1'];
                       $scoreJ2 = $_POST['ScoreJ2'];
 
+                      if (isset($_POST['Joker'])) {
+                        $joker = $_POST['Joker'];
+                      } else {
+                        $joker = " ";
+                      }
 
                       // echo "Before conversion ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
 
@@ -117,6 +122,14 @@ session_start(); // On démarre la session AVANT toute chose
                 			{
                 				//echo "Le match saisit est le match n°" . $_POST['idMatch'] . '<br />'; //idMAtch est la valeur du champs caché du formulaire de saisie de score
                 				// echo "The player ID is " . $_SESSION['JOU_ID'] . '<br />';
+
+                        echo "Joker = " . $_POST['Joker'] . "<br />";
+                        // if ($_POST['Joker'] == "yes") {
+                        if ($joker == "on") {
+                          $doublePoints = 2;
+                        } else {
+                          $doublePoints = 1;
+                        }
 
                 				//Contrôles avant chargement :
                 				$pronoOK = 'OK';
@@ -219,7 +232,8 @@ session_start(); // On démarre la session AVANT toute chose
                           // echo "type result après conversion=" . $typeMatch . "<br :>";
 
                 					// $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch']);
-                          $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
+                          // $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
+                          $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints);
 
                 					$nbRow = $req->rowcount();
                 				}
