@@ -122,6 +122,12 @@ session_start(); // On démarre la session AVANT toute chose
                         $scoreJ1 = $_POST['ScoreJ1'];
                         $scoreJ2 = $_POST['ScoreJ2'];
 
+                        if (isset($_POST['Joker'])) {
+                          $joker = $_POST['Joker'];
+                        } else {
+                          $joker = " ";
+                        }
+
                         // echo "Before conversion ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
 
                         //if (empty($_POST['VouD']) OR empty($_POST['ScoreJ1']) OR empty($_POST['ScoreJ2']))
@@ -154,6 +160,17 @@ session_start(); // On démarre la session AVANT toute chose
                           if ($result == 'W' or $result == 'L') {
                             ConvertResultETF($result);
                             $result = $outputResult;
+                          }
+
+                          // $joker = $_POST['Joker'];
+                          // echo "Joker=" . $joker;
+                          // if ($joker == "yes") {
+                          echo "Joker = " . $_POST['Joker'] . "<br />";
+                          // if ($_POST['Joker'] == "yes") {
+                          if ($joker == "on") {
+                            $doublePoints = 2;
+                          } else {
+                            $doublePoints = 1;
                           }
 
                           //Contrôles avant chargement :
@@ -238,13 +255,6 @@ session_start(); // On démarre la session AVANT toute chose
                               break;
                           }
 
-                          $joker = $_POST['Joker'];
-                          echo "Joker=" . $joker;
-                          if ($joker == "yes") {
-                            $doublePoints = 2;
-                          } else {
-                            $doublePoints = 1;
-                          }
                           // echo "pronoOK=" . $pronoOK . "<br />";
 
                           //Chargement des scores en table MySQL des pronostiques
@@ -500,6 +510,8 @@ session_start(); // On démarre la session AVANT toute chose
                             if ($nbRow > 0) {
                                 while ($donnees = $req->fetch()) {
                                     //echo $donnees['RES_MATCH_ID'] . " - " . $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_TOURNOI'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs " . $donnees['RES_MATCH_JOU2'] . "<br />";
+
+                                    // Controle que le match est bien saisissable avant d'afficher le formulaire
 
                                     echo "<br />Pronostiquez votre score pour ce match :<br /><br />";
 

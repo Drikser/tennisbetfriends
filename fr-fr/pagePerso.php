@@ -909,19 +909,20 @@ session_start(); // On démarre la session AVANT toute chose
           // Compter le nombre de jokers utilisés / restants
           $Nb_joker = getNbJoker();
           $donnees = $Nb_joker->fetch();
-          echo 'Nb Joker=' . $donnees['nbJoker'] . '<br />';
-          if ($donnees['nbJoker'] > 2) {
-            echo "NOTE: Vous avez utilisé tous vos jokers.<br />";
-            echo "<br />";
-          } else {
-            if ($donnees['nbJoker'] >= 1) {
-              echo "NOTE: Vous avez utilisé " . $donnees['nbJoker'] . " joker sur 3.<br />";
-              echo "<br />";
-            } else {
-              echo "NOTE: Vous n'avez pas encore utilisé de joker. Il vous en reste encore 3 sur 3.<br />";
-              echo "<br />";
-            }
-          }
+          $Nb_remaining_joker = 3 - $donnees['nbJoker'];
+          echo 'Nb Joker(s) (&#9733) restant(s) = ' . $Nb_remaining_joker . '<br /><br />';
+          // if ($donnees['nbJoker'] > 2) {
+          //   echo "NOTE: Vous avez utilisé tous vos jokers.<br />";
+          //   echo "<br />";
+          // } else {
+          //   if ($donnees['nbJoker'] >= 1) {
+          //     echo "NOTE: Vous avez utilisé " . $donnees['nbJoker'] . " joker sur 3.<br />";
+          //     echo "<br />";
+          //   } else {
+          //     echo "NOTE: Vous n'avez pas encore utilisé de joker. Il vous en reste encore 3 sur 3.<br />";
+          //     echo "<br />";
+          //   }
+          // }
 
             ?>
                 <table>
@@ -982,7 +983,7 @@ session_start(); // On démarre la session AVANT toute chose
                         <?php
                         if ($donnees['PRO_DBL_PTS'] == 2) {
                         ?>
-                          <td align="center" valign="middle" class="cellule"><?php echo $donnees['PRO_RES_MATCH'] . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $donnees['PRO_TYP_MATCH'] . " &#9733"; ?></td>
+                          <td align="center" valign="middle" class="cellule"><?php echo "&#9733 " . $donnees['PRO_RES_MATCH'] . " " . $donnees['PRO_SCORE_JOU1'] . "/" . $donnees['PRO_SCORE_JOU2'] . " " . $donnees['PRO_TYP_MATCH']; ?></td>
                         <?php
                         } else {
                         ?>
@@ -1014,6 +1015,11 @@ session_start(); // On démarre la session AVANT toute chose
                    </table>
 
                 <div id="FinListeMatchs"></div>
+
+                <!-- Test refresh page to see it it takes result entered by Admin -->
+                <!-- <script>
+                  window.location.reload();
+                </script> -->
 
                 <?php
     			//$reponse->closeCursor();
