@@ -99,232 +99,12 @@ session_start(); // On démarre la session AVANT toute chose
                     // echo "Diff = " . $Heure_diffStr . "<br />";
 
 
-                    // 06/07/2020: ajout cible ici pour essayer d'afficher le message sur la même page
-                    // include ("formulairePronostiqueUnitaireCible.php");
-                    //****************************************************************************
-                    // debut copy formulairePronostiqueUnitaireCible.php
-                    //****************************************************************************
-                    if (isset($_POST['TypeMatch'])
-                    and isset($_POST['ScoreJ1'])
-                    and isset($_POST['ScoreJ2']))
-                    {
-
-                      $typeMatch = $_POST['TypeMatch'];
-
-                      if (isset($_POST['VouD'])) {
-                        // echo "VouD reçu = " . $_POST['VouD'] . "<br />";
-                        $result = $_POST['VouD'];
-                      } else {
-                        // echo "VouD pas reçu - initialisé à blanc<br />";
-                        $result = "";
-                      }
-
-                      $scoreJ1 = $_POST['ScoreJ1'];
-                      $scoreJ2 = $_POST['ScoreJ2'];
-
-                      if (isset($_POST['Joker'])) {
-                        $joker = $_POST['Joker'];
-                      } else {
-                        $joker = " ";
-                      }
-
-                      // echo "Before conversion ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
-
-                      //if (empty($_POST['VouD']) OR empty($_POST['ScoreJ1']) OR empty($_POST['ScoreJ2']))
-                			// if ($_POST['VouD']=="" OR $_POST['ScoreJ1']=="" OR $_POST['ScoreJ2']=="")
-                      if ($result=="" OR ($scoreJ1=="0" and $scoreJ2=="0" and $typeMatch==""))
-                			{
-                				echo "<span class='warning'>You must fill out all the fields. You entered: </span><br />";
-                        echo "<span class='warning'>Result=" . $result . ", Score=" . $scoreJ1 . "/" . $scoreJ2 .  " " . $typeMatch . "</span><br />";
-                				// echo "<span class='warning'>Go back to the form: </span>" . '<a href="pronostique.php">Cliquer ici</a>';
-                        echo "<span class='warning'>Go back to the form: </span>";
-                        ?>
-                        <input type="button" value="OK" onclick="history.go(-1)">
-                        <?php
-                			}
-                			else
-                			{
-                				//echo "Le match saisit est le match n°" . $_POST['idMatch'] . '<br />'; //idMAtch est la valeur du champs caché du formulaire de saisie de score
-                				// echo "The player ID is " . $_SESSION['JOU_ID'] . '<br />';
-
-                        echo "Joker = " . $_POST['Joker'] . "<br />";
-                        // if ($_POST['Joker'] == "yes") {
-                        if ($joker == "on") {
-                          $doublePoints = 2;
-                        } else {
-                          $doublePoints = 1;
-                        }
-
-                				//Contrôles avant chargement :
-                				$pronoOK = 'OK';
-
-                        // echo "After conversion  ==> Result=" . $result . " (" . $scoreJ1 . "/" . $scoreJ2 . ") - type de match: " . $typeMatch . ". <br />";
-
-                				switch ($typeMatch) {
-                					case 'RET':
-                						if ($_POST['TypeTournoi'] != 'GC') {
-
-                	          //echo "type de tournoi différent de GC : <" . $_POST['TypeTournoi'] . "><br />";
-                               if ($scoreJ1 == 2 OR $scoreJ2 == 2) {
-                		               echo "<span class='warning'>Wrong score: If a player won 2 sets he can't retire.</span><br />";
-                		               $pronoOK = 'KO';
-                               }
-                	          } else {
-                            	if ($scoreJ1 == 3 OR $scoreJ2 == 3) {
-                          		//echo "<span class='warning'>!!! Mauvais score renseigné : Le vainqueur doit gagner 3 sets !!! Type Tournoi = " . $_POST['TypeTournoi'] . "</span><br />";
-                	         		  echo "<span class='warning'>Wrong score: If a player won 3 sets he can't retire.</span><br />";
-                	           	  $pronoOK = 'KO';
-                	           	}
-                	          }
-
-                            if ($_POST['TypeTournoi'] != 'GC') {
-
-                              if ($scoreJ1 == 2) {
-                  							echo "<span class='warning'>Warning : the loser can't retire if the opponent already won 2 sets.</span><br />";
-                  							$pronoOK = 'KO';
-                              }
-
-                            } else {
-                              if ($scoreJ1 == 3) {
-                  							echo "<span class='warning'>Warning : the loser can't retire if the opponent already won 3 sets.</span><br />";
-                  							$pronoOK = 'KO';
-                              }
-                            }
-
-                						break;
-
-                					case 'WO':
-                						if ($scoreJ1 != 0 OR $scoreJ2 != 0) {
-                							echo "<span class='warning'>Warning : in the event of a walk over, score must be 0-0</span><br />";
-                							$pronoOK = 'KO';
-                						}
-
-                						break;
-
-                					default:
-                	                    if ($scoreJ1 == 0) {
-                	                        echo "<span class='warning'>Wrong score: the winner can't win with 0 set</span><br />";
-                	                        $pronoOK = 'KO';
-                	                    }
-
-                	                    if ($_POST['TypeTournoi'] != 'GC') {
-
-                	                    	//echo "type de tournoi différent de GC : <" . $_POST['TypeTournoi'] . "><br />";
-
-                		                    if ($scoreJ1 != 2) {
-                		                        //echo "<span class='warning'>!!! Mauvais score renseigné : Le vainqueur doit gagner 2 sets !!! Type Tournoi <" . $_POST['TypeTournoi'] . "></span><br />";
-                		                        echo "<span class='warning'>Wrong score: the winner has to win 2 sets</span><br />";
-                		                        $pronoOK = 'KO';
-                		                    }
-                	                    }
-                	                    else {
-
-                	                    	if ($scoreJ1 != 3) {
-                	                    		//echo "<span class='warning'>!!! Mauvais score renseigné : Le vainqueur doit gagner 3 sets !!! Type Tournoi = " . $_POST['TypeTournoi'] . "</span><br />";
-                	                    		echo "<span class='warning'>Wrong score: the winner has to win 3 sets</span><br />";
-                	                        $pronoOK = 'KO';
-                	                    	}
-                	                    }
-
-                	                    if ($scoreJ2 >= $scoreJ1) {
-                	                        echo "<span class='warning'>Wrong score: winner's number of sets must be greater than loser's number of sets</span><br />";
-                	                        $pronoOK = 'KO';
-                	                    }
-
-                						break;
-                				}
-
-                				//Chargement des scores en table MySQL des pronostiques
-                				$nbRow = 0;
-
-                				if ($pronoOK == 'OK') {
-                          // convert result from english to french for process, if english version
-                          // W --> V
-                          // L --> D
-                          // echo "result avant conversion=" . $result . "<br :>";
-                          $outputResultF = "";
-                          if ($result == 'W' or $result == 'L') {
-                            $result = ConvertResultETF($result);
-                          }
-                          // echo "result après conversion=" . $result . "<br :>";
-                          // convert match type from english to french for process, if english version
-                          // RET --> AB
-                          // echo "type result avant conversion=" . $typeMatch . "<br :>";
-                          if ($typeMatch == 'RET') {
-                            $typeMatch = ConvertTypeResultETF($typeMatch);
-                          }
-                          // echo "type result après conversion=" . $typeMatch . "<br :>";
-
-                					// $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch']);
-                          // $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
-                          $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints);
-
-                					$nbRow = $req->rowcount();
-                				}
-                				else {
-                          ConvertResultFTE($result);
-                          $result = $outputResultE;
-                          echo "<span class='warning'>Your prediction: result=" . $result . ", score=" . $scoreJ1 . "/" . $scoreJ2 . "</span><br />";
-                          echo "<span class='warning'>Go back to the form: </span>";
-                          ?>
-                          <input type="button" value="OK" onclick="history.go(-1)">
-                          <?php
-                          echo "<br />";
-                					// echo "<span class='warning'>Please try again " . '<a href="pronostique_matchs.php">HERE</a>' . ". If the error persists, please contact the webadmin.</span><br />";
-                				}
-
-
-                				if ($nbRow > 0)
-                				{
-                					// echo 'Congrats! Prediction done!<br />';
-
-                					// if ($_POST['VouD'] == 'V') {
-                          if ($result == 'V') {
-                					 	switch ($typeMatch) {
-                					 	 	case 'AB':
-                					 	 		echo '<span class="info">Your prediction: </span><b>' . htmlspecialchars($_POST['Player1']) . '</b><span class="info"> defeated </span><b>' . htmlspecialchars($_POST['Player2']) . '</b><span class="info"> by withdrawal: ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . ' before ' . htmlspecialchars($_POST['Player2']) . ' withdrawal. </span><br />';
-                					 	 		break;
-
-                					 	 	case 'WO':
-                				 	 			echo '<span class="info">Your prediction: </span><b>' . htmlspecialchars($_POST['Player1']) . '</b><span class="info"> defeated </span><b>' . htmlspecialchars($_POST['Player2']) . '</b><span class="info"> by W.O. </span><br />';
-                				 	 			break;
-
-                					 	 	default:
-                				 	 			echo '<span class="info">Your prediction: </span><b>' . htmlspecialchars($_POST['Player1']) . '</b><span class="info"> defeated </span><b>' . htmlspecialchars($_POST['Player2']) . '</b><span class="info">: ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . '</span><br />';
-                				 	 			break;
-                					 	 }
-                					 }
-                					 else {
-                					 	switch ($typeMatch) {
-                					 	 	case 'AB':
-                					 	 		echo '<span class="info">Your prediction: </span><b>' . htmlspecialchars($_POST['Player2']) . '</b><span class="info"> defeated </span><b>' . htmlspecialchars($_POST['Player1']) . '</b><span class="info"> by withdrawal: ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . ' before ' . htmlspecialchars($_POST['Player1']) . ' withdrawal. </span><br />';
-                					 	 		break;
-
-                					 	 	case 'WO':
-                					 	 		echo '<span class="info">Your prediction: </span><b>' . htmlspecialchars($_POST['Player2']) . '</b><span class="info"> defeated </span><b>' . htmlspecialchars($_POST['Player1']) . '</b><span class="info"> by W.O. </span><br />';
-                					 	 		break;
-
-                					 	 	default:
-                					 	 		echo '<span class="info">Your prediction: </span><b>' . htmlspecialchars($_POST['Player2']) . '</b><span class="info"> defeated </span><b>' . htmlspecialchars($_POST['Player1']) . '</b><span class="info">: ' . htmlspecialchars($scoreJ1) . ' sets to ' . htmlspecialchars($scoreJ2) . '</span><br />';
-                					 	 		break;
-                					 	}
-                					}
-
-                					echo '<span class=info>You can change your prediction in your <a href="pagePerso.php">' . 'Personal page' . '</a> </span>';
-                					// echo '<br />To make a new prediction, click <a href="pronostique_matchs.php">' . 'HERE' . '</a><br/>';
-                          // echo '<br /><a href="pronostique_matchs.php" class="button">' . 'New prediction' . '</a><br/>';
-                          ?>
-                          <input type="button" value="OK" onclick="window.location.href='pronostique_matchs.php'"><br />
-                          <?php
-
-                				} else {
-                          // echo "<br />Update did nothing";
-                        }
-                			}
-                    }
-                    //****************************************************************************
-                    // fin copy formulairePronostiqueUnitaireCible.php
-                    //****************************************************************************
+                    // Les contrôles sont différents selon le tour du Tournoi
+                    // - Deux 1er tours, pas de score (juste choix du vainqueur)
+                    // - A partir du 3ème tour, scores
+                    // - A partir des 1/8ème de finale, introduction du joker pour doubles ses Points
+                    $GLOBALS['pageOrigine'] = 'pronostique_matchs';
+                    include ("controleSaisie.php");
 
                     $prognosisToDo = getPrognosisToDo();
 
@@ -417,6 +197,12 @@ session_start(); // On démarre la session AVANT toute chose
                               if (strtotime(date('Y-m-d H:i:s')) < strtotime($donnees['RES_MATCH_DAT'])) {
                                   // echo "Match à saisir = " . $matchASaisir . "<br />";
 
+                                  // Si 1er tour ou 2ème tour, on affiche seulement le formulaire avec choix du vainqueur
+                                  // A partir du 3ème tour, retour au système classique: selection du match à saisir et affichage du formulaire de saisie
+                                  if (($donnees['RES_MATCH_POIDS_TOUR'] == 64) or ($donnees['RES_MATCH_POIDS_TOUR'] == 32)) {
+                                    $GLOBALS['pageOrigine'] = 'pronostique_matchs';
+                                    include ("formulairePronostiqueMatchASaisir2_entete.php");
+                                  } else {
                                   // Si on clique sur "saisie du résultat", renvoi vers ancre "FinListeMatchs"
                                   //echo $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs. " . $donnees['RES_MATCH_JOU2'] . " --> " . "<a href=pronostique_matchs.php?ResMatchId=".$matchASaisir."#FinListeMatchs>" . " Saisir le score</a> (" . $diffStr . " restants)<br />";
                                   ?>
@@ -434,6 +220,7 @@ session_start(); // On démarre la session AVANT toute chose
                                     <td width="200" align="center" valign="middle" class="cellule">(<?php echo $diffStr; ?> left)</td>
                                   </tr>
                                   <?php
+                                }
                               }
                               else {
                                 // echo "Trop tard pour match = " . $matchASaisir . "<br />";

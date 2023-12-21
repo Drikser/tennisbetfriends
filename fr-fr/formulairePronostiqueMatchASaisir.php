@@ -43,8 +43,6 @@
   }
 ?>
 
-<!-- <form action= <?php $cibleFormulaire; ?> method="post" enctype="multipart/form-data"> -->
-<!-- <form action="formulairePronostiqueUnitaireCible.php" method="post" enctype="multipart/form-data"> -->
 <table>
     <tr>
 <!--        <th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>   -->
@@ -52,7 +50,7 @@
         <th width="150" align="center" valign="middle" class="cellule">Date du match</th>
         <th width="150" align="center" valign="middle" class="cellule">Niveau</th>
         <th width="150" align="center" valign="middle" class="cellule">Joueur 1</th>
-        <th width="50" align="center" valign="middle" class="cellule">Choisir vainqueur</th>
+        <th width="50"  align="center" valign="middle" class="cellule">Choisir vainqueur</th>
         <th width="150" align="center" valign="middle" class="cellule">Joueur 2</th>
         <th width="150" align="center" valign="middle" class="cellule">Score Vainqueur (nb sets)</th>
         <th width="150" align="center" valign="middle" class="cellule">Score Perdant (nb sets)</th>
@@ -605,7 +603,7 @@
         <td align="center" valign="middle" class="cellule" style="display:none"><input type="text" name="TypeTournoi" class="form-control" id="TypeTournoi" value="<?php echo $donnees['RES_TYP_TOURNOI']; ?>" required="required"></td>
 <!-- ************************** bouton validation en fin de ligne ***************************** -->
         <!-- <td colspan="3" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Valider" onclick="return confirm('Êtes-vous sûr de votre choix ?')"></td> -->
-        <td colspan="3" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Valider"></td>
+        <td colspan="3" align="center" valign="middle"><input type="submit" name="" id="submit" class="bouton" value="Valider"></td>
 
 <!-- ************************** bouton annulation en fin de ligne ***************************** -->
         <!-- <td colspan="3" valign="middle"><input type="button" value="Annuler" onclick="history.go(-1)"></td> -->

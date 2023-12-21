@@ -44,9 +44,11 @@ session_start(); // On démarre la session AVANT toute chose
               // $adresse = "https://www.atptour.com/en/scores/current/australian-open/580/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/roland-garros/520/draws";
               // $adresse = "C:/wamp64/www/tennisbetfriends/tablesMySQL/tennisbetfriends/Database%20creations/Draw_RG2022/view-source_https___www.atptour.com_en_scores_current_roland-garros_520_draws.html";
-              $adresse = "https://www.atptour.com/en/scores/current/wimbledon/540/draws";
+              // $adresse = "https://www.atptour.com/en/scores/current/wimbledon/540/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/us-open/560/draws";
+
               // ----- Other tournaments for tests -----
+              $adresse = "https://www.atptour.com/en/scores/archive/australian-open/580/2023/draws";
               // $adresse = "https://www.atptour.com/en/scores/current/paris/352/draws";
 
               $page = file_get_contents($adresse);

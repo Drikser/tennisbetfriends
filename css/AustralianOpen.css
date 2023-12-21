@@ -135,6 +135,7 @@ font-weight: bold;
 
 table
 {
+    Table-layout: fixed;
     border-collapse: collapse; /* Les bordures du tableau seront collées (plus joli) */
 }
 

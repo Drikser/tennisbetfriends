@@ -640,6 +640,7 @@ function getMatchToCorrect($level, $Player1, $Player2) {
 	return $matchToCorrect;
 }
 
+
 //************************************************************************************************************************************************************
 //****************************************************** Fonctions d'insertion *******************************************************************************
 //************************************************************************************************************************************************************
@@ -963,6 +964,8 @@ function updateLevelFrench($postPlayerId) {
 function updatePrognosis($postPlayerId, $postMatchId, $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints) {
 
 	$bdd = dbConnect();
+
+	// echo "update prognosis for match " . $_POST['idMatch'] . ": " . $result . "(" . $scoreJ1 . "/" . $scoreJ2 . ")<br />";
 
 	//echo "fonction updatePrognosis() : paramètres=" . $postPlayerId . " / " . $postMatchId . "<br />";
 	//echo "Saisie=" . $_POST['VouD'] . " " . $_POST['ScoreJ1'] . "/" . $_POST['ScoreJ2'] . " (" . $_POST['TypeMatch'] . ")<br />";

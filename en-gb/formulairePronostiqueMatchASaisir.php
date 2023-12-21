@@ -1,10 +1,3 @@
- <!--
-*********************************************************
-*  Page pour saisie de plusieurs matchs d'un seul coup  *
-*  ==> Un formulaire par match saisit                   *
-*********************************************************
--->
-
 <?php
     // $Player1 = htmlentities($donnees['RES_MATCH_JOU1']);
     // $Player2 = htmlentities($donnees['RES_MATCH_JOU2']);
@@ -43,8 +36,6 @@
   }
 ?>
 
-<!-- <form action= <?php $cibleFormulaire; ?> method="post" enctype="multipart/form-data"> -->
-<!-- <form action="formulairePronostiqueUnitaireCible.php" method="post" enctype="multipart/form-data"> -->
 <table>
     <tr>
 <!--        <th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>   -->
@@ -52,7 +43,7 @@
         <th width="150" align="center" valign="middle" class="cellule">Match date</th>
         <th width="150" align="center" valign="middle" class="cellule">Round</th>
         <th width="150" align="center" valign="middle" class="cellule">Player 1</th>
-        <th width="50" align="center" valign="middle" class="cellule">Choose winner</th>
+        <th width="50"  align="center" valign="middle" class="cellule">Choose winner</th>
         <th width="150" align="center" valign="middle" class="cellule">Player 2</th>
         <th width="150" align="center" valign="middle" class="cellule">Winner score (nb sets)</th>
         <th width="150" align="center" valign="middle" class="cellule">Loser score (nb sets)</th>
@@ -183,6 +174,12 @@
                   break;
 
                 default:
+                ?>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <?php
                   break;
               }
             }
@@ -225,6 +222,12 @@
                   break;
 
                 default:
+                ?>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <?php
                   break;
               }
             }
@@ -474,8 +477,8 @@
                 <?php
                 break;
             }
-            }
-            else {
+          }
+          else {
               switch ($donnees['PRO_TYP_MATCH']) {
                 case 'AB':
                   ?>
@@ -515,7 +518,7 @@
           $Nb_joker = getNbJoker();
           $result = $Nb_joker->fetch();
           $Nb_remaining_joker = 3 - $result['nbJoker'];
-          echo 'Nb Joker(s) (&#9733) restant(s) = ' . $Nb_remaining_joker . '<br />';
+          echo 'Nb remaining Joker(s) (&#9733) = ' . $Nb_remaining_joker . '<br />';
 
             switch ($donnees['PRO_DBL_PTS']) {
               case '1':

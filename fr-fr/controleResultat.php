@@ -16,22 +16,27 @@ $totJouPtsProno = 0;
 
 if ($prono['PRO_RES_MATCH'] == $_POST['VouD']) {
 
-	if ($prono['PRO_SCORE_JOU1']==$_POST['ScoreJ1'] AND
-        $prono['PRO_SCORE_JOU2']==$_POST['ScoreJ2'] AND
-    	$prono['PRO_TYP_MATCH']==$_POST['TypeMatch']) {
+  if ($_POST['Poids'] == 64 or $_POST['Poids'] == 32) {
+    // First 2 rounds, Resultat OK = 1 point
+    $ptsPrognosis = $ptsGoodPrognosisR2 * $prono['PRO_DBL_PTS'];
+  } else {
+    if ($prono['PRO_SCORE_JOU1']==$_POST['ScoreJ1'] AND
+          $prono['PRO_SCORE_JOU2']==$_POST['ScoreJ2'] AND
+      	$prono['PRO_TYP_MATCH']==$_POST['TypeMatch']) {
 
-		// RESULTAT OK ET SCORE EXACT
-		// $ptsPrognosis = $ptsExactPrognosis;
-    $ptsPrognosis = $ptsExactPrognosis * $prono['PRO_DBL_PTS'];
-		//$nbPrognosisOK = $one;
-	}
-	else {
+  		// RESULTAT OK ET SCORE EXACT
+  		// $ptsPrognosis = $ptsExactPrognosis;
+      $ptsPrognosis = $ptsExactPrognosis * $prono['PRO_DBL_PTS'];
+  		//$nbPrognosisOK = $one;
+  	}
+  	else {
 
-		// RESULTAT OK MAIS PAS LE SCORE EXACT
-    // $ptsPrognosis = $ptsGoodPrognosis;
-		$ptsPrognosis = $ptsGoodPrognosis * $prono['PRO_DBL_PTS'];
-		//$nbPrognosisOK = $zero;
-	}
+  		// RESULTAT OK MAIS PAS LE SCORE EXACT
+      // $ptsPrognosis = $ptsGoodPrognosis;
+  		$ptsPrognosis = $ptsGoodPrognosis * $prono['PRO_DBL_PTS'];
+  		//$nbPrognosisOK = $zero;
+  	}
+  }
 
 }
 //case ($prono['PRO_RES_MATCH'] != $_POST['VouD']) :
