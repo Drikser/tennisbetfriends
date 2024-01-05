@@ -466,7 +466,7 @@ function getPrognosisToDo() {
 																				AND r.RES_MATCH_JOU1 != "Bye"
 	                                      AND r.RES_MATCH_JOU2 != "Bye"
 	                                      AND p.PRO_RES_MATCH = ""
-	                               	 ORDER BY r.RES_MATCH_DAT, r.RES_MATCH_POIDS_TOUR, r.RES_MATCH_TOUR_SEQ');
+	                               	 ORDER BY r.RES_MATCH_DAT, r.RES_MATCH_POIDS_TOUR desc, r.RES_MATCH_TOUR_SEQ');
 	return $response;
 }
 

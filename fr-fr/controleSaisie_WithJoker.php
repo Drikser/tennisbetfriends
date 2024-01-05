@@ -4,9 +4,9 @@
  //****************************************************************************
  // debut copy formulairePronostiqueUnitaireCible.php
  //****************************************************************************
- echo "Display from ControleSaisieWithJoker.php:";
- echo "ID match=" . $_POST['idMatch'] . " - poids tour=" . $_POST['Poids'] . " - " . $_POST['Player1'] . " c. " . $_POST['Player2'] . "<br />";
- echo "VouD=" . $_POST['VouD'] . " - " . $_POST['ScoreJ1'] . "/" . $_POST['ScoreJ2'] . "(" . $_POST['TypeMatch'] . ")<br />";
+ // echo "Display from ControleSaisieWithJoker.php: <br />";
+ // echo "ID match=" . $_POST['idMatch'] . " - poids tour=" . $_POST['Poids'] . " - " . $_POST['Player1'] . " c. " . $_POST['Player2'] . "<br />";
+ // echo "VouD=" . $_POST['VouD'] . " - " . $_POST['ScoreJ1'] . "/" . $_POST['ScoreJ2'] . "(" . $_POST['TypeMatch'] . ")<br />";
 
  $typeMatch = $_POST['TypeMatch'];
  if (isset($_POST['VouD'])) {
@@ -64,10 +64,11 @@
    }
 
    // $joker = $_POST['Joker'];
-   // echo "Joker=" . $joker;
    // if ($joker == "yes") {
-   echo "Joker = " . $_POST['Joker'] . "<br />";
+   // echo "Joker = " . $_POST['Joker'] . "<br />";
    // if ($_POST['Joker'] == "yes") {
+
+   // echo "Joker=" . $joker . "<br />";
    if ($joker == "on") {
      $doublePoints = 2;
    } else {
@@ -158,7 +159,7 @@
 
    if ($pronoOK == 'OK') {
 
-     echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ", " . $doublePoints . ") <br />";
+     // echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ", " . $doublePoints . ") <br />";
      // $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
      $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints);
 

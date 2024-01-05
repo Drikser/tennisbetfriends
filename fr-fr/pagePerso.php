@@ -814,7 +814,11 @@ session_start(); // On démarre la session AVANT toute chose
                         if (($donnees['RES_MATCH_POIDS_TOUR'] == 64) or ($donnees['RES_MATCH_POIDS_TOUR'] == 32)) {
                           include ("formulairePronostiqueMatchASaisir2_entete.php");
                         } else {
-                          include ("formulairePronostiqueMatchASaisir.php");
+                          if ($donnees['RES_MATCH_POIDS_TOUR'] == 16) {
+                            include ("formulairePronostiqueMatchASaisirNoJoker.php");
+                          } else {
+                            include ("formulairePronostiqueMatchASaisir.php");
+                          }
                         }
                     }
 

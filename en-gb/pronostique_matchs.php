@@ -141,26 +141,27 @@ session_start(); // On démarre la session AVANT toute chose
                             //var_dump($diff);
                             //echo $diffStr;
 
-                            // change displqy for english version of the website
+                            // change display for english version of the website
                             $outputRound = ConvertRoundFTE($donnees['RES_MATCH_TOUR']);
 
                             //Get New-York date and time.
-                            $Heure_match_NY = new \DateTime("{$donnees['RES_MATCH_DAT']}");
-                            // echo "* Date et heure du match à New-York = " . $Heure_match_NY . "<br />";
+                            $Heure_match_local = new \DateTime("{$donnees['RES_MATCH_DAT']}");
+                            // echo "Match date and time match (locale time) = " . $Heure_match_local . "<br />";
                             //Number of hours to add has already been calculated = $Heure_diffStr
 
                             //Add the hours by using the DateTime::add method in
                             //conjunction with the DateInterval object.
-                            $Heure_match_NY->add(new DateInterval("PT{$Heure_diffStr}H"));
-                            // $Heure_match_NY->add(new DateInterval("PT5H"));
-                            // echo "* Date et heure du match à New-York (+jetlag) = " . $Heure_match_NY_mod . "<br />";
+                            $Heure_match_local->add(new DateInterval("PT{$Heure_diffStr}H"));
+                            // $Heure_match_local->add(new DateInterval("PT5H"));
+                            // echo "* Date et heure du match à New-York (+jetlag) = " . $Heure_match_local_mod . "<br />";
 
                             //Format the new time into a more human-friendly format
                             //and print it out.
                             // setlocale(LC_TIME, 'fr_FR', 'French');
                             // setlocale(LC_TIME, 'fr_FR.utf8','fra');
-                            // $Heure_match_YourTime = $Heure_match_NY->format('Y-m-d, H:i');
-                            $Heure_match_YourTime = $Heure_match_NY->format('l d F, H:i');
+                            // $Heure_match_YourTime = $Heure_match_local->format('Y-m-d, H:i');
+                            $Heure_match_YourTime = $Heure_match_local->format('l d F, H:i');
+                            // echo "Match date and time match (your time) = " . $Heure_match_local . "<br />";
 
 
                             // Nouvelle table avec titre si le tour est différent
@@ -279,8 +280,12 @@ session_start(); // On démarre la session AVANT toute chose
                                     echo "<br />Please make your prediction for this match:<br /><br />";
 
                                     $GLOBALS['pageOrigine'] = 'pronostique_matchs';
-                                    include ("formulairePronostiqueMatchASaisir.php");
+                                    if ($donnees['RES_MATCH_POIDS_TOUR'] == 16) {
+                                      include ("formulairePronostiqueMatchASaisirNoJoker.php");
+                                    } else {
+                                      include ("formulairePronostiqueMatchASaisir.php");
                                     }
+                                }
                             }
                             else {
                                 echo "<span class='warning'>TECHNICAL ISSUE - You score can't be updated. Please contact the website administrator</span><br />";

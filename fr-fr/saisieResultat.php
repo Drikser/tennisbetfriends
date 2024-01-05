@@ -100,7 +100,8 @@ session_start(); // On démarre la session AVANT toute chose
         	            while ($donnees = $matchChoisi->fetch()) {
         	 			        //	echo $donnees['RES_MATCH_ID'] . " - " . $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_TOURNOI'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs " . $donnees['RES_MATCH_JOU2'] . "<br />";
 
-        	 				      include ("formulairePronostiqueMatchASaisir.php");
+        	 				      // include ("formulairePronostiqueMatchASaisir.php");
+                        include ("formulairePronostiqueMatchASaisirNoJoker.php");
         	            }
 
                     //$reponse->closeCursor();

@@ -165,25 +165,25 @@ session_start(); // On démarre la session AVANT toute chose
                                 // echo "Saisie à faire avant " . utf8_encode(datefmt_format($donnees['RES_MATCH_DAT'], 0)) . "<br />";
 
                                 //Get New-York date and time.
-                                $Heure_match_NY = new \DateTime("{$donnees['RES_MATCH_DAT']}");
-                                // echo "* Date et heure du match à New-York = " . $Heure_match_NY . "<br />";
+                                $Heure_match_local = new \DateTime("{$donnees['RES_MATCH_DAT']}");
+                                // echo "Date et heure du match (heure locale) = " . $Heure_match_local . "<br />";
                                 //Number of hours to add has already been calculated = $Heure_diffStr
 
                                 //Add the hours by using the DateTime::add method in
                                 //conjunction with the DateInterval object.
-                                $Heure_match_NY->add(new DateInterval("PT{$Heure_diffStr}H"));
-                                // $Heure_match_NY->add(new DateInterval("PT5H"));
-                                // echo "* Date et heure du match à New-York (+jetlag) = " . $Heure_match_NY_mod . "<br />";
+                                $Heure_match_local->add(new DateInterval("PT{$Heure_diffStr}H"));
+                                // $Heure_match_local->add(new DateInterval("PT5H"));
+                                // echo "Date et heure du match (heure locale + jetlag) = " . $Heure_match_local_mod . "<br />";
 
                                 //Format the new time into a more human-friendly format
                                 //and print it out.
                                 // setlocale(LC_TIME, 'fr_FR', 'French');
                                 setlocale(LC_TIME, 'fr_FR.utf8','fra');
-                                // $Heure_match_YourTime = $Heure_match_NY->format('Y-m-d, H:i');
-                                $Heure_match_YourTime = $Heure_match_NY->format('l d F, H:i');
+                                // $Heure_match_YourTime = $Heure_match_local->format('Y-m-d, H:i');
+                                $Heure_match_YourTime = $Heure_match_local->format('l d F, H:i');
                                 // echo "Saisie à faire avant " . $Heure_match_YourTime . " (chez vous)<br />";
                                 $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::SHORT);
-                                // echo "Saisie à faire avant " . $formatter->format($Heure_match_NY) . " (chez vous)<br />";
+                                // echo "Saisie à faire avant " . $formatter->format($Heure_match_local) . " (chez vous)<br />";
                                 // echo "Saisie à faire avant " . $formatter->format($donnees['RES_MATCH_DAT']) . " (chez vous)<br />";
                                 echo "Saisie à faire avant: ";
 
@@ -199,12 +199,12 @@ session_start(); // On démarre la session AVANT toute chose
                                   <br />
                                   <?php
                                   // echo "Saisie à faire avant " . $donnees['RES_MATCH_DAT'] . "<br />";
-                                  $Heure_match_NY = new \DateTime("{$donnees['RES_MATCH_DAT']}");
-                                  $Heure_match_NY->add(new DateInterval("PT{$Heure_diffStr}H"));
+                                  $Heure_match_local = new \DateTime("{$donnees['RES_MATCH_DAT']}");
+                                  $Heure_match_local->add(new DateInterval("PT{$Heure_diffStr}H"));
                                   setlocale(LC_TIME, 'fr_FR.utf8','fra');
-                                  $Heure_match_YourTime = $Heure_match_NY->format('l d F, H:i');
+                                  $Heure_match_YourTime = $Heure_match_local->format('l d F, H:i');
                                   $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::SHORT);
-                                  // echo "Saisie à faire avant " . $formatter->format($Heure_match_NY) . " (chez vous)<br />";
+                                  // echo "Saisie à faire avant " . $formatter->format($Heure_match_local) . " (chez vous)<br />";
                                   echo "Saisie à faire avant: ";
                                   ?>
                                   <table>
@@ -296,14 +296,11 @@ session_start(); // On démarre la session AVANT toute chose
                                     echo "<br />Pronostiquez votre score pour ce match :<br /><br />";
 
                                     $GLOBALS['pageOrigine'] = 'pronostique_matchs';
-                                    include ("formulairePronostiqueMatchASaisir.php");
-                                    // if (isset($_POST['TypeMatch'])
-                                    // or  isset($_POST['VouD'])
-                                    // or  isset($_POST['ScoreJ1'])
-                                    // or  isset($_POST['ScoreJ2']))
-                                    //   // $session_jou_id = $_SESSION['JOU_ID'];
-                                    //   include ("pronostique_matchs_controles.php");
-                                    // }
+                                    if ($donnees['RES_MATCH_POIDS_TOUR'] == 16) {
+                                      include ("formulairePronostiqueMatchASaisirNoJoker.php");
+                                    } else {
+                                      include ("formulairePronostiqueMatchASaisir.php");
+                                    }
                                  }
                             }
                             else {

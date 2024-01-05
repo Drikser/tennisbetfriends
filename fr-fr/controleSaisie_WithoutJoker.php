@@ -5,9 +5,9 @@
 // debut copy formulairePronostiqueUnitaireCible.php
 //****************************************************************************
 
-echo "Display from ControleSaisieWithJoker.php:";
-echo "ID match=" . $_POST['idMatch'] . " - poids tour=" . $_POST['Poids'] . " - " . $_POST['Player1'] . " c. " . $_POST['Player2'] . "<br />";
-echo "VouD=" . $_POST['VouD'] . " - " . $_POST['ScoreJ1'] . "/" . $_POST['ScoreJ2'] . "(" . $_POST['TypeMatch'] . ")<br />";
+// echo "Display from ControleSaisieWithoutJoker.php: <br />";
+// echo "ID match=" . $_POST['idMatch'] . " - poids tour=" . $_POST['Poids'] . " - " . $_POST['Player1'] . " c. " . $_POST['Player2'] . "<br />";
+// echo "VouD=" . $_POST['VouD'] . " - " . $_POST['ScoreJ1'] . "/" . $_POST['ScoreJ2'] . "(" . $_POST['TypeMatch'] . ")<br />";
 
 $typeMatch = $_POST['TypeMatch'];
 if (isset($_POST['VouD'])) {
@@ -150,9 +150,9 @@ else
 
  if ($pronoOK == 'OK') {
 
-   echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ", " . $doublePoints . ") <br />";
+   // echo "updatePrognosis(" . $_SESSION['JOU_ID'] . ", " . $_POST['idMatch'] . ", " . $result . ", " . $scoreJ1 . ", " . $scoreJ2 . ", " . $typeMatch . ") <br />";
    // $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch);
-   $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, $doublePoints);
+   $req = updatePrognosis($_SESSION['JOU_ID'], $_POST['idMatch'], $result, $scoreJ1, $scoreJ2, $typeMatch, 1);
 
    $nbRow = $req->rowcount();
  }

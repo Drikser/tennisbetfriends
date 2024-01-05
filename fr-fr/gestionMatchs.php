@@ -196,7 +196,8 @@ session_start(); // On démarre la session AVANT toute chose
                     while ($donnees = $matchChoisi->fetch()) {
                       //	echo $donnees['RES_MATCH_ID'] . " - " . $donnees['RES_MATCH_DAT'] . " - " . $donnees['RES_TOURNOI'] . " - " . $donnees['RES_MATCH_TOUR'] . " : " . $donnees['RES_MATCH_JOU1'] . " vs " . $donnees['RES_MATCH_JOU2'] . "<br />";
                       $GLOBALS['pageOrigine'] = 'gestionMatchs_saisie';
-                        include ("formulairePronostiqueMatchASaisir.php");
+                        // include ("formulairePronostiqueMatchASaisir.php");
+                        include ("formulairePronostiqueMatchASaisirNoJoker.php");
                     }
 
                   } else {
@@ -258,7 +259,8 @@ session_start(); // On démarre la session AVANT toute chose
                       echo "ID du dernier match saisi=" . $IdLastEnteredMatch;
 
                       $GLOBALS['pageOrigine'] = 'gestionMatchs_correction';
-                      include ("formulairePronostiqueMatchASaisir.php");
+                      // include ("formulairePronostiqueMatchASaisir.php");
+                      include ("formulairePronostiqueMatchASaisirNoJoker.php");
                   }
                   break;
 
@@ -283,7 +285,8 @@ session_start(); // On démarre la session AVANT toute chose
                         echo "ID du match à corriger = " . $IdSelectedMatch;
 
                         $GLOBALS['pageOrigine'] = 'gestionMatchs_correction';
-                        include ("formulairePronostiqueMatchASaisir.php");
+                        // include ("formulairePronostiqueMatchASaisir.php");
+                        include ("formulairePronostiqueMatchASaisirNoJoker.php");
                     }
                     break;
 
