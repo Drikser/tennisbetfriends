@@ -534,7 +534,7 @@
                 ?>
                 <td align="center" valign="middle" class="cellule">
                   <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
-                  <input type="checkbox" name="Joker" id="DoublePoints"><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcard left)" ?></label><br>
+                  <input type="checkbox" name="Joker" id="DoublePoints"><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcard remaining)" ?></label><br>
                 </td>
                 <?php
                 break;
@@ -543,7 +543,7 @@
                 ?>
                 <td align="center" valign="middle" class="cellule">
                   <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
-                  <input type="checkbox" name="Joker" id="DoublePoints"><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcards left)" ?></label><br>
+                  <input type="checkbox" name="Joker" id="DoublePoints"><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcards remaining)" ?></label><br>
                 </td>
                 <?php
                 break;
@@ -555,7 +555,7 @@
               if ($Nb_remaining_joker == 0) {
                 ?>
                  <td align="center" valign="middle" class="cellule">
-                   <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcard left)" ?></label><br>
+                   <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcard remaining)" ?></label><br>
                  </td>
                  <?php
                  break;
@@ -564,7 +564,7 @@
                   ?>
                   <td align="center" valign="middle" class="cellule">
                   <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
-                    <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcard left)" ?></label><br>
+                    <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcard remaining)" ?></label><br>
                   </td>
                   <?php
                   break;
@@ -572,7 +572,7 @@
                   ?>
                   <td align="center" valign="middle" class="cellule">
                   <!-- <input type="checkbox" name="DoublePoints" id="DoublePoints"> <label for="DoublePoints"></label><br> -->
-                    <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcards left)" ?></label><br>
+                    <input type="checkbox" name="Joker" id="DoublePoints" value="yes" checked><label for="DoublePoints"><?php echo "(" . $Nb_remaining_joker . " wildcards remaining)" ?></label><br>
                   </td>
                   <?php
                   break;

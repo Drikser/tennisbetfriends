@@ -54,9 +54,9 @@ while ($titre = $allPrognosis->fetch()) {
     <th colspan="4" align="center" valign="middle" class="cellule">OFFICIAL RESULTS</th>
 		<th align="center" valign="middle" class="cellule"></th>
 		<th colspan="<?php echo $nbplayers ?>" align="center" valign="middle">PLAYER PREDICTIONS</th>
-  </tr>
+  	</tr>
 
-  <tr>
+  	<tr>
 		<th width="100" align="center" valign="middle" class="cellule" style="display:none">Id Match</th>
     <th width="150" align="center" valign="middle" class="cellule">Round</th>
     <th width="200" align="center" valign="middle" class="cellule">Player 1</th>
@@ -71,17 +71,17 @@ while ($titre = $allPrognosis->fetch()) {
 		}
         ?>
 
-  </tr>
+  	</tr>
 
-  <?php
+	<?php
 
-  //include("affichageResultatsPronoMatchsRequete.php");
+//include("affichageResultatsPronoMatchsRequete.php");
 	$allPrognosis = getAllPrognosis();
 
 	$ResMatchPoidsTourPrecedent = "";
 	$colorLine = "";
 	//while ($donnees = $response->fetch()) {
-  while ($donnees = $allPrognosis->fetch()) {
+  	while ($donnees = $allPrognosis->fetch()) {
 
 
    	if ($donnees['RES_MATCH_ID'] != $idMatchPrecedent) {
@@ -125,7 +125,7 @@ while ($titre = $allPrognosis->fetch()) {
 											?>
 														<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['proRes'] . " " . $tabPseudoProno[$i]['proScore1'] . "/" . $tabPseudoProno[$i]['proScore2'] . " " . $tabPseudoProno[$i]['proTypMatch'] . " (" . $tabPseudoProno[$i]['proPoints'] . "pt)"; ?></td>
 											<?php
-										else {
+										} else {
 											?>
 														<td align="center" valign="middle" class="cellule"><?php echo $tabPseudoProno[$i]['proRes'] . " " . $tabPseudoProno[$i]['proScore1'] . "/" . $tabPseudoProno[$i]['proScore2'] . " " . $tabPseudoProno[$i]['proTypMatch'] . " (" . $tabPseudoProno[$i]['proPoints'] . "pts)"; ?></td>
 											<?php

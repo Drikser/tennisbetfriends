@@ -85,7 +85,7 @@
         if ($_SESSION['JOU_PSE'] != "Admin") {
           if ($pageOrigine == 'pronostique_matchs') {
           ?>
-            <td colspan="3" align="center" valign="middle"><input type="button" value="Annuler" onclick="window.location.href='pronostique_matchs2.php'">
+            <td colspan="3" align="center" valign="middle"><input type="button" value="Annuler" onclick="window.location.href='pronostique_matchs.php'">
           <?php
             } else {
               ?>

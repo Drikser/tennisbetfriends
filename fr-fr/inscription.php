@@ -214,7 +214,7 @@ session_start(); // On démarre la session AVANT toute chose
 			$donnees = $sql_count->fetch();
 			//$nbInscrits = $donnees['nbInscrits'];
 
-			echo '<br />' . 'Nombre de personnes inscrites = ' . $donnees['nbInscrits'] . '<br />';
+			// echo '<br />' . 'Nombre de personnes inscrites = ' . $donnees['nbInscrits'] . '<br />';
 			if ($donnees['nbInscrits'] == 0) {
 				echo 'Soyez la première personne à vous inscrire !<br />';
 			}

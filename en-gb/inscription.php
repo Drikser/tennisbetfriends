@@ -205,7 +205,7 @@ session_start(); // On démarre la session AVANT toute chose
 			while ($donnees = $lastPseudo->fetch())
 			{
 			?>
-				<strong>Pseudo</strong> : <?php echo $donnees['JOU_PSE'] . ' (' . $donnees['JOU_DAT_INS'] . ')'; ?><br />
+				<strong>Username</strong>: <?php echo $donnees['JOU_PSE'] . ' (' . $donnees['JOU_DAT_INS'] . ')'; ?><br />
 			<?php
 			}
 
@@ -217,7 +217,7 @@ session_start(); // On démarre la session AVANT toute chose
 			$donnees = $sql_count->fetch();
 			//$nbInscrits = $donnees['nbInscrits'];
 
-			echo '<br />' . 'Number of registered users = ' . $donnees['nbInscrits'] . '<br />';
+			// echo '<br />' . 'Number of registered users = ' . $donnees['nbInscrits'] . '<br />';
 			if ($donnees['nbInscrits'] == 0) {
 				echo 'Be the first to register!<br />';
 			}

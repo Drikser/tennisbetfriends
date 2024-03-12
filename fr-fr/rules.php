@@ -40,9 +40,9 @@ session_start(); // On démarre la session AVANT toute chose
 			<p>Lors de ce concours, le site de référence sera le site <a class="a_text" href="https://www.atptour.com/" target="_blank">www.atptour.com</a>, sur lequel seront pris l'ordre des matchs et les horaires, dans la section "Daily schedule" du site.</p>
 
 
-			<h2>Faire les pronostiques</h2>
+			<h2>Les pronostiques</h2>
 
-        	<h3>Pronostiques tournoi</h3>
+        	<h3>Pronostiquesx tournoi</h3>
 
         	<p>
         	Avant le début du tournoi, vous pouvez choisir : <br />
@@ -60,7 +60,49 @@ session_start(); // On démarre la session AVANT toute chose
 
         	<h3>Pronostiques matchs</h3>
 
-        	<p>Tous les jours, vous aurez la possibilité de saisir votre pronostique pour les matchs de la journée.</p>
+          <p>Tous les jours, vous aurez la possibilité de saisir votre pronostique pour les matchs de la journée, avec quelques différences selon l'avancement du tournoi:<br />
+            - Les 2 premiers tours: sélection du vainqueur uniquement<br />
+            - 3ème tour: pronostique classique<br />
+            - À partir des huitièmes de finale: pronostique classique, avec 3 jokers pour doubler vos points sur le match de votre choix<br />
+          </p>
+
+          <h4>- Les 2 premiers tours</h4>
+
+          <p>Pour les 2 premiers tours, vous ne devez sélectionner que le vainqueur du match, peu importe le nombre de sets, si il y abandon ou forfait.</p>
+
+          <p>
+        	Exemple: <br />
+        	<table>
+        		<tr>
+        			<th>Votre pronostique</td>
+        			<th colspan="6">A renseigner sur le site</td>
+        		</tr>
+        		<tr>
+        			<td>Le joueur1 bat le joueur2</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio" checked>
+                <input type="radio" >
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              </td>
+        			<!-- <td><img src="../images/Rules-J1-V-J2-3-0.PNG" /></td> -->
+        		</tr>
+        		<tr>
+        			<td>Le joueur2 bat le joueur1</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio">
+                <input type="radio" checked>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+        			<!-- <td><img src="../images/Rules-J1-D-J2-3-1.PNG" /></td> -->
+        		</tr>
+          </table>
+        	</p>
+
+          <h4>- 3ème tour</h4>
+
         	<p>Le score d'un match sera en nombre de set, c'est à dire que le score peut être 3/0, 3/1 ou 3/2.</p>
 
         	<p>
@@ -176,6 +218,113 @@ session_start(); // On démarre la session AVANT toute chose
         	</table>
         	</p>
 
+          <h4>- À partir des huitièmes de finale</h4>
+
+          <p>Vous pronostiquez de la même façon que précédemment, mais vous avez désormais 3 jokers, que vous pouvez utiliser à tout moment pour double vos points sur le match choisit. <br />
+          Si vous trouver le score exact, vos points sur ce match seront 5pts x 2 = 10pts. <br />
+          Si vous trouver le bon vainqueur mais pas le score exact, vos points sur ce match seront 3pts x 2 = 6pts. <br />
+          Si vous trouver ne trouvez pas le bon vainqueur, vos points sur ce match seront 0pt x 2 = 0pt. <br />
+          </p>
+
+          <p>
+        	Exemples: <br />
+        	<table>
+        		<tr>
+        			<th>Votre pronostique</td>
+        			<th colspan="7">A renseigner sur le site</td>
+        		</tr>
+        		<tr>
+        			<td>Vous souhaitez jouer votre joker sur ce match</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio" checked>
+                <input type="radio" >
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>3</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>1</option>
+                </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option></option>
+                </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="checkbox" value="yes" checked><label>(reste 2 jokers)</label><br>
+                  <option></option>
+                </select>
+              </td>
+        		</tr>
+            <tr>
+        			<td>Vous ne souhaitez pas jouer votre joker sur ce match</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="radio" checked>
+                <input type="radio" >
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>3</option>
+                </select>
+              </td>
+              <td width="150" align="center" valign="middle" class="cellule">
+                <select>
+                  <option>1</option>
+                </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <select>
+                  <option></option>
+                </select>
+              <td width="50" align="center" valign="middle" class="cellule">
+                <input type="checkbox" value="yes"><label>(reste 2 jokers)</label><br>
+                  <option></option>
+                </select>
+              </td>
+        		</tr>
+        	</table>
+        	</p>
+
+          <p>Lorsque vous jouez un joker, il sera matérialisé par le symbole &#9733 dans le récap des scores.</p>
+          <p>
+        	Exemple: <br />
+        	<table>
+            <tr>
+        			<th>Niveau</td>
+              <th>Joueur 1</td>
+              <th>Résultat</td>
+              <th>Joueur 2</td>
+              <th>Pseudo</td>
+        		</tr>
+        		<tr>
+              <td width="150" align="center" valign="middle" class="cellule">Huitième de finale</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">V 3/1</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">&#9733 V 3/1 (10pts)</td>
+        		</tr>
+            <tr>
+              <td width="150" align="center" valign="middle" class="cellule">Huitième de finale</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">V 3/1</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">&#9733 V 3/0 (6pts)</td>
+        		</tr>
+            <tr>
+              <td width="150" align="center" valign="middle" class="cellule">Huitième de finale</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 1</td>
+              <td width="50" align="center" valign="middle" class="cellule">V 3/1</td>
+              <td width="150" align="center" valign="middle" class="cellule">Joueur 2</td>
+              <td width="150" align="center" valign="middle" class="cellule">&#9733 D 3/2 (0pt)</td>
+        		</tr>
+        	</table>
+        	</p>
+
 
         	<h3>Les horaires des matchs</h3>
 
@@ -201,7 +350,7 @@ session_start(); // On démarre la session AVANT toute chose
         	<h2>Le barème</h2>
 
         	<p>Pronostiques tournoi:
-				<ul>
+	          <ul>
             		<li>10 points pour le vainqueur</li>
 		            <li>5 points par finaliste trouvé</li>
 		            <li>3 points par demi-finaliste trouvé</li>
@@ -211,10 +360,26 @@ session_start(); // On démarre la session AVANT toute chose
         	</p>
 
         	<p>Pronostiques matchs:
-				<ul>
-            		<li>5 points si vous avez trouvé le résultat exact (vainqueur + nb sets exact, ou AB ou WO)</li>
-		            <li>3 points si vous avez trouvé le vainqueur sans le bon score</li>
-		            <li>0 points si vous n'avez pas trouvé le vainqueur</li>
+            <ul>
+            		<li>Les 2 premiers tours</li>
+                <ul>
+                  <li>1 point si vainqueur trouvé</li>
+                  <li>0 point si vainqueur non trouvé</li>
+                </ul>
+		            <li>3ème tour</li>
+                <ul>
+              		<li>5 points si vous avez trouvé le résultat exact (vainqueur + nb sets exact, ou AB ou WO)</li>
+  		            <li>3 points si vous avez trouvé le vainqueur sans le bon score</li>
+  		            <li>0 points si vous n'avez pas trouvé le vainqueur</li>
+    		       	</ul>
+		            <li>À partir des huitièmes de finale</li>
+                <ul>
+                  <li>10 points si score exact avec joker</li>
+  		            <li>6 points si vainqueur trouvé avec joker</li>
+              		<li>5 points si score exact sans joker</li>
+  		            <li>3 points si vainqueur trouvé sans joker</li>
+  		            <li>0 points si vous n'avez pas trouvé le vainqueur, avec ou sans joker</li>
+    		       	</ul>
 		       	</ul>
         	</p>
 

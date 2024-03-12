@@ -28,6 +28,12 @@ h2
     text-decoration: underline;
 }
 
+h4
+{
+    color: White;
+    text-decoration: underline;
+    font-style: italic;
+}
 
 /*.tournoi*/
 h6
