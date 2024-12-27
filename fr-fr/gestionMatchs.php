@@ -27,7 +27,8 @@ session_start(); // On démarre la session AVANT toute chose
         <div class="element_corps" id="corps">
             <h1>Le coin de l'Admin</h1>
 
-            <a href="#chargementJoueursAvantTournoi">Télécharger joueurs avant le tournoi</a>
+            <a href="#changerCSS">Changer le design</a>
+            <br /><a href="#chargementJoueursAvantTournoi">Télécharger joueurs avant le tournoi</a>
             <br /><a href="#telechargerTousLesJoueurs">Télécharger tous les joueurs</a>
             <br /><a href="#creationMatchsPremierTour">Création des matchs du premier tour</a>
             <br /><a href="#saisieResultat">Saisie du résultat des matchs</a>
@@ -37,6 +38,32 @@ session_start(); // On démarre la session AVANT toute chose
         		//*                                         CHARGEMENT TABLE DES JOUEURS
         		//*************************************************************************************************************************************************
             -->
+
+            <!-- <p>
+                Changer le design pour tournoi suivant :<br />
+            </p> -->
+            <div id="changerCSS"></div>
+            <h2>Changer le CSS pour le tournoi à venir:</h2>
+
+            <form id="registration_form" action="gestionMatchs.php" method="post" enctype="multipart/form-data">
+    
+            <p>
+              <label for="nextGC">Afficher le thème pour :</label>
+              <select id="nextGC" name="nextGC">
+                <option value="Empty">-- Selectionner tournoi --</option>
+                <option value="OpenAustralie">Janvier - Open d'Australie</option>
+                <option value="RolandGarros">Mai - Roland Garros</option>
+                <option value="Wimbledon">Juillet - Wimbledon</option>
+                <option value="USOpen">Septembre - US Open</option>
+              </select>
+            </p>
+
+ 			      <p>
+ 				      <input type="submit" value="Valider" />
+ 			      </p>
+ 			      
+            </form>
+
 
             <!-- <p>
                 Chargement avant tournoi :<br />
