@@ -33,6 +33,7 @@ session_start(); // On démarre la session AVANT toute chose
             <br /><a href="#creationMatchsPremierTour">Création des matchs du premier tour</a>
             <br /><a href="#saisieResultat">Saisie du résultat des matchs</a>
             <br /><a href="#correctionResultat">Correction d'un résultat</a>
+            <br /><a href="#testAPI">Test APIs</a>
             <!--
             //*************************************************************************************************************************************************
         		//*                                         CHARGEMENT TABLE DES JOUEURS
@@ -520,6 +521,117 @@ session_start(); // On démarre la session AVANT toute chose
             ?>
             (<a href="#HautDePage">Haut</a>)
 
+
+            <!--
+            //*************************************************************************************************************************************************
+            //*                                         TEST APIS CALL
+            //*************************************************************************************************************************************************
+            -->
+
+            <!-- <p>
+                Ici nous allons tester du code pour appeler une API<br />
+            </p> -->
+            <div id="testAPI"></div>
+            <h2>Test appels API :</h2>
+
+            <p>
+            <?php
+            //phpinfo();
+
+            // 1- test of file_get_content
+            //------------------------------
+            echo "Test avec get_file_content<br/>";
+            echo "-------------------------------";
+
+            $payload = json_encode ([
+              "title" => "Update title"
+            ]);
+
+            $options = [
+              "http" => [
+                "method" => "PATCH",
+                "header" => "Content-type: application/json; charset=UTF-8",
+                "content" => $payload
+              ]
+            ];
+
+            $context = stream_context_create($options);
+
+            $adresse = "https://jsonplaceholder.typicode.com/albums/1";
+            // $adresse = "https://www.atptour.com/en/tournaments/roland-garros/520/overview";
+            // $adresse = "https://www.atptour.com/en/tournaments/wimbledon/540/overview";
+            // $adresse = "https://www.atptour.com/en/tournaments/us-open/560/overview";
+            // ----- Other tournaments for tests -----
+            // $adresse = "https://www.atptour.com/en/tournaments/paris/352/overview";
+
+            $page = file_get_contents($adresse, false, $context);
+
+            var_dump($adresse);
+
+            print_r($http_response_header);
+
+            // 2- test of cURL
+            //------------------
+            echo "<br/><br/>";
+            echo "Test avec cURL<br/>";
+            echo "-------------------";
+
+            $payload = json_encode ([
+              "title" => "Update title"
+            ]);
+
+            $headers = [
+              "Content-type: application/json; charset=UTF-8",
+              "Accept-language: en"
+            ];
+
+            $ch = curl_init();
+
+            /*
+            curl_setopt ($ch, CURLOPT_URL, "https://jsonplaceholder.typicode.com/albums/1");
+            curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+            */
+
+            curl_setopt_array($ch, [
+              CURLOPT_URL => "https://jsonplaceholder.typicode.com/albums/1" ,
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_CUSTOMREQUEST => "PATCH",
+              CURLOPT_POSTFIELDS => $payload,
+              CURLOPT_HTTPHEADER => $headers,
+              CURLOPT_HEADER => true
+            ]);
+
+            $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+            $data = curl_exec($ch);
+
+            curl_close($ch);
+
+            var_dump($status_code);
+            var_dump($data);
+
+
+            $ch = curl_init();
+
+            // 3- test of cURL
+            //------------------
+            echo "<br/><br/>";
+            echo "Test avec un autre tests cURL<br/>";
+            echo "----------------------------------";
+
+	          curl_setopt($ch, CURLOPT_URL, "https://www.google.com");
+
+          	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $response = curl_exec($ch);
+
+          	curl_close($ch);      
+
+          	echo $response;
+
+            ?>
+
+            </p>
 
             <!--      FIN DES OPTIONS GESTION DES MATCHS        -->
 
