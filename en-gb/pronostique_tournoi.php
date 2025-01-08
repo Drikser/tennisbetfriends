@@ -56,8 +56,10 @@ session_start(); // On démarre la session AVANT toute chose
                      $cityTournament = $donnees['SET_TOURNAMENT'];
 					        }
 
-                  if ($cityTournament == 'Paris') {
-                    echo "You must make your bonus tournament predictions <span class=warning>before the start of the tournament</span>, on <span class=warning>Sunday " . substr($startDateTournament,0,10) . "</span> at <span class=warning>" . substr($startDateTournament,11,8) . "</span> (" . $cityTournament . " time)<br /><br />";
+                //   if ($cityTournament == 'Paris') {
+                  if ($cityTournament == 'Paris' 
+                  or  $cityTournament == 'Melbourne') {
+                      echo "You must make your bonus tournament predictions <span class=warning>before the start of the tournament</span>, on <span class=warning>Sunday " . substr($startDateTournament,0,10) . "</span> at <span class=warning>" . substr($startDateTournament,11,8) . "</span> (" . $cityTournament . " time)<br /><br />";
                     echo "<span class=congrats>INFO:</span> You must validate your choices category by category.<br /><br />";
                   } else {
                     echo "You must make your bonus tournament predictions <span class=warning>before the start of the tournament</span>, on <span class=warning>Monday " . substr($startDateTournament,0,10) . "</span> at <span class=warning>" . substr($startDateTournament,11,8) . "</span> (" . $cityTournament . " time)<br /><br />";
