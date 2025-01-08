@@ -57,8 +57,10 @@ session_start(); // On démarre la session AVANT toute chose
                      $cityTournament = $donnees['SET_TOURNAMENT'];
 					        }
 
-                  if ($cityTournament == 'Paris') {
-                    echo "Vous devez faire vos pronostiques sur le tournoi <span class=warning>avant le début du tournoi</span>, le <span class=warning>dimanche " . substr($startDateTournament,0,10) . "</span> à <span class=warning>" . substr($startDateTournament,11,8) . "</span> (heure de " . $cityTournament . ").<br /><br />";
+                // if ($cityTournament == 'Paris') {
+                  if ($cityTournament == 'Paris' 
+                  or  $cityTournament == 'Melbourne') {
+                        echo "Vous devez faire vos pronostiques sur le tournoi <span class=warning>avant le début du tournoi</span>, le <span class=warning>dimanche " . substr($startDateTournament,0,10) . "</span> à <span class=warning>" . substr($startDateTournament,11,8) . "</span> (heure de " . $cityTournament . ").<br /><br />";
                     echo "<span class=congrats>INFO:</span> Vous devez valider vos choix catégorie par catégorie.<br /><br />";
                   } else {
                     echo "Vous devez faire vos pronostiques sur le tournoi <span class=warning>avant le début du tournoi</span>, le <span class=warning>lundi " . substr($startDateTournament,0,10) . "</span> à <span class=warning>" . substr($startDateTournament,11,8) . "</span> (heure de " . $cityTournament . ").<br /><br />";
